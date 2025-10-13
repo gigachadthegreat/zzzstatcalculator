@@ -96,7 +96,7 @@ function App() {
     const [dmgTakenIncrease, setDmgTakenIncrease] = useState(0);
     const [dmgTakenReduction, setDmgTakenReduction] = useState(0);
     const [defenseShred, setDefenseShred] = useState(0);
-    const [stunMultiplier, setStunMultiplier] = useState(1);
+    const [stunMultiplier, setStunMultiplier] = useState(100);
     const [resIgnore, setResIgnore] = useState(0);
     const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
     const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");

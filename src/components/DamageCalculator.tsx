@@ -190,7 +190,7 @@ function DamageCalculator({
             calculateDefenseMultiplier() *
             calculateResMultiplier() *
             calculatedmgTakenMultiplierTarget() *
-            stunMultiplier
+            (stunMultiplier/100)
         );
     };
 
@@ -204,7 +204,7 @@ function DamageCalculator({
             calculateDefenseMultiplier() *
             calculateResMultiplier() *
             calculatedmgTakenMultiplierTarget() *
-            stunMultiplier
+            (stunMultiplier/100)
         );
     };
 
@@ -346,7 +346,7 @@ function DamageCalculator({
 
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
-                            labelText="Stun Multiplier"
+                            labelText="Stun Multiplier %"
                             infoText="Damage multiplier when the enemy is stunned."
                             onInputChange={(value) => setStunMultiplier(Number(value))}
                             inputValue={stunMultiplier}
