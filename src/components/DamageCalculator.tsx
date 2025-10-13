@@ -1,4 +1,4 @@
-import { type Stats as CalculatedStats, levelFactorAttacker } from "../constants/types";
+import { type Stats, levelFactorAttacker, AnomalyMultipliers } from "../constants/types";
 // import LabelWithInfo from "./LabelWithInfo";
 import infoIcon from "../assets/info-icon.png";
 import LabelWithTextInput from "./LabelWithTextInput";
@@ -44,6 +44,12 @@ function DamageCalculator({
     isRupture,
     setIsRupture,
 
+    isAnomaly,
+    setIsAnomaly,
+
+    anomalyType,
+    setAnomalyType,
+
     additionalHpFlat,
     setAdditionalHpFlat,
 
@@ -76,8 +82,11 @@ function DamageCalculator({
 
     additionalSheerPercent,
     setAdditionalSheerPercent,
+
+    characterLevel,
+    setCharacterLevel,
 }: {
-    calculatedStats: CalculatedStats | null;
+    calculatedStats: Stats | null;
     characterName: string;
 
     defTarget: number;
@@ -116,6 +125,12 @@ function DamageCalculator({
     isRupture: boolean;
     setIsRupture: (value: boolean) => void;
 
+    isAnomaly: boolean;
+    setIsAnomaly: (value: boolean) => void;
+
+    anomalyType: keyof typeof AnomalyMultipliers;
+    setAnomalyType: (value: keyof typeof AnomalyMultipliers) => void;
+
     additionalHpFlat: number;
     setAdditionalHpFlat: (value: number) => void;
 
@@ -148,11 +163,12 @@ function DamageCalculator({
 
     additionalSheerPercent: number;
     setAdditionalSheerPercent: (value: number) => void;
+
+    characterLevel: number;
+    setCharacterLevel: (value: number) => void;
 }) {
     // Character Stats
-    const characterLevel = 60;
-
-    const modifiedStats: CalculatedStats | null = calculatedStats
+    const modifiedStats: Stats | null = calculatedStats
         ? {
               ...calculatedStats,
               HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
@@ -176,6 +192,32 @@ function DamageCalculator({
             calculatedmgTakenMultiplierTarget() *
             stunMultiplier
         );
+    };
+
+    const calculateAnomalyDamageDealt = () => {
+        if (!modifiedStats) return 0;
+        return (
+            calculateAnomalyBaseDamage() *
+            calculateAnomalyProficiencyMultiplier() *
+            calculateAnomalyLevelMultiplier() *
+            dmgBonusMultiplierAttacker() *
+            calculateDefenseMultiplier() *
+            calculateResMultiplier() *
+            calculatedmgTakenMultiplierTarget() *
+            stunMultiplier
+        );
+    };
+
+    const calculateAnomalyBaseDamage = () => {
+        return AnomalyMultipliers[anomalyType as keyof typeof AnomalyMultipliers] * (modifiedStats!.ATTACK_FLAT ?? 0);
+    };
+
+    const calculateAnomalyProficiencyMultiplier = () => {
+        return (modifiedStats!.ANOMALY_PROFICIENCY_FLAT ?? 0) * 0.01;
+    };
+
+    const calculateAnomalyLevelMultiplier = () => {
+        return 1 + (1 / 59) * (characterLevel - 1);
     };
 
     const calculateBaseDamage = () => {
@@ -228,7 +270,12 @@ function DamageCalculator({
         return 1 + dmgTakenIncrease / 100 - dmgTakenReduction / 100;
     };
 
-    const calculatedDamage = modifiedStats ? calculateDamageDealt() : 0;
+    let calculatedDamage = 0;
+    if (isAnomaly) {
+        calculatedDamage = modifiedStats ? calculateAnomalyDamageDealt() : 0;
+    } else {
+        calculatedDamage = modifiedStats ? calculateDamageDealt() : 0;
+    }
 
     return (
         <div className="">
@@ -310,6 +357,14 @@ function DamageCalculator({
                     <h3 className="font-bold mb-2">Attacker Modifiers</h3>
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
+                            labelText="Character Level"
+                            infoText="The level of the attacking character. Affects Defense and Anomaly calculations."
+                            onInputChange={(value) => setCharacterLevel(Number(value))}
+                            inputValue={characterLevel}
+                        />
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <LabelWithTextInput
                             labelText="Multiplier Value %"
                             infoText="The percentage multiplier for the specific attack."
                             onInputChange={(value) => setMultiplierValue(Number(value))}
@@ -338,6 +393,25 @@ function DamageCalculator({
                             infoText={"Use Sheerforce in Damage calculation instead of Attack"}
                         />
                         <input checked={isRupture} onChange={(e) => setIsRupture(e.target.checked)} type="checkbox" />
+                    </div>
+                    <div className="flex items-center gap-2 mb-2 py-1">
+                        <LabelWithInfo labelText={"Use Anomaly caltulation"} infoText={"Use Anomalydamage in Damage calculation"} />
+                        <input checked={isAnomaly} onChange={(e) => setIsAnomaly(e.target.checked)} type="checkbox" />
+                    </div>
+                    <div className="flex items-center gap-2 mb-2 py-1">
+                        <LabelWithInfo
+                            labelText={"Anomaly Type"}
+                            infoText={"The attribute/element of the anomaly. Affects Damage calculation"}
+                        />
+                        <select
+                            value={anomalyType}
+                            onChange={(e) =>setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)} // prettier-ignore
+                            className="p-1 border rounded w-24"
+                        >
+                            {Object.keys(AnomalyMultipliers).map((key) => (
+                                <option value={key} key={key}>{key}</option>
+                            ))}
+                        </select>{" "}
                     </div>
                     <div className="flex items-center gap-2 mb-2">
                         <label>Crit Mode:</label>

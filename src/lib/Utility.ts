@@ -1,4 +1,4 @@
-import { type Character, type SelectedDrives, type SeletedSubstats } from "../constants/types";
+import { AnomalyMultipliers, type Character, type SelectedDrives, type SeletedSubstats } from "../constants/types";
 import { type Wengine } from "../constants/types";
 import { SheerHpConversionFactor, SheerAttackConsersionFactor } from "../constants/types";
 
@@ -48,6 +48,9 @@ export const getParameterizedStatsAsUrl = (
     critMode: string,
     multiplierValue: number,
     isRupture: boolean,
+    isAnomaly: boolean,
+    anomalyType: keyof typeof AnomalyMultipliers,
+
     additionalHpFlat: number,
     additionalHpPercent: number,
     additionalAttackFlat: number,
@@ -58,7 +61,8 @@ export const getParameterizedStatsAsUrl = (
     additionalCritDamage: number,
     additionalElementPercent: number,
     additionalSheerFlat: number,
-    additionalSheerPercent: number
+    additionalSheerPercent: number,
+    characterLevel: number
 ) => {
     const params = new URLSearchParams();
     params.set("characterName", characterName);
@@ -77,6 +81,8 @@ export const getParameterizedStatsAsUrl = (
     params.set("critMode", critMode);
     params.set("multiplierValue", multiplierValue.toString());
     params.set("isRupture", isRupture.toString());
+    params.set("isAnomaly", isAnomaly.toString());
+    params.set("anomalyType", anomalyType.toString());
     params.set("additionalHpFlat", additionalHpFlat.toString());
     params.set("additionalHpPercent", additionalHpPercent.toString());
     params.set("additionalAttackFlat", additionalAttackFlat.toString());
@@ -88,6 +94,7 @@ export const getParameterizedStatsAsUrl = (
     params.set("additionalElementPercent", additionalElementPercent.toString());
     params.set("additionalSheerFlat", additionalSheerFlat.toString());
     params.set("additionalSheerPercent", additionalSheerPercent.toString());
+    params.set("characterLevel", characterLevel.toString());
 
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 };
@@ -133,6 +140,9 @@ export const getsettingsFromUrl = () => {
     settings.critMode = parseParam("critMode", "string");
     settings.multiplierValue = parseParam("multiplierValue", "number");
     settings.isRupture = parseParam("isRupture", "boolean");
+    settings.isAnomaly = parseParam("isAnomaly", "boolean");
+    settings.anomalyType = parseParam("anomalyType", "string");
+
     settings.additionalHpFlat = parseParam("additionalHpFlat", "number");
     settings.additionalHpPercent = parseParam("additionalHpPercent", "number");
     settings.additionalAttackFlat = parseParam("additionalAttackFlat", "number");
@@ -144,6 +154,7 @@ export const getsettingsFromUrl = () => {
     settings.additionalElementPercent = parseParam("additionalElementPercent", "number");
     settings.additionalSheerFlat = parseParam("additionalSheerFlat", "number");
     settings.additionalSheerPercent = parseParam("additionalSheerPercent", "number");
+    settings.characterLevel = parseParam("characterLevel", "number");
 
     // Filter out null values so we only return settings that were present in the URL
     return Object.fromEntries(Object.entries(settings).filter(([, value]) => value !== null));

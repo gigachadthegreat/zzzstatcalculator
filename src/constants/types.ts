@@ -113,13 +113,7 @@ export const DriveStats = {
     } as DriveStatRecord<
         (typeof StatType)[keyof Pick<
             typeof StatType,
-            | "CRIT_RATE"
-            | "CRIT_DAMAGE"
-            | "ATTACK_PERCENT"
-            | "DEFENSE_PERCENT"
-            | "HP_PERCENT"
-            | "ANOMALY_PROFICIENCY_FLAT"
-            | "NONE"
+            "CRIT_RATE" | "CRIT_DAMAGE" | "ATTACK_PERCENT" | "DEFENSE_PERCENT" | "HP_PERCENT" | "ANOMALY_PROFICIENCY_FLAT" | "NONE"
         >]
     >,
     Drive5: {
@@ -251,7 +245,15 @@ export const SheerHpConversionFactor = 0.1;
 export const SheerAttackConsersionFactor = 0.3;
 
 export const levelFactorAttacker = [
-    50, 54, 58, 62, 66, 71, 76, 82, 88, 94, 100, 107, 114, 121, 129, 137, 145, 153, 162, 172, 181, 191, 201, 211, 222,
-    233, 245, 256, 268, 281, 293, 306, 319, 333, 347, 361, 375, 390, 405, 421, 436, 452, 469, 485, 502, 519, 537, 555,
-    573, 592, 610, 629, 649, 669, 689, 709, 730, 751, 772, 794,
+    50, 54, 58, 62, 66, 71, 76, 82, 88, 94, 100, 107, 114, 121, 129, 137, 145, 153, 162, 172, 181, 191, 201, 211, 222, 233, 245, 256, 268,
+    281, 293, 306, 319, 333, 347, 361, 375, 390, 405, 421, 436, 452, 469, 485, 502, 519, 537, 555, 573, 592, 610, 629, 649, 669, 689, 709,
+    730, 751, 772, 794,
 ];
+
+export const AnomalyMultipliers = {
+    Burn: 10,
+    Shock: 12.5,
+    Corruption: 12.5,
+    Shatter: 5.0,
+    Assault: 7.13
+};

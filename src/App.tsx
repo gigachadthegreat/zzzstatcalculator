@@ -1,6 +1,6 @@
 import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
-import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, type statTypeKeys } from "./constants/types";
+import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, type statTypeKeys, AnomalyMultipliers } from "./constants/types";
 import { useState, useEffect } from "react";
 import { calculateSheer, getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
@@ -29,6 +29,8 @@ function App() {
             if (settings.critMode) setCritMode(settings.critMode as "avg" | "crit" | "noCrit");
             if (settings.multiplierValue != null) setMultiplierValue(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
+            if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
+            if (settings.anomalyType != null) setAnomalyType(settings.anomalyType);
             if (settings.additionalHpFlat != null) setAdditionalHpFlat(settings.additionalHpFlat);
             if (settings.additionalHpPercent != null) setAdditionalHpPercent(settings.additionalHpPercent);
             if (settings.additionalAttackFlat != null) setAdditionalAttackFlat(settings.additionalAttackFlat);
@@ -40,6 +42,7 @@ function App() {
             if (settings.additionalElementPercent != null) setAdditionalElementPercent(settings.additionalElementPercent);
             if (settings.additionalSheerFlat != null) setAdditionalSheerFlat(settings.additionalSheerFlat);
             if (settings.additionalSheerPercent != null) setAdditionalSheerPercent(settings.additionalSheerPercent);
+            if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
 
             setCalculatedStats(calculateStats(
                 getCharacterFromName(settings.characterName, Characters),
@@ -96,8 +99,9 @@ function App() {
     const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
     const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
     const [multiplierValue, setMultiplierValue] = useState<number>(100);
-    const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
-
+    const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
+    const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
+    const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
     const [additionalHpFlat, setAdditionalHpFlat] = useState(0);
     const [additionalHpPercent, setAdditionalHpPercent] = useState(0);
     const [additionalAttackFlat, setAdditionalAttackFlat] = useState(0);
@@ -109,6 +113,7 @@ function App() {
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
     const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
     const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
+    const [characterLevel, setCharacterLevel] = useState(60);
 
     const [additionalStats, setAdditionalStats] = useState<Stats>({
         HP_FLAT: 0,
@@ -164,6 +169,8 @@ function App() {
             setCalculatedStats(calculatedStats);
 
             setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
+            setIsAnomaly(getCharacterFromName(newCharacterName, Characters).speciality == "ANOMALY");
+
             return newCharacterName;
         });
     };
@@ -242,6 +249,8 @@ function App() {
                                     critMode,
                                     multiplierValue,
                                     isRupture,
+                                    isAnomaly,
+                                    anomalyType,
                                     additionalHpFlat,
                                     additionalHpPercent,
                                     additionalAttackFlat,
@@ -252,7 +261,8 @@ function App() {
                                     additionalCritDamage,
                                     additionalElementPercent,
                                     additionalSheerFlat,
-                                    additionalSheerPercent
+                                    additionalSheerPercent,
+                                    characterLevel
                                 )
                             )
                         }
@@ -315,6 +325,10 @@ function App() {
                             setMultiplierValue={(value) => setMultiplierValue(value)}
                             isRupture={isRupture}
                             setIsRupture={(value) => setIsRupture(value)}
+                            isAnomaly={isAnomaly}
+                            setIsAnomaly={(value) => setIsAnomaly(value)}
+                            anomalyType={anomalyType}
+                            setAnomalyType={(value) => setAnomalyType(value)}
                             additionalHpFlat={additionalHpFlat}
                             setAdditionalHpFlat={(value) => setAdditionalHpFlat(value)}
                             additionalHpPercent={additionalHpPercent}
@@ -337,6 +351,8 @@ function App() {
                             setAdditionalSheerFlat={(value) => setAdditionalSheerFlat(value)}
                             additionalSheerPercent={additionalSheerPercent}
                             setAdditionalSheerPercent={(value) => setAdditionalSheerPercent(value)}
+                            characterLevel={characterLevel}
+                            setCharacterLevel={(value) => setCharacterLevel(value)}
                         />
                     </div>
                 </div>
