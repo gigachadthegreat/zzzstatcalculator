@@ -1,8 +1,8 @@
 import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
-import { StatType, type Stats as CalculatedStats, type SelectedDrives, type SeletedSubstats, type statTypeKeys } from "./constants/types";
+import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, type statTypeKeys } from "./constants/types";
 import { useState, useEffect } from "react";
-import { getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
+import { calculateSheer, getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
 import { Wengines } from "./constants/Wengines";
 import { calculateStats } from "./lib/Calculations";
@@ -75,7 +75,7 @@ function App() {
         PEN_FLAT: 0,
     });
 
-    const [calculatedStats, setCalculatedStats] = useState<CalculatedStats>(
+    const [calculatedStats, setCalculatedStats] = useState<Stats>(
         calculateStats(
             getCharacterFromName(characterName, Characters),
             getWengineFromName(wengineName, Wengines),
@@ -110,7 +110,7 @@ function App() {
     const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
     const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
 
-    const [additionalStats, setAdditionalStats] = useState<CalculatedStats>({
+    const [additionalStats, setAdditionalStats] = useState<Stats>({
         HP_FLAT: 0,
         ATTACK_FLAT: 0,
         DEFENSE_FLAT: 0,
@@ -282,7 +282,8 @@ function App() {
                             infoText="Character stats as displayed in character selection menu"
                             calculatedStats={calculatedStats}
                             additionalStats={additionalStats}
-                            isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE"}
+                            isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
+                            additionalSheer={additionalSheerFlat + calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) * (additionalSheerPercent/100)}
                         />
                     </div>
 

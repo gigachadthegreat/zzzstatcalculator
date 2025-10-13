@@ -388,22 +388,6 @@ function DamageCalculator({
                     </div>
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
-                            labelText="Add. PEN %"
-                            infoText="Additional percentage penetration."
-                            onInputChange={(value) => setAdditionalPenPercent(Number(value))}
-                            inputValue={additionalPenPercent}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. PEN Flat"
-                            infoText="Additional flat penetration."
-                            onInputChange={(value) => setAdditionalPenFlat(Number(value))}
-                            inputValue={additionalPenFlat}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
                             labelText="Add. CRIT Rate %"
                             infoText="Additional critical rate percentage."
                             onInputChange={(value) => setAdditionalCritRate(Number(value))}
@@ -418,6 +402,7 @@ function DamageCalculator({
                             inputValue={additionalCritDamage}
                         />
                     </div>
+
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
                             labelText="Add. Element DMG %"
@@ -426,6 +411,23 @@ function DamageCalculator({
                             inputValue={additionalElementPercent}
                         />
                     </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <LabelWithTextInput
+                            labelText="Add. PEN %"
+                            infoText="Additional percentage penetration."
+                            onInputChange={(value) => setAdditionalPenPercent(Number(value))}
+                            inputValue={additionalPenPercent}
+                        />
+                    </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <LabelWithTextInput
+                            labelText="Add. PEN Flat"
+                            infoText="Additional flat penetration."
+                            onInputChange={(value) => setAdditionalPenFlat(Number(value))}
+                            inputValue={additionalPenFlat}
+                        />
+                    </div>
+
                     <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
                         <LabelWithTextInput
                             labelText="Add. Sheer Flat"
@@ -447,7 +449,7 @@ function DamageCalculator({
             <div className="mt-4 text-center">
                 <div className=" text-3xl font-bold">
                     Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
-                </div >
+                </div>
             </div>
         </div>
     );

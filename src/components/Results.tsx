@@ -29,12 +29,14 @@ function Results({
     calculatedStats,
     additionalStats,
     isRupture,
+    additionalSheer,
 }: {
     header: string;
     infoText: string;
     calculatedStats: Stats | null;
     additionalStats: Stats | null;
     isRupture: boolean;
+    additionalSheer: number | null;
 }) {
     const statsToDisplay: { key: statTypeKeys; label: string; toFixed: number }[] = [
         { key: "HP_FLAT", label: "HP", toFixed: 0 },
@@ -80,19 +82,34 @@ function Results({
                         />
                     );
                 })}
-                {isRupture && (
-                    <StatRow
-                        label="Sheer Force"
-                        baseValue={calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT)}
-                        additionalValue={calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0)}
-                        combatValue={
-                            calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) +
-                            calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0)
-                        }
-                        toFixed={0}
-                        className={`${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""}`}
-                    />
-                )}
+                <span className={`font-bold ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${isRupture ? "" : "opacity-50"}`}>
+                    Sheer Force
+                </span>
+                <span
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                        isRupture ? "" : "opacity-50"
+                    }`}
+                >
+                    {calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT).toFixed(0)}
+                </span>
+                <span
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                        isRupture ? "" : "opacity-50"
+                    }`}
+                >
+                    {(calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0) + (additionalSheer ?? 0)).toFixed(0)}
+                </span>
+                <span
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                        isRupture ? "" : "opacity-50"
+                    }`}
+                >
+                    {(
+                        calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) +
+                        calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0) +
+                        (additionalSheer ?? 0)
+                    ).toFixed(0)}
+                </span>
             </div>
         </div>
     );
