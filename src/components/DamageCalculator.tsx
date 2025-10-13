@@ -296,7 +296,7 @@ function DamageCalculator({
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
                             labelText="DEF Target"
-                            infoText="Enemy Defense. All Deadly Asssault and most Shiyu enemies have 953 DEF"
+                            infoText="Enemy Defense. All Deadly Asssault and most Shiyu enemies have 953 DEF. Tryfing has 572 DEF at Level 70. "
                             onInputChange={(value) => setDefTarget(Number(value))}
                             inputValue={defTarget}
                         />
