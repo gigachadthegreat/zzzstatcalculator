@@ -95,7 +95,7 @@ export const getParameterizedStatsAsUrl = (
 
 export const getsettingsFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
-    const settings: { [key: string]: any } = {};
+    const settings: { [key: string]: string } = {};
 
     const parseParam = (key: string, type: "string" | "number" | "boolean" | "json") => {
         const value = params.get(key);
