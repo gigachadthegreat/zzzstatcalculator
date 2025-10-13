@@ -44,12 +44,14 @@ function App() {
             if (settings.additionalSheerPercent != null) setAdditionalSheerPercent(settings.additionalSheerPercent);
             if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
 
-            setCalculatedStats(calculateStats(
-                getCharacterFromName(settings.characterName, Characters),
-                getWengineFromName(settings.wengineName, Wengines),
-                settings.selectedDrives,
-                settings.selectedSubstats
-            ));
+            setCalculatedStats(
+                calculateStats(
+                    getCharacterFromName(settings.characterName, Characters),
+                    getWengineFromName(settings.wengineName, Wengines),
+                    settings.selectedDrives,
+                    settings.selectedSubstats
+                )
+            );
         }
     }, []);
 
@@ -293,7 +295,10 @@ function App() {
                             calculatedStats={calculatedStats}
                             additionalStats={additionalStats}
                             isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
-                            additionalSheer={additionalSheerFlat + calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) * (additionalSheerPercent/100)}
+                            additionalSheer={
+                                additionalSheerFlat +
+                                calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) * (additionalSheerPercent / 100)
+                            }
                         />
                     </div>
 
@@ -357,6 +362,9 @@ function App() {
                     </div>
                 </div>
             </main>
+            <div className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-700 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-800" onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}>
+                Report an issue
+            </div>
         </div>
     );
 }
