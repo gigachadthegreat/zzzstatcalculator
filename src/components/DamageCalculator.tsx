@@ -297,7 +297,11 @@ function DamageCalculator({
 
     return (
         <div className="">
-            <h2 className="text-2xl font-bold mb-6 text-center">Damage Calculation</h2>
+            <div className="mt-4 text-center mb-5">
+                <div className=" text-3xl font-bold">
+                    Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
+                </div>
+            </div>
             <div className="flex justify-between ">
                 <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
                     <div className="flex items-center space-x-2 ">
@@ -546,11 +550,6 @@ function DamageCalculator({
                             inputValue={additionalSheerPercent}
                         />
                     </div>
-                </div>
-            </div>
-            <div className="mt-4 text-center">
-                <div className=" text-3xl font-bold">
-                    Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
                 </div>
             </div>
         </div>

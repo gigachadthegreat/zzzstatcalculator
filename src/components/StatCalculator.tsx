@@ -51,7 +51,6 @@ function StatCalculator({
         setSubstatCount(substatCount);
     }, [selectedSubstats]);
 
-
     const substatColors = {
         HP_PERCENT: "#00A000", // green
         HP_FLAT: "#40C040", // lighter green
@@ -281,22 +280,25 @@ function StatCalculator({
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 mt-6">
                     {Object.keys(selectedSubstats).map((substat) => (
                         <div key={substat} className="grid grid-cols-[1fr,auto,auto] items-center gap-4">
-                            <label className="block font-medium text-sm">
-                                {substat.replace(/_/g, " ")} (+{DriveStats.SubstatValues[substat as keyof typeof DriveStats.SubstatValues]})
-                            </label>
+                            <div className="flex items-center justify-between">
+                                <label className="block font-medium text-sm mr-2">
+                                    {substat.replace(/_/g, " ")} (+
+                                    {DriveStats.SubstatValues[substat as keyof typeof DriveStats.SubstatValues]})
+                                </label>
+                                <input
+                                    type="number"
+                                    min="0"
+                                    max={numberOfPossibleSubstats}
+                                    value={selectedSubstats[substat as keyof typeof selectedSubstats]}
+                                    onChange={(e) => handleSubstatChange(substat, parseInt(e.target.value) || 0)}
+                                    className="p-1 border rounded bg-white w-16 text-center"
+                                />
+                            </div>
                             <RangeSlider
                                 maxValue={numberOfPossibleSubstats}
                                 value={selectedSubstats[substat as keyof typeof selectedSubstats]}
                                 onChange={(value) => handleSubstatChange(substat, value || 0)}
                                 unavailableValue={substatCount}
-                            />
-                            <input
-                                type="number"
-                                min="0"
-                                max={numberOfPossibleSubstats}
-                                value={selectedSubstats[substat as keyof typeof selectedSubstats]}
-                                onChange={(e) => handleSubstatChange(substat, parseInt(e.target.value) || 0)}
-                                className="p-1 border rounded bg-white w-16 text-center"
                             />
                         </div>
                     ))}
