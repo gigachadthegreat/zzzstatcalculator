@@ -21,7 +21,7 @@ function LabelWithTextInput({
                 type="number"
                 value={inputValue}
                 onChange={(e) => onInputChange(Number(e.target.value))} // prettier-ignore
-                className="p-1 border rounded w-24 text-right"
+                className="p-1 border rounded bg-white w-16 text-center"
             />
         </div>
     );

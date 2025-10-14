@@ -150,6 +150,7 @@ function StatCalculator({
                         <h2 className="text-xl font-bold mb-4">Drive Stats</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div className="flex items-center gap-2">
+                                <label htmlFor="drive1">Drive 1 enabled</label>
                                 <input
                                     id="drive1"
                                     type="checkbox"
@@ -157,9 +158,9 @@ function StatCalculator({
                                     checked={selectedDrives.drive1Enabled}
                                     onChange={() => handleDriveChange("drive1Enabled", !selectedDrives.drive1Enabled)}
                                 />
-                                <label htmlFor="drive1">Drive 1 enabled</label>
                             </div>
                             <div className="flex items-center gap-2">
+                                <label htmlFor="drive2">Drive 2 enabled</label>
                                 <input
                                     id="drive2"
                                     type="checkbox"
@@ -167,9 +168,9 @@ function StatCalculator({
                                     checked={selectedDrives.drive2Enabled}
                                     onChange={() => handleDriveChange("drive2Enabled", !selectedDrives.drive2Enabled)}
                                 />
-                                <label htmlFor="drive2">Drive 2 enabled</label>
                             </div>
                             <div className="flex items-center gap-2">
+                                <label htmlFor="drive3">Drive 3 enabled</label>
                                 <input
                                     id="drive3"
                                     type="checkbox"
@@ -177,7 +178,6 @@ function StatCalculator({
                                     checked={selectedDrives.drive3Enabled}
                                     onChange={() => handleDriveChange("drive3Enabled", !selectedDrives.drive3Enabled)}
                                 />
-                                <label htmlFor="drive3">Drive 3 enabled</label>
                             </div>
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">

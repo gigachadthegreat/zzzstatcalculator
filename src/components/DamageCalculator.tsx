@@ -417,18 +417,18 @@ function DamageCalculator({
                             inputValue={additionalSheerDmgBonusMultiplierAttacker}
                         />
                     </div>
-                    <div className="flex items-center gap-2 mb-2 py-1">
+                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between pr-6">
                         <LabelWithInfo
                             labelText={"Use Rupture caltulation"}
                             infoText={"Use Sheerforce in Damage calculation instead of Attack"}
                         />
-                        <input checked={isRupture} onChange={(e) => setIsRupture(e.target.checked)} type="checkbox" />
+                        <input className="h-4 w-4" checked={isRupture} onChange={(e) => setIsRupture(e.target.checked)} type="checkbox" />
                     </div>
-                    <div className="flex items-center gap-2 mb-2 py-1">
+                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between  pr-6">
                         <LabelWithInfo labelText={"Use Anomaly caltulation"} infoText={"Use Anomalydamage in Damage calculation"} />
-                        <input checked={isAnomaly} onChange={(e) => setIsAnomaly(e.target.checked)} type="checkbox" />
+                        <input className="h-4 w-4" checked={isAnomaly} onChange={(e) => setIsAnomaly(e.target.checked)} type="checkbox" />
                     </div>
-                    <div className="flex items-center gap-2 mb-2 py-1">
+                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
                         <LabelWithInfo
                             labelText={"Anomaly Type"}
                             infoText={"The attribute/element of the anomaly. Affects Damage calculation"}
@@ -436,7 +436,7 @@ function DamageCalculator({
                         <select
                             value={anomalyType}
                             onChange={(e) =>setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)} // prettier-ignore
-                            className="p-1 border rounded w-24"
+                            className="p-1 border rounded bg-white w-28 text-center"
                         >
                             {Object.keys(AnomalyMultipliers).map((key) => (
                                 <option value={key} key={key}>
@@ -445,12 +445,12 @@ function DamageCalculator({
                             ))}
                         </select>{" "}
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className="flex items-center gap-2 mb-2 w-80 justify-between">
                         <label>Crit Mode:</label>
                         <select
                             value={critMode}
                             onChange={(e) => setCritMode(e.target.value as "avg" | "crit" | "noCrit")} // prettier-ignore
-                            className="p-1 border rounded w-24"
+                            className="p-1 border rounded bg-white w-28 text-center"
                         >
                             <option value="avg">Average</option>
                             <option value="crit">Always Crit</option>
