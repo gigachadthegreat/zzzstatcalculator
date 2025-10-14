@@ -14,7 +14,7 @@ function LabelWithTextInput({
     placeholder?: string;
 }) {
     return (
-        <div className="w-70 flex justify-between">
+        <div className="w-80 flex justify-between">
             <LabelWithInfo labelText={labelText} infoText={infoText} />
 
             <input

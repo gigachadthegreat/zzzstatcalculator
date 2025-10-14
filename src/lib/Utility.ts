@@ -35,7 +35,7 @@ export const getParameterizedStatsAsUrl = (
     wengineName: string,
     selectedDrives: SelectedDrives,
     selectedSubstats: SeletedSubstats,
-    
+
     defTarget: number,
     resTarget: number,
     resReductionTarget: number,
@@ -45,6 +45,7 @@ export const getParameterizedStatsAsUrl = (
     stunMultiplier: number,
     resIgnore: number,
     additionalDmgBonusMultiplierAttacker: number,
+    additionalSheerDmgBonusMultiplierAttacker: number,
     critMode: string,
     multiplierValue: number,
     isRupture: boolean,
@@ -61,7 +62,7 @@ export const getParameterizedStatsAsUrl = (
     additionalCritDamage: number,
     additionalElementPercent: number,
     additionalSheerFlat: number,
-    additionalSheerPercent: number,
+    additionalSheerPercent: number
     // characterLevel: number
 ) => {
     const params = new URLSearchParams();
@@ -78,6 +79,7 @@ export const getParameterizedStatsAsUrl = (
     params.set("stunMultiplier", stunMultiplier.toString());
     params.set("resIgnore", resIgnore.toString());
     params.set("additionalDmgBonusMultiplierAttacker", additionalDmgBonusMultiplierAttacker.toString());
+    params.set("additionalSheerDmgBonusMultiplierAttacker", additionalSheerDmgBonusMultiplierAttacker.toString());
     params.set("critMode", critMode);
     params.set("multiplierValue", multiplierValue.toString());
     params.set("isRupture", isRupture.toString());
@@ -137,6 +139,7 @@ export const getsettingsFromUrl = () => {
     settings.stunMultiplier = parseParam("stunMultiplier", "number");
     settings.resIgnore = parseParam("resIgnore", "number");
     settings.additionalDmgBonusMultiplierAttacker = parseParam("additionalDmgBonusMultiplierAttacker", "number");
+    settings.additionalSheerDmgBonusMultiplierAttacker = parseParam("additionalSheerDmgBonusMultiplierAttacker", "number");
     settings.critMode = parseParam("critMode", "string");
     settings.multiplierValue = parseParam("multiplierValue", "number");
     settings.isRupture = parseParam("isRupture", "boolean");

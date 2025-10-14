@@ -35,6 +35,9 @@ function DamageCalculator({
     additionalDmgBonusMultiplierAttacker,
     setAdditionalDmgBonusMultiplierAttacker,
 
+    additionalSheerDmgBonusMultiplierAttacker,
+    setAdditionalSheerDmgBonusMultiplierAttacker,
+
     critMode,
     setCritMode,
 
@@ -82,10 +85,9 @@ function DamageCalculator({
 
     additionalSheerPercent,
     setAdditionalSheerPercent,
-
-    // characterLevel,
-    // setCharacterLevel,
-}: {
+}: // characterLevel,
+// setCharacterLevel,
+{
     calculatedStats: Stats | null;
     characterName: string;
 
@@ -115,6 +117,9 @@ function DamageCalculator({
 
     additionalDmgBonusMultiplierAttacker: number;
     setAdditionalDmgBonusMultiplierAttacker: (value: number) => void;
+
+    additionalSheerDmgBonusMultiplierAttacker: number;
+    setAdditionalSheerDmgBonusMultiplierAttacker: (value: number) => void;
 
     critMode: "avg" | "crit" | "noCrit";
     setCritMode: (value: "avg" | "crit" | "noCrit") => void;
@@ -190,7 +195,20 @@ function DamageCalculator({
             calculateDefenseMultiplier() *
             calculateResMultiplier() *
             calculatedmgTakenMultiplierTarget() *
-            (stunMultiplier/100)
+            (stunMultiplier / 100)
+        );
+    };
+
+    const calculateSheerDamageDealt = () => {
+        if (!modifiedStats) return 0;
+        return (
+            calculateBaseDamage() *
+            dmgBonusMultiplierAttacker() *
+            critMultiplierAttacker() *
+            calculateResMultiplier() *
+            calculatedmgTakenMultiplierTarget() *
+            (stunMultiplier / 100) *
+            (additionalSheerDmgBonusMultiplierAttacker / 100 + 1)
         );
     };
 
@@ -204,7 +222,7 @@ function DamageCalculator({
             calculateDefenseMultiplier() *
             calculateResMultiplier() *
             calculatedmgTakenMultiplierTarget() *
-            (stunMultiplier/100)
+            (stunMultiplier / 100)
         );
     };
 
@@ -250,10 +268,6 @@ function DamageCalculator({
     };
 
     const calculateDefenseMultiplier = () => {
-        if (isRupture) {
-            return 1;
-        }
-
         const levelFactor = levelFactorAttacker[60 - 1];
         const finalDef = Math.max(
             defTarget * (1 - defenseShred / 100) * (1 - (modifiedStats!.PEN_PERCENT ?? 0) / 100) - (modifiedStats!.PEN_FLAT ?? 0),
@@ -273,10 +287,13 @@ function DamageCalculator({
     let calculatedDamage = 0;
     if (isAnomaly) {
         calculatedDamage = modifiedStats ? calculateAnomalyDamageDealt() : 0;
+    } else if (isRupture) {
+        {
+            calculatedDamage = modifiedStats ? calculateSheerDamageDealt() : 0;
+        }
     } else {
         calculatedDamage = modifiedStats ? calculateDamageDealt() : 0;
     }
-    console.log(calculatedDamage)
 
     return (
         <div className="">
@@ -388,6 +405,14 @@ function DamageCalculator({
                             inputValue={additionalDmgBonusMultiplierAttacker}
                         />
                     </div>
+                    <div className="flex items-center gap-2 mb-2">
+                        <LabelWithTextInput
+                            labelText="Additional Sheer DMG %"
+                            infoText="Additional sheer damage bonus from other sources. This is different from Additional DMG % is is multiplicative with the damage formula. Sources include anything that says 'Sheer DMG' such as Yixuans W-Engine"
+                            onInputChange={(value) => setAdditionalSheerDmgBonusMultiplierAttacker(Number(value))}
+                            inputValue={additionalSheerDmgBonusMultiplierAttacker}
+                        />
+                    </div>
                     <div className="flex items-center gap-2 mb-2 py-1">
                         <LabelWithInfo
                             labelText={"Use Rupture caltulation"}
@@ -410,7 +435,9 @@ function DamageCalculator({
                             className="p-1 border rounded w-24"
                         >
                             {Object.keys(AnomalyMultipliers).map((key) => (
-                                <option value={key} key={key}>{key}</option>
+                                <option value={key} key={key}>
+                                    {key}
+                                </option>
                             ))}
                         </select>{" "}
                     </div>

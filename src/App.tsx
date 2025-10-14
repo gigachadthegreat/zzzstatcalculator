@@ -26,6 +26,8 @@ function App() {
             if (settings.resIgnore != null) setResIgnore(settings.resIgnore);
             if (settings.additionalDmgBonusMultiplierAttacker != null)
                 setAdditionalDmgBonusMultiplierAttacker(settings.additionalDmgBonusMultiplierAttacker);
+            if (settings.additionalSheerDmgBonusMultiplierAttacker != null)
+                setAdditionalSheerDmgBonusMultiplierAttacker(settings.additionalSheerDmgBonusMultiplierAttacker);          
             if (settings.critMode) setCritMode(settings.critMode as "avg" | "crit" | "noCrit");
             if (settings.multiplierValue != null) setMultiplierValue(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
@@ -99,6 +101,7 @@ function App() {
     const [stunMultiplier, setStunMultiplier] = useState(100);
     const [resIgnore, setResIgnore] = useState(0);
     const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
+    const [additionalSheerDmgBonusMultiplierAttacker, setAdditionalSheerDmgBonusMultiplierAttacker] = useState(0);
     const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
     const [multiplierValue, setMultiplierValue] = useState<number>(100);
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
@@ -267,6 +270,7 @@ function App() {
         setStunMultiplier(100);
         setResIgnore(0);
         setAdditionalDmgBonusMultiplierAttacker(0);
+        setAdditionalAttackFlat(0)
         setCritMode("avg");
         setMultiplierValue(100);
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
@@ -334,6 +338,7 @@ function App() {
                                         stunMultiplier,
                                         resIgnore,
                                         additionalDmgBonusMultiplierAttacker,
+                                        additionalSheerDmgBonusMultiplierAttacker,
                                         critMode,
                                         multiplierValue,
                                         isRupture,
@@ -411,6 +416,8 @@ function App() {
                             setResIgnore={(value) => setResIgnore(value)}
                             additionalDmgBonusMultiplierAttacker={additionalDmgBonusMultiplierAttacker}
                             setAdditionalDmgBonusMultiplierAttacker={(value) => setAdditionalDmgBonusMultiplierAttacker(value)}
+                            additionalSheerDmgBonusMultiplierAttacker= {additionalSheerDmgBonusMultiplierAttacker}
+                            setAdditionalSheerDmgBonusMultiplierAttacker= {setAdditionalSheerDmgBonusMultiplierAttacker}
                             critMode={critMode}
                             setCritMode={(value) => setCritMode(value)}
                             multiplierValue={multiplierValue}
