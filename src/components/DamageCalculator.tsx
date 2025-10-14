@@ -295,6 +295,123 @@ function DamageCalculator({
         calculatedDamage = modifiedStats ? calculateDamageDealt() : 0;
     }
 
+    const getCritFormula = () => {
+        switch (critMode) {
+            case "avg":
+                return `(1 + (min(${modifiedStats?.CRIT_RATE}, 100) / 100) * (${modifiedStats?.CRIT_DAMAGE} / 100))`;
+            case "crit":
+                return `(1 + ${modifiedStats?.CRIT_DAMAGE} / 100)`;
+            case "noCrit":
+                return "1";
+            default:
+                return "1";
+        }
+    };
+
+    const finalDef = modifiedStats
+        ? Math.max(defTarget * (1 - defenseShred / 100) * (1 - (modifiedStats.PEN_PERCENT ?? 0) / 100) - (modifiedStats.PEN_FLAT ?? 0), 0)
+        : 0;
+    const levelFactor = levelFactorAttacker[59];
+
+    const getFormula = () => {
+        if (isAnomaly) {
+            return (
+                <>
+                    <p className="text-sm text-gray-500 mt-2">
+                        <strong>Anomaly Base DMG:</strong> ({AnomalyMultipliers[anomalyType]} &times;{" "}
+                        {modifiedStats?.ATTACK_FLAT.toFixed(0)})
+                        <span className="text-blue-600"> = {calculateAnomalyBaseDamage().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>Anomaly Proficiency Multiplier:</strong> ({modifiedStats?.ANOMALY_PROFICIENCY_FLAT.toFixed(3)}{" "}
+                        &times; 0.01)
+                        <span className="text-blue-600"> = {calculateAnomalyProficiencyMultiplier().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>Anomaly Level Multiplier:</strong> (1 + (1 / 59) &times; (60 - 1))
+                        <span className="text-blue-600"> = {calculateAnomalyLevelMultiplier().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                        {additionalDmgBonusMultiplierAttacker} / 100)
+                        <span className="text-blue-600"> = {dmgBonusMultiplierAttacker().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>DEF Multiplier:</strong> ({levelFactor} / ({finalDef.toFixed(3)} + {levelFactor}))
+                        <span className="text-blue-600"> = {calculateDefenseMultiplier().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>RES Multiplier:</strong> (1 - {resTarget} / 100 + {resReductionTarget} / 100 + {resIgnore} / 100)
+                        <span className="text-blue-600"> = {calculateResMultiplier().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>DMG Taken Multiplier:</strong> (1 + {dmgTakenIncrease} / 100 - {dmgTakenReduction} / 100)
+                        <span className="text-blue-600"> = {calculatedmgTakenMultiplierTarget().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>Stun Multiplier:</strong> ({stunMultiplier} / 100)
+                        <span className="text-blue-600"> = {(stunMultiplier / 100).toFixed(3)}</span>
+                    </p>
+                </>
+            );
+        }
+
+        if (isRupture) {
+            return (
+                <>
+                    <p className="text-sm text-gray-500 mt-2">
+                        <strong>Base DMG:</strong> ({multiplierValue} / 100 &times; (
+                        {calculateSheer(modifiedStats!.HP_FLAT, modifiedStats!.ATTACK_FLAT).toFixed(3)} &times; (1 +{" "}
+                        {additionalSheerPercent} / 100) + {additionalSheerFlat}))
+                        <span className="text-blue-600"> = {calculateBaseDamage().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                        {additionalDmgBonusMultiplierAttacker} / 100)
+                        <span className="text-blue-600"> = {dmgBonusMultiplierAttacker().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>Crit Multiplier:</strong> {getCritFormula()}
+                        <span className="text-blue-600"> = {critMultiplierAttacker().toFixed(3)}</span> <br />
+                        &times; <strong>Additional Sheer DMG Multiplier:</strong> (1 + {additionalSheerDmgBonusMultiplierAttacker} / 100)
+                        <span className="text-blue-600"> = {(1 + additionalSheerDmgBonusMultiplierAttacker / 100).toFixed(3)}</span>
+                        <br />
+                        &times; <strong>RES Multiplier:</strong> (1 - {resTarget} / 100 + {resReductionTarget} / 100 + {resIgnore} / 100)
+                        <span className="text-blue-600"> = {calculateResMultiplier().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>DMG Taken Multiplier:</strong> (1 + {dmgTakenIncrease} / 100 - {dmgTakenReduction} / 100)
+                        <span className="text-blue-600"> = {calculatedmgTakenMultiplierTarget().toFixed(3)}</span>
+                        <br />
+                        &times; <strong>Stun Multiplier:</strong> ({stunMultiplier} / 100)
+                        <span className="text-blue-600"> = {(stunMultiplier / 100).toFixed(3)}</span>
+                        <br />
+                        <br />
+                    </p>
+                </>
+            );
+        }
+        return (
+            <>
+                <p className="text-sm text-gray-500 mt-2">
+                    <strong>Base DMG:</strong> ({multiplierValue} / 100 &times; {modifiedStats?.ATTACK_FLAT.toFixed(3)})
+                    <span className="text-blue-600"> = {calculateBaseDamage().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                    {additionalDmgBonusMultiplierAttacker} / 100)
+                    <span className="text-blue-600"> = {dmgBonusMultiplierAttacker().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>Crit Multiplier:</strong> {getCritFormula()}
+                    <span className="text-blue-600"> = {critMultiplierAttacker().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>DEF Multiplier:</strong> ({levelFactor} / ({finalDef.toFixed(3)} + {levelFactor}))
+                    <span className="text-blue-600"> = {calculateDefenseMultiplier().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>RES Multiplier:</strong> (1 - {resTarget} / 100 + {resReductionTarget} / 100 + {resIgnore} / 100)
+                    <span className="text-blue-600"> = {calculateResMultiplier().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>DMG Taken Multiplier:</strong> (1 + {dmgTakenIncrease} / 100 - {dmgTakenReduction} / 100)
+                    <span className="text-blue-600"> = {calculatedmgTakenMultiplierTarget().toFixed(3)}</span>
+                    <br />
+                    &times; <strong>Stun Multiplier:</strong> ({stunMultiplier} / 100)
+                    <span className="text-blue-600"> = {(stunMultiplier / 100).toFixed(3)}</span>
+                    <br />
+                    <br />
+                </p>
+            </>
+        );
+    };
+
     return (
         <div className="">
             <div className="mt-4 text-center mb-5">
@@ -302,6 +419,11 @@ function DamageCalculator({
                     Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
                 </div>
             </div>
+            <div className="mt-4 text-center mb-6 p-4 bg-gray-50 rounded-lg shadow-inner">
+                <h4 className="text-lg font-bold mb-2">Damage Formula</h4>
+                <div className="font-mono text-sm text-left">{getFormula()}</div>
+            </div>
+
             <div className="flex justify-between ">
                 <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
                     <div className="flex items-center space-x-2 ">
