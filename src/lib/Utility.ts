@@ -62,7 +62,7 @@ export const getParameterizedStatsAsUrl = (
     additionalElementPercent: number,
     additionalSheerFlat: number,
     additionalSheerPercent: number,
-    characterLevel: number
+    // characterLevel: number
 ) => {
     const params = new URLSearchParams();
     params.set("characterName", characterName);
@@ -94,7 +94,7 @@ export const getParameterizedStatsAsUrl = (
     params.set("additionalElementPercent", additionalElementPercent.toString());
     params.set("additionalSheerFlat", additionalSheerFlat.toString());
     params.set("additionalSheerPercent", additionalSheerPercent.toString());
-    params.set("characterLevel", characterLevel.toString());
+    // params.set("characterLevel", characterLevel.toString());
 
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 };
@@ -154,7 +154,7 @@ export const getsettingsFromUrl = () => {
     settings.additionalElementPercent = parseParam("additionalElementPercent", "number");
     settings.additionalSheerFlat = parseParam("additionalSheerFlat", "number");
     settings.additionalSheerPercent = parseParam("additionalSheerPercent", "number");
-    settings.characterLevel = parseParam("characterLevel", "number");
+    // settings.characterLevel = parseParam("characterLevel", "number");
 
     // Filter out null values so we only return settings that were present in the URL
     return Object.fromEntries(Object.entries(settings).filter(([, value]) => value !== null));

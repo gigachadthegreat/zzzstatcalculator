@@ -83,8 +83,8 @@ function DamageCalculator({
     additionalSheerPercent,
     setAdditionalSheerPercent,
 
-    characterLevel,
-    setCharacterLevel,
+    // characterLevel,
+    // setCharacterLevel,
 }: {
     calculatedStats: Stats | null;
     characterName: string;
@@ -164,8 +164,8 @@ function DamageCalculator({
     additionalSheerPercent: number;
     setAdditionalSheerPercent: (value: number) => void;
 
-    characterLevel: number;
-    setCharacterLevel: (value: number) => void;
+    // characterLevel: number;
+    // setCharacterLevel: (value: number) => void;
 }) {
     // Character Stats
     const modifiedStats: Stats | null = calculatedStats
@@ -217,7 +217,7 @@ function DamageCalculator({
     };
 
     const calculateAnomalyLevelMultiplier = () => {
-        return 1 + (1 / 59) * (characterLevel - 1);
+        return 1 + (1 / 59) * (60 - 1);
     };
 
     const calculateBaseDamage = () => {
@@ -254,7 +254,7 @@ function DamageCalculator({
             return 1;
         }
 
-        const levelFactor = levelFactorAttacker[characterLevel - 1];
+        const levelFactor = levelFactorAttacker[60 - 1];
         const finalDef = Math.max(
             defTarget * (1 - defenseShred / 100) * (1 - (modifiedStats!.PEN_PERCENT ?? 0) / 100) - (modifiedStats!.PEN_FLAT ?? 0),
             0
@@ -276,6 +276,7 @@ function DamageCalculator({
     } else {
         calculatedDamage = modifiedStats ? calculateDamageDealt() : 0;
     }
+    console.log(calculatedDamage)
 
     return (
         <div className="">
@@ -355,14 +356,14 @@ function DamageCalculator({
                 </div>
                 <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
                     <h3 className="font-bold mb-2">Attacker Modifiers</h3>
-                    <div className="flex items-center gap-2 mb-2">
+                    {/* <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
                             labelText="Character Level"
                             infoText="The level of the attacking character. Affects Defense and Anomaly calculations."
                             onInputChange={(value) => setCharacterLevel(Number(value))}
                             inputValue={characterLevel}
                         />
-                    </div>
+                    </div> */}
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
                             labelText="Multiplier Value %"

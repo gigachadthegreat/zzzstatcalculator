@@ -42,7 +42,7 @@ function App() {
             if (settings.additionalElementPercent != null) setAdditionalElementPercent(settings.additionalElementPercent);
             if (settings.additionalSheerFlat != null) setAdditionalSheerFlat(settings.additionalSheerFlat);
             if (settings.additionalSheerPercent != null) setAdditionalSheerPercent(settings.additionalSheerPercent);
-            if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
+            // if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
 
             setCalculatedStats(
                 calculateStats(
@@ -101,7 +101,7 @@ function App() {
     const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
     const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
     const [multiplierValue, setMultiplierValue] = useState<number>(100);
-    const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
+    const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
     const [additionalHpFlat, setAdditionalHpFlat] = useState(0);
@@ -115,7 +115,7 @@ function App() {
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
     const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
     const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
-    const [characterLevel, setCharacterLevel] = useState(60);
+    // const [characterLevel, setCharacterLevel] = useState(60);
 
     const [additionalStats, setAdditionalStats] = useState<Stats>({
         HP_FLAT: 0,
@@ -225,52 +225,139 @@ function App() {
         });
     };
 
+    const resetEveryState = () => {
+        const newCharacterName = Characters[0].name;
+        const newWengineName = "None";
+        const newSelectedDrives = {
+            drive1Enabled: false,
+            drive2Enabled: false,
+            drive3Enabled: false,
+            drive4: StatType.NONE,
+            drive5: StatType.NONE,
+            drive6: StatType.NONE,
+            drive2psc: StatType.NONE,
+            drive4psc: StatType.NONE,
+        };
+        const newSelectedSubstats = {
+            HP_PERCENT: 0,
+            HP_FLAT: 0,
+            ATTACK_PERCENT: 0,
+            ATTACK_FLAT: 0,
+            DEFENSE_PERCENT: 0,
+            DEFENSE_FLAT: 0,
+            CRIT_RATE: 0,
+            CRIT_DAMAGE: 0,
+            ANOMALY_PROFICIENCY_FLAT: 0,
+            PEN_FLAT: 0,
+        };
+
+        setCharacterName(newCharacterName);
+        setWengineName(newWengineName);
+        setSelectedDrives(newSelectedDrives);
+
+        setSelectedSubstats(newSelectedSubstats);
+
+        // Damage Calculator State
+        setDefTarget(953);
+        setResTarget(0);
+        setResReductionTarget(0);
+        setDmgTakenIncrease(0);
+        setDmgTakenReduction(0);
+        setDefenseShred(0);
+        setStunMultiplier(100);
+        setResIgnore(0);
+        setAdditionalDmgBonusMultiplierAttacker(0);
+        setCritMode("avg");
+        setMultiplierValue(100);
+        setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
+        setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
+        setAnomalyType("Burn");
+        setAdditionalHpFlat(0);
+        setAdditionalHpPercent(0);
+        setAdditionalAttackFlat(0);
+        setAdditionalAttackPercent(0);
+        setAdditionalPenPercent(0);
+        setAdditionalPenFlat(0);
+        setAdditionalCritRate(0);
+        setAdditionalCritDamage(0);
+        setAdditionalElementPercent(0);
+        setAdditionalSheerFlat(0);
+        setAdditionalSheerPercent(0);
+
+        setCalculatedStats(
+            calculateStats(
+                getCharacterFromName(newCharacterName, Characters),
+                getWengineFromName(newWengineName, Wengines),
+                newSelectedDrives,
+                newSelectedSubstats
+            )
+        );
+
+        const newUrl = window.location.origin + window.location.pathname + window.location.hash;
+
+        // 2. Use the History API to update the URL
+        // - null: The state object (can be any data you want to associate with the history entry)
+        // - '': The title (most browsers ignore this, so an empty string is common)
+        // - newUrl: The new URL to display in the address bar
+        window.history.replaceState(null, "", newUrl);
+    };
+
     return (
         <div className="min-h-screen bg-gray-100 text-gray-800">
             <header className="bg-white shadow">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <h1 className="text-3xl font-bold text-gray-900">ZZZ Stat Calculator</h1>
-                    <button
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-                        onClick={() =>
-                            navigator.clipboard.writeText(
-                                getParameterizedStatsAsUrl(
-                                    characterName,
-                                    wengineName,
-                                    selectedDrives,
-                                    selectedSubstats,
-                                    defTarget,
-                                    resTarget,
-                                    resReductionTarget,
-                                    dmgTakenIncrease,
-                                    dmgTakenReduction,
-                                    defenseShred,
-                                    stunMultiplier,
-                                    resIgnore,
-                                    additionalDmgBonusMultiplierAttacker,
-                                    critMode,
-                                    multiplierValue,
-                                    isRupture,
-                                    isAnomaly,
-                                    anomalyType,
-                                    additionalHpFlat,
-                                    additionalHpPercent,
-                                    additionalAttackFlat,
-                                    additionalAttackPercent,
-                                    additionalPenPercent,
-                                    additionalPenFlat,
-                                    additionalCritRate,
-                                    additionalCritDamage,
-                                    additionalElementPercent,
-                                    additionalSheerFlat,
-                                    additionalSheerPercent,
-                                    characterLevel
+
+                    <div className="space-x-5">
+                        <button
+                            className="right-5 cursor-pointer px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
+                            onClick={() => resetEveryState()}
+                        >
+                            Reset everything
+                        </button>
+
+                        <button
+                            className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                            onClick={() =>
+                                navigator.clipboard.writeText(
+                                    getParameterizedStatsAsUrl(
+                                        characterName,
+                                        wengineName,
+                                        selectedDrives,
+                                        selectedSubstats,
+                                        defTarget,
+                                        resTarget,
+                                        resReductionTarget,
+                                        dmgTakenIncrease,
+                                        dmgTakenReduction,
+                                        defenseShred,
+                                        stunMultiplier,
+                                        resIgnore,
+                                        additionalDmgBonusMultiplierAttacker,
+                                        critMode,
+                                        multiplierValue,
+                                        isRupture,
+                                        isAnomaly,
+                                        anomalyType,
+                                        additionalHpFlat,
+                                        additionalHpPercent,
+                                        additionalAttackFlat,
+                                        additionalAttackPercent,
+                                        additionalPenPercent,
+                                        additionalPenFlat,
+                                        additionalCritRate,
+                                        additionalCritDamage,
+                                        additionalElementPercent,
+                                        additionalSheerFlat,
+                                        additionalSheerPercent
+                                        // characterLevel
+                                    )
                                 )
-                            )
-                        }
-                    >
-                        Copy Build Link
-                    </button>
+                            }
+                        >
+                            Copy Build Link
+                        </button>
+                    </div>
                 </div>
             </header>
             <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
@@ -356,13 +443,16 @@ function App() {
                             setAdditionalSheerFlat={(value) => setAdditionalSheerFlat(value)}
                             additionalSheerPercent={additionalSheerPercent}
                             setAdditionalSheerPercent={(value) => setAdditionalSheerPercent(value)}
-                            characterLevel={characterLevel}
-                            setCharacterLevel={(value) => setCharacterLevel(value)}
+                            // characterLevel={characterLevel}
+                            // setCharacterLevel={(value) => setCharacterLevel(value)}
                         />
                     </div>
                 </div>
             </main>
-            <div className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-700 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-800" onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}>
+            <div
+                className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-700 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-800"
+                onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}
+            >
                 Report an issue
             </div>
         </div>
