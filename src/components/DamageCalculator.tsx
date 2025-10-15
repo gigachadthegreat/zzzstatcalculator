@@ -422,14 +422,20 @@ function DamageCalculator({
                     Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
                 </div>
             </div>
-            <div className="mt-4 mb-6 p-4 bg-gray-50 rounded-lg shadow-inner hover:bg-gray-300 hover:cursor-pointer transition-all duration-100">
-                <h4 className="text-lg font-bold mb-2 cursor-pointer" onClick={() => setIsFormulaVisible(!isFormulaVisible)}>
+
+            <div className="mt-4 mb-6  bg-gray-100 rounded-lg shadow-inner">
+                <h4
+                    className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 p-4 ${isFormulaVisible ? "rounded-t-md": "rounded-md" } transition-colors`}
+                    onClick={() => setIsFormulaVisible(!isFormulaVisible)}
+                >
                     <span className="text-center block">Damage Formula</span>
                 </h4>
                 <div
-                    className={`transition-all duration-500 ease-in-out overflow-hidden ${isFormulaVisible ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"}`}
+                    className={`transition-all duration-500 ease-in-out overflow-hidden px-4 ${
+                        isFormulaVisible ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                    }`}
                 >
-                    <div className="font-mono text-sm text-left pt-2">{getFormula()}</div>
+                    <div className="font-mono text-base text-left pt-1">{getFormula()}</div>
                 </div>
             </div>
 
