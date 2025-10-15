@@ -520,6 +520,20 @@ export const Wengines: Wengine[] = [
         WengineStatValue: 32,
     },
     {
+        name: "Dreamlit Hearth",
+        speciality: "SUPPORT",
+        WengineStatSelected: "HP_PERCENT",
+        WengineFlatAttack: 713,
+        WengineStatValue: 30
+    },
+    {
+        name: "Grill O'Wisp",
+        speciality: "RUPTURE",
+        WengineStatSelected: "HP_PERCENT",
+        WengineFlatAttack: 624,
+        WengineStatValue: 25
+    },
+    {
         name: "None",
         speciality: "DEFENSE",
         WengineStatSelected: "NONE",
