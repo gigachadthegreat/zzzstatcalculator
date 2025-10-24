@@ -1,7 +1,7 @@
 import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
-import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, type statTypeKeys, AnomalyMultipliers } from "./constants/types";
-import { useState, useEffect } from "react";
+import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, AnomalyMultipliers, type statTypeKeys } from "./constants/types";
+import { useState, useEffect, useRef } from "react";
 import { calculateSheer, getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
 import { Wengines } from "./constants/Wengines";
@@ -9,6 +9,22 @@ import { calculateStats } from "./lib/Calculations";
 import Results from "./components/Results";
 
 function App() {
+    const imgRef = useRef<HTMLImageElement>(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (imgRef.current) {
+                const scrollY = -window.scrollY/15;
+                console.log(scrollY)
+
+                imgRef.current.style.transform = `translateY(${scrollY}px) `;
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     useEffect(() => {
         const settings = getsettingsFromUrl();
         if (Object.keys(settings).length > 0) {
@@ -27,7 +43,7 @@ function App() {
             if (settings.additionalDmgBonusMultiplierAttacker != null)
                 setAdditionalDmgBonusMultiplierAttacker(settings.additionalDmgBonusMultiplierAttacker);
             if (settings.additionalSheerDmgBonusMultiplierAttacker != null)
-                setAdditionalSheerDmgBonusMultiplierAttacker(settings.additionalSheerDmgBonusMultiplierAttacker);          
+                setAdditionalSheerDmgBonusMultiplierAttacker(settings.additionalSheerDmgBonusMultiplierAttacker);
             if (settings.critMode) setCritMode(settings.critMode as "avg" | "crit" | "noCrit");
             if (settings.multiplierValue != null) setMultiplierValue(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
@@ -270,7 +286,7 @@ function App() {
         setStunMultiplier(100);
         setResIgnore(0);
         setAdditionalDmgBonusMultiplierAttacker(0);
-        setAdditionalAttackFlat(0)
+        setAdditionalAttackFlat(0);
         setCritMode("avg");
         setMultiplierValue(100);
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
@@ -307,8 +323,8 @@ function App() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 text-gray-800">
-            <header className="bg-white shadow">
+        <div className={`min-h-screen bg-gray-100 text-gray-800  `}>
+            <header className="bg-white shadow sticky top-0 z-20">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <h1 className="text-3xl font-bold text-gray-900">ZZZ Stat Calculator</h1>
 
@@ -365,97 +381,111 @@ function App() {
                     </div>
                 </div>
             </header>
-            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div className="space-y-8">
-                    <div className="bg-white shadow-md rounded-lg p-6">
-                        <StatCalculator
-                            characterName={characterName}
-                            wengineName={wengineName}
-                            selectedDrives={selectedDrives}
-                            selectedSubstats={selectedSubstats}
-                            onCharacterChange={(characterName) => handeCharacterChange(characterName)}
-                            onWengineChange={(wengineName) => handeWengineChange(wengineName)}
-                            onDriveChange={(drivePosition, driveValue) => handleDriveChange(drivePosition, driveValue)}
-                            onSubstatChange={(stat, value) => handleSubstatChange(stat, value)}
-                        />
-                    </div>
 
-                    <div className="bg-white shadow-md rounded-lg p-6">
-                        <Results
-                            header="Character Stats"
-                            infoText="Character stats as displayed in character selection menu"
-                            calculatedStats={calculatedStats}
-                            additionalStats={additionalStats}
-                            isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
-                            additionalSheer={
-                                additionalSheerFlat +
-                                calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) * (additionalSheerPercent / 100)
-                            }
-                        />
-                    </div>
-
-                    <div className="bg-white shadow-md rounded-lg p-6">
-                        <DamageCalculator
-                            calculatedStats={calculatedStats}
-                            characterName={characterName}
-                            defTarget={defTarget}
-                            resReductionTarget={resReductionTarget}
-                            setResReductionTarget={(value) => setResReductionTarget(value)}
-                            setDefTarget={(value) => setDefTarget(value)}
-                            resTarget={resTarget}
-                            setResTarget={(value) => setResTarget(value)}
-                            dmgTakenIncrease={dmgTakenIncrease}
-                            setDmgTakenIncrease={(value) => setDmgTakenIncrease(value)}
-                            dmgTakenReduction={dmgTakenReduction}
-                            setDmgTakenReduction={(value) => setDmgTakenReduction(value)}
-                            defenseShred={defenseShred}
-                            setDefenseShred={(value) => setDefenseShred(value)}
-                            stunMultiplier={stunMultiplier}
-                            setStunMultiplier={(value) => setStunMultiplier(value)}
-                            resIgnore={resIgnore}
-                            setResIgnore={(value) => setResIgnore(value)}
-                            additionalDmgBonusMultiplierAttacker={additionalDmgBonusMultiplierAttacker}
-                            setAdditionalDmgBonusMultiplierAttacker={(value) => setAdditionalDmgBonusMultiplierAttacker(value)}
-                            additionalSheerDmgBonusMultiplierAttacker= {additionalSheerDmgBonusMultiplierAttacker}
-                            setAdditionalSheerDmgBonusMultiplierAttacker= {setAdditionalSheerDmgBonusMultiplierAttacker}
-                            critMode={critMode}
-                            setCritMode={(value) => setCritMode(value)}
-                            multiplierValue={multiplierValue}
-                            setMultiplierValue={(value) => setMultiplierValue(value)}
-                            isRupture={isRupture}
-                            setIsRupture={(value) => setIsRupture(value)}
-                            isAnomaly={isAnomaly}
-                            setIsAnomaly={(value) => setIsAnomaly(value)}
-                            anomalyType={anomalyType}
-                            setAnomalyType={(value) => setAnomalyType(value)}
-                            additionalHpFlat={additionalHpFlat}
-                            setAdditionalHpFlat={(value) => setAdditionalHpFlat(value)}
-                            additionalHpPercent={additionalHpPercent}
-                            setAdditionalHpPercent={(value) => setAdditionalHpPercent(value)}
-                            additionalAttackFlat={additionalAttackFlat}
-                            setAdditionalAttackFlat={(value) => setAdditionalAttackFlat(value)}
-                            additionalAttackPercent={additionalAttackPercent}
-                            setAdditionalAttackPercent={(value) => setAdditionalAttackPercent(value)}
-                            additionalPenPercent={additionalPenPercent}
-                            setAdditionalPenPercent={(value) => setAdditionalPenPercent(value)}
-                            additionalPenFlat={additionalPenFlat}
-                            setAdditionalPenFlat={(value) => setAdditionalPenFlat(value)}
-                            additionalCritRate={additionalCritRate}
-                            setAdditionalCritRate={(value) => setAdditionalCritRate(value)}
-                            additionalCritDamage={additionalCritDamage}
-                            setAdditionalCritDamage={(value) => setAdditionalCritDamage(value)}
-                            additionalElementPercent={additionalElementPercent}
-                            setAdditionalElementPercent={(value) => setAdditionalElementPercent(value)}
-                            additionalSheerFlat={additionalSheerFlat}
-                            setAdditionalSheerFlat={(value) => setAdditionalSheerFlat(value)}
-                            additionalSheerPercent={additionalSheerPercent}
-                            setAdditionalSheerPercent={(value) => setAdditionalSheerPercent(value)}
-                            // characterLevel={characterLevel}
-                            // setCharacterLevel={(value) => setCharacterLevel(value)}
-                        />
-                    </div>
+            <div className="grid grid-cols-5 ">
+                <div className="pt-15">
+                    <img
+                        ref={imgRef}
+                        className={`object-contain w-3/5  left-25 z-0 scale-700 top-135 sticky drop-shadow-gray-300 drop-shadow-sm`} //top-135
+                        src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.PNG`}
+                        alt="character avatar"
+                    />
                 </div>
-            </main>
+                <div className="col-span-3 z-10">
+                    <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
+                        <div className="space-y-8">
+                            <div className="bg-white shadow-md rounded-lg p-6">
+                                <StatCalculator
+                                    characterName={characterName}
+                                    wengineName={wengineName}
+                                    selectedDrives={selectedDrives}
+                                    selectedSubstats={selectedSubstats}
+                                    onCharacterChange={(characterName) => handeCharacterChange(characterName)}
+                                    onWengineChange={(wengineName) => handeWengineChange(wengineName)}
+                                    onDriveChange={(drivePosition, driveValue) => handleDriveChange(drivePosition, driveValue)}
+                                    onSubstatChange={(stat, value) => handleSubstatChange(stat, value)}
+                                />
+                            </div>
+
+                            <div className="bg-white shadow-md rounded-lg p-6">
+                                <Results
+                                    header="Character Stats"
+                                    infoText="Character stats as displayed in character selection menu"
+                                    calculatedStats={calculatedStats}
+                                    additionalStats={additionalStats}
+                                    isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
+                                    additionalSheer={
+                                        additionalSheerFlat +
+                                        calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) *
+                                            (additionalSheerPercent / 100)
+                                    }
+                                />
+                            </div>
+
+                            <div className="bg-white shadow-md rounded-lg p-6">
+                                <DamageCalculator
+                                    calculatedStats={calculatedStats}
+                                    characterName={characterName}
+                                    defTarget={defTarget}
+                                    resReductionTarget={resReductionTarget}
+                                    setResReductionTarget={(value) => setResReductionTarget(value)}
+                                    setDefTarget={(value) => setDefTarget(value)}
+                                    resTarget={resTarget}
+                                    setResTarget={(value) => setResTarget(value)}
+                                    dmgTakenIncrease={dmgTakenIncrease}
+                                    setDmgTakenIncrease={(value) => setDmgTakenIncrease(value)}
+                                    dmgTakenReduction={dmgTakenReduction}
+                                    setDmgTakenReduction={(value) => setDmgTakenReduction(value)}
+                                    defenseShred={defenseShred}
+                                    setDefenseShred={(value) => setDefenseShred(value)}
+                                    stunMultiplier={stunMultiplier}
+                                    setStunMultiplier={(value) => setStunMultiplier(value)}
+                                    resIgnore={resIgnore}
+                                    setResIgnore={(value) => setResIgnore(value)}
+                                    additionalDmgBonusMultiplierAttacker={additionalDmgBonusMultiplierAttacker}
+                                    setAdditionalDmgBonusMultiplierAttacker={(value) => setAdditionalDmgBonusMultiplierAttacker(value)}
+                                    additionalSheerDmgBonusMultiplierAttacker={additionalSheerDmgBonusMultiplierAttacker}
+                                    setAdditionalSheerDmgBonusMultiplierAttacker={setAdditionalSheerDmgBonusMultiplierAttacker}
+                                    critMode={critMode}
+                                    setCritMode={(value) => setCritMode(value)}
+                                    multiplierValue={multiplierValue}
+                                    setMultiplierValue={(value) => setMultiplierValue(value)}
+                                    isRupture={isRupture}
+                                    setIsRupture={(value) => setIsRupture(value)}
+                                    isAnomaly={isAnomaly}
+                                    setIsAnomaly={(value) => setIsAnomaly(value)}
+                                    anomalyType={anomalyType}
+                                    setAnomalyType={(value) => setAnomalyType(value)}
+                                    additionalHpFlat={additionalHpFlat}
+                                    setAdditionalHpFlat={(value) => setAdditionalHpFlat(value)}
+                                    additionalHpPercent={additionalHpPercent}
+                                    setAdditionalHpPercent={(value) => setAdditionalHpPercent(value)}
+                                    additionalAttackFlat={additionalAttackFlat}
+                                    setAdditionalAttackFlat={(value) => setAdditionalAttackFlat(value)}
+                                    additionalAttackPercent={additionalAttackPercent}
+                                    setAdditionalAttackPercent={(value) => setAdditionalAttackPercent(value)}
+                                    additionalPenPercent={additionalPenPercent}
+                                    setAdditionalPenPercent={(value) => setAdditionalPenPercent(value)}
+                                    additionalPenFlat={additionalPenFlat}
+                                    setAdditionalPenFlat={(value) => setAdditionalPenFlat(value)}
+                                    additionalCritRate={additionalCritRate}
+                                    setAdditionalCritRate={(value) => setAdditionalCritRate(value)}
+                                    additionalCritDamage={additionalCritDamage}
+                                    setAdditionalCritDamage={(value) => setAdditionalCritDamage(value)}
+                                    additionalElementPercent={additionalElementPercent}
+                                    setAdditionalElementPercent={(value) => setAdditionalElementPercent(value)}
+                                    additionalSheerFlat={additionalSheerFlat}
+                                    setAdditionalSheerFlat={(value) => setAdditionalSheerFlat(value)}
+                                    additionalSheerPercent={additionalSheerPercent}
+                                    setAdditionalSheerPercent={(value) => setAdditionalSheerPercent(value)}
+                                    // characterLevel={characterLevel}
+                                    // setCharacterLevel={(value) => setCharacterLevel(value)}
+                                />
+                            </div>
+                        </div>
+                    </main>
+                </div>
+            </div>
             <div
                 className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-700 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-800"
                 onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}
