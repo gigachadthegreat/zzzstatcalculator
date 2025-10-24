@@ -506,7 +506,7 @@ export const Characters: Character[] = [
         },
     },
     {
-        name: "Anby: Soldier 0",
+        name: "Soldier 0 Anby",
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7673,
