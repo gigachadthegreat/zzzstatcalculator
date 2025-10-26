@@ -164,7 +164,103 @@ export const AttackStats: CharacterAttack[] = [
             
         ],
     },
+    {
+        characterName: "Rina",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Whack the Dimwit - 1", attackType: "BASIC", Level1Damage: 44.00, growthPerLevel: 4 },
+            { attackName: "Basic: Whack the Dimwit - 2", attackType: "BASIC", Level1Damage: 111.40, growthPerLevel: 10.2 },
+            { attackName: "Basic: Whack the Dimwit - 3", attackType: "BASIC", Level1Damage: 117.10, growthPerLevel: 10.7 },
+            { attackName: "Basic: Whack the Dimwit - 4", attackType: "BASIC", Level1Damage: 183.90, growthPerLevel: 16.8 },
 
+            { attackName: "Basic: Shoo the Fool", attackType: "BASIC", Level1Damage: 315.10, growthPerLevel: 28.7 },
+            // DASH
+            { attackName: "Dash: Sudden Surprise", attackType: "DASH", Level1Damage: 105.00, growthPerLevel: 9.6 },
+            // DODGE
+            { attackName: "Dodge: Bangboo Callback", attackType: "DASH", Level1Damage: 227.60, growthPerLevel: 20.7 },
+            // ASSIST
+            { attackName: "Quick Assist: Duple Meter Allemande", attackType: "ASSIST", Level1Damage: 122.60, growthPerLevel: 11.2 },
+            { attackName: "Assist Follow-Up: Quadruple Meter Gavotte", attackType: "ASSIST", Level1Damage: 349.40, growthPerLevel: 31.8 },
+            // SPECIAL
+            { attackName: "Special: Beat the Blockhead", attackType: "SPECIAL", Level1Damage: 61.30, growthPerLevel: 5.6 },
+            // EX SPECIAL
+            { attackName: "EX Special: Dimwit Disappearing Trick", attackType: "EXSPECIAL", Level1Damage: 546.00, growthPerLevel: 49.7 },
+            // CHAIN
+            { attackName: "Chain: Code of Conduct", attackType: "CHAIN", Level1Damage: 1013.00, growthPerLevel: 92.1 },
+            // ULT
+            { attackName: "Ultimate: The Queen's Attendant", attackType: "ULT", Level1Damage: 2116.70, growthPerLevel: 192.5 },
+            
+        ],
+    },
+    {
+        characterName: "Lycaon",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Moon Hunter - 1 ", attackType: "BASIC", Level1Damage: 29.2, growthPerLevel: 2.7 },
+            { attackName: "Basic: Moon Hunter - 1 Charged ", attackType: "BASIC", Level1Damage: 37.1, growthPerLevel: 3.4 },
+            { attackName: "Basic: Moon Hunter - 2", attackType: "BASIC", Level1Damage: 34.9, growthPerLevel: 3.2 },
+            { attackName: "Basic: Moon Hunter - 2 Charged ", attackType: "BASIC", Level1Damage: 56.4, growthPerLevel: 5.2 },
+            { attackName: "Basic: Moon Hunter - 3", attackType: "BASIC", Level1Damage: 58.4, growthPerLevel: 5.4 },
+            { attackName: "Basic: Moon Hunter - 3 Charged ", attackType: "BASIC", Level1Damage: 99.5, growthPerLevel: 9.1 },
+            { attackName: "Basic: Moon Hunter - 4", attackType: "BASIC", Level1Damage: 152, growthPerLevel: 13.9 },
+            { attackName: "Basic: Moon Hunter - 4 Charged ", attackType: "BASIC", Level1Damage: 210.9, growthPerLevel: 19.2 },
+            { attackName: "Basic: Moon Hunter - 5", attackType: "BASIC", Level1Damage: 180.7, growthPerLevel: 16.5 },
+            { attackName: "Basic: Moon Hunter - 5 Level-1 Charged ", attackType: "BASIC", Level1Damage: 277.6, growthPerLevel: 25.3 },
+            { attackName: "Basic: Moon Hunter - 5 Level-2 Charged ", attackType: "BASIC", Level1Damage: 355.7, growthPerLevel: 32.4 },
+            // DASH
+            { attackName: "Dash: Keep it Clean", attackType: "DASH", Level1Damage: 47.30, growthPerLevel: 4.3 },
+            // DODGE
+            { attackName: "Dodge: Etiquette Manual", attackType: "DASH", Level1Damage: 181.00, growthPerLevel: 17 },
+            // ASSIST
+            { attackName: "Quick Assist: Wolf Pack", attackType: "ASSIST", Level1Damage: 63.10, growthPerLevel: 5.8 },
+            { attackName: "Assist Follow-Up: Vengeful Counterattack", attackType: "ASSIST", Level1Damage: 288.30, growthPerLevel: 26.3 },
+            // SPECIAL
+            { attackName: "Special: Time to Hunt", attackType: "SPECIAL", Level1Damage: 77.1, growthPerLevel: 7.1 },
+            { attackName: "Special: Time to Hunt - Charged", attackType: "SPECIAL", Level1Damage: 133.1, growthPerLevel: 12.2 },
+            // EX SPECIAL
+            { attackName: "EX Special: Thrill of the Hunt", attackType: "EXSPECIAL", Level1Damage: 534.3, growthPerLevel: 48.7 },
+            { attackName: "EX Special: Thrill of the Hunt - Charged", attackType: "EXSPECIAL", Level1Damage: 789.5, growthPerLevel: 71.9 },
+            // CHAIN
+            { attackName: "Chain: As You Wish", attackType: "CHAIN", Level1Damage: 637.8, growthPerLevel: 58 },
+            // ULT
+            { attackName: "Ultimate: Mission Complete", attackType: "ULT", Level1Damage: 1694.1, growthPerLevel: 154.1 },
+            
+        ],
+    },
+    {
+        characterName: "Koleda",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Smash 'n' Bash - 1", attackType: "BASIC", Level1Damage: 63.6, growthPerLevel: 5.8 },
+            { attackName: "Basic: Smash 'n' Bash - 2", attackType: "BASIC", Level1Damage: 79.2, growthPerLevel: 7.2 },
+            { attackName: "Basic: Smash 'n' Bash - 3", attackType: "BASIC", Level1Damage: 126.1, growthPerLevel: 11.5 },
+            { attackName: "Basic: Smash 'n' Bash - 4", attackType: "BASIC", Level1Damage: 317.4, growthPerLevel: 28.9 },
+            { attackName: "Basic: Smash 'n' Bash - 1 Enchanced", attackType: "BASIC", Level1Damage: 160.8, growthPerLevel: 14.7 },
+            { attackName: "Basic: Smash 'n' Bash - 2 Enchanced", attackType: "BASIC", Level1Damage: 404.9, growthPerLevel: 36.9 },
+            { attackName: "Basic: Smash 'n' Bash - 2 Enchanced Teamwork", attackType: "BASIC", Level1Damage: 501.3, growthPerLevel: 45.6 },
+            // DASH
+            { attackName: "Dash: Tremble!", attackType: "DASH", Level1Damage: 56.10, growthPerLevel: 5.1 },
+            // DODGE
+            { attackName: "Dodge: Don't Look Down on Me", attackType: "DASH", Level1Damage: 343.20, growthPerLevel: 31.3 },
+            // ASSIST
+            { attackName: "Quick Assist: Coming Thru!", attackType: "ASSIST", Level1Damage: 183.8, growthPerLevel: 16.8 },
+            { attackName: "Assist Follow-Up: Hammer Bell", attackType: "ASSIST", Level1Damage: 359.2, growthPerLevel: 32.7 },
+            // SPECIAL
+            { attackName: "Special: Hammer Time - Strike", attackType: "SPECIAL", Level1Damage: 51.9, growthPerLevel: 4.8 },
+            { attackName: "Special: Hammer Time - Explosion", attackType: "SPECIAL", Level1Damage: 77.8, growthPerLevel: 7.1 },
+            { attackName: "Special: Hammer Time - Explosion Teamwork", attackType: "SPECIAL", Level1Damage: 85.5, growthPerLevel: 7.8 },
+            // EX SPECIAL
+            { attackName: "EX Special: Boiling Furnace - Strike", attackType: "EXSPECIAL", Level1Damage: 152.3, growthPerLevel: 13.9 },
+            { attackName: "EX Special: Boiling Furnace - Explosion", attackType: "EXSPECIAL", Level1Damage: 606, growthPerLevel: 55.1 },
+            { attackName: "EX Special: Boiling Furnace - Explosion Teamwork", attackType: "EXSPECIAL", Level1Damage: 666.6, growthPerLevel: 60.6 },
+            // CHAIN
+            { attackName: "Chain: Natural Disaster", attackType: "CHAIN", Level1Damage: 636.00, growthPerLevel: 57.9 },
+            // ULT
+            { attackName: "Ultimate: Hammerquake", attackType: "ULT", Level1Damage: 1548.80, growthPerLevel: 140.8 },
+            { attackName: "Ultimate: Hammerquake Teamwork", attackType: "ULT", Level1Damage: 1694.00, growthPerLevel: 154 },
+            
+        ],
+    },
 
     // {
     //     characterName: "",
@@ -181,7 +277,7 @@ export const AttackStats: CharacterAttack[] = [
     //         // SPECIAL
     //         { attackName: "Special: ", attackType: "SPECIAL", Level1Damage: , growthPerLevel:  },
     //         // EX SPECIAL
-    //         { attackName: "EX Special:  ", attackType: "EXSPECIAL", Level1Damage: , growthPerLevel:  },
+    //         { attackName: "EX Special: ", attackType: "EXSPECIAL", Level1Damage: , growthPerLevel:  },
     //         // CHAIN
     //         { attackName: "Chain: ", attackType: "CHAIN", Level1Damage: , growthPerLevel:  },
     //         // ULT
