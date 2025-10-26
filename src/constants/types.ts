@@ -2,6 +2,17 @@ export interface Stat {
     type: string;
     amount: number;
 }
+export type attackTypeKey = keyof typeof AttackTypes;
+export const AttackTypes = {
+    BASIC: "BASIC",
+    DASH: "DASH",
+    ASSIST: "ASSIST",
+    SPECIAL: "SPECIAL",
+    EXSPECIAL: "EXSPECIAL",
+    CHAIN: "CHAIN",
+    ULT: "ULT",
+    NONE: "NONE" 
+}
 
 export type statTypeKeys = keyof typeof StatType;
 export const StatType = {
@@ -87,6 +98,18 @@ export interface Character {
     name: string;
     speciality: specialityKeys;
     stats: Stats;
+}
+
+export interface CharacterAttack {
+    characterName: string;
+    attackStats: AttackStats[];
+}
+
+export interface AttackStats {
+    attackName: string;
+    attackType: attackTypeKey;
+    Level1Damage: number;
+    growthPerLevel: number;
 }
 
 export interface Wengine {
@@ -289,5 +312,5 @@ export const AnomalyMultipliers = {
     Shock: 12.5,
     Corruption: 12.5,
     Shatter: 5.0,
-    Assault: 7.13
+    Assault: 7.13,
 };
