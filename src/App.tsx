@@ -15,8 +15,6 @@ function App() {
         const handleScroll = () => {
             if (imgRef.current) {
                 const scrollY = -window.scrollY/15;
-                console.log(scrollY)
-
                 imgRef.current.style.transform = `translateY(${scrollY}px) `;
             }
         };
