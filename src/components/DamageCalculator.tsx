@@ -423,9 +423,9 @@ function DamageCalculator({
                 </div>
             </div>
 
-            <div className="mt-4 mb-6  bg-gray-100 rounded-lg shadow-inner">
+            <div className="mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
                 <h4
-                    className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 p-4 ${isFormulaVisible ? "rounded-t-md": "rounded-md" } transition-colors`}
+                    className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 p-4 ${isFormulaVisible ? "rounded-t-md": "rounded-md" } transition-colors`}
                     onClick={() => setIsFormulaVisible(!isFormulaVisible)}
                 >
                     <span className="text-center block">Damage Formula</span>
@@ -440,7 +440,7 @@ function DamageCalculator({
             </div>
 
             <div className="flex justify-between ">
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
+                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                     <div className="flex items-center space-x-2 ">
                         <h3 className="font-bold ">Target Stats</h3>
                         <img
@@ -512,7 +512,7 @@ function DamageCalculator({
                         />
                     </div>
                 </div>
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
+                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-bold mb-2">Attacker Modifiers</h3>
                     {/* <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
@@ -572,8 +572,8 @@ function DamageCalculator({
                         />
                         <select
                             value={anomalyType}
-                            onChange={(e) =>setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)} // prettier-ignore
-                            className="p-1 border rounded bg-white w-28 text-center"
+                            onChange={(e) => setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)}
+                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
                         >
                             {Object.keys(AnomalyMultipliers).map((key) => (
                                 <option value={key} key={key}>
@@ -586,8 +586,8 @@ function DamageCalculator({
                         <label>Crit Mode:</label>
                         <select
                             value={critMode}
-                            onChange={(e) => setCritMode(e.target.value as "avg" | "crit" | "noCrit")} // prettier-ignore
-                            className="p-1 border rounded bg-white w-28 text-center"
+                            onChange={(e) => setCritMode(e.target.value as "avg" | "crit" | "noCrit")}
+                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
                         >
                             <option value="avg">Average</option>
                             <option value="crit">Always Crit</option>
@@ -595,7 +595,7 @@ function DamageCalculator({
                         </select>
                     </div>
                 </div>
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50">
+                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-bold mb-2">Additional Stats</h3>
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput

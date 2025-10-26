@@ -6,7 +6,7 @@ function LabelWithInfo({ labelText, infoText }: { labelText: string; infoText: s
         <div className="flex items-center  space-x-2">
             <label>{labelText}</label>
             <img
-                className="  opacity-75 hover:opacity-50 hover:cursor-pointer "
+                className="invert text-white opacity-75 hover:opacity-50 hover:cursor-pointer "
                 src={infoIcon}
                 title={infoText}
                 alt="Info Icon"

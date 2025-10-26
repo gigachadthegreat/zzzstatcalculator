@@ -56,18 +56,18 @@ function Results({
         return <div>No stats calculated yet.</div>;
     }
     return (
-        <div className="w-fit p-4 bg-gray-100 rounded-lg mx-auto">
+        <div className="w-fit p-4 bg-gray-100 dark:bg-slate-800 rounded-lg mx-auto">
             <h2 className="text-2xl font-bold text-center mb-5">{header}</h2>
             <div className="grid grid-cols-4 auto-cols-min [&>span]:p-1">
                 <span className="font-bold"></span>
-                <span className="font-mono font-bold text-center">Base</span>
-                <span className="font-mono font-bold text-center">Additional</span>
+                <span className="font-mono font-bold text-center ">Base</span>
+                <span className="font-mono font-bold text-center ">Additional</span>
                 <span className="font-mono font-bold text-center">In-Combat</span>
                 {statsToDisplay.map(({ key, label, toFixed }, index) => {
                     const baseValue = calculatedStats ? calculatedStats[key as keyof Stats] : 0;
                     const additionalValue = additionalStats ? additionalStats[key as keyof Stats] : 0;
                     const combatValue = baseValue + additionalValue;
-                    const className = index % 2 === 0 ? "bg-gray-200" : "";
+                    const className = index % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800";
 
                     return (
                         <StatRow
@@ -81,25 +81,25 @@ function Results({
                         />
                     );
                 })}
-                <span className={`font-bold ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${isRupture ? "" : "opacity-50"}`}>
+                <span className={`font-bold ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${isRupture ? "" : "opacity-50"}`}>
                     Sheer Force
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
                         isRupture ? "" : "opacity-50"
                     }`}
                 >
                     {calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT).toFixed(0)}
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
                         isRupture ? "" : "opacity-50"
                     }`}
                 >
                     {(calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0) + (additionalSheer ?? 0)).toFixed(0)}
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200" : ""} ${
+                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
                         isRupture ? "" : "opacity-50"
                     }`}
                 >

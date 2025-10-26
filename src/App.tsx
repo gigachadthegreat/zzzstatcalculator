@@ -323,10 +323,10 @@ function App() {
     };
 
     return (
-        <div className={`min-h-screen bg-gray-100 text-gray-800  `}>
-            <header className="bg-white shadow sticky top-0 z-20">
+        <div className={`min-h-screen bg-gray-100 text-gray-800 dark:bg-slate-950 dark:text-gray-200`}>
+            <header className="bg-white shadow sticky top-0 z-20 dark:bg-slate-900 dark:border-b dark:border-slate-800">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-                    <h1 className="text-3xl font-bold text-gray-900">ZZZ Stat Calculator</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">ZZZ Stat Calculator</h1>
 
                     <div className="space-x-5">
                         <button
@@ -386,7 +386,7 @@ function App() {
                 <div className="pt-15">
                     <img
                         ref={imgRef}
-                        className={` w-3/5  left-25 z-0 scale-700 top-135 sticky drop-shadow-gray-300 drop-shadow-sm`} //top-135
+                        className={` w-3/5  left-25 z-0 scale-700 top-135 sticky`} //top-135
                         src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.PNG`}
                         alt="character avatar"
                     />
@@ -394,7 +394,7 @@ function App() {
                 <div className="col-span-3 z-10">
                     <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
                         <div className="space-y-8">
-                            <div className="bg-white shadow-md rounded-lg p-6">
+                            <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <StatCalculator
                                     characterName={characterName}
                                     wengineName={wengineName}
@@ -407,7 +407,7 @@ function App() {
                                 />
                             </div>
 
-                            <div className="bg-white shadow-md rounded-lg p-6">
+                            <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <Results
                                     header="Character Stats"
                                     calculatedStats={calculatedStats}
@@ -421,7 +421,7 @@ function App() {
                                 />
                             </div>
 
-                            <div className="bg-white shadow-md rounded-lg p-6">
+                            <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <DamageCalculator
                                     calculatedStats={calculatedStats}
                                     characterName={characterName}
