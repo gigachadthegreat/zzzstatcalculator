@@ -148,7 +148,7 @@ function StatCalculator({
 
                     <div className="p-4 border rounded-lg bg-gray-50">
                         <h2 className="text-xl font-bold mb-4">Drive Stats</h2>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-1  gap-4">
                             <div className="flex items-center gap-2">
                                 <label htmlFor="drive1">Drive 1 enabled</label>
                                 <input
@@ -180,7 +180,7 @@ function StatCalculator({
                                 />
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                        <div className="grid grid-cols-1  gap-4 mt-4">
                             <div>
                                 <label className="block mb-2 font-semibold">Drive 4</label>
                                 <select
@@ -268,7 +268,7 @@ function StatCalculator({
                     <label className="font-semibold">
                         Total Substat Rolls: {substatCount} / {numberOfPossibleSubstats}
                     </label>
-                    <div className="flex-grow">
+                    <div className="grow">
                         <ProgressBar
                             maximum={numberOfPossibleSubstats}
                             amount={Object.values(selectedSubstats)}

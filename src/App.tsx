@@ -386,7 +386,7 @@ function App() {
                 <div className="pt-15">
                     <img
                         ref={imgRef}
-                        className={`object-contain w-3/5  left-25 z-0 scale-700 top-135 sticky drop-shadow-gray-300 drop-shadow-sm`} //top-135
+                        className={` w-3/5  left-25 z-0 scale-700 top-135 sticky drop-shadow-gray-300 drop-shadow-sm`} //top-135
                         src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.PNG`}
                         alt="character avatar"
                     />
