@@ -99,7 +99,7 @@ function StatCalculator({
                                 <select
                                     value={characterName}
                                     onChange={(e) => handeCharacterChange(e.target.value)}
-                                    className="w-full p-2 border rounded bg-white"
+                                    className="w-full p-2 border rounded bg-white text-center"
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
@@ -121,7 +121,7 @@ function StatCalculator({
                                 <select
                                     value={wengineName}
                                     onChange={(e) => handeWengineChange(e.target.value)}
-                                    className="w-full p-2 border rounded bg-white"
+                                    className="w-full p-2 border rounded bg-white text-center"
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
@@ -181,12 +181,12 @@ function StatCalculator({
                             </div>
                         </div>
                         <div className="grid grid-cols-1  gap-4 mt-4">
-                            <div>
-                                <label className="block mb-2 font-semibold">Drive 4</label>
+                            <div className="flex items-center gap-2 justify-between">
+                                <label className="block font-semibold ">Drive 4</label>
                                 <select
                                     value={selectedDrives.drive4}
                                     onChange={(e) => handleDriveChange("drive4", e.target.value as statTypeKeys)}
-                                    className="w-full p-2 border rounded bg-white"
+                                    className="w-3/4 p-2 border rounded bg-white text-center"
                                 >
                                     <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive4) as Array<keyof typeof DriveStats.Drive4>).map((stat) => (
@@ -196,12 +196,12 @@ function StatCalculator({
                                     ))}
                                 </select>
                             </div>
-                            <div>
-                                <label className="block mb-2 font-semibold">Drive 5</label>
+                            <div className="flex items-center gap-2 justify-between ">
+                                <label className="block font-semibold ">Drive 5</label>
                                 <select
                                     value={selectedDrives.drive5}
                                     onChange={(e) => handleDriveChange("drive5", e.target.value as statTypeKeys)}
-                                    className="w-full p-2 border rounded bg-white"
+                                    className="w-3/4 p-2 border rounded bg-white text-center"
                                 >
                                     <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive5) as Array<keyof typeof DriveStats.Drive5>).map((stat) => (
@@ -211,12 +211,12 @@ function StatCalculator({
                                     ))}
                                 </select>
                             </div>
-                            <div>
-                                <label className="block mb-2 font-semibold">Drive 6</label>
+                            <div className="flex items-center gap-2 justify-between">
+                                <label className="block font-semibold ">Drive 6</label>
                                 <select
                                     value={selectedDrives.drive6}
                                     onChange={(e) => handleDriveChange("drive6", e.target.value as statTypeKeys)}
-                                    className="w-full p-2 border rounded bg-white"
+                                    className="w-3/4 p-2 border rounded bg-white text-center"
                                 >
                                     <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive6) as Array<keyof typeof DriveStats.Drive6>).map((stat) => (
