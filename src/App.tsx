@@ -82,8 +82,9 @@ function App() {
         drive4: StatType.NONE,
         drive5: StatType.NONE,
         drive6: StatType.NONE,
-        drive2psc: StatType.NONE,
-        drive4psc: StatType.NONE,
+        drive2psc1: StatType.NONE,
+        drive2psc2: StatType.NONE,
+        drive2psc3: StatType.NONE,
     });
     const [selectedSubstats, setSelectedSubstats] = useState<SeletedSubstats>({
         HP_PERCENT: 0,
@@ -254,8 +255,9 @@ function App() {
             drive4: StatType.NONE,
             drive5: StatType.NONE,
             drive6: StatType.NONE,
-            drive2psc: StatType.NONE,
-            drive4psc: StatType.NONE,
+            drive2psc1: StatType.NONE,
+            drive2psc2: StatType.NONE,
+            drive2psc3: StatType.NONE,
         };
         const newSelectedSubstats = {
             HP_PERCENT: 0,

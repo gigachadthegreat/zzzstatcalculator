@@ -161,16 +161,24 @@ export const calculateStats = (
 
     const drive2PscAdditionalStat1 = AddIndividualStatToBase(
         baseStats,
-        drives.drive2psc,
-        drives.drive2psc in DriveStats.Drive2Psc
-            ? DriveStats.Drive2Psc[drives.drive2psc as keyof typeof DriveStats.Drive2Psc]
+        drives.drive2psc1,
+        drives.drive2psc1 in DriveStats.Drive2Psc1
+            ? DriveStats.Drive2Psc1[drives.drive2psc1 as keyof typeof DriveStats.Drive2Psc1]
             : 0
     );
     const drive2PscAdditionalStat2 = AddIndividualStatToBase(
         baseStats,
-        drives.drive4psc,
-        drives.drive4psc in DriveStats.Drive4Psc
-            ? DriveStats.Drive4Psc[drives.drive4psc as keyof typeof DriveStats.Drive4Psc]
+        drives.drive2psc2,
+        drives.drive2psc2 in DriveStats.Drive2Psc2
+            ? DriveStats.Drive2Psc2[drives.drive2psc2 as keyof typeof DriveStats.Drive2Psc2]
+            : 0
+    );
+
+    const drive2PscAdditionalStat3 = AddIndividualStatToBase(
+        baseStats,
+        drives.drive2psc3,
+        drives.drive2psc3 in DriveStats.Drive2Psc3
+            ? DriveStats.Drive2Psc3[drives.drive2psc3 as keyof typeof DriveStats.Drive2Psc3]
             : 0
     );
 
@@ -186,6 +194,7 @@ export const calculateStats = (
 
     finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat1);
     finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat2);
+    finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat3);
 
     let additionalStatsFromSubstats = {
         HP_FLAT: 0,

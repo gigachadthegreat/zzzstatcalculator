@@ -226,15 +226,18 @@ function StatCalculator({
                                     ))}
                                 </select>
                             </div>
+                        </div>
+                        <div className="grid grid-cols-1  gap-4 mt-4">
+                            <label className="block mb-2 font-semibold">Drive 2 piece effects</label>
+
                             <div>
-                                <label className="block mb-2 font-semibold">Drive 2Psc</label>
                                 <select
-                                    value={selectedDrives.drive2psc}
-                                    onChange={(e) => handleDriveChange("drive2psc", e.target.value as statTypeKeys)}
+                                    value={selectedDrives.drive2psc1}
+                                    onChange={(e) => handleDriveChange("drive2psc1", e.target.value as statTypeKeys)}
                                     className="w-full p-2 border rounded bg-white"
                                 >
                                     <option value="NONE">None</option>
-                                    {Object.keys(DriveStats.Drive2Psc).map((stat) => (
+                                    {Object.keys(DriveStats.Drive2Psc1).map((stat) => (
                                         <option key={stat} value={stat}>
                                             {stat.replace(/_/g, " ")}
                                         </option>
@@ -242,14 +245,27 @@ function StatCalculator({
                                 </select>
                             </div>
                             <div>
-                                <label className="block mb-2 font-semibold">Drive 4Psc</label>
                                 <select
-                                    value={selectedDrives.drive4psc}
-                                    onChange={(e) => handleDriveChange("drive4psc", e.target.value as statTypeKeys)}
+                                    value={selectedDrives.drive2psc2}
+                                    onChange={(e) => handleDriveChange("drive2psc2", e.target.value as statTypeKeys)}
                                     className="w-full p-2 border rounded bg-white"
                                 >
                                     <option value="NONE">None</option>
-                                    {Object.keys(DriveStats.Drive4Psc).map((stat) => (
+                                    {Object.keys(DriveStats.Drive2Psc2).map((stat) => (
+                                        <option key={stat} value={stat}>
+                                            {stat.replace(/_/g, " ")}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <select
+                                    value={selectedDrives.drive2psc3}
+                                    onChange={(e) => handleDriveChange("drive2psc3", e.target.value as statTypeKeys)}
+                                    className="w-full p-2 border rounded bg-white"
+                                >
+                                    <option value="NONE">None</option>
+                                    {Object.keys(DriveStats.Drive2Psc3).map((stat) => (
                                         <option key={stat} value={stat}>
                                             {stat.replace(/_/g, " ")}
                                         </option>
