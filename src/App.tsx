@@ -410,7 +410,6 @@ function App() {
                             <div className="bg-white shadow-md rounded-lg p-6">
                                 <Results
                                     header="Character Stats"
-                                    infoText="Character stats as displayed in character selection menu"
                                     calculatedStats={calculatedStats}
                                     additionalStats={additionalStats}
                                     isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}

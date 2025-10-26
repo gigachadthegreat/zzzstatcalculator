@@ -32,7 +32,6 @@ function Results({
     additionalSheer,
 }: {
     header: string;
-    infoText: string;
     calculatedStats: Stats | null;
     additionalStats: Stats | null;
     isRupture: boolean;
