@@ -35,7 +35,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Ultimate: Ether Grenade - Total", attackType: "ULT", Level1Damage: 1520, growthPerLevel: 138.2 },
             { attackName: "Ultimate: Ether Grenade - Bombard", attackType: "ULT", Level1Damage: 646.80, growthPerLevel: 58.8 },
             { attackName: "Ultimate: Ether Grenade - Energy Field", attackType: "ULT", Level1Damage: 873.20, growthPerLevel: 79.4 },
-            
         ],
     },
     {
@@ -64,7 +63,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: Signed and Sealed", attackType: "CHAIN", Level1Damage: 627.30, growthPerLevel: 57.1 },
             // ULT
             { attackName: "Ultimate: Complete Payback", attackType: "ULT", Level1Damage: 1643.00, growthPerLevel: 149.4 },
-            
         ],
     },
     {
@@ -91,7 +89,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: Electro Engine", attackType: "CHAIN", Level1Damage: 542.40, growthPerLevel: 49.4 },
             // ULT
             { attackName: "Ultimate: Overdrive Engine", attackType: "ULT", Level1Damage: 1512.60, growthPerLevel: 137.6 },
-            
         ],
     },
     {
@@ -125,7 +122,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: Grand Slam!", attackType: "CHAIN", Level1Damage: 483.3, growthPerLevel: 44.7 },
             // ULT
             { attackName: "Ultimate: Walk-Off Home Run!", attackType: "ULT", Level1Damage: 1718.4, growthPerLevel: 156.3 },
-            
         ],
     },
     {
@@ -161,7 +157,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: Pudding Slash", attackType: "CHAIN", Level1Damage: 748.80, growthPerLevel: 67.7 },
             // ULT
             { attackName: "Ultimate: Jumbo Pudding Slash", attackType: "ULT", Level1Damage: 1989.80, growthPerLevel: 180.9 },
-            
         ],
     },
     {
@@ -189,7 +184,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: Code of Conduct", attackType: "CHAIN", Level1Damage: 1013.00, growthPerLevel: 92.1 },
             // ULT
             { attackName: "Ultimate: The Queen's Attendant", attackType: "ULT", Level1Damage: 2116.70, growthPerLevel: 192.5 },
-            
         ],
     },
     {
@@ -224,7 +218,6 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Chain: As You Wish", attackType: "CHAIN", Level1Damage: 637.8, growthPerLevel: 58 },
             // ULT
             { attackName: "Ultimate: Mission Complete", attackType: "ULT", Level1Damage: 1694.1, growthPerLevel: 154.1 },
-            
         ],
     },
     {
@@ -258,9 +251,130 @@ export const AttackStats: CharacterAttack[] = [
             // ULT
             { attackName: "Ultimate: Hammerquake", attackType: "ULT", Level1Damage: 1548.80, growthPerLevel: 140.8 },
             { attackName: "Ultimate: Hammerquake Teamwork", attackType: "ULT", Level1Damage: 1694.00, growthPerLevel: 154 },
-            
         ],
     },
+    {
+        characterName: "Piper",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Load Up and Roll Out - 1", attackType: "BASIC", Level1Damage: 59, growthPerLevel: 5.4 },
+            { attackName: "Basic: Load Up and Roll Out - 2", attackType: "BASIC", Level1Damage: 78.8, growthPerLevel: 7.2 },
+            { attackName: "Basic: Load Up and Roll Out - 3", attackType: "BASIC", Level1Damage: 150.1, growthPerLevel: 13.7 },
+            { attackName: "Basic: Load Up and Roll Out - 4", attackType: "BASIC", Level1Damage: 320.6, growthPerLevel: 29.2 },
+            // DASH
+            { attackName: "Dash: Pedal to the Metal", attackType: "DASH", Level1Damage: 90.1, growthPerLevel: 8.2 },
+            // DODGE
+            { attackName: "Dodge: Power Drift", attackType: "DASH", Level1Damage: 269, growthPerLevel: 24.5 },
+            // ASSIST
+            { attackName: "Quick Assist: Brake Tap", attackType: "ASSIST", Level1Damage: 130, growthPerLevel: 11.9 },
+            { attackName: "Assist Follow-Up: Overtaking Maneuver", attackType: "ASSIST", Level1Damage: 400.5, growthPerLevel: 36.5 },
+            // SPECIAL
+            { attackName: "Special: Tire Spin", attackType: "SPECIAL", Level1Damage: 271.7, growthPerLevel: 23.7 },
+            { attackName: "Special: One Trillion Tons 1 Charge", attackType: "SPECIAL", Level1Damage: 93.4, growthPerLevel: 8.5 },
+            { attackName: "Special: One Trillion Tons 2 Charge", attackType: "SPECIAL", Level1Damage: 103.4, growthPerLevel: 9.4 },
+            { attackName: "Special: One Trillion Tons 3 Charge", attackType: "SPECIAL", Level1Damage: 235, growthPerLevel: 21.4 },
+            // EX SPECIAL
+            { attackName: "EX Special: Engine Spin", attackType: "EXSPECIAL", Level1Damage: 93.5, growthPerLevel: 8.6 },
+            { attackName: "EX Special: Really Heavy", attackType: "EXSPECIAL", Level1Damage: 612.9, growthPerLevel: 55.8 },
+            // CHAIN
+            { attackName: "Chain: Buckle Up", attackType: "CHAIN", Level1Damage: 652.3, growthPerLevel: 59.3 },
+            // ULT
+            { attackName: "Ultimate: Hold On Tight", attackType: "ULT", Level1Damage: 1660.4, growthPerLevel: 151 },
+        ],
+    },
+    {
+        characterName: "Billy",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Full Firepower - Standing Fire", attackType: "BASIC", Level1Damage: 68, growthPerLevel: 6.2 },
+            { attackName: "Basic: Full Firepower - Standing Bullet", attackType: "BASIC", Level1Damage: 7.6, growthPerLevel: 0.7 },
+            { attackName: "Basic: Full Firepower - Crouching Fire", attackType: "BASIC", Level1Damage: 61.8, growthPerLevel: 5.7 },
+            { attackName: "Basic: Full Firepower - Crouching Bullet", attackType: "BASIC", Level1Damage: 12.7, growthPerLevel: 1.2 },
+            { attackName: "Basic: Full Firepower - Rolling Shot ", attackType: "BASIC", Level1Damage: 61.8, growthPerLevel: 5.7 },
+            { attackName: "Basic: Full Firepower - Finishing Shot", attackType: "BASIC", Level1Damage: 49.5, growthPerLevel: 4.5 },
+            // DASH
+            { attackName: "Dash: Starlight Sanction - 360-degree Shot", attackType: "DASH", Level1Damage: 63.1, growthPerLevel: 5.8 },
+            { attackName: "Dash: Starlight Sanction - Straight Shot", attackType: "DASH", Level1Damage: 39, growthPerLevel: 3.6 },
+            // DODGE
+            { attackName: "Dodge: Fair Fight", attackType: "DASH", Level1Damage: 221.4, growthPerLevel: 20.2 },
+            // ASSIST
+            { attackName: "Quick Assist: Power of Teamwork", attackType: "ASSIST", Level1Damage: 93.4, growthPerLevel: 8.5 },
+            { attackName: "Assist Follow-Up: Fatal Shot", attackType: "ASSIST", Level1Damage: 388.8, growthPerLevel: 35.4 },
+            // SPECIAL
+            { attackName: "Special: Stand Still - 1", attackType: "SPECIAL", Level1Damage: 24.2, growthPerLevel: 2.2 },
+            { attackName: "Special: Stand Still - 2", attackType: "SPECIAL", Level1Damage: 51.7, growthPerLevel: 4.7 },
+            { attackName: "Special: Stand Still - 3", attackType: "SPECIAL", Level1Damage: 50.1, growthPerLevel: 4.6 },
+            // EX SPECIAL
+            { attackName: "EX Special: Clearance Time", attackType: "EXSPECIAL", Level1Damage: 543.8, growthPerLevel: 49.5 },
+            // CHAIN
+            { attackName: "Chain: Starlight Mirage", attackType: "CHAIN", Level1Damage: 735.2, growthPerLevel: 66.9 },
+            // ULT
+            { attackName: "Ultimate: Starlight Sparkle", attackType: "ULT", Level1Damage: 1597.7, growthPerLevel: 145.3 },
+        ],
+    },
+    {
+        characterName: "Anton",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Enthusiastic Drills - 1", attackType: "BASIC", Level1Damage: 67.8, growthPerLevel: 6.2 },
+            { attackName: "Basic: Enthusiastic Drills - 2", attackType: "BASIC", Level1Damage: 92.3, growthPerLevel: 8.4 },
+            { attackName: "Basic: Enthusiastic Drills - 3", attackType: "BASIC", Level1Damage: 109.3, growthPerLevel: 9.9 },
+            { attackName: "Basic: Enthusiastic Drills - 4", attackType: "BASIC", Level1Damage: 229.1, growthPerLevel: 20.9 },
+            { attackName: "Basic: Enthusiastic Drills (Burst Mode) - 1", attackType: "BASIC", Level1Damage: 240.9, growthPerLevel: 262.8 },
+            { attackName: "Basic: Enthusiastic Drills (Burst Mode) - 2", attackType: "BASIC", Level1Damage: 469.2, growthPerLevel: 511.9 },
+            { attackName: "Basic: Enthusiastic Drills (Burst Mode) - 3", attackType: "BASIC", Level1Damage: 456.9, growthPerLevel: 498.6 },
+            // DASH
+            { attackName: "Dash:  Fire With Fire", attackType: "DASH", Level1Damage: 68.4, growthPerLevel: 6.3 },
+            // DODGE
+            { attackName: "Dodge: Retaliation", attackType: "DASH", Level1Damage: 271.2, growthPerLevel: 24.7 },
+            { attackName: "Dodge: Overload Drill (Burst Mode)", attackType: "DASH", Level1Damage: 465.4, growthPerLevel: 42.4 },
+            // ASSIST
+            { attackName: "Quick Assist: Shoulder-To-Shoulder", attackType: "ASSIST", Level1Damage: 263.4, growthPerLevel: 24 },
+            { attackName: "Quick Assist: Protective Drill (Burst Mode)", attackType: "ASSIST", Level1Damage: 365.4, growthPerLevel: 33.3 },
+            { attackName: "Assist Follow-Up: Limit Burst", attackType: "ASSIST", Level1Damage: 325.8, growthPerLevel: 29.7 },
+            // SPECIAL
+            { attackName: "Special: Spin, Bro!", attackType: "SPECIAL", Level1Damage: 44.2, growthPerLevel: 4.1 },
+            { attackName: "Special: Explosive Drill (Burst Mode)", attackType: "SPECIAL", Level1Damage: 231.4, growthPerLevel: 21.1 },
+            // EX SPECIAL
+            { attackName: "EX Special: Smash the Horizon, Bro!", attackType: "EXSPECIAL", Level1Damage: 195.1, growthPerLevel: 17.8 },
+            // CHAIN
+            { attackName: "Chain: Go Go Go!", attackType: "CHAIN", Level1Damage: 640.7, growthPerLevel: 58.3 },
+            // ULT
+            { attackName: "Ultimate: Go Go Go Go Go!", attackType: "ULT", Level1Damage: 1816.4, growthPerLevel: 165.2 },
+        ],
+    },
+    {
+        characterName: "Corin",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Wipeout - 1", attackType: "BASIC", Level1Damage: 82, growthPerLevel: 7.5 },
+            { attackName: "Basic: Wipeout - 2", attackType: "BASIC", Level1Damage: 76.6, growthPerLevel:  7},
+            { attackName: "Basic: Wipeout - 3", attackType: "BASIC", Level1Damage: 179.2, growthPerLevel: 16.3 },
+            { attackName: "Basic: Wipeout - 4", attackType: "BASIC", Level1Damage: 233.4, growthPerLevel: 21.3 },
+            { attackName: "Basic: Wipeout - 5", attackType: "BASIC", Level1Damage: 421.2, growthPerLevel: 38.3 },
+            // DASH
+            { attackName: "Dash: Oopsy-Daisy!", attackType: "DASH", Level1Damage: 96.7, growthPerLevel: 8.8 },
+            // DODGE
+            { attackName: "Dodge: Nope!", attackType: "DASH", Level1Damage: 271.2, growthPerLevel: 24.8 },
+            // ASSIST
+            { attackName: "Quick Assist: Emergency Measures", attackType: "ASSIST", Level1Damage: 215, growthPerLevel: 19.6 },
+            { attackName: "Assist Follow-Up: Quick Sweep", attackType: "ASSIST", Level1Damage: 547.5, growthPerLevel: 49.5 },
+            // SPECIAL
+            { attackName: "Special: Clean Sweep - Spinning Slash", attackType: "SPECIAL", Level1Damage: 66.7, growthPerLevel: 6.1 },
+            { attackName: "Special: Clean Sweep - Extended Slash Maximum", attackType: "SPECIAL", Level1Damage: 37.5, growthPerLevel: 3.5 },
+            { attackName: "Special: Clean Sweep - Explosion DMG", attackType: "SPECIAL", Level1Damage: 25, growthPerLevel: 2.3 },
+            // EX SPECIAL
+            { attackName: "EX Special: Beware the Skirt - Spinning Slash", attackType: "EXSPECIAL", Level1Damage: 345.1, growthPerLevel: 31.4 },
+            { attackName: "EX Special: Beware the Skirt - Extended Slash Maximum", attackType: "EXSPECIAL", Level1Damage: 1035.1, growthPerLevel: 94.2 },
+            { attackName: "EX Special: Beware the Skirt - Explosion DMG", attackType: "EXSPECIAL", Level1Damage: 345.1, growthPerLevel: 31.4 },
+            // CHAIN
+            { attackName: "Chain: Sorry...", attackType: "CHAIN", Level1Damage: 687.3, growthPerLevel: 62.5 },
+            // ULT
+            { attackName: "Ultimate: Very, Very Sorry!", attackType: "ULT", Level1Damage: 2028.8, growthPerLevel: 184.5 },
+        ],
+    },
+
+
 
     // {
     //     characterName: "",
@@ -282,7 +396,6 @@ export const AttackStats: CharacterAttack[] = [
     //         { attackName: "Chain: ", attackType: "CHAIN", Level1Damage: , growthPerLevel:  },
     //         // ULT
     //         { attackName: "Ultimate: ", attackType: "ULT", Level1Damage: , growthPerLevel:  },
-            
     //     ],
     // },
 ];
