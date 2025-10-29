@@ -373,14 +373,273 @@ export const AttackStats: CharacterAttack[] = [
             { attackName: "Ultimate: Very, Very Sorry!", attackType: "ULT", Level1Damage: 2028.8, growthPerLevel: 184.5 },
         ],
     },
+    {
+        characterName: "Grace",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: High-Pressure Spike - 1", attackType: "BASIC", Level1Damage: 55.1, growthPerLevel: 5.1 },
+            { attackName: "Basic: High-Pressure Spike - 2", attackType: "BASIC", Level1Damage: 59.7, growthPerLevel: 5.5 },
+            { attackName: "Basic: High-Pressure Spike - 3", attackType: "BASIC", Level1Damage: 124.8, growthPerLevel: 11.4 },
+            { attackName: "Basic: High-Pressure Spike - 4", attackType: "BASIC", Level1Damage: 186.3, growthPerLevel: 17 },
+            { attackName: "Basic: High-Pressure Spike - 5", attackType: "BASIC", Level1Damage: 40.3, growthPerLevel: 3.7 },
+            // DASH
+            { attackName: "Dash: Quick Inspection", attackType: "DASH", Level1Damage: 33.3, growthPerLevel: 3.1 },
+            // DODGE
+            { attackName: "Dodge: Violation Penalty", attackType: "DASH", Level1Damage: 164.2, growthPerLevel: 15 },
+            // ASSIST
+            { attackName: "Quick Assist: Incident Management", attackType: "ASSIST", Level1Damage: 45.5, growthPerLevel: 4.2 },
+            { attackName: "Assist Follow-Up: Counter Volt Needle", attackType: "ASSIST", Level1Damage: 359.2, growthPerLevel: 32.7 },
+            // SPECIAL
+            { attackName: "Special: Obstruction Removal", attackType: "SPECIAL", Level1Damage: 42.1, growthPerLevel: 3.9 },
+            // EX SPECIAL
+            { attackName: "EX Special: Supercharged Obstruction Removal", attackType: "EXSPECIAL", Level1Damage: 333.8, growthPerLevel: 30.4 },
+            // CHAIN
+            { attackName: "Chain: Collaborative Construction", attackType: "CHAIN", Level1Damage: 571.3, growthPerLevel: 52 },
+            // ULT
+            { attackName: "Ultimate: Demolition Blast - Beware", attackType: "ULT", Level1Damage: 1478.8, growthPerLevel: 134.4 },
+        ],
+    },
+    {
+        characterName: "Soldier 11",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Warmup Sparks - 1", attackType: "BASIC", Level1Damage: 34.4, growthPerLevel: 3.2 },
+            { attackName: "Basic: Warmup Sparks - 2", attackType: "BASIC", Level1Damage: 41.2, growthPerLevel: 3.8 },
+            { attackName: "Basic: Warmup Sparks - 3", attackType: "BASIC", Level1Damage: 102.8, growthPerLevel: 9.4 },
+            { attackName: "Basic: Warmup Sparks - 4", attackType: "BASIC", Level1Damage: 213.4, growthPerLevel: 19.4 },
+            
+            { attackName: "Basic: Fire Suppression - 1", attackType: "BASIC", Level1Damage: 55.1, growthPerLevel: 5.1 },
+            { attackName: "Basic: Fire Suppression - 2", attackType: "BASIC", Level1Damage: 57.2, growthPerLevel: 5.2 },
+            { attackName: "Basic: Fire Suppression - 3", attackType: "BASIC", Level1Damage: 132, growthPerLevel: 12 },
+            { attackName: "Basic: Fire Suppression - 4", attackType: "BASIC", Level1Damage: 340.7, growthPerLevel: 31 },
+            // DASH
+            { attackName: "Dash: Blazing Fire", attackType: "DASH", Level1Damage: 68.3, growthPerLevel: 6.3 },
+            { attackName: "Dash: Fire Suppression", attackType: "DASH", Level1Damage: 78.8, growthPerLevel: 7.2 },
+            // DODGE
+            { attackName: "Dodge: Backdraft", attackType: "DASH", Level1Damage: 262, growthPerLevel: 23.9 },
+            // ASSIST
+            { attackName: "Quick Assist: Covering Fire", attackType: "ASSIST", Level1Damage: 120.8, growthPerLevel: 11 },
+            { attackName: "Assist Follow-Up: Reignition", attackType: "ASSIST", Level1Damage: 383.7, growthPerLevel: 34.9 },
+            // SPECIAL
+            { attackName: "Special: Raging Fire", attackType: "SPECIAL", Level1Damage: 52.6, growthPerLevel: 4.8 },
+            // EX SPECIAL
+            { attackName: "EX Special: Fervent Fire", attackType: "EXSPECIAL", Level1Damage: 675, growthPerLevel: 61.4 },
+            // CHAIN
+            { attackName: "Chain: Uplifting Flame", attackType: "CHAIN", Level1Damage: 632.5, growthPerLevel: 57.5 },
+            // ULT
+            { attackName: "Ultimate: Bellowing Flame", attackType: "ULT", Level1Damage: 2103, growthPerLevel: 191.2 },
+        ],
+    },
+    {
+        characterName: "Nekomata",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Kitty Slash - 1", attackType: "BASIC", Level1Damage: 55.2, growthPerLevel: 5.1 },
+            { attackName: "Basic: Kitty Slash - 2", attackType: "BASIC", Level1Damage: 62.6, growthPerLevel: 5.7 },
+            { attackName: "Basic: Kitty Slash - 3", attackType: "BASIC", Level1Damage: 72.7, growthPerLevel: 6.7 },
+            { attackName: "Basic: Kitty Slash - 4", attackType: "BASIC", Level1Damage: 170.2, growthPerLevel: 15.5 },
+            { attackName: "Basic: Kitty Slash - 5", attackType: "BASIC", Level1Damage: 123.6, growthPerLevel: 11.3 },
+            
+            { attackName: "Basic: Crimson Blade", attackType: "BASIC", Level1Damage: 71.8, growthPerLevel: 6.6 },
+            // DASH
+            { attackName: "Dash: Over Here!", attackType: "DASH", Level1Damage: 35.1, growthPerLevel: 3.2 },
+            // DODGE
+            { attackName: "Dodge: Phantom Claws", attackType: "DASH", Level1Damage: 227.9, growthPerLevel: 20.8 },
+            // ASSIST
+            { attackName: "Quick Assist: Cat's Paw", attackType: "ASSIST", Level1Damage: 94.5, growthPerLevel: 8.6 },
+            { attackName: "Assist Follow-Up: Shadow Strike", attackType: "ASSIST", Level1Damage: 300.4, growthPerLevel: 60.1 },
+            // SPECIAL
+            { attackName: "Special: Surprise Attack", attackType: "SPECIAL", Level1Damage: 47.3, growthPerLevel: 4.3 },
+            // EX SPECIAL
+            { attackName: "EX Special: Super Surprise Attack!", attackType: "EXSPECIAL", Level1Damage: 539.7, growthPerLevel: 49.1 },
+            // CHAIN
+            { attackName: "Chain: Claw Swipe", attackType: "CHAIN", Level1Damage: 536.2, growthPerLevel: 48.8 },
+            // ULT
+            { attackName: "Ultimate: Claw Smash", attackType: "ULT", Level1Damage: 1571.1, growthPerLevel: 142.9 },
+        ],
+    },
+    {
+        characterName: "Zhu Yuan",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Don't Move! - 1", attackType: "BASIC", Level1Damage: 43.1, growthPerLevel: 4 },
+            { attackName: "Basic: Don't Move! - 2", attackType: "BASIC", Level1Damage: 126.4, growthPerLevel: 11.5 },
+            { attackName: "Basic: Don't Move! - 3", attackType: "BASIC", Level1Damage: 137.3, growthPerLevel: 12.5 },
+            { attackName: "Basic: Don't Move! - 4", attackType: "BASIC", Level1Damage: 151, growthPerLevel: 13.8 },
+            { attackName: "Basic: Don't Move! - 5", attackType: "BASIC", Level1Damage: 162.2, growthPerLevel: 14.8 },
 
+            { attackName: "Basic: Please Do Not Resist Physical - 1", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
+            { attackName: "Basic: Please Do Not Resist Physical - 2", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
+            { attackName: "Basic: Please Do Not Resist Physical - 3", attackType: "BASIC", Level1Damage: 160.9, growthPerLevel: 14.7 },
+            
+            { attackName: "Basic: Please Do Not Resist Ether - 1", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
+            { attackName: "Basic: Please Do Not Resist Ether - 2", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
+            { attackName: "Basic: Please Do Not Resist Ether - 3", attackType: "BASIC", Level1Damage: 407.7, growthPerLevel: 37.7 },
+            // DASH
+            { attackName: "Dash: Firepower Offensive", attackType: "DASH", Level1Damage: 55.1, growthPerLevel: 5.1 },
+            { attackName: "Dash: Overwhelming Firepower", attackType: "DASH", Level1Damage: 53.7, growthPerLevel: 4.9 },
+            // DODGE
+            { attackName: "Dodge: Fire Blast", attackType: "DASH", Level1Damage: 176.8, growthPerLevel: 16.1 },
+            // ASSIST
+            { attackName: "Quick Assist: Covering Shot", attackType: "ASSIST", Level1Damage: 51.4, growthPerLevel: 4.7 },
+            { attackName: "Assist Follow-Up: Defensive Counter", attackType: "ASSIST", Level1Damage: 355.8, growthPerLevel: 71.2 },
+            // SPECIAL
+            { attackName: "Special: Buckshot Blast", attackType: "SPECIAL", Level1Damage: 18.4, growthPerLevel: 1.7 },
+            // EX SPECIAL
+            { attackName: "EX Special: Full Barrage", attackType: "EXSPECIAL", Level1Damage: 587.4, growthPerLevel: 53.4 },
+            // CHAIN
+            { attackName: "Chain: Eradication Mode", attackType: "CHAIN", Level1Damage: 587.5, growthPerLevel: 53.5 },
+            // ULT
+            { attackName: "Ultimate: Max Eradication Mode", attackType: "ULT", Level1Damage: 1977.6, growthPerLevel: 179.8 },
+        ],
+    },
+    {
+        characterName: "Ellen",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Saw Teeth Trimming - 1", attackType: "BASIC", Level1Damage: 48.8, growthPerLevel: 4.5 },
+            { attackName: "Basic: Saw Teeth Trimming - 2", attackType: "BASIC", Level1Damage: 111.1, growthPerLevel: 10.1 },
+            { attackName: "Basic: Saw Teeth Trimming - 3", attackType: "BASIC", Level1Damage: 297.3, growthPerLevel: 27.1 },
+            
+            { attackName: "Basic: Flash Freeze Trimming - 1", attackType: "BASIC", Level1Damage: 99.6, growthPerLevel: 9.1 },
+            { attackName: "Basic: Flash Freeze Trimming - 2", attackType: "BASIC", Level1Damage: 184, growthPerLevel: 16.8 },
+            { attackName: "Basic: Flash Freeze Trimming - 3", attackType: "BASIC", Level1Damage: 496.2, growthPerLevel: 45.2 },
+            
+            { attackName: "Basic: Glacial Blade Wave - 1", attackType: "BASIC", Level1Damage: 230.2, growthPerLevel: 21 },
+            { attackName: "Basic: Glacial Blade Wave - 2", attackType: "BASIC", Level1Damage: 146.8, growthPerLevel: 13.4 },
+            { attackName: "Basic: Glacial Blade Wave - 1 + 2", attackType: "BASIC", Level1Damage: 377, growthPerLevel: 34.4 },
+            
+            { attackName: "Basic: Icy Blade - Small Enemy", attackType: "BASIC", Level1Damage: 181.2, growthPerLevel: 16.5 },
+            { attackName: "Basic: Icy Blade - Medium Enemy", attackType: "BASIC", Level1Damage: 220.2, growthPerLevel: 20.1 },
+            { attackName: "Basic: Icy Blade - Large Enemy", attackType: "BASIC", Level1Damage: 259.2, growthPerLevel: 23.7 },
+            // DASH
+            { attackName: "Dash: Arctic Ambush  - Spinning Slash", attackType: "DASH", Level1Damage: 62.3, growthPerLevel: 5.7 },
+            { attackName: "Dash: Arctic Ambush  - Swift Scissors", attackType: "DASH", Level1Damage: 127.6, growthPerLevel: 11.6 },
+            { attackName: "Dash: Arctic Ambush  - Charged Scissors", attackType: "DASH", Level1Damage: 158.2, growthPerLevel: 14.4 },
+            { attackName: "Dash: Arctic Ambush  - Swift Scissors Flash Freeze Charge Obtained", attackType: "DASH", Level1Damage: 1, growthPerLevel: 0 },
+            { attackName: "Dash: Arctic Ambush  - Charged Scissors Flash Freeze Charge Obtained", attackType: "DASH", Level1Damage: 3, growthPerLevel: 0 },
+            
+            { attackName: "Dash: Monstrous Wave", attackType: "DASH", Level1Damage: 77, growthPerLevel: 7 },
+
+            { attackName: "Dash: Cold Snap", attackType: "DASH", Level1Damage: 145.7, growthPerLevel: 159 },
+            // DODGE
+            { attackName: "Dodge: Reef Rock", attackType: "DASH", Level1Damage: 152.6, growthPerLevel: 13.9 },
+            // ASSIST
+            { attackName: "Quick Assist: Shark Sentinel", attackType: "ASSIST", Level1Damage: 121.1, growthPerLevel: 11.1 },
+            { attackName: "Assist Follow-Up: Shark Cruiser", attackType: "ASSIST", Level1Damage: 437.9, growthPerLevel: 39.9 },
+            // SPECIAL
+            { attackName: "Special: Drift", attackType: "SPECIAL", Level1Damage: 50.5, growthPerLevel: 4.6 },
+            // EX SPECIAL
+            { attackName: "EX Special: Tail Swipe", attackType: "EXSPECIAL", Level1Damage: 377.2, growthPerLevel: 34.3 },
+            { attackName: "EX Special: Sharknami", attackType: "EXSPECIAL", Level1Damage: 553.3, growthPerLevel: 50.3 },
+            // CHAIN
+            { attackName: "Chain: Avalanche", attackType: "CHAIN", Level1Damage: 794.6, growthPerLevel: 72.3 },
+            // ULT
+            { attackName: "Ultimate: Endless Winter", attackType: "ULT", Level1Damage: 1890.8, growthPerLevel: 171.9 },
+        ],
+    },
+    {
+        characterName: "Qingyi",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Penultimate - 1", attackType: "BASIC", Level1Damage: 47.2, growthPerLevel: 4.3 },
+            { attackName: "Basic: Penultimate - 1 Alt", attackType: "BASIC", Level1Damage: 110.3, growthPerLevel: 10.1 },
+            { attackName: "Basic: Penultimate - 2", attackType: "BASIC", Level1Damage: 122.1, growthPerLevel: 11.1 },
+            { attackName: "Basic: Penultimate - 3", attackType: "BASIC", Level1Damage: 17.6, growthPerLevel: 1.6 },
+            { attackName: "Basic: Penultimate - 4", attackType: "BASIC", Level1Damage: 106.4, growthPerLevel: 9.7 },
+            { attackName: "Basic: Penultimate - 4 Enhanced", attackType: "BASIC", Level1Damage: 234.4, growthPerLevel: 21.4 },
+            
+            { attackName: "Basic: Enchanted Blossoms", attackType: "BASIC", Level1Damage: 85.6, growthPerLevel: 7.8 },
+            
+            { attackName: "Basic: Enchanted Moonlit Blossoms - Rush Attack", attackType: "BASIC", Level1Damage: 448.7, growthPerLevel: 40.8 },
+            { attackName: "Basic: Enchanted Moonlit Blossoms - Finishing Strike", attackType: "BASIC", Level1Damage: 394.4, growthPerLevel: 35.9 },
+            // DASH
+            { attackName: "Dash: Breach", attackType: "DASH", Level1Damage: 49.5, growthPerLevel: 4.5 },
+            // DODGE
+            { attackName: "Dodge: Lingering Sentiments", attackType: "DASH", Level1Damage: 284, growthPerLevel: 25.9 },
+            // ASSIST
+            { attackName: "Quick Assist: Wind Through the Pines", attackType: "ASSIST", Level1Damage: 133.9, growthPerLevel: 12.2 },
+            { attackName: "Assist Follow-Up: Song of the Clear River", attackType: "ASSIST", Level1Damage: 376.4, growthPerLevel: 34.3 },
+            // SPECIAL
+            { attackName: "Special: Sunlit Glory", attackType: "SPECIAL", Level1Damage: 62.4, growthPerLevel: 5.7 },
+            // EX SPECIAL
+            { attackName: "EX Special: Moonlit Begonia", attackType: "EXSPECIAL", Level1Damage: 602.8, growthPerLevel: 54.9 },
+            // CHAIN
+            { attackName: "Chain: Tranquil Serenade", attackType: "CHAIN", Level1Damage: 647.9, growthPerLevel: 58.9 },
+            // ULT
+            { attackName: "Ultimate: Eight Sounds of Ganzhou", attackType: "ULT", Level1Damage: 1670.7, growthPerLevel: 151.9 },
+        ],
+    },
+    {
+        characterName: "Jane Doe",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Dancing Blades - 1", attackType: "BASIC", Level1Damage: 36.1, growthPerLevel: 3.3 },
+            { attackName: "Basic: Dancing Blades - 2", attackType: "BASIC", Level1Damage: 62.3, growthPerLevel: 5.7 },
+            { attackName: "Basic: Dancing Blades - 3", attackType: "BASIC", Level1Damage: 83.5, growthPerLevel: 7.6 },
+            { attackName: "Basic: Dancing Blades - 4", attackType: "BASIC", Level1Damage: 163.4, growthPerLevel: 14.9 },
+            { attackName: "Basic: Dancing Blades - 5", attackType: "BASIC", Level1Damage: 98.8, growthPerLevel: 9 },
+            { attackName: "Basic: Dancing Blades - 6", attackType: "BASIC", Level1Damage: 291.3, growthPerLevel: 26.5 },
+           
+            { attackName: "Basic:  Salchow Jump - Combo", attackType: "BASIC", Level1Damage: 300.8, growthPerLevel: 27.4 },
+            { attackName: "Basic:  Salchow Jump - Finishing Strike", attackType: "BASIC", Level1Damage: 161.3, growthPerLevel: 14.7 },
+            // DASH
+            { attackName: "Dash: Edge Jump - 1", attackType: "DASH", Level1Damage: 71.5, growthPerLevel: 6.5 },
+            { attackName: "Dash: Edge Jump - 2", attackType: "DASH", Level1Damage: 71.5, growthPerLevel: 6.5 },
+            // DODGE
+            { attackName: "Dodge: Phantom Thrust", attackType: "DASH", Level1Damage: 104.5, growthPerLevel: 9.5 },
+            { attackName: "Dodge: Swift Shadow - 1", attackType: "DASH", Level1Damage: 341.2, growthPerLevel: 31.1 },
+            { attackName: "Dodge: Swift Shadow - 2", attackType: "DASH", Level1Damage: 341.2, growthPerLevel: 31.1 },
+            { attackName: "Dodge: Swift Shadow Dance", attackType: "DASH", Level1Damage: 387, growthPerLevel: 35.2 },
+            // ASSIST
+            { attackName: "Quick Assist: Dark Thorn", attackType: "ASSIST", Level1Damage: 119.2, growthPerLevel: 10.9 },
+            { attackName: "Assist Follow-Up: Gale Sweep", attackType: "ASSIST", Level1Damage: 345.5, growthPerLevel: 31.5 },
+            // SPECIAL
+            { attackName: "Special: Aerial Sweep", attackType: "SPECIAL", Level1Damage: 57.8, growthPerLevel: 5.3 },
+            // EX SPECIAL
+            { attackName: "EX Special: Aerial Sweep - Tail Swipe", attackType: "EXSPECIAL", Level1Damage: 574.7, growthPerLevel: 52.3 },
+            // CHAIN
+            { attackName: "Chain: Flowers of Sin", attackType: "CHAIN", Level1Damage: 632.6, growthPerLevel: 57.6 },
+            // ULT
+            { attackName: "Ultimate: Final Curtain", attackType: "ULT", Level1Damage: 1470.6, growthPerLevel: 133.7 },
+        ],
+    },
+    {
+        characterName: "Seth",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Lightning Strike - 1", attackType: "BASIC", Level1Damage: 36.2, growthPerLevel: 3.3 },
+            { attackName: "Basic: Lightning Strike - 2", attackType: "BASIC", Level1Damage: 56.5, growthPerLevel: 5.2 },
+            { attackName: "Basic: Lightning Strike - 3", attackType: "BASIC", Level1Damage: 193.3, growthPerLevel: 17.6 },
+            { attackName: "Basic: Lightning Strike - 4", attackType: "BASIC", Level1Damage: 97.4, growthPerLevel: 8.9 },
+            
+            { attackName: "Basic: Lightning Strike - Electrified - ", attackType: "BASIC", Level1Damage: 382.8, growthPerLevel: 34.8 },
+            { attackName: "Basic: Lightning Strike - Electrified - ", attackType: "BASIC", Level1Damage: 424.2, growthPerLevel: 38.6 },
+            // DASH
+            { attackName: "Dash: Thunder Assault", attackType: "DASH", Level1Damage: 110, growthPerLevel: 10 },
+            // DODGE
+            { attackName: "Dodge: Retreat to Advance", attackType: "DASH", Level1Damage: 230, growthPerLevel: 21 },
+            // ASSIST
+            { attackName: "Quick Assist: Armed Support", attackType: "ASSIST", Level1Damage: 100, growthPerLevel: 9.1 },
+            { attackName: "Assist Follow-Up: Public Security Ruling", attackType: "ASSIST", Level1Damage: 428.5, growthPerLevel: 39 },
+            // SPECIAL
+            { attackName: "Special: Thunder Shield Rush", attackType: "SPECIAL", Level1Damage: 69.2, growthPerLevel: 75.5 },
+            // EX SPECIAL
+            { attackName: "EX Special: Thunder Shield Rush - High Voltage", attackType: "EXSPECIAL", Level1Damage: 646, growthPerLevel: 704.8 },
+            { attackName: "EX Special: Thunder Shield Rush - High Voltage - Charged", attackType: "EXSPECIAL", Level1Damage: 999.8, growthPerLevel: 1090.7 },
+            // CHAIN
+            { attackName: "Chain: Final Judgement", attackType: "CHAIN", Level1Damage: 704.1, growthPerLevel: 64.1 },
+            // ULT
+            { attackName: "Ultimate: Justice Prevails", attackType: "ULT", Level1Damage: 2024.3, growthPerLevel: 184.1 },
+        ],
+    },
 
 
     // {
     //     characterName: "",
     //     attackStats: [
     //         // BASIC
-    //         { attackName: "Basic:  - 1", attackType: "BASIC", Level1Damage: , growthPerLevel:  },
+    //         { attackName: "Basic:  - ", attackType: "BASIC", Level1Damage: , growthPerLevel:  },
     //         // DASH
     //         { attackName: "Dash: ", attackType: "DASH", Level1Damage: , growthPerLevel:  },
     //         // DODGE
