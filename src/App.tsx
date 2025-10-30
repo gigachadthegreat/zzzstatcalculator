@@ -2,10 +2,10 @@ import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
 import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, AnomalyMultipliers, type statTypeKeys } from "./constants/types";
 import { useState, useEffect, useRef } from "react";
-import { calculateSheer, getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
+import { getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
 import { Wengines } from "./constants/Wengines";
-import { calculateStats } from "./lib/Calculations";
+import { calculateStats, calculateSheer } from "./lib/Calculations";
 import Results from "./components/Results";
 
 function App() {

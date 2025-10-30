@@ -1,5 +1,5 @@
 import { type Stats, type statTypeKeys } from "../constants/types";
-import { calculateSheer } from "../lib/Utility";
+import { calculateSheer} from "../lib/Calculations"
 
 const StatRow = ({
     label,

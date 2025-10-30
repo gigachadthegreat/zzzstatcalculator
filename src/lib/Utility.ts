@@ -1,6 +1,5 @@
-import { AnomalyMultipliers, type Character, type SelectedDrives, type SeletedSubstats } from "../constants/types";
+import { AnomalyMultipliers, type Character, type CharacterAttack, type SelectedDrives, type SeletedSubstats } from "../constants/types";
 import { type Wengine } from "../constants/types";
-import { SheerHpConversionFactor, SheerAttackConsersionFactor } from "../constants/types";
 
 export const getCharacterFromName = (name: string, characters: Character[]): Character => {
     const foundCharacter = characters.find((char) => char.name === name);
@@ -26,9 +25,25 @@ export const getSortedList = (names: string[]) => {
     });
 };
 
-export const calculateSheer = (hp: number, attack: number) => {
-    return hp * SheerHpConversionFactor + attack * SheerAttackConsersionFactor;
+
+
+
+
+
+
+
+export const getMultiplierFromAttack = (Attacks: CharacterAttack[], characterName: string, attackName: string, attackLvl: number) => {
+    const attack = Attacks.find((characterAttacks) => characterAttacks.characterName === characterName);
+
+    if (attack == undefined) throw new Error("Attack not found");
+
+    const attackLvl1Damage = attack.attackStats.find((attack) => attack.attackName === attackName)?.Level1Damage ?? 0;
+    const attackGrowthPerLevel = attack.attackStats.find((attack) => attack.attackName === attackName)?.growthPerLevel ?? 0;
+
+    return attackLvl1Damage + attackLvl * attackGrowthPerLevel;
 };
+
+
 
 export const getParameterizedStatsAsUrl = (
     characterName: string,
@@ -100,7 +115,6 @@ export const getParameterizedStatsAsUrl = (
 
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
 };
-
 
 export const getsettingsFromUrl = () => {
     const params = new URLSearchParams(window.location.search);

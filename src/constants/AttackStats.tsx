@@ -1,6 +1,6 @@
 import type { CharacterAttack } from "./types";
 
-export const AttackStats: CharacterAttack[] = [
+export const Attacks: CharacterAttack[] = [
     {
         characterName: "Nicole",
         attackStats: [

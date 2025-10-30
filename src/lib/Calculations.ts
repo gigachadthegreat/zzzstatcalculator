@@ -6,6 +6,9 @@ import {
     type SelectedDrives,
     type SeletedSubstats,
     DriveStats,
+    SheerHpConversionFactor,
+    SheerAttackConsersionFactor,
+    AnomalyMultipliers,
 } from "../constants/types";
 
 export const AddIndividualStatToBase = (_baseStats: CalculatedStats, _statTypeToAdd: string, _statsToAdd: number) => {
@@ -114,34 +117,17 @@ export const AddNewStatsToBaseStats = (_baseStats: CalculatedStats, _statsToAdd:
     return finalStats;
 };
 
-export const calculateStats = (
-    character: Character,
-    wengineSt: Wengine,
-    drives: SelectedDrives,
-    substatsSt: SeletedSubstats
-) => {
+export const calculateStats = (character: Character, wengineSt: Wengine, drives: SelectedDrives, substatsSt: SeletedSubstats) => {
     let baseStats = JSON.parse(JSON.stringify(character.stats));
     let finalStats = JSON.parse(JSON.stringify(character.stats));
 
-    const wengineMainAdditionalStats = AddIndividualStatToBase(
-        baseStats,
-        StatType.ATTACK_FLAT,
-        wengineSt.WengineFlatAttack
-    );
+    const wengineMainAdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, wengineSt.WengineFlatAttack);
     baseStats = AddNewStatsToBaseStats(baseStats, wengineMainAdditionalStats); // Wengine Base Stat is always added to character stats before any other calculation. Therefore it's included in further percentage additions.
-    const wengineSecondaryAdditionalStats = AddIndividualStatToBase(
-        baseStats,
-        wengineSt.WengineStatSelected,
-        wengineSt.WengineStatValue
-    );
+    const wengineSecondaryAdditionalStats = AddIndividualStatToBase(baseStats, wengineSt.WengineStatSelected, wengineSt.WengineStatValue);
 
     const drive1AdditionalStats = AddIndividualStatToBase(baseStats, StatType.HP_FLAT, DriveStats.Drive1HpFlat);
     const drive2AdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, DriveStats.Drive2AttackFlat);
-    const drive3AdditionalStats = AddIndividualStatToBase(
-        baseStats,
-        StatType.DEFENSE_FLAT,
-        DriveStats.Drive3DefenseFlat
-    );
+    const drive3AdditionalStats = AddIndividualStatToBase(baseStats, StatType.DEFENSE_FLAT, DriveStats.Drive3DefenseFlat);
 
     const drive4AdditionalStats = AddIndividualStatToBase(
         baseStats,
@@ -162,24 +148,18 @@ export const calculateStats = (
     const drive2PscAdditionalStat1 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc1,
-        drives.drive2psc1 in DriveStats.Drive2Psc1
-            ? DriveStats.Drive2Psc1[drives.drive2psc1 as keyof typeof DriveStats.Drive2Psc1]
-            : 0
+        drives.drive2psc1 in DriveStats.Drive2Psc1 ? DriveStats.Drive2Psc1[drives.drive2psc1 as keyof typeof DriveStats.Drive2Psc1] : 0
     );
     const drive2PscAdditionalStat2 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc2,
-        drives.drive2psc2 in DriveStats.Drive2Psc2
-            ? DriveStats.Drive2Psc2[drives.drive2psc2 as keyof typeof DriveStats.Drive2Psc2]
-            : 0
+        drives.drive2psc2 in DriveStats.Drive2Psc2 ? DriveStats.Drive2Psc2[drives.drive2psc2 as keyof typeof DriveStats.Drive2Psc2] : 0
     );
 
     const drive2PscAdditionalStat3 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc3,
-        drives.drive2psc3 in DriveStats.Drive2Psc3
-            ? DriveStats.Drive2Psc3[drives.drive2psc3 as keyof typeof DriveStats.Drive2Psc3]
-            : 0
+        drives.drive2psc3 in DriveStats.Drive2Psc3 ? DriveStats.Drive2Psc3[drives.drive2psc3 as keyof typeof DriveStats.Drive2Psc3] : 0
     );
 
     finalStats = AddNewStatsToBaseStats(baseStats, wengineSecondaryAdditionalStats);
@@ -224,4 +204,160 @@ export const calculateStats = (
     finalStats = AddNewStatsToBaseStats(finalStats, additionalStatsFromSubstats);
 
     return finalStats;
+};
+
+export const calculatedmgTakenMultiplierTarget = (dmgTakenIncrease: number, dmgTakenReduction: number) => {
+    return 1 + dmgTakenIncrease / 100 - dmgTakenReduction / 100;
+};
+
+export const calculateResMultiplier = (resTarget: number, resReductionTarget: number, resIgnore: number) => {
+    return 1 - resTarget / 100 + resReductionTarget / 100 + resIgnore / 100;
+};
+export const calculateDefenseMultiplier = (
+    levelFactor: number,
+    defTarget: number,
+    defenseShred: number,
+    penPercent: number,
+    penFlat: number
+) => {
+    const finalDef = Math.max(defTarget * (1 - defenseShred / 100) * (1 - penPercent / 100) - (penFlat ?? 0), 0);
+    return levelFactor / (finalDef + levelFactor);
+};
+
+export const critMultiplierAttacker = (critMode: "avg" | "crit" | "noCrit", critRate: number, critdamage: number) => {
+    switch (critMode) {
+        case "avg":
+            return 1 + (Math.min(critRate, 100) / 100) * (critdamage / 100);
+        case "crit":
+            return 1 + critdamage / 100;
+        case "noCrit":
+            return 1;
+        default:
+            return 1;
+    }
+};
+
+export const dmgBonusMultiplierAttacker = (elementPercent: number, additionalDmgBonusMultiplierAttacker: number) => {
+    return elementPercent / 100 + additionalDmgBonusMultiplierAttacker / 100 + 1;
+};
+
+export const calculateBaseSheerDamage = (
+    multiplierValue: number,
+    hpFlat: number,
+    attackFlat: number,
+    additionalSheerPercentage: number,
+    additionalSheerFlat: number
+) => {
+    return (multiplierValue / 100) * (calculateSheer(hpFlat, attackFlat) * (1 + additionalSheerPercentage / 100) + additionalSheerFlat);
+};
+
+export const calculateSheer = (hp: number, attack: number) => {
+    return hp * SheerHpConversionFactor + attack * SheerAttackConsersionFactor;
+};
+
+export const calculateBaseDamage = (multiplierValue: number, attackFlat: number) => {
+    return (multiplierValue / 100) * attackFlat;
+};
+
+export const calculateAnomalyLevelMultiplier = () => {
+    return 1 + (1 / 59) * (60 - 1);
+};
+
+export const calculateAnomalyProficiencyMultiplier = (anomalyProficiency: number) => {
+    return anomalyProficiency * 0.01;
+};
+
+export const calculateAnomalyBaseDamage = (anomalyType: keyof typeof AnomalyMultipliers, attackFlat: number) => {
+    return AnomalyMultipliers[anomalyType] * attackFlat;
+};
+
+export const calculateDamageDealt = (
+    multiplierValue: number,
+    attackFlat: number,
+    elementPercent: number,
+    additionalDmgBonusMultiplierAttacker: number,
+    critMode: "avg" | "crit" | "noCrit",
+    critRate: number,
+    critDamage: number,
+    defTarget: number,
+    defenseShred: number,
+    levelFactorAttacker: number,
+    penPercent: number,
+    penFlat: number,
+    resTarget: number,
+    resReductionTarget: number,
+    resIgnore: number,
+    dmgTakenIncrease: number,
+    dmgTakenReduction: number,
+    stunMultiplier: number
+) => {
+    return (
+        calculateBaseDamage(multiplierValue, attackFlat) *
+        dmgBonusMultiplierAttacker(elementPercent, additionalDmgBonusMultiplierAttacker) *
+        critMultiplierAttacker(critMode, critRate, critDamage) *
+        calculateDefenseMultiplier(levelFactorAttacker, defTarget, defenseShred, penPercent, penFlat) *
+        calculateResMultiplier(resTarget, resReductionTarget, resIgnore) *
+        calculatedmgTakenMultiplierTarget(dmgTakenIncrease, dmgTakenReduction) *
+        (stunMultiplier / 100)
+    );
+};
+
+export const calculateSheerDamageDealt = (
+    multiplierValue: number,
+    hpFlat: number,
+    attackFlat: number,
+    additionalSheerPercent: number,
+    additionalSheerFlat: number,
+    elementPercent: number,
+    additionalDmgBonusMultiplierAttacker: number,
+    critMode: "avg" | "crit" | "noCrit",
+    critRate: number,
+    critDamage: number,
+    resTarget: number,
+    resReductionTarget: number,
+    resIgnore: number,
+    dmgTakenIncrease: number,
+    dmgTakenReduction: number,
+    stunMultiplier: number,
+    additionalSheerDmgBonusMultiplierAttacker: number
+) => {
+    return (
+        calculateBaseSheerDamage(multiplierValue, hpFlat, attackFlat, additionalSheerPercent, additionalSheerFlat) *
+        dmgBonusMultiplierAttacker(elementPercent, additionalDmgBonusMultiplierAttacker) *
+        critMultiplierAttacker(critMode, critRate, critDamage) *
+        calculateResMultiplier(resTarget, resReductionTarget, resIgnore) *
+        calculatedmgTakenMultiplierTarget(dmgTakenIncrease, dmgTakenReduction) *
+        (stunMultiplier / 100) *
+        (additionalSheerDmgBonusMultiplierAttacker / 100 + 1)
+    );
+};
+
+export const calculateAnomalyDamageDealt = (
+    anomalyType: keyof typeof AnomalyMultipliers,
+    attackFlat: number,
+    anomalyProficiency: number,
+    elementPercent: number,
+    additionalDmgBonusMultiplierAttacker: number,
+    levelFactorAttacker: number,
+    defTarget: number,
+    defenseShred: number,
+    penPercent: number,
+    penFlat: number,
+    resTarget: number,
+    resReductionTarget: number,
+    resIgnore: number,
+    dmgTakenIncrease: number,
+    dmgTakenReduction: number,
+    stunMultiplier: number
+) => {
+    return (
+        calculateAnomalyBaseDamage(anomalyType, attackFlat) *
+        calculateAnomalyProficiencyMultiplier(anomalyProficiency) *
+        calculateAnomalyLevelMultiplier() *
+        dmgBonusMultiplierAttacker(elementPercent, additionalDmgBonusMultiplierAttacker) *
+        calculateDefenseMultiplier(levelFactorAttacker, defTarget, defenseShred, penPercent, penFlat) *
+        calculateResMultiplier(resTarget, resReductionTarget, resIgnore) *
+        calculatedmgTakenMultiplierTarget(dmgTakenIncrease, dmgTakenReduction) *
+        (stunMultiplier / 100)
+    );
 };
