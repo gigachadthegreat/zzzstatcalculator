@@ -907,6 +907,266 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "Ultimate: Lunalux Garrote", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 },
         ],
     },
+    {
+        characterName: "Soldier 0 Anby",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Penetrating Shock - 1", attackType: "BASIC", Level1Damage: 32.7, growthPerLevel: 3 },
+            { attackName: "Basic: Penetrating Shock - 2", attackType: "BASIC", Level1Damage: 62.2, growthPerLevel: 5.7 },
+            { attackName: "Basic: Penetrating Shock - 3 Finisher", attackType: "BASIC", Level1Damage: 80.1, growthPerLevel: 7.3 },
+            { attackName: "Basic: Penetrating Shock - 3", attackType: "BASIC", Level1Damage: 39.9, growthPerLevel: 3.7 },
+            { attackName: "Basic: Penetrating Shock - 4", attackType: "BASIC", Level1Damage: 154.5, growthPerLevel: 14.1 },
+            { attackName: "Basic: Penetrating Shock - 5", attackType: "BASIC", Level1Damage: 148.5, growthPerLevel: 13.5 },
+            // DASH
+            { attackName: "Dash: Torrent", attackType: "DASH", Level1Damage: 82.5, growthPerLevel: 7.5 },
+            // DODGE
+            { attackName: "Dodge: Ground Flash Counter", attackType: "DASH", Level1Damage: 250.6, growthPerLevel: 22.8 },
+            // ASSIST
+            { attackName: "Quick Assist: Cloud Flash", attackType: "ASSIST", Level1Damage: 108.2, growthPerLevel: 9.9 },
+            { attackName: "Assist Follow-Up: Conducting Blow", attackType: "ASSIST", Level1Damage: 407.1, growthPerLevel: 37.1 },
+            // SPECIAL
+            { attackName: "Special: Celestial Thunder", attackType: "SPECIAL", Level1Damage: 59.6, growthPerLevel: 5.5 },
+            { attackName: "Special: Azure Flash - White Thunder", attackType: "SPECIAL", Level1Damage: 167.2, growthPerLevel: 15.2 },
+            { attackName: "Special: Azure Flash", attackType: "SPECIAL", Level1Damage: 43, growthPerLevel: 4 },
+            { attackName: "Special: Thunder Smite", attackType: "SPECIAL", Level1Damage: 188.1, growthPerLevel: 17.1 },
+            // EX SPECIAL
+            { attackName: "EX Special: Sundering Bolt", attackType: "EXSPECIAL", Level1Damage: 379.6, growthPerLevel: 34.6 },
+            // CHAIN
+            { attackName: "Chain: Leaping Thunderstrike", attackType: "CHAIN", Level1Damage: 563.8, growthPerLevel: 51.3 },
+            // ULT
+            { attackName: "Ultimate: Voidstrike", attackType: "ULT", Level1Damage: 1734.9, growthPerLevel: 157.8 },
+        ],
+    },
+    {
+        characterName: "Pulchra",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Swift Strike - 1", attackType: "BASIC", Level1Damage: 35.7, growthPerLevel: 3.3 },
+            { attackName: "Basic: Swift Strike - 2", attackType: "BASIC", Level1Damage: 94.1, growthPerLevel: 8.6 },
+            { attackName: "Basic: Swift Strike - 3", attackType: "BASIC", Level1Damage: 167.6, growthPerLevel: 15.3 },
+
+            { attackName: "Basic: Leaping Strike", attackType: "BASIC", Level1Damage: 135, growthPerLevel: 12.3 },
+            // DASH
+            { attackName: "Dash: First Strike Advantage", attackType: "DASH", Level1Damage: 48.3, growthPerLevel: 4.4 },
+            // DODGE
+            { attackName: "Dodge: Relentless Retribution", attackType: "DASH", Level1Damage: 201.8, growthPerLevel: 18.4 },
+            // ASSIST
+            { attackName: "Quick Assist: Contract - Bodyguard", attackType: "ASSIST", Level1Damage: 78.3, growthPerLevel: 7.2 },
+            { attackName: "Assist Follow-Up: Independent Pricing", attackType: "ASSIST", Level1Damage: 307.1, growthPerLevel: 28 },
+            // SPECIAL
+            { attackName: "Special: Rending Claw", attackType: "SPECIAL", Level1Damage: 25.1, growthPerLevel: 2.3 },
+            { attackName: "Special: Rending Claw - Nightmare Shadow", attackType: "SPECIAL", Level1Damage: 46.3, growthPerLevel: 4.3 },
+            { attackName: "Special: Rending Claw - Nightmare Shadow -Finishing Move", attackType: "SPECIAL", Level1Damage: 53.5, growthPerLevel: 4.9 },
+            // EX SPECIAL
+            { attackName: "EX Special: Rending Claw - Flashstep", attackType: "EXSPECIAL", Level1Damage: 347.7, growthPerLevel: 31.7 },
+            // CHAIN
+            { attackName: "Chain: Hey, Didn't Expect That, Right?", attackType: "CHAIN", Level1Damage: 534.1, growthPerLevel: 48.6 },
+            // ULT
+            { attackName: "Ultimate: Oh, Time to Play?", attackType: "ULT", Level1Damage: 1393.8, growthPerLevel: 126.8 },
+        ],
+    },
+    {
+        characterName: "Trigger",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Cold-Bore Shot - 1", attackType: "BASIC", Level1Damage: 34.5, growthPerLevel: 3.2 },
+            { attackName: "Basic: Cold-Bore Shot - 2", attackType: "BASIC", Level1Damage: 56.9, growthPerLevel: 5.2 },
+            { attackName: "Basic: Cold-Bore Shot - 3", attackType: "BASIC", Level1Damage: 110.9, growthPerLevel: 10.1 },
+            { attackName: "Basic: Cold-Bore Shot - 4", attackType: "BASIC", Level1Damage: 243, growthPerLevel: 22.1 },
+            
+            { attackName: "Basic: Silenced Shot - Shot", attackType: "BASIC", Level1Damage: 47.6, growthPerLevel: 4.4 },
+            { attackName: "Basic: Silenced Shot - Counter", attackType: "BASIC", Level1Damage: 233.9, growthPerLevel: 21.3 },
+            { attackName: "Basic: Silenced Shot - Finisher", attackType: "BASIC", Level1Damage: 131.2, growthPerLevel: 12 },
+           
+            { attackName: "Basic: Harmonizing Shot", attackType: "BASIC", Level1Damage: 95.8, growthPerLevel: 8.8 },
+            
+            { attackName: "Basic: Harmonizing Shot - Tartarus - Continuous ", attackType: "BASIC", Level1Damage: 67.8, growthPerLevel: 6.3 },
+            { attackName: "Basic: Harmonizing Shot - Tartarus - Finisher ", attackType: "BASIC", Level1Damage: 45.2, growthPerLevel: 4.2 },
+            // DASH
+            { attackName: "Dash: Vengeful Specter", attackType: "DASH", Level1Damage: 51.4, growthPerLevel: 4.7 },
+            // DODGE
+            { attackName: "Dodge: Condemned Soul", attackType: "DASH", Level1Damage: 219.7, growthPerLevel: 20 },
+            // ASSIST
+            { attackName: "Quick Assist: Cold-Bore Cover Fire", attackType: "ASSIST", Level1Damage: 84.4, growthPerLevel: 7.7 },
+            { attackName: "Assist Follow-Up: Piercing Thunder", attackType: "ASSIST", Level1Damage: 432.9, growthPerLevel: 39.4 },
+            // SPECIAL
+            { attackName: "Special: Spectral Flash", attackType: "SPECIAL", Level1Damage: 71.5, growthPerLevel: 6.5 },
+            // EX SPECIAL
+            { attackName: "EX Special: Flash Burial", attackType: "EXSPECIAL", Level1Damage: 634.4, growthPerLevel: 57.7 },
+            // CHAIN
+            { attackName: "Chain: Stygian Guide", attackType: "CHAIN", Level1Damage: 574.7, growthPerLevel: 52.3 },
+            // ULT
+            { attackName: "Ultimate: Underworld Requiem", attackType: "ULT", Level1Damage: 1480.5, growthPerLevel: 134.6 },
+        ],
+    },
+    {
+        characterName: "Vivian",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Feathered Strike - 1", attackType: "BASIC", Level1Damage: 34.1, growthPerLevel: 3.1 },
+            { attackName: "Basic: Feathered Strike - 2", attackType: "BASIC", Level1Damage: 24.2, growthPerLevel: 2.2 },
+            { attackName: "Basic: Feathered Strike - 3", attackType: "BASIC", Level1Damage: 76.9, growthPerLevel: 7 },
+            { attackName: "Basic: Feathered Strike - 4", attackType: "BASIC", Level1Damage: 128.4, growthPerLevel: 11.7 },
+           
+            { attackName: "Basic: Noblweoman - Waltz", attackType: "BASIC", Level1Damage: 47.8, growthPerLevel: 4.4 },
+           
+            { attackName: "Basic: Fluttering Frock - Suspension", attackType: "BASIC", Level1Damage: 80.2, growthPerLevel: 7.3 },
+          
+            { attackName: "Basic: Featherbloom", attackType: "BASIC", Level1Damage: 220, growthPerLevel: 20 },
+            // DASH
+            { attackName: "Dash: Silver Thorned Melody", attackType: "DASH", Level1Damage: 59.6, growthPerLevel: 4.6 },
+            // DODGE
+            { attackName: "Dodge: Wingblade Reverb", attackType: "DASH", Level1Damage: 236.4, growthPerLevel: 21.5 },
+            // ASSIST
+            { attackName: "Quick Assist: Frostwing Guard", attackType: "ASSIST", Level1Damage: 97.3, growthPerLevel: 8.9 },
+            { attackName: "Assist Follow-Up: Featherblade Execution", attackType: "ASSIST", Level1Damage: 373.9, growthPerLevel: 34 },
+            // SPECIAL
+            { attackName: "Special: Song of Silver Wings", attackType: "SPECIAL", Level1Damage: 56.9, growthPerLevel: 5.2 },
+            // EX SPECIAL
+            { attackName: "EX Special: Violet Requiem", attackType: "EXSPECIAL", Level1Damage: 592.6, growthPerLevel: 53.9 },
+            // CHAIN
+            { attackName: "Chain: Chorus of Celestial Wings", attackType: "CHAIN", Level1Damage: 658.9, growthPerLevel: 59.9 },
+            // ULT
+            { attackName: "Ultimate: Soarding Bird's Song", attackType: "ULT", Level1Damage: 1686.8, growthPerLevel: 153.4 },
+        ],
+    },
+    {
+        characterName: "Hugo",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Dark Abyss Quartet - 1", attackType: "BASIC", Level1Damage: 43.1, growthPerLevel: 4 },
+            { attackName: "Basic: Dark Abyss Quartet - 2", attackType: "BASIC", Level1Damage: 74.1, growthPerLevel: 6.8 },
+            { attackName: "Basic: Dark Abyss Quartet - 3", attackType: "BASIC", Level1Damage: 169.6, growthPerLevel: 15.5 },
+            { attackName: "Basic: Dark Abyss Quartet - Slash", attackType: "BASIC", Level1Damage: 149.1, growthPerLevel: 13.6 },
+            { attackName: "Basic: Dark Abyss Quartet - Shot", attackType: "BASIC", Level1Damage: 58.6, growthPerLevel: 5.4 },
+            { attackName: "Basic: Dark Abyss Quartet - Charged Shot", attackType: "BASIC", Level1Damage: 118, growthPerLevel: 10.8 },
+           
+            { attackName: "Basic: Abyss Concerto - Slash", attackType: "BASIC", Level1Damage: 143.4, growthPerLevel: 13.1 },
+            { attackName: "Basic: Abyss Concerto - Shot", attackType: "BASIC", Level1Damage: 86.7, growthPerLevel: 7.9 },
+            { attackName: "Basic: Abyss Concerto - Charged Shot", attackType: "BASIC", Level1Damage: 170.6, growthPerLevel: 15.6 },
+            // DASH
+            { attackName: "Dash: Phantasm - Shatter", attackType: "DASH", Level1Damage: 93.5, growthPerLevel: 8.5 },
+            // DODGE
+            { attackName: "Dodge: Phantasm - Slash", attackType: "DASH", Level1Damage: 245.9, growthPerLevel: 22.4 },
+            { attackName: "Dodge: Phantasm - Slash - ALT Shot", attackType: "DASH", Level1Damage: 162.1, growthPerLevel: 14.8 },
+            { attackName: "Dodge: Phantasm - Slash - ALT Charged Shot", attackType: "DASH", Level1Damage: 212.1, growthPerLevel: 19.3 },
+            // ASSIST
+            { attackName: "Quick Assist: Elegy", attackType: "ASSIST", Level1Damage: 104.5, growthPerLevel: 9.5 },
+            { attackName: "Quick Assist: Elegy - ALT Shot", attackType: "ASSIST", Level1Damage: 124.7, growthPerLevel: 11.4 },
+            { attackName: "Quick Assist: Elegy - ALT Charged Shot", attackType: "ASSIST", Level1Damage: 163.2, growthPerLevel: 14.9 },
+            { attackName: "Assist Follow-Up: Ace Reversal", attackType: "ASSIST", Level1Damage: 291.7, growthPerLevel: 26.6 },
+            // SPECIAL
+            { attackName: "Special: Soul Hunter - Judgment", attackType: "SPECIAL", Level1Damage: 85.3, growthPerLevel: 7.8 },
+            // EX SPECIAL
+            { attackName: "EX Special: Soul Hunter - Punishment", attackType: "EXSPECIAL", Level1Damage: 373.2, growthPerLevel: 34 },
+            // CHAIN
+            { attackName: "Chain: Trick of Fate", attackType: "CHAIN", Level1Damage: 701.1, growthPerLevel: 63.8 },
+            // ULT
+            { attackName: "Ultimate: Blaspheme", attackType: "ULT", Level1Damage: 1527.1, growthPerLevel: 138.9 },
+        ],
+    },
+    {
+        characterName: "Pan Yinhu",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Unyielding Strikes - 1", attackType: "BASIC", Level1Damage: 49.7, growthPerLevel: 4.6 },
+            { attackName: "Basic: Unyielding Strikes - 2", attackType: "BASIC", Level1Damage: 49.8, growthPerLevel: 4.6 },
+            { attackName: "Basic: Unyielding Strikes - 3", attackType: "BASIC", Level1Damage: 109.4, growthPerLevel: 10 },
+            { attackName: "Basic: Unyielding Strikes - 4", attackType: "BASIC", Level1Damage: 211.3, growthPerLevel: 19.3 },
+            // DASH
+            { attackName: "Dash: Sizzling Oil Supreme", attackType: "DASH", Level1Damage: 83.4, growthPerLevel: 7.6 },
+            // DODGE
+            { attackName: "Dodge: Moving Mountains and Seas", attackType: "DASH", Level1Damage: 219.2, growthPerLevel: 20 },
+            // ASSIST
+            { attackName: "Quick Assist: Lift Your Gaze to Good Fortune", attackType: "ASSIST", Level1Damage: 91.7, growthPerLevel: 8.4 },
+            { attackName: "Assist Follow-Up: Ride the Momentum", attackType: "ASSIST", Level1Damage: 337.4, growthPerLevel: 30.7 },
+            // SPECIAL
+            { attackName: "Special: Sonic Pressure-Point Strike", attackType: "SPECIAL", Level1Damage: 62.5, growthPerLevel: 5.7 },
+            { attackName: "Special: Touch of Death - 1", attackType: "SPECIAL", Level1Damage: 97.3, growthPerLevel: 8.9 },
+            { attackName: "Special: Touch of Death - 2", attackType: "SPECIAL", Level1Damage: 97.3, growthPerLevel: 8.9 },
+            { attackName: "Special: Touch of Death - 3", attackType: "SPECIAL", Level1Damage: 97.3, growthPerLevel: 8.9 },
+            // EX SPECIAL
+            { attackName: "EX Special: Mountainous Pulse Strike", attackType: "EXSPECIAL", Level1Damage: 384.1, growthPerLevel: 35 },
+            // CHAIN
+            { attackName: "Chain: Anointed with Wok Steam", attackType: "CHAIN", Level1Damage: 632.3, growthPerLevel: 57.5 },
+            // ULT
+            { attackName: "Ultimate: A Feast Fit for an Emperor!", attackType: "ULT", Level1Damage: 1627.9, growthPerLevel: 148 },
+        ],
+    },
+    {
+        characterName: "Yixuan",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Cirrus Strike - 1", attackType: "BASIC", Level1Damage: 45.8, growthPerLevel: 4.2 },
+            { attackName: "Basic: Cirrus Strike - 2", attackType: "BASIC", Level1Damage: 65.5, growthPerLevel: 6 },
+            { attackName: "Basic: Cirrus Strike - 3", attackType: "BASIC", Level1Damage: 87.1, growthPerLevel: 8 },
+            { attackName: "Basic: Cirrus Strike - 4", attackType: "BASIC", Level1Damage: 104.8, growthPerLevel: 9.6 },
+            { attackName: "Basic: Cirrus Strike - 5", attackType: "BASIC", Level1Damage: 113.7, growthPerLevel: 10.4 },
+
+            { attackName: "Basic: Ink-Veil Cloud Coalescence", attackType: "BASIC", Level1Damage: 234.7, growthPerLevel: 21.4 },
+
+            { attackName: "Basic: Auric Array", attackType: "BASIC", Level1Damage: 305.2, growthPerLevel: 27.8 },
+
+            { attackName: "Basic: Qingming Eruption", attackType: "BASIC", Level1Damage: 110.6, growthPerLevel: 10.1 },
+            // DASH
+            { attackName: "Dash: Skybreaker", attackType: "DASH", Level1Damage: 49.9, growthPerLevel: 4.6 },
+            // DODGE
+            { attackName: "Dodge: Banishing Blow", attackType: "DASH", Level1Damage: 219.6, growthPerLevel: 20 },
+            // ASSIST
+            { attackName: "Quick Assist: Cloudstream Shadow", attackType: "ASSIST", Level1Damage: 101.2, growthPerLevel: 9.2 },
+            { attackName: "Assist Follow-Up: Celestial Cloud Blitz", attackType: "ASSIST", Level1Damage: 297, growthPerLevel: 27 },
+            // SPECIAL
+            { attackName: "Special: Shadow-Ignition", attackType: "SPECIAL", Level1Damage: 52.1, growthPerLevel: 4.8 },
+            // EX SPECIAL
+            { attackName: "EX Special: Ink Manifestation", attackType: "EXSPECIAL", Level1Damage: 300.3, growthPerLevel: 27.3 },
+            { attackName: "EX Special: Ink Manifestation - Additional DMG on Full Charge", attackType: "EXSPECIAL", Level1Damage: 149.6, growthPerLevel: 13.6 },
+            { attackName: "EX Special: Ink Manifestation - Total Damage on Full Charge", attackType: "EXSPECIAL", Level1Damage: 449.9, growthPerLevel: 40.9 },
+            
+            { attackName: "EX Special: Ink Manifestation - Celestial Cloud Blitz - Break", attackType: "EXSPECIAL", Level1Damage: 370.6, growthPerLevel: 33.7 },
+            { attackName: "EX Special: Ink Manifestation - Qingming Eruption - Break", attackType: "EXSPECIAL", Level1Damage: 426.4, growthPerLevel: 38.8 },
+            { attackName: "EX Special: Ink Manifestation", attackType: "EXSPECIAL", Level1Damage: , growthPerLevel:  },
+            
+            { attackName: "EX Special: Cloud-Shaper", attackType: "EXSPECIAL", Level1Damage: 671.8, growthPerLevel: 61.1 },
+            { attackName: "EX Special: Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 234.3, growthPerLevel: 21.3 },
+            { attackName: "EX Special: Cloud-Shaper + Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 1140.4, growthPerLevel: 103.7 },
+            // CHAIN
+            { attackName: "Chain: Auric Ink Rush", attackType: "CHAIN", Level1Damage: 533.1, growthPerLevel: 48.5 },
+            // ULT
+            { attackName: "Ultimate: Qingming Skyshade", attackType: "ULT", Level1Damage: 1853.4, growthPerLevel: 168.5 },
+            { attackName: "Ultimate: Talisman Suppression", attackType: "ULT", Level1Damage: 1466.2, growthPerLevel: 133.3 },
+        ],
+    },
+    {
+        characterName: "Ju Fufu",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Tiger Seven Forms - Flaming Claw - 1", attackType: "BASIC", Level1Damage: 42.5, growthPerLevel: 3.9 },
+            { attackName: "Basic: Tiger Seven Forms - Flaming Claw - 2", attackType: "BASIC", Level1Damage: 45.2, growthPerLevel: 4.2 },
+            { attackName: "Basic: Tiger Seven Forms - Flaming Claw - 3", attackType: "BASIC", Level1Damage: 31.5, growthPerLevel: 2.9 },
+            { attackName: "Basic: Tiger Seven Forms - Flaming Claw - 4", attackType: "BASIC", Level1Damage: 218.4, growthPerLevel: 19.9 },
+            
+            { attackName: "Basic: Hu Wei", attackType: "BASIC", Level1Damage: 92.4, growthPerLevel: 8.4 },
+            // DASH
+            { attackName: "Dash: Tiger Seven Forms - Tiger Charge", attackType: "DASH", Level1Damage: 36.8, growthPerLevel: 3.4 },
+            { attackName: "Dash: Tiger Seven Forms - Mountain King's Game", attackType: "DASH", Level1Damage: 18.4, growthPerLevel: 1.7 },
+            { attackName: "Dash: Tiger Seven Forms - Mountain King's Game - Momentum", attackType: "DASH", Level1Damage: 19.2, growthPerLevel: 1.8 },
+            { attackName: "Dash: Tiger Seven Forms - Mountain King's Game - Hu Wei", attackType: "DASH", Level1Damage: 92.4, growthPerLevel: 8.4 },
+            // DODGE
+            { attackName: "Dodge: Tiger Seven Forms - Reignited Mountain", attackType: "DASH", Level1Damage: 207.8, growthPerLevel: 18.9 },
+            // ASSIST
+            { attackName: "Quick Assist: Decisive Stomp", attackType: "ASSIST", Level1Damage: 75.3, growthPerLevel: 6.9 },
+            { attackName: "Assist Follow-Up: Feral Blazing Maw", attackType: "ASSIST", Level1Damage: 407.2, growthPerLevel: 37.1 },
+            // SPECIAL
+            { attackName: "Special: Tiger Seven Forms - Mountain-Descending Tiger", attackType: "SPECIAL", Level1Damage: 66.1, growthPerLevel: 6.1 },
+            // EX SPECIAL
+            { attackName: "EX Special: Tiger Seven Forms Alt - Mountain-Descending Savage Tiger", attackType: "EXSPECIAL", Level1Damage: 526.5, growthPerLevel: 47.9 },
+            // CHAIN
+            { attackName: "Chain: Tiger Cauldron Collapse", attackType: "CHAIN", Level1Damage: 668.1, growthPerLevel: 60.8 },
+            { attackName: "Chain: Suppressing Tiger Cauldron", attackType: "CHAIN", Level1Damage: 354.5, growthPerLevel: 32.3 },
+            // ULT
+            { attackName: "Ultimate: Tiger Seven Forms - Raging Tiger Explosion", attackType: "ULT", Level1Damage: 1663.8, growthPerLevel: 151.3 },
+        ],
+    },
 
 
 
