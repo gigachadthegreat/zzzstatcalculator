@@ -926,8 +926,11 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "Assist Follow-Up: Conducting Blow", attackType: "ASSIST", Level1Damage: 407.1, growthPerLevel: 37.1 },
             // SPECIAL
             { attackName: "Special: Celestial Thunder", attackType: "SPECIAL", Level1Damage: 59.6, growthPerLevel: 5.5 },
+
+            { attackName: "Special: Azure Flash - Total", attackType: "SPECIAL", Level1Damage: 210.2, growthPerLevel: 19.2 },
             { attackName: "Special: Azure Flash - White Thunder", attackType: "SPECIAL", Level1Damage: 167.2, growthPerLevel: 15.2 },
             { attackName: "Special: Azure Flash", attackType: "SPECIAL", Level1Damage: 43, growthPerLevel: 4 },
+
             { attackName: "Special: Thunder Smite", attackType: "SPECIAL", Level1Damage: 188.1, growthPerLevel: 17.1 },
             // EX SPECIAL
             { attackName: "EX Special: Sundering Bolt", attackType: "EXSPECIAL", Level1Damage: 379.6, growthPerLevel: 34.6 },
@@ -1166,9 +1169,213 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "Ultimate: Tiger Seven Forms - Raging Tiger Explosion", attackType: "ULT", Level1Damage: 1663.8, growthPerLevel: 151.3 },
         ],
     },
+    {
+        characterName: "Yuzuha",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Tanuki Claws - 1", attackType: "BASIC", Level1Damage: 37.7, growthPerLevel: 3.5 },
+            { attackName: "Basic: Tanuki Claws - 2", attackType: "BASIC", Level1Damage: 57.7, growthPerLevel: 5.3 },
+            { attackName: "Basic: Tanuki Claws - 3", attackType: "BASIC", Level1Damage: 66, growthPerLevel: 6 },
+            { attackName: "Basic: Tanuki Claws - 4", attackType: "BASIC", Level1Damage: 98.1, growthPerLevel: 9 },
+            { attackName: "Basic: Tanuki Claws - 5", attackType: "BASIC", Level1Damage: 164.1, growthPerLevel: 15 },
 
+            { attackName: "Basic: Hard Candy Shot", attackType: "BASIC", Level1Damage: 132, growthPerLevel: 12 },
 
+            { attackName: "Basic: Sugarburst Sparkles", attackType: "BASIC", Level1Damage: 27.5, growthPerLevel: 2.5 },
 
+            { attackName: "Basic: Sugarburst Sparkles - Max", attackType: "BASIC", Level1Damage: 308, growthPerLevel: 28 },
+           
+            { attackName: "Basic: Tanuki Helper - Coordinated ", attackType: "BASIC", Level1Damage: 110, growthPerLevel: 10 },
+        
+            { attackName: "Basic: Tanuki Helper - Auto-Attack", attackType: "BASIC", Level1Damage: 110, growthPerLevel: 10 },
+
+            // DASH
+            { attackName: "Dash: You're Outta Luck!", attackType: "DASH", Level1Damage: 69.8, growthPerLevel: 6.4 },
+            // DODGE
+            { attackName: "Dodge: Time for Payback~", attackType: "DASH", Level1Damage: 276.9, growthPerLevel: 25.2 },
+            // ASSIST
+            { attackName: "Quick Assist: Dessert Time", attackType: "ASSIST", Level1Damage: 122.9, growthPerLevel: 11.2 },
+            { attackName: "Assist Follow-Up: We Have Cookies", attackType: "ASSIST", Level1Damage: 294.3, growthPerLevel: 26.8 },
+            { attackName: "Assist Follow-Up: Stuffed Hard Candy Shot", attackType: "ASSIST", Level1Damage: 463.6, growthPerLevel: 42.2 },
+            // SPECIAL
+            { attackName: "Special: Gummy Bombardment", attackType: "SPECIAL", Level1Damage: 50.5, growthPerLevel: 4.6 },
+            // EX SPECIAL
+            { attackName: "EX Special: Cavity Alert", attackType: "EXSPECIAL", Level1Damage: 421, growthPerLevel: 38.3 },
+            { attackName: "EX Special: Cavity Alert, Right Now!", attackType: "EXSPECIAL", Level1Damage: 241.4, growthPerLevel: 22 },
+            // CHAIN
+            { attackName: "Chain: Prank Assault", attackType: "CHAIN", Level1Damage: 598.7, growthPerLevel: 54.5 },
+            // ULT
+            { attackName: "Ultimate: Surrender or Suffer the Mischief", attackType: "ULT", Level1Damage: 1443.2, growthPerLevel: 131.2 },
+        ],
+    },
+    {
+        characterName: "Alice",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Celestial Overture - 1", attackType: "BASIC", Level1Damage: 55.1, growthPerLevel: 5.1 },
+            { attackName: "Basic: Celestial Overture - 2", attackType: "BASIC", Level1Damage: 88, growthPerLevel: 8 },
+            { attackName: "Basic: Celestial Overture - 3", attackType: "BASIC", Level1Damage: 66.1, growthPerLevel: 6.1 },
+            { attackName: "Basic: Celestial Overture - 4", attackType: "BASIC", Level1Damage: 111.9, growthPerLevel: 10.2 },
+            { attackName: "Basic: Celestial Overture - 5", attackType: "BASIC", Level1Damage: 130.3, growthPerLevel: 11.9 },
+            { attackName: "Basic: Celestial Overture - 5 Enchanced", attackType: "BASIC", Level1Damage: 218.3, growthPerLevel: 19.9 },
+
+            { attackName: "Basic: Starshine Waltz - 1", attackType: "BASIC", Level1Damage: 188.9, growthPerLevel: 17.2 },
+            { attackName: "Basic: Starshine Waltz - 2", attackType: "BASIC", Level1Damage: 304.4, growthPerLevel: 27.7 },
+            { attackName: "Basic: Starshine Waltz - 3", attackType: "BASIC", Level1Damage: 965.7, growthPerLevel: 87.8 },
+            // DASH
+            { attackName: "Dash: Blade-Dancer's Gale", attackType: "DASH", Level1Damage: 75.3, growthPerLevel: 6.9 },
+            // DODGE
+            { attackName: "Dodge: Ceremony of Swordlight", attackType: "DASH", Level1Damage: 284, growthPerLevel: 25.9 },
+            // ASSIST
+            { attackName: "Quick Assist: Intertwined Stab", attackType: "ASSIST", Level1Damage: 163.3, growthPerLevel: 14.9 },
+            { attackName: "Assist Follow-Up: Cross Riposte", attackType: "ASSIST", Level1Damage: 332.7, growthPerLevel: 30.3 },
+            // SPECIAL
+            { attackName: "Special: Piercing Dawn", attackType: "SPECIAL", Level1Damage: 62.4, growthPerLevel: 5.7 },
+            // EX SPECIAL
+            { attackName: "EX Special: Aurora Thrust - Northern Cross", attackType: "EXSPECIAL", Level1Damage: 460, growthPerLevel: 41.9 },
+            { attackName: "EX Special: Aurora Thrust - Southern Cross", attackType: "EXSPECIAL", Level1Damage: 532, growthPerLevel: 48.4 },
+            // CHAIN
+            { attackName: "Chain: Starfall Intermission", attackType: "CHAIN", Level1Damage: 666.3, growthPerLevel: 60.6 },
+            // ULT
+            { attackName: "Ultimate: Starfall Finale", attackType: "ULT", Level1Damage: 2262, growthPerLevel: 205.7 },
+        ],
+    },
+    {
+        characterName: "Seed",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Chrysanthemum Wheel Dance - 1", attackType: "BASIC", Level1Damage: 46.5, growthPerLevel: 4.3 },
+            { attackName: "Basic: Chrysanthemum Wheel Dance - 2", attackType: "BASIC", Level1Damage: 124.1, growthPerLevel: 11.3 },
+            { attackName: "Basic: Chrysanthemum Wheel Dance - 3", attackType: "BASIC", Level1Damage: 71.8, growthPerLevel: 6.6 },
+            { attackName: "Basic: Chrysanthemum Wheel Dance - 4", attackType: "BASIC", Level1Damage: 358.6, growthPerLevel: 32.6 },
+            
+            { attackName: "Basic: Falling Petals - Total", attackType: "BASIC", Level1Damage: 1684.3, growthPerLevel: 153.3 },
+            { attackName: "Basic: Falling Petals - Slaughter", attackType: "BASIC", Level1Damage: 166.6, growthPerLevel: 15.2 },
+            { attackName: "Basic: Falling Petals - Downfall First Form", attackType: "BASIC", Level1Damage: 528.3, growthPerLevel: 48.1 },
+            { attackName: "Basic: Falling Petals - Downfall Second Form", attackType: "BASIC", Level1Damage: 989.4, growthPerLevel: 90 },
+            // DASH
+            { attackName: "Dash: Magnetic Wheel Dance", attackType: "DASH", Level1Damage: 64.2, growthPerLevel: 5.9 },
+            // DODGE
+            { attackName: "Dodge: Blossom Burst", attackType: "DASH", Level1Damage: 320.1, growthPerLevel: 29.1 },
+            // ASSIST
+            { attackName: "Quick Assist: ", attackType: "ASSIST", Level1Damage: 154, growthPerLevel: 14 },
+            { attackName: "Assist Follow-Up: ", attackType: "ASSIST", Level1Damage: 456, growthPerLevel: 41.5 },
+            // SPECIAL
+            { attackName: "Special: Withered in Frost", attackType: "SPECIAL", Level1Damage: 47.7, growthPerLevel: 4.4 },
+            // EX SPECIAL
+            { attackName: "EX Special: Raining Iron Petals", attackType: "EXSPECIAL", Level1Damage: 683.4, growthPerLevel: 62.2 },
+            { attackName: "EX Special: Raining Iron Petals - including Punch", attackType: "EXSPECIAL", Level1Damage: 850, growthPerLevel: 77.4 },
+            { attackName: "EX Special: Raining Iron Petals - Away", attackType: "EXSPECIAL", Level1Damage: 18.4, growthPerLevel: 1.7 },
+            // CHAIN
+            { attackName: "Chain: Tempest of Frosty Petals", attackType: "CHAIN", Level1Damage: 734.2, growthPerLevel: 66.8 },
+            // ULT
+            { attackName: "Ultimate: Clockwork Garden - Bloom!", attackType: "ULT", Level1Damage: 3249.7, growthPerLevel: 295.5 },
+        ],
+    },
+    {
+        characterName: "Orphie & Magus",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: High-Pressure Flamethrower - 1", attackType: "BASIC", Level1Damage: 14.5, growthPerLevel: 1.4 },
+            { attackName: "Basic: High-Pressure Flamethrower - 2", attackType: "BASIC", Level1Damage: 44.4, growthPerLevel: 4.1 },
+            { attackName: "Basic: High-Pressure Flamethrower - 3", attackType: "BASIC", Level1Damage: 41.5, growthPerLevel: 3.8 },
+            { attackName: "Basic: High-Pressure Flamethrower - 4", attackType: "BASIC", Level1Damage: 86.7, growthPerLevel: 7.9 },
+            { attackName: "Basic: High-Pressure Flamethrower - 5", attackType: "BASIC", Level1Damage: 181.6, growthPerLevel: 16.6 },
+            { attackName: "Basic: High-Pressure Flamethrower - Fire Blade", attackType: "BASIC", Level1Damage: 158.4, growthPerLevel: 14.4 },
+            // DASH
+            { attackName: "Dash: Rush Command", attackType: "DASH", Level1Damage: 62.3, growthPerLevel: 5.7 },
+            // DODGE
+            { attackName: "Dodge: Counter Strike Opportunity", attackType: "DASH", Level1Damage: 257.8, growthPerLevel: 23.5 },
+            // ASSIST
+            { attackName: "Quick Assist: Searing Slash", attackType: "ASSIST", Level1Damage: 113.7, growthPerLevel: 10.4 },
+            { attackName: "Assist Follow-Up: Boiling Pierce", attackType: "ASSIST", Level1Damage: 360.9, growthPerLevel: 32.9 },
+            // SPECIAL
+            { attackName: "Special: Blazing Chamber", attackType: "SPECIAL", Level1Damage: 39.5, growthPerLevel: 3.6 },
+            { attackName: "Special: Corrosive Flash", attackType: "SPECIAL", Level1Damage: 495, growthPerLevel: 45 },
+            // EX SPECIAL
+            { attackName: "EX Special: Watch Your Step", attackType: "EXSPECIAL", Level1Damage: 280.9, growthPerLevel: 25.6 },
+            { attackName: "EX Special: Crimson Vortex", attackType: "EXSPECIAL", Level1Damage: 678.4, growthPerLevel: 61.7 },
+            { attackName: "EX Special: Heat Charge", attackType: "EXSPECIAL", Level1Damage: 389.4, growthPerLevel: 35.4 },
+            { attackName: "EX Special: Fiery Eruption", attackType: "EXSPECIAL", Level1Damage: 259.6, growthPerLevel: 23.6 },
+            // CHAIN
+            { attackName: "Chain: Overheated Barrel", attackType: "CHAIN", Level1Damage: 626.3, growthPerLevel: 57 },
+            // ULT
+            { attackName: "Ultimate: Dance With Fire", attackType: "ULT", Level1Damage: 698.7, growthPerLevel: 63.6 },
+            { attackName: "Ultimate: Dance With Fire - Additional Extended", attackType: "ULT", Level1Damage: 465.8, growthPerLevel: 42.4 },
+            { attackName: "Ultimate: Dance With Fire - Total", attackType: "ULT", Level1Damage: 1164.5, growthPerLevel: 106 },
+        ],
+    },
+    {
+        characterName: "Lucia",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Orbital Combo - 1", attackType: "BASIC", Level1Damage: 40.9, growthPerLevel: 3.8 },
+            { attackName: "Basic: Orbital Combo - 2", attackType: "BASIC", Level1Damage: 27.8, growthPerLevel: 2.6 },
+            { attackName: "Basic: Orbital Combo - 3", attackType: "BASIC", Level1Damage: 83.5, growthPerLevel: 7.6 },
+            { attackName: "Basic: Orbital Combo - 4", attackType: "BASIC", Level1Damage: 80.1, growthPerLevel: 7.3 },
+            
+            { attackName: "Basic: Orbital Combo - Whim", attackType: "BASIC", Level1Damage: 172.9, growthPerLevel: 15.8 },
+            { attackName: "Basic: Orbital Combo - Harmony", attackType: "BASIC", Level1Damage: 412.5, growthPerLevel: 37.5 },
+            { attackName: "Basic: Orbital Combo - Aftershock", attackType: "BASIC", Level1Damage: 550, growthPerLevel: 50 },
+            // DASH
+            { attackName: "Dash: Refraction", attackType: "DASH", Level1Damage: 86.3, growthPerLevel: 7.9 },
+            // DODGE
+            { attackName: "Dodge: Stardust Echo - Whim", attackType: "DASH", Level1Damage: 248.3, growthPerLevel: 22.6 },
+            { attackName: "Dodge: Stardust Echo - Harmony", attackType: "DASH", Level1Damage: 385.8, growthPerLevel: 35.1 },
+            // ASSIST
+            { attackName: "Quick Assist: Crushing Mist - Whim", attackType: "ASSIST", Level1Damage: 106.4, growthPerLevel: 9.7 },
+            { attackName: "Quick Assist: Crushing Mist - Harmony", attackType: "ASSIST", Level1Damage: 243.9, growthPerLevel: 22.2 },
+            { attackName: "Quick Assist: Crushing Mist - Aftershock", attackType: "ASSIST", Level1Damage: 550, growthPerLevel: 50 },
+            { attackName: "Assist Follow-Up: Harmony of Painted Dreams", attackType: "ASSIST", Level1Damage: 327.7, growthPerLevel: 29.8 },
+            // SPECIAL
+            { attackName: "Special: Symphony of the Reaper - Storm - Whim", attackType: "SPECIAL", Level1Damage: 45.9, growthPerLevel: 4.2 },
+            { attackName: "Special: Symphony of the Reaper - Storm - Harmony", attackType: "SPECIAL", Level1Damage: 183.4, growthPerLevel: 16.7 },
+            { attackName: "Special: Symphony of the Reaper - Storm - Aftershock", attackType: "SPECIAL", Level1Damage: 550, growthPerLevel: 50 },
+            // EX SPECIAL
+            { attackName: "EX Special: Symphony of the Reaper - Daybreak", attackType: "EXSPECIAL", Level1Damage: 638.1, growthPerLevel: 58.1 },
+            // CHAIN
+            { attackName: "Chain: Stage of Brilliance", attackType: "CHAIN", Level1Damage: 616.7, growthPerLevel: 56.1 },
+            // ULT
+            { attackName: "Ultimate: Charge, Great Armor! - Charge Single Hit", attackType: "ULT", Level1Damage: 93, growthPerLevel: 8.5 },
+            { attackName: "Ultimate: Charge, Great Armor!", attackType: "ULT", Level1Damage: 1902.7, growthPerLevel: 173 },
+            { attackName: "Ultimate: Charge, Great Armor! - Total", attackType: "ULT", Level1Damage: 1995.7, growthPerLevel: 181.5 },
+        ],
+    },
+    {
+        characterName: "Manato",
+        attackStats: [
+            // BASIC
+            { attackName: "Basic: Blazing Wind Slash - 1", attackType: "BASIC", Level1Damage: 28.7, growthPerLevel: 2.7 },
+            { attackName: "Basic: Blazing Wind Slash - 2", attackType: "BASIC", Level1Damage: 82.7, growthPerLevel: 7.6 },
+            { attackName: "Basic: Blazing Wind Slash - 3", attackType: "BASIC", Level1Damage: 134.6, growthPerLevel: 12.3 },
+            { attackName: "Basic: Blazing Wind Slash - 1 Scorchwind", attackType: "BASIC", Level1Damage: 63.1, growthPerLevel: 5.9 },
+            { attackName: "Basic: Blazing Wind Slash - 2 Scorchwind", attackType: "BASIC", Level1Damage: 95.5, growthPerLevel: 8.8 },
+            { attackName: "Basic: Blazing Wind Slash - 3 Scorchwind", attackType: "BASIC", Level1Damage: 143.3, growthPerLevel: 13.1 },
+
+            { attackName: "Basic: Blazing Wind - Misty Slash - 1", attackType: "BASIC", Level1Damage: 53.1, growthPerLevel: 4.9 },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 2", attackType: "BASIC", Level1Damage: 111.2, growthPerLevel: 10.2 },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 3", attackType: "BASIC", Level1Damage: 154.5, growthPerLevel: 14.1 },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 4", attackType: "BASIC", Level1Damage: 237.8, growthPerLevel: 21.7 },
+            // DASH
+            { attackName: "Dash: Radiant Blade - Zanshin", attackType: "DASH", Level1Damage: 58.7, growthPerLevel: 5.4 },
+            // DODGE
+            { attackName: "Dodge: Radiant Blade - Battle Sweep", attackType: "DASH", Level1Damage: 198, growthPerLevel: 18 },
+            // ASSIST
+            { attackName: "Quick Assist: Lone Shadow - Regroup", attackType: "ASSIST", Level1Damage: 90.7, growthPerLevel: 8.3 },
+            { attackName: "Defensive Assist: Lone Shadow - Mountain Stand", attackType: "ASSIST", Level1Damage: 40, growthPerLevel: 3.7 },
+            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang", attackType: "ASSIST", Level1Damage: 166.7, growthPerLevel: 15.2 },
+            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang - Total Maximum", attackType: "ASSIST", Level1Damage: 570.1, growthPerLevel: 51.9 },
+            // SPECIAL
+            { attackName: "Special:  Return to Ashes", attackType: "SPECIAL", Level1Damage: 50.7, growthPerLevel: 4.7 },
+            { attackName: "Special:  Return to Ashes - Charged or Successfull Block", attackType: "SPECIAL", Level1Damage: 130.7, growthPerLevel: 11.9 },
+            // EX SPECIAL
+            { attackName: "EX Special: Return to Ashes - Fall", attackType: "EXSPECIAL", Level1Damage: 652.6, growthPerLevel: 59.4 },
+            // CHAIN
+            { attackName: "Chain: Blazing Eruption", attackType: "CHAIN", Level1Damage: 483.3, growthPerLevel: 44 },
+            // ULT
+            { attackName: "Ultimate: Musou Aratama", attackType: "ULT", Level1Damage: 1562.3, growthPerLevel: 142.1 },
+        ],
+    },
 
 
     // {
