@@ -1124,7 +1124,6 @@ export const Attacks: CharacterAttack[] = [
             
             { attackName: "EX Special: Ink Manifestation - Celestial Cloud Blitz - Break", attackType: "EXSPECIAL", Level1Damage: 370.6, growthPerLevel: 33.7 },
             { attackName: "EX Special: Ink Manifestation - Qingming Eruption - Break", attackType: "EXSPECIAL", Level1Damage: 426.4, growthPerLevel: 38.8 },
-            { attackName: "EX Special: Ink Manifestation", attackType: "EXSPECIAL", Level1Damage: , growthPerLevel:  },
             
             { attackName: "EX Special: Cloud-Shaper", attackType: "EXSPECIAL", Level1Damage: 671.8, growthPerLevel: 61.1 },
             { attackName: "EX Special: Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 234.3, growthPerLevel: 21.3 },
