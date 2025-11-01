@@ -1,6 +1,7 @@
-import type { CharacterAttack } from "./types";
+import { calculateDamageDealt } from "../lib/Calculations";
+import type { CharacterAttacks } from "./types";
 
-export const Attacks: CharacterAttack[] = [
+export const Attacks: CharacterAttacks[] = [
     {
         characterName: "Nicole",
         attackStats: [
@@ -10,7 +11,7 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "Basic: Cunning Combo - 3", attackType: "BASIC", Level1Damage: 304.3, growthPerLevel: 27.3 },
             { attackName: "Basic: Do As I Please - 1", attackType: "BASIC", Level1Damage: 88.1, growthPerLevel: 8.1 },
             { attackName: "Basic: Do As I Please - 2", attackType: "BASIC", Level1Damage: 100.9, growthPerLevel: 9.3 },
-            { attackName: "Basic: Do As I Please - 2", attackType: "BASIC", Level1Damage: 452.3, growthPerLevel: 41.3 },
+            { attackName: "Basic: Do As I Please - 3", attackType: "BASIC", Level1Damage: 452.3, growthPerLevel: 41.3 },
             // DASH
             { attackName: "Dash: Jack in the Box - Forward", attackType: "DASH", Level1Damage: 158.2, growthPerLevel: 14.2 },
             { attackName: "Dash: Jack in the Box - Backward", attackType: "DASH", Level1Damage: 60.0, growthPerLevel: 5.5 },
@@ -455,7 +456,7 @@ export const Attacks: CharacterAttack[] = [
             // CHAIN
             { attackName: "Chain: Claw Swipe", attackType: "CHAIN", Level1Damage: 536.2, growthPerLevel: 48.8 },
             // ULT
-            { attackName: "Ultimate: Claw Smash", attackType: "ULT", Level1Damage: 1571.1, growthPerLevel: 142.9 },
+            { attackName: "Ultimate: Claw Smash", attackType: "ULT", Level1Damage: 1571.1, growthPerLevel: 142.9,  },
         ],
     },
     {
@@ -468,13 +469,13 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "Basic: Don't Move! - 4", attackType: "BASIC", Level1Damage: 151, growthPerLevel: 13.8 },
             { attackName: "Basic: Don't Move! - 5", attackType: "BASIC", Level1Damage: 162.2, growthPerLevel: 14.8 },
 
-            { attackName: "Basic: Please Do Not Resist Physical - 1", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
-            { attackName: "Basic: Please Do Not Resist Physical - 2", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
-            { attackName: "Basic: Please Do Not Resist Physical - 3", attackType: "BASIC", Level1Damage: 160.9, growthPerLevel: 14.7 },
+            { attackName: "Basic: Please Do Not Resist - Physical - 1", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
+            { attackName: "Basic: Please Do Not Resist - Physical - 2", attackType: "BASIC", Level1Damage: 53.7, growthPerLevel: 4.9 },
+            { attackName: "Basic: Please Do Not Resist - Physical - 3", attackType: "BASIC", Level1Damage: 160.9, growthPerLevel: 14.7 },
             
-            { attackName: "Basic: Please Do Not Resist Ether - 1", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
-            { attackName: "Basic: Please Do Not Resist Ether - 2", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
-            { attackName: "Basic: Please Do Not Resist Ether - 3", attackType: "BASIC", Level1Damage: 407.7, growthPerLevel: 37.7 },
+            { attackName: "Basic: Please Do Not Resist - Ether - 1", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
+            { attackName: "Basic: Please Do Not Resist - Ether - 2", attackType: "BASIC", Level1Damage: 135.9, growthPerLevel: 12.4 },
+            { attackName: "Basic: Please Do Not Resist - Ether - 3", attackType: "BASIC", Level1Damage: 407.7, growthPerLevel: 37.7 },
             // DASH
             { attackName: "Dash: Firepower Offensive", attackType: "DASH", Level1Damage: 55.1, growthPerLevel: 5.1 },
             { attackName: "Dash: Overwhelming Firepower", attackType: "DASH", Level1Damage: 53.7, growthPerLevel: 4.9 },
@@ -902,9 +903,11 @@ export const Attacks: CharacterAttack[] = [
             { attackName: "EX Special: ", attackType: "EXSPECIAL", Level1Damage: 541.2, growthPerLevel: 49.2 },
             { attackName: "EX Special: ", attackType: "EXSPECIAL", Level1Damage: 59.6, growthPerLevel: 5.5 },
             // CHAIN
-            { attackName: "Chain: Lunalux - Snare", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4 },
+            { attackName: "Chain: Lunalux - Snare - AA active", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4, calculatorType: "EvelynChainAActive" },
+            { attackName: "Chain: Lunalux - Snare - AA inactive", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4 },
             // ULT
-            { attackName: "Ultimate: Lunalux Garrote", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 },
+            { attackName: "Ultimate: Lunalux Garrote - AA active", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 , calculatorType: "EvelynUltAActive" },
+            { attackName: "Ultimate: Lunalux Garrote - AA inactive", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 },
         ],
     },
     {

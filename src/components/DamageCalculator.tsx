@@ -1,5 +1,12 @@
-import { useState } from "react";
-import { type Stats, levelFactorAttacker, AnomalyMultipliers, type CharacterAttack } from "../constants/types";
+import { useEffect, useState } from "react";
+import {
+    type Stats,
+    levelFactorAttacker,
+    AnomalyMultipliers,
+    type CharacterAttacks,
+    type AttackStats,
+    AttackTypes,
+} from "../constants/types";
 import LabelWithTextInput from "./LabelWithTextInput";
 import { getMultiplierFromAttack } from "../lib/Utility";
 
@@ -21,6 +28,7 @@ import {
 } from "../lib/Calculations.ts";
 
 import LabelWithInfo from "./LabelWithInfo";
+import RangeSlider from "./RangeSlider";
 import { Attacks } from "../constants/AttackStats.tsx";
 
 function DamageCalculator({
@@ -192,6 +200,19 @@ function DamageCalculator({
     // setCharacterLevel: (value: number) => void;
 }) {
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
+    const [attackUsed, setAttackUsed] = useState<string>(
+        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0].attackName
+    );
+    const [attackLevel, setAttackLevel] = useState<number>(1);
+
+    useEffect(() => {
+        setMultiplierValue(getMultiplierFromAttack(Attacks, characterName, attackUsed, attackLevel));
+    }, [attackUsed, attackLevel, characterName]);
+
+    useEffect(() => {
+        setAttackUsed(Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0].attackName);
+    }, [characterName]);
+
 
     // Character Stats
     const modifiedStats: Stats | null = calculatedStats
@@ -581,6 +602,49 @@ function DamageCalculator({
                             inputValue={multiplierValue}
                         />
                     </div>
+
+                    <div className="flex flex-col gap-2 mb-2">
+                        <div className="flex items-center justify-between">
+                            <LabelWithInfo labelText={"Attack Level"} infoText={"Choose attack level (1-16)"} />
+                            <div className="text-sm font-mono">Level {attackLevel}</div>
+                        </div>
+                        <div className="w-3/4">
+                            <input
+                            type="range"
+                            min={1}
+                            max={16}
+                            value={attackLevel}
+                            onChange={(e) => setAttackLevel(Number(e.target.value))}
+                            className="w-full"
+                            />
+                        </div>
+                    </div>
+
+
+                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
+                        <LabelWithInfo labelText={"Attack"} infoText={"The used by the the character."} />
+                        <select
+                            value={attackUsed}
+                            onChange={(e) => setAttackUsed(e.target.value)}
+                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-3/4 "
+                        >
+                            {Object.keys(AttackTypes).map((type) => (
+                                <optgroup label={type} key={type}>
+                                    {Attacks.filter((attack) => attack.characterName === characterName)[0]
+                                        .attackStats.filter((attackStat) => attackStat.attackType === type)
+                                        .map((key) => (
+                                            <option value={key.attackName} key={key.attackName}>
+                                                {key.attackName}
+                                            </option>
+                                        ))}
+                                </optgroup>
+                            ))}
+                        </select>{" "}
+                    </div>
+
+                    
+
+
                     <div className="flex items-center gap-2 mb-2">
                         <LabelWithTextInput
                             labelText="RES Ignore %"

@@ -11,7 +11,6 @@ export const AttackTypes = {
     EXSPECIAL: "EXSPECIAL",
     CHAIN: "CHAIN",
     ULT: "ULT",
-    NONE: "NONE" 
 }
 
 export type statTypeKeys = keyof typeof StatType;
@@ -100,7 +99,7 @@ export interface Character {
     stats: Stats;
 }
 
-export interface CharacterAttack {
+export interface CharacterAttacks {
     characterName: string;
     attackStats: AttackStats[];
 }
@@ -110,6 +109,7 @@ export interface AttackStats {
     attackType: attackTypeKey;
     Level1Damage: number;
     growthPerLevel: number;
+    calculatorType?: string;
 }
 
 export interface Wengine {

@@ -1,4 +1,4 @@
-import { AnomalyMultipliers, type Character, type CharacterAttack, type SelectedDrives, type SeletedSubstats } from "../constants/types";
+import { AnomalyMultipliers, type Character, type CharacterAttacks, type SelectedDrives, type SeletedSubstats } from "../constants/types";
 import { type Wengine } from "../constants/types";
 
 export const getCharacterFromName = (name: string, characters: Character[]): Character => {
@@ -32,7 +32,7 @@ export const getSortedList = (names: string[]) => {
 
 
 
-export const getMultiplierFromAttack = (Attacks: CharacterAttack[], characterName: string, attackName: string, attackLvl: number) => {
+export const getMultiplierFromAttack = (Attacks: CharacterAttacks[], characterName: string, attackName: string, attackLvl: number) => {
     const attack = Attacks.find((characterAttacks) => characterAttacks.characterName === characterName);
 
     if (attack == undefined) throw new Error("Attack not found");
@@ -40,7 +40,7 @@ export const getMultiplierFromAttack = (Attacks: CharacterAttack[], characterNam
     const attackLvl1Damage = attack.attackStats.find((attack) => attack.attackName === attackName)?.Level1Damage ?? 0;
     const attackGrowthPerLevel = attack.attackStats.find((attack) => attack.attackName === attackName)?.growthPerLevel ?? 0;
 
-    return attackLvl1Damage + attackLvl * attackGrowthPerLevel;
+    return attackLvl1Damage + (attackLvl-1) * attackGrowthPerLevel;
 };
 
 
