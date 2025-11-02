@@ -11,7 +11,7 @@ export const AttackTypes = {
     EXSPECIAL: "EXSPECIAL",
     CHAIN: "CHAIN",
     ULT: "ULT",
-}
+};
 
 export type statTypeKeys = keyof typeof StatType;
 export const StatType = {
@@ -59,6 +59,23 @@ export interface Stats {
     PEN_FLAT: number;
     IMPACT_FLAT: number;
     ENERGY_REGEN_FLAT: number;
+}
+
+export interface AttackModifiers {
+    additionalSheerPercent: number;
+    additionalSheerFlat: number;
+    additionalDmgBonusMultiplierAttacker: number;
+    critMode: "avg" | "crit" | "noCrit";
+    defenseTarget: number;
+    defenseShred: number;
+    levelFactorAttacker: number;
+    resTarget: number;
+    resReductionTarget: number;
+    resIgnore: number;
+    dmgTakenIncrease: number;
+    dmgTakenReduction: number;
+    stunMultiplier: number;
+    additionalSheerDmgBonusMultiplierAttacker: number;
 }
 
 export interface ParameterizedStats {

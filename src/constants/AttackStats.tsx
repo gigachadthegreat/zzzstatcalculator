@@ -1,4 +1,3 @@
-import { calculateDamageDealt } from "../lib/Calculations";
 import type { CharacterAttacks } from "./types";
 
 export const Attacks: CharacterAttacks[] = [
@@ -900,13 +899,13 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Special: Binding Sunder - First Form - Bind", attackType: "SPECIAL", Level1Damage: 40.4, growthPerLevel: 3.7 },
             { attackName: "Special: Binding Sunder - First Form - Explosion", attackType: "SPECIAL", Level1Damage: 34, growthPerLevel: 3.1 },
             // EX SPECIAL
-            { attackName: "EX Special: ", attackType: "EXSPECIAL", Level1Damage: 541.2, growthPerLevel: 49.2 },
-            { attackName: "EX Special: ", attackType: "EXSPECIAL", Level1Damage: 59.6, growthPerLevel: 5.5 },
+            { attackName: "EX Special: Binding Sunder - Final Form - Bind", attackType: "EXSPECIAL", Level1Damage: 541.2, growthPerLevel: 49.2 },
+            { attackName: "EX Special: Binding Sunder - First Form - Explosion", attackType: "EXSPECIAL", Level1Damage: 59.6, growthPerLevel: 5.5 },
             // CHAIN
-            { attackName: "Chain: Lunalux - Snare - AA active", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4, calculatorType: "EvelynChainAActive" },
+            { attackName: "Chain: Lunalux - Snare - AA active", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4, calculatorType: "EvelynAdditionalActive" },
             { attackName: "Chain: Lunalux - Snare - AA inactive", attackType: "CHAIN", Level1Damage: 829.3, growthPerLevel: 75.4 },
             // ULT
-            { attackName: "Ultimate: Lunalux Garrote - AA active", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 , calculatorType: "EvelynUltAActive" },
+            { attackName: "Ultimate: Lunalux Garrote - AA active", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 , calculatorType: "EvelynAdditionalActive" },
             { attackName: "Ultimate: Lunalux Garrote - AA inactive", attackType: "ULT", Level1Damage: 1988.5, growthPerLevel: 180.2 },
         ],
     },
@@ -1103,42 +1102,42 @@ export const Attacks: CharacterAttacks[] = [
         characterName: "Yixuan",
         attackStats: [
             // BASIC
-            { attackName: "Basic: Cirrus Strike - 1", attackType: "BASIC", Level1Damage: 45.8, growthPerLevel: 4.2 },
-            { attackName: "Basic: Cirrus Strike - 2", attackType: "BASIC", Level1Damage: 65.5, growthPerLevel: 6 },
-            { attackName: "Basic: Cirrus Strike - 3", attackType: "BASIC", Level1Damage: 87.1, growthPerLevel: 8 },
-            { attackName: "Basic: Cirrus Strike - 4", attackType: "BASIC", Level1Damage: 104.8, growthPerLevel: 9.6 },
-            { attackName: "Basic: Cirrus Strike - 5", attackType: "BASIC", Level1Damage: 113.7, growthPerLevel: 10.4 },
+            { attackName: "Basic: Cirrus Strike - 1", attackType: "BASIC", Level1Damage: 45.8, growthPerLevel: 4.2, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Cirrus Strike - 2", attackType: "BASIC", Level1Damage: 65.5, growthPerLevel: 6 , calculatorType: "DefaultRupture"},
+            { attackName: "Basic: Cirrus Strike - 3", attackType: "BASIC", Level1Damage: 87.1, growthPerLevel: 8 , calculatorType: "DefaultRupture"},
+            { attackName: "Basic: Cirrus Strike - 4", attackType: "BASIC", Level1Damage: 104.8, growthPerLevel: 9.6, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Cirrus Strike - 5", attackType: "BASIC", Level1Damage: 113.7, growthPerLevel: 10.4, calculatorType: "DefaultRupture" },
 
-            { attackName: "Basic: Ink-Veil Cloud Coalescence", attackType: "BASIC", Level1Damage: 234.7, growthPerLevel: 21.4 },
+            { attackName: "Basic: Ink-Veil Cloud Coalescence", attackType: "BASIC", Level1Damage: 234.7, growthPerLevel: 21.4, calculatorType: "DefaultRupture" },
 
-            { attackName: "Basic: Auric Array", attackType: "BASIC", Level1Damage: 305.2, growthPerLevel: 27.8 },
+            { attackName: "Basic: Auric Array", attackType: "BASIC", Level1Damage: 305.2, growthPerLevel: 27.8, calculatorType: "DefaultRupture" },
 
-            { attackName: "Basic: Qingming Eruption", attackType: "BASIC", Level1Damage: 110.6, growthPerLevel: 10.1 },
+            { attackName: "Basic: Qingming Eruption", attackType: "BASIC", Level1Damage: 110.6, growthPerLevel: 10.1, calculatorType: "DefaultRupture" },
             // DASH
-            { attackName: "Dash: Skybreaker", attackType: "DASH", Level1Damage: 49.9, growthPerLevel: 4.6 },
+            { attackName: "Dash: Skybreaker", attackType: "DASH", Level1Damage: 49.9, growthPerLevel: 4.6, calculatorType: "DefaultRupture" },
             // DODGE
-            { attackName: "Dodge: Banishing Blow", attackType: "DASH", Level1Damage: 219.6, growthPerLevel: 20 },
+            { attackName: "Dodge: Banishing Blow", attackType: "DASH", Level1Damage: 219.6, growthPerLevel: 20 , calculatorType: "DefaultRupture"},
             // ASSIST
-            { attackName: "Quick Assist: Cloudstream Shadow", attackType: "ASSIST", Level1Damage: 101.2, growthPerLevel: 9.2 },
-            { attackName: "Assist Follow-Up: Celestial Cloud Blitz", attackType: "ASSIST", Level1Damage: 297, growthPerLevel: 27 },
+            { attackName: "Quick Assist: Cloudstream Shadow", attackType: "ASSIST", Level1Damage: 101.2, growthPerLevel: 9.2, calculatorType: "DefaultRupture" },
+            { attackName: "Assist Follow-Up: Celestial Cloud Blitz", attackType: "ASSIST", Level1Damage: 297, growthPerLevel: 27 , calculatorType: "DefaultRupture"},
             // SPECIAL
-            { attackName: "Special: Shadow-Ignition", attackType: "SPECIAL", Level1Damage: 52.1, growthPerLevel: 4.8 },
+            { attackName: "Special: Shadow-Ignition", attackType: "SPECIAL", Level1Damage: 52.1, growthPerLevel: 4.8, calculatorType: "DefaultRupture" },
             // EX SPECIAL
-            { attackName: "EX Special: Ink Manifestation", attackType: "EXSPECIAL", Level1Damage: 300.3, growthPerLevel: 27.3 },
-            { attackName: "EX Special: Ink Manifestation - Additional DMG on Full Charge", attackType: "EXSPECIAL", Level1Damage: 149.6, growthPerLevel: 13.6 },
-            { attackName: "EX Special: Ink Manifestation - Total Damage on Full Charge", attackType: "EXSPECIAL", Level1Damage: 449.9, growthPerLevel: 40.9 },
+            { attackName: "EX Special: Ink Manifestation", attackType: "EXSPECIAL", Level1Damage: 300.3, growthPerLevel: 27.3, calculatorType: "DefaultRupture" },
+            { attackName: "EX Special: Ink Manifestation - Additional DMG on Full Charge", attackType: "EXSPECIAL", Level1Damage: 149.6, growthPerLevel: 13.6, calculatorType: "DefaultRupture" },
+            { attackName: "EX Special: Ink Manifestation - Total Damage on Full Charge", attackType: "EXSPECIAL", Level1Damage: 449.9, growthPerLevel: 40.9, calculatorType: "DefaultRupture" },
             
-            { attackName: "EX Special: Ink Manifestation - Celestial Cloud Blitz - Break", attackType: "EXSPECIAL", Level1Damage: 370.6, growthPerLevel: 33.7 },
-            { attackName: "EX Special: Ink Manifestation - Qingming Eruption - Break", attackType: "EXSPECIAL", Level1Damage: 426.4, growthPerLevel: 38.8 },
+            { attackName: "EX Special: Ink Manifestation - Celestial Cloud Blitz - Break", attackType: "EXSPECIAL", Level1Damage: 370.6, growthPerLevel: 33.7, calculatorType: "DefaultRupture" },
+            { attackName: "EX Special: Ink Manifestation - Qingming Eruption - Break", attackType: "EXSPECIAL", Level1Damage: 426.4, growthPerLevel: 38.8, calculatorType: "DefaultRupture" },
             
-            { attackName: "EX Special: Cloud-Shaper", attackType: "EXSPECIAL", Level1Damage: 671.8, growthPerLevel: 61.1 },
-            { attackName: "EX Special: Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 234.3, growthPerLevel: 21.3 },
-            { attackName: "EX Special: Cloud-Shaper + Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 1140.4, growthPerLevel: 103.7 },
+            { attackName: "EX Special: Cloud-Shaper", attackType: "EXSPECIAL", Level1Damage: 671.8, growthPerLevel: 61.1, calculatorType: "DefaultRupture" },
+            { attackName: "EX Special: Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 234.3, growthPerLevel: 21.3, calculatorType: "DefaultRupture" },
+            { attackName: "EX Special: Cloud-Shaper + Ashen Ink Becomes Shadows", attackType: "EXSPECIAL", Level1Damage: 1140.4, growthPerLevel: 103.7, calculatorType: "DefaultRupture" },
             // CHAIN
-            { attackName: "Chain: Auric Ink Rush", attackType: "CHAIN", Level1Damage: 533.1, growthPerLevel: 48.5 },
+            { attackName: "Chain: Auric Ink Rush", attackType: "CHAIN", Level1Damage: 533.1, growthPerLevel: 48.5, calculatorType: "DefaultRupture" },
             // ULT
-            { attackName: "Ultimate: Qingming Skyshade", attackType: "ULT", Level1Damage: 1853.4, growthPerLevel: 168.5 },
-            { attackName: "Ultimate: Talisman Suppression", attackType: "ULT", Level1Damage: 1466.2, growthPerLevel: 133.3 },
+            { attackName: "Ultimate: Qingming Skyshade", attackType: "ULT", Level1Damage: 1853.4, growthPerLevel: 168.5, calculatorType: "DefaultRupture" },
+            { attackName: "Ultimate: Talisman Suppression", attackType: "ULT", Level1Damage: 1466.2, growthPerLevel: 133.3, calculatorType: "DefaultRupture" },
         ],
     },
     {
@@ -1348,35 +1347,35 @@ export const Attacks: CharacterAttacks[] = [
         characterName: "Manato",
         attackStats: [
             // BASIC
-            { attackName: "Basic: Blazing Wind Slash - 1", attackType: "BASIC", Level1Damage: 28.7, growthPerLevel: 2.7 },
-            { attackName: "Basic: Blazing Wind Slash - 2", attackType: "BASIC", Level1Damage: 82.7, growthPerLevel: 7.6 },
-            { attackName: "Basic: Blazing Wind Slash - 3", attackType: "BASIC", Level1Damage: 134.6, growthPerLevel: 12.3 },
-            { attackName: "Basic: Blazing Wind Slash - 1 Scorchwind", attackType: "BASIC", Level1Damage: 63.1, growthPerLevel: 5.9 },
-            { attackName: "Basic: Blazing Wind Slash - 2 Scorchwind", attackType: "BASIC", Level1Damage: 95.5, growthPerLevel: 8.8 },
-            { attackName: "Basic: Blazing Wind Slash - 3 Scorchwind", attackType: "BASIC", Level1Damage: 143.3, growthPerLevel: 13.1 },
+            { attackName: "Basic: Blazing Wind Slash - 1", attackType: "BASIC", Level1Damage: 28.7, growthPerLevel: 2.7, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind Slash - 2", attackType: "BASIC", Level1Damage: 82.7, growthPerLevel: 7.6, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind Slash - 3", attackType: "BASIC", Level1Damage: 134.6, growthPerLevel: 12.3, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind Slash - 1 Scorchwind", attackType: "BASIC", Level1Damage: 63.1, growthPerLevel: 5.9, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind Slash - 2 Scorchwind", attackType: "BASIC", Level1Damage: 95.5, growthPerLevel: 8.8, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind Slash - 3 Scorchwind", attackType: "BASIC", Level1Damage: 143.3, growthPerLevel: 13.1, calculatorType: "DefaultRupture" },
 
-            { attackName: "Basic: Blazing Wind - Misty Slash - 1", attackType: "BASIC", Level1Damage: 53.1, growthPerLevel: 4.9 },
-            { attackName: "Basic: Blazing Wind - Misty Slash - 2", attackType: "BASIC", Level1Damage: 111.2, growthPerLevel: 10.2 },
-            { attackName: "Basic: Blazing Wind - Misty Slash - 3", attackType: "BASIC", Level1Damage: 154.5, growthPerLevel: 14.1 },
-            { attackName: "Basic: Blazing Wind - Misty Slash - 4", attackType: "BASIC", Level1Damage: 237.8, growthPerLevel: 21.7 },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 1", attackType: "BASIC", Level1Damage: 53.1, growthPerLevel: 4.9, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 2", attackType: "BASIC", Level1Damage: 111.2, growthPerLevel: 10.2, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 3", attackType: "BASIC", Level1Damage: 154.5, growthPerLevel: 14.1, calculatorType: "DefaultRupture" },
+            { attackName: "Basic: Blazing Wind - Misty Slash - 4", attackType: "BASIC", Level1Damage: 237.8, growthPerLevel: 21.7, calculatorType: "DefaultRupture" },
             // DASH
-            { attackName: "Dash: Radiant Blade - Zanshin", attackType: "DASH", Level1Damage: 58.7, growthPerLevel: 5.4 },
+            { attackName: "Dash: Radiant Blade - Zanshin", attackType: "DASH", Level1Damage: 58.7, growthPerLevel: 5.4, calculatorType: "DefaultRupture" },
             // DODGE
-            { attackName: "Dodge: Radiant Blade - Battle Sweep", attackType: "DASH", Level1Damage: 198, growthPerLevel: 18 },
+            { attackName: "Dodge: Radiant Blade - Battle Sweep", attackType: "DASH", Level1Damage: 198, growthPerLevel: 18, calculatorType: "DefaultRupture" },
             // ASSIST
-            { attackName: "Quick Assist: Lone Shadow - Regroup", attackType: "ASSIST", Level1Damage: 90.7, growthPerLevel: 8.3 },
-            { attackName: "Defensive Assist: Lone Shadow - Mountain Stand", attackType: "ASSIST", Level1Damage: 40, growthPerLevel: 3.7 },
-            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang", attackType: "ASSIST", Level1Damage: 166.7, growthPerLevel: 15.2 },
-            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang - Total Maximum", attackType: "ASSIST", Level1Damage: 570.1, growthPerLevel: 51.9 },
+            { attackName: "Quick Assist: Lone Shadow - Regroup", attackType: "ASSIST", Level1Damage: 90.7, growthPerLevel: 8.3, calculatorType: "DefaultRupture" },
+            { attackName: "Defensive Assist: Lone Shadow - Mountain Stand", attackType: "ASSIST", Level1Damage: 40, growthPerLevel: 3.7, calculatorType: "DefaultRupture" },
+            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang", attackType: "ASSIST", Level1Damage: 166.7, growthPerLevel: 15.2, calculatorType: "DefaultRupture" },
+            { attackName: "Assist Follow-Up: Lone Shadow - Breaking Fang - Total Maximum", attackType: "ASSIST", Level1Damage: 570.1, growthPerLevel: 51.9, calculatorType: "DefaultRupture" },
             // SPECIAL
-            { attackName: "Special:  Return to Ashes", attackType: "SPECIAL", Level1Damage: 50.7, growthPerLevel: 4.7 },
-            { attackName: "Special:  Return to Ashes - Charged or Successfull Block", attackType: "SPECIAL", Level1Damage: 130.7, growthPerLevel: 11.9 },
+            { attackName: "Special:  Return to Ashes", attackType: "SPECIAL", Level1Damage: 50.7, growthPerLevel: 4.7, calculatorType: "DefaultRupture" },
+            { attackName: "Special:  Return to Ashes - Charged or Successfull Block", attackType: "SPECIAL", Level1Damage: 130.7, growthPerLevel: 11.9, calculatorType: "DefaultRupture" },
             // EX SPECIAL
-            { attackName: "EX Special: Return to Ashes - Fall", attackType: "EXSPECIAL", Level1Damage: 652.6, growthPerLevel: 59.4 },
+            { attackName: "EX Special: Return to Ashes - Fall", attackType: "EXSPECIAL", Level1Damage: 652.6, growthPerLevel: 59.4, calculatorType: "DefaultRupture" },
             // CHAIN
-            { attackName: "Chain: Blazing Eruption", attackType: "CHAIN", Level1Damage: 483.3, growthPerLevel: 44 },
+            { attackName: "Chain: Blazing Eruption", attackType: "CHAIN", Level1Damage: 483.3, growthPerLevel: 44, calculatorType: "DefaultRupture" },
             // ULT
-            { attackName: "Ultimate: Musou Aratama", attackType: "ULT", Level1Damage: 1562.3, growthPerLevel: 142.1 },
+            { attackName: "Ultimate: Musou Aratama", attackType: "ULT", Level1Damage: 1562.3, growthPerLevel: 142.1, calculatorType: "DefaultRupture" },
         ],
     },
 

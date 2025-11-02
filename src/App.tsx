@@ -1,6 +1,15 @@
 import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
-import { StatType, type Stats, type SelectedDrives, type SeletedSubstats, AnomalyMultipliers, type statTypeKeys } from "./constants/types";
+import {
+    StatType,
+    type Stats,
+    type SelectedDrives,
+    type SeletedSubstats,
+    AnomalyMultipliers,
+    type statTypeKeys,
+    type AttackModifiers,
+    levelFactorAttacker,
+} from "./constants/types";
 import { useState, useEffect, useRef } from "react";
 import { getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
@@ -14,7 +23,7 @@ function App() {
     useEffect(() => {
         const handleScroll = () => {
             if (imgRef.current) {
-                const scrollY = -window.scrollY/15;
+                const scrollY = -window.scrollY / 15;
                 imgRef.current.style.transform = `translateY(${scrollY}px) `;
             }
         };
@@ -30,19 +39,7 @@ function App() {
             if (settings.wengineName) setWengineName(settings.wengineName);
             if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
             if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SeletedSubstats);
-            if (settings.defTarget != null) setDefTarget(settings.defTarget);
-            if (settings.resTarget != null) setResTarget(settings.resTarget);
-            if (settings.resReductionTarget != null) setResReductionTarget(settings.resReductionTarget);
-            if (settings.dmgTakenIncrease != null) setDmgTakenIncrease(settings.dmgTakenIncrease);
-            if (settings.dmgTakenReduction != null) setDmgTakenReduction(settings.dmgTakenReduction);
-            if (settings.defenseShred != null) setDefenseShred(settings.defenseShred);
-            if (settings.stunMultiplier != null) setStunMultiplier(settings.stunMultiplier);
-            if (settings.resIgnore != null) setResIgnore(settings.resIgnore);
-            if (settings.additionalDmgBonusMultiplierAttacker != null)
-                setAdditionalDmgBonusMultiplierAttacker(settings.additionalDmgBonusMultiplierAttacker);
-            if (settings.additionalSheerDmgBonusMultiplierAttacker != null)
-                setAdditionalSheerDmgBonusMultiplierAttacker(settings.additionalSheerDmgBonusMultiplierAttacker);
-            if (settings.critMode) setCritMode(settings.critMode as "avg" | "crit" | "noCrit");
+            if (settings.defTarget != null) setAttackModifiers(settings.attackModifiers);
             if (settings.multiplierValue != null) setMultiplierValue(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
@@ -56,8 +53,6 @@ function App() {
             if (settings.additionalCritRate != null) setAdditionalCritRate(settings.additionalCritRate);
             if (settings.additionalCritDamage != null) setAdditionalCritDamage(settings.additionalCritDamage);
             if (settings.additionalElementPercent != null) setAdditionalElementPercent(settings.additionalElementPercent);
-            if (settings.additionalSheerFlat != null) setAdditionalSheerFlat(settings.additionalSheerFlat);
-            if (settings.additionalSheerPercent != null) setAdditionalSheerPercent(settings.additionalSheerPercent);
             // if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
 
             setCalculatedStats(
@@ -107,17 +102,6 @@ function App() {
     );
 
     // Damage Calculator State
-    const [defTarget, setDefTarget] = useState(953);
-    const [resTarget, setResTarget] = useState(0);
-    const [resReductionTarget, setResReductionTarget] = useState(0);
-    const [dmgTakenIncrease, setDmgTakenIncrease] = useState(0);
-    const [dmgTakenReduction, setDmgTakenReduction] = useState(0);
-    const [defenseShred, setDefenseShred] = useState(0);
-    const [stunMultiplier, setStunMultiplier] = useState(100);
-    const [resIgnore, setResIgnore] = useState(0);
-    const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
-    const [additionalSheerDmgBonusMultiplierAttacker, setAdditionalSheerDmgBonusMultiplierAttacker] = useState(0);
-    const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
     const [multiplierValue, setMultiplierValue] = useState<number>(100);
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
@@ -131,8 +115,38 @@ function App() {
     const [additionalCritRate, setAdditionalCritRate] = useState(0);
     const [additionalCritDamage, setAdditionalCritDamage] = useState(0);
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
-    const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
-    const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
+
+    // const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
+    // const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
+    // const [additionalSheerDmgBonusMultiplierAttacker, setAdditionalSheerDmgBonusMultiplierAttacker] = useState(0);
+
+    // const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
+    // const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
+    // const [defTarget, setDefTarget] = useState(953);
+    // const [defenseShred, setDefenseShred] = useState(0);
+    // const [resTarget, setResTarget] = useState(0);
+    // const [resReductionTarget, setResReductionTarget] = useState(0);
+    // const [dmgTakenIncrease, setDmgTakenIncrease] = useState(0);
+    // const [dmgTakenReduction, setDmgTakenReduction] = useState(0);
+    // const [stunMultiplier, setStunMultiplier] = useState(100);
+    // const [resIgnore, setResIgnore] = useState(0);
+
+    const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
+        additionalSheerPercent: 0,
+        additionalSheerFlat: 0,
+        additionalSheerDmgBonusMultiplierAttacker: 0,
+        additionalDmgBonusMultiplierAttacker: 0,
+        critMode: "avg",
+        defenseTarget: 953,
+        defenseShred: 0,
+        levelFactorAttacker: levelFactorAttacker[60 - 1],
+        resTarget: 0,
+        resReductionTarget: 0,
+        dmgTakenIncrease: 0,
+        dmgTakenReduction: 0,
+        stunMultiplier: 100,
+        resIgnore: 0,
+    });
     // const [characterLevel, setCharacterLevel] = useState(60);
 
     const [additionalStats, setAdditionalStats] = useState<Stats>({
@@ -277,17 +291,23 @@ function App() {
         setSelectedSubstats(newSelectedSubstats);
 
         // Damage Calculator State
-        setDefTarget(953);
-        setResTarget(0);
-        setResReductionTarget(0);
-        setDmgTakenIncrease(0);
-        setDmgTakenReduction(0);
-        setDefenseShred(0);
-        setStunMultiplier(100);
-        setResIgnore(0);
-        setAdditionalDmgBonusMultiplierAttacker(0);
-        setAdditionalAttackFlat(0);
-        setCritMode("avg");
+        setAttackModifiers({
+            additionalSheerPercent: 0,
+            additionalSheerFlat: 0,
+            additionalDmgBonusMultiplierAttacker: 0,
+            critMode: "avg",
+            defenseTarget: 953,
+            defenseShred: 0,
+            levelFactorAttacker: levelFactorAttacker[60 - 1],
+            resTarget: 0,
+            resReductionTarget: 0,
+            dmgTakenIncrease: 0,
+            dmgTakenReduction: 0,
+            stunMultiplier: 100,
+            resIgnore: 0,
+            additionalSheerDmgBonusMultiplierAttacker: 0,
+        });
+
         setMultiplierValue(100);
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
         setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
@@ -301,8 +321,6 @@ function App() {
         setAdditionalCritRate(0);
         setAdditionalCritDamage(0);
         setAdditionalElementPercent(0);
-        setAdditionalSheerFlat(0);
-        setAdditionalSheerPercent(0);
 
         setCalculatedStats(
             calculateStats(
@@ -341,21 +359,11 @@ function App() {
                             onClick={() =>
                                 navigator.clipboard.writeText(
                                     getParameterizedStatsAsUrl(
+                                        attackModifiers,
                                         characterName,
                                         wengineName,
                                         selectedDrives,
                                         selectedSubstats,
-                                        defTarget,
-                                        resTarget,
-                                        resReductionTarget,
-                                        dmgTakenIncrease,
-                                        dmgTakenReduction,
-                                        defenseShred,
-                                        stunMultiplier,
-                                        resIgnore,
-                                        additionalDmgBonusMultiplierAttacker,
-                                        additionalSheerDmgBonusMultiplierAttacker,
-                                        critMode,
                                         multiplierValue,
                                         isRupture,
                                         isAnomaly,
@@ -369,8 +377,6 @@ function App() {
                                         additionalCritRate,
                                         additionalCritDamage,
                                         additionalElementPercent,
-                                        additionalSheerFlat,
-                                        additionalSheerPercent
                                         // characterLevel
                                     )
                                 )
@@ -414,9 +420,9 @@ function App() {
                                     additionalStats={additionalStats}
                                     isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
                                     additionalSheer={
-                                        additionalSheerFlat +
+                                        attackModifiers.additionalSheerFlat +
                                         calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) *
-                                            (additionalSheerPercent / 100)
+                                            (attackModifiers.additionalSheerPercent / 100)
                                     }
                                 />
                             </div>
@@ -425,28 +431,8 @@ function App() {
                                 <DamageCalculator
                                     calculatedStats={calculatedStats}
                                     characterName={characterName}
-                                    defTarget={defTarget}
-                                    resReductionTarget={resReductionTarget}
-                                    setResReductionTarget={(value) => setResReductionTarget(value)}
-                                    setDefTarget={(value) => setDefTarget(value)}
-                                    resTarget={resTarget}
-                                    setResTarget={(value) => setResTarget(value)}
-                                    dmgTakenIncrease={dmgTakenIncrease}
-                                    setDmgTakenIncrease={(value) => setDmgTakenIncrease(value)}
-                                    dmgTakenReduction={dmgTakenReduction}
-                                    setDmgTakenReduction={(value) => setDmgTakenReduction(value)}
-                                    defenseShred={defenseShred}
-                                    setDefenseShred={(value) => setDefenseShred(value)}
-                                    stunMultiplier={stunMultiplier}
-                                    setStunMultiplier={(value) => setStunMultiplier(value)}
-                                    resIgnore={resIgnore}
-                                    setResIgnore={(value) => setResIgnore(value)}
-                                    additionalDmgBonusMultiplierAttacker={additionalDmgBonusMultiplierAttacker}
-                                    setAdditionalDmgBonusMultiplierAttacker={(value) => setAdditionalDmgBonusMultiplierAttacker(value)}
-                                    additionalSheerDmgBonusMultiplierAttacker={additionalSheerDmgBonusMultiplierAttacker}
-                                    setAdditionalSheerDmgBonusMultiplierAttacker={setAdditionalSheerDmgBonusMultiplierAttacker}
-                                    critMode={critMode}
-                                    setCritMode={(value) => setCritMode(value)}
+                                    attackModifiers={attackModifiers}
+                                    setAttackModifiers={(value) => setAttackModifiers(value)}
                                     multiplierValue={multiplierValue}
                                     setMultiplierValue={(value) => setMultiplierValue(value)}
                                     isRupture={isRupture}
@@ -473,10 +459,6 @@ function App() {
                                     setAdditionalCritDamage={(value) => setAdditionalCritDamage(value)}
                                     additionalElementPercent={additionalElementPercent}
                                     setAdditionalElementPercent={(value) => setAdditionalElementPercent(value)}
-                                    additionalSheerFlat={additionalSheerFlat}
-                                    setAdditionalSheerFlat={(value) => setAdditionalSheerFlat(value)}
-                                    additionalSheerPercent={additionalSheerPercent}
-                                    setAdditionalSheerPercent={(value) => setAdditionalSheerPercent(value)}
                                     // characterLevel={characterLevel}
                                     // setCharacterLevel={(value) => setCharacterLevel(value)}
                                 />
