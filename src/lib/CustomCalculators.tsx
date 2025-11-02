@@ -1,6 +1,7 @@
 import { type AttackModifiers, type Stats } from "../constants/types";
 
-export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [Stats, number, AttackModifiers] => {
+export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [Stats, number, AttackModifiers, number] => {
+    // returns additional stats to be added later; new mulitpler, additional attack modifiers to be added later, additional damage added to final damage number
     // Evelyn Chain with additinal ability active:
     // UNCONDITIONAL: Add 30% additional damage
     // CONDITIONAL: If CRIT Rate >= 80%, increase Multiplier Value damage by 25%
@@ -9,7 +10,7 @@ export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [
     if (stats.CRIT_RATE >= 80) {
         newMulitplier *= 1.25;
     }
-    let newAdditionalAttackModiifers: AttackModifiers = {
+    const newAdditionalAttackModiifers: AttackModifiers = {
         additionalSheerPercent: 0,
         additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
@@ -26,7 +27,7 @@ export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [
         resIgnore: 0,
     };
 
-    let newAdditionalStats: Stats = {
+    const newAdditionalStats: Stats = {
         HP_FLAT: 0,
         ATTACK_FLAT: 0,
         DEFENSE_FLAT: 0,
@@ -43,5 +44,5 @@ export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [
 
 
 
-    return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers];
+    return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
 };

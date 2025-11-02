@@ -145,7 +145,7 @@ function DamageCalculator({
         if (attackUsed.calculatorType === undefined) {
             setMultiplierValue(baseMultiplier);
         }
-    }, [attackUsed, attackLevel, characterName]);
+    }, [attackUsed, attackLevel, characterName, setMultiplierValue]);
 
     // compute baseMultiplier once for use with custom calculators
     const baseMultiplier = getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel);
@@ -155,7 +155,7 @@ function DamageCalculator({
     }, [characterName]);
 
     // Character Stats
-    var modifiedStats: Stats | null = calculatedStats
+    const finalStats: Stats | null = calculatedStats
         ? {
               ...calculatedStats,
               HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
@@ -168,7 +168,7 @@ function DamageCalculator({
           }
         : null;
 
-    var finalAttackModifiers: AttackModifiers = JSON.parse(JSON.stringify(attackModifiers));
+    const finalAttackModifiers: AttackModifiers = JSON.parse(JSON.stringify(attackModifiers));
 
     let calculatedDamage = 0;
 
@@ -177,72 +177,71 @@ function DamageCalculator({
     let newMultiplier = undefined;
     if (attackUsed.calculatorType !== undefined) {
         let additionalStats: Stats | null = null;
-        let additionalAttackModifiers: AttackModifiers = {} as AttackModifiers;
+        let additionalAttackModifiers: AttackModifiers | null;
         switch (attackUsed.calculatorType) {
             case "EvelynAdditionalActive":
-                if (!modifiedStats) throw new Error("modifiedStats is null, cannot apply EvelynAdditionalActive");
-                [additionalStats, newMultiplier, additionalAttackModifiers] = EvelynAdditionalActive(modifiedStats, baseMultiplier);
+                if (!finalStats) throw new Error("finalStats is null, cannot apply EvelynAdditionalActive");
+                [additionalStats, newMultiplier, additionalAttackModifiers] = EvelynAdditionalActive(finalStats, baseMultiplier);
                 break;
             default:
                 throw "Unknown Calculator Type";
         }
 
-        if (modifiedStats && additionalStats) {
-            const ms = modifiedStats as Stats;
-            const add = additionalStats as Stats;
-            Object.keys(ms).forEach((key) => {
+        if (finalStats && additionalStats) {
+            Object.keys(finalStats).forEach((key) => {
                 const k = key as keyof Stats;
-                (ms[k] as number) = (ms[k] as number) + (add[k] as number);
+                (finalStats[k] as number) = (finalStats[k] as number) + (additionalStats[k] as number);
             });
         }
 
-        // Merge additional attack modifiers for calculation only (do not call setter here)
-        Object.keys(finalAttackModifiers).forEach((key) => {
-            if (key !== "critMode") {
-                const k = key as keyof AttackModifiers;
-                (finalAttackModifiers[k] as number) = (finalAttackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
-            }
-        });
-
+        if (finalAttackModifiers && additionalAttackModifiers) {
+            // Merge additional attack modifiers for calculation only (do not call setter here)
+            Object.keys(finalAttackModifiers).forEach((key) => {
+                if (key !== "critMode") {
+                    const k = key as keyof AttackModifiers;
+                    (finalAttackModifiers[k] as number) = (finalAttackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
+                }
+            });
+        }
         setMultiplierValue(newMultiplier ?? multiplierValue);
     }
 
     if (isAnomaly) {
-        calculatedDamage = modifiedStats
+        calculatedDamage = finalStats
             ? calculateAnomalyDamageDealt(
                   anomalyType,
-                  modifiedStats.ATTACK_FLAT,
-                  modifiedStats.ANOMALY_PROFICIENCY_FLAT,
-                  modifiedStats.ELEMENT_PERCENT,
-                  modifiedStats.PEN_PERCENT,
-                  modifiedStats.PEN_FLAT,
+                  finalStats.ATTACK_FLAT,
+                  finalStats.ANOMALY_PROFICIENCY_FLAT,
+                  finalStats.ELEMENT_PERCENT,
+                  finalStats.PEN_PERCENT,
+                  finalStats.PEN_FLAT,
                   finalAttackModifiers
               )
             : 0;
     } else if (isRupture) {
         {
-            calculatedDamage = modifiedStats
+            calculatedDamage = finalStats
                 ? calculateSheerDamageDealt(
                       multiplierValue,
-                      modifiedStats?.HP_FLAT,
-                      modifiedStats?.ATTACK_FLAT,
-                      modifiedStats?.ELEMENT_PERCENT,
-                      modifiedStats?.CRIT_RATE,
-                      modifiedStats?.CRIT_DAMAGE,
+                      finalStats?.HP_FLAT,
+                      finalStats?.ATTACK_FLAT,
+                      finalStats?.ELEMENT_PERCENT,
+                      finalStats?.CRIT_RATE,
+                      finalStats?.CRIT_DAMAGE,
                       finalAttackModifiers
                   )
                 : 0;
         }
     } else {
-        calculatedDamage = modifiedStats
+        calculatedDamage = finalStats
             ? calculateDamageDealt(
                   multiplierValue,
-                  modifiedStats?.ATTACK_FLAT ?? 0,
-                  modifiedStats?.ELEMENT_PERCENT ?? 0,
-                  modifiedStats?.CRIT_RATE ?? 0,
-                  modifiedStats?.CRIT_DAMAGE ?? 0,
-                  modifiedStats?.PEN_PERCENT ?? 0,
-                  modifiedStats?.PEN_FLAT ?? 0,
+                  finalStats?.ATTACK_FLAT ?? 0,
+                  finalStats?.ELEMENT_PERCENT ?? 0,
+                  finalStats?.CRIT_RATE ?? 0,
+                  finalStats?.CRIT_DAMAGE ?? 0,
+                  finalStats?.PEN_PERCENT ?? 0,
+                  finalStats?.PEN_FLAT ?? 0,
                   finalAttackModifiers
               )
             : 0;
@@ -251,9 +250,9 @@ function DamageCalculator({
     const getCritFormula = () => {
         switch (finalAttackModifiers.critMode) {
             case "avg":
-                return `(1 + (min(${modifiedStats?.CRIT_RATE}, 100) / 100) * (${modifiedStats?.CRIT_DAMAGE} / 100))`;
+                return `(1 + (min(${finalStats?.CRIT_RATE}, 100) / 100) * (${finalStats?.CRIT_DAMAGE} / 100))`;
             case "crit":
-                return `(1 + ${modifiedStats?.CRIT_DAMAGE} / 100)`;
+                return `(1 + ${finalStats?.CRIT_DAMAGE} / 100)`;
             case "noCrit":
                 return "1";
             default:
@@ -261,12 +260,12 @@ function DamageCalculator({
         }
     };
 
-    const finalDef = modifiedStats
+    const finalDef = finalStats
         ? Math.max(
               finalAttackModifiers.defenseTarget *
                   (1 - finalAttackModifiers.defenseShred / 100) *
-                  (1 - (modifiedStats.PEN_PERCENT ?? 0) / 100) -
-                  (modifiedStats.PEN_FLAT ?? 0),
+                  (1 - (finalStats.PEN_PERCENT ?? 0) / 100) -
+                  (finalStats.PEN_FLAT ?? 0),
               0
           )
         : 0;
@@ -276,51 +275,51 @@ function DamageCalculator({
         if (isAnomaly) {
             return (
                 <>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-gray-300 mt-2">
                         <strong>Anomaly Base DMG:</strong> ({AnomalyMultipliers[anomalyType]} &times;{" "}
-                        {modifiedStats?.ATTACK_FLAT.toFixed(0)})
-                        <span className="text-blue-600">
+                        {finalStats?.ATTACK_FLAT.toFixed(0)})
+                        <span className="text-blue-300">
                             {" "}
-                            = {calculateAnomalyBaseDamage(anomalyType, modifiedStats?.ATTACK_FLAT ?? 0).toFixed(3)}
+                            = {calculateAnomalyBaseDamage(anomalyType, finalStats?.ATTACK_FLAT ?? 0).toFixed(3)}
                         </span>
                         <br />
-                        &times; <strong>Anomaly Proficiency Multiplier:</strong> ({modifiedStats?.ANOMALY_PROFICIENCY_FLAT.toFixed(3)}{" "}
+                        &times; <strong>Anomaly Proficiency Multiplier:</strong> ({finalStats?.ANOMALY_PROFICIENCY_FLAT.toFixed(3)}{" "}
                         &times; 0.01)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
-                            = {calculateAnomalyProficiencyMultiplier(modifiedStats!.ANOMALY_PROFICIENCY_FLAT ?? 0).toFixed(3)}
+                            = {calculateAnomalyProficiencyMultiplier(finalStats!.ANOMALY_PROFICIENCY_FLAT ?? 0).toFixed(3)}
                         </span>
                         <br />
                         &times; <strong>Anomaly Level Multiplier:</strong> (1 + (1 / 59) &times; (60 - 1))
-                        <span className="text-blue-600"> = {calculateAnomalyLevelMultiplier().toFixed(3)}</span>
+                        <span className="text-blue-300"> = {calculateAnomalyLevelMultiplier().toFixed(3)}</span>
                         <br />
-                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {finalStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
                         {finalAttackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {dmgBonusMultiplierAttacker(
-                                modifiedStats?.ELEMENT_PERCENT ?? 0,
+                                finalStats?.ELEMENT_PERCENT ?? 0,
                                 finalAttackModifiers.additionalDmgBonusMultiplierAttacker
                             ).toFixed(3)}
                         </span>
                         <br />
                         &times; <strong>DEF Multiplier:</strong> ({levelFactor} / ({finalDef.toFixed(3)} + {levelFactor}))
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculateDefenseMultiplier(
                                 levelFactorAttacker[60 - 1],
                                 finalAttackModifiers.defenseTarget,
                                 finalAttackModifiers.defenseShred,
-                                modifiedStats?.PEN_PERCENT ?? 0,
-                                modifiedStats?.PEN_FLAT ?? 0
+                                finalStats?.PEN_PERCENT ?? 0,
+                                finalStats?.PEN_FLAT ?? 0
                             ).toFixed(3)}
                         </span>
                         <br />
                         &times; <strong>RES Multiplier:</strong> (1 - {finalAttackModifiers.resTarget} / 100 +{" "}
                         {finalAttackModifiers.resReductionTarget} / 100 + {finalAttackModifiers.resIgnore} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculateResMultiplier(
@@ -332,7 +331,7 @@ function DamageCalculator({
                         <br />
                         &times; <strong>DMG Taken Multiplier:</strong> (1 + {finalAttackModifiers.dmgTakenIncrease} / 100 -{" "}
                         {finalAttackModifiers.dmgTakenReduction} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculatedmgTakenMultiplierTarget(
@@ -342,7 +341,7 @@ function DamageCalculator({
                         </span>
                         <br />
                         &times; <strong>Stun Multiplier:</strong> ({finalAttackModifiers.stunMultiplier} / 100)
-                        <span className="text-blue-600"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
+                        <span className="text-blue-300"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
                     </p>
                 </>
             );
@@ -351,54 +350,54 @@ function DamageCalculator({
         if (isRupture) {
             return (
                 <>
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-sm text-gray-300 mt-2">
                         <strong>Base DMG:</strong> ({multiplierValue} / 100 &times; (
-                        {calculateSheer(modifiedStats!.HP_FLAT, modifiedStats!.ATTACK_FLAT).toFixed(3)} &times; (1 +{" "}
+                        {calculateSheer(finalStats!.HP_FLAT, finalStats!.ATTACK_FLAT).toFixed(3)} &times; (1 +{" "}
                         {finalAttackModifiers.additionalSheerPercent} / 100) + {finalAttackModifiers.additionalSheerFlat}))
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculateBaseSheerDamage(
                                 multiplierValue,
-                                modifiedStats?.HP_FLAT ?? 0,
-                                modifiedStats?.ATTACK_FLAT ?? 0,
+                                finalStats?.HP_FLAT ?? 0,
+                                finalStats?.ATTACK_FLAT ?? 0,
                                 finalAttackModifiers.additionalSheerPercent,
                                 finalAttackModifiers.additionalSheerFlat
                             ).toFixed(3)}
                         </span>
                         <br />
-                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                        &times; <strong>DMG Bonus Multiplier:</strong> (1 + {finalStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
                         {finalAttackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {dmgBonusMultiplierAttacker(
-                                modifiedStats?.ELEMENT_PERCENT ?? 0,
+                                finalStats?.ELEMENT_PERCENT ?? 0,
                                 finalAttackModifiers.additionalDmgBonusMultiplierAttacker
                             ).toFixed(3)}
                         </span>
                         <br />
                         &times; <strong>Crit Multiplier:</strong> {getCritFormula()}
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {critMultiplierAttacker(
                                 finalAttackModifiers.critMode,
-                                modifiedStats?.CRIT_RATE ?? 0,
-                                modifiedStats?.CRIT_DAMAGE ?? 0
+                                finalStats?.CRIT_RATE ?? 0,
+                                finalStats?.CRIT_DAMAGE ?? 0
                             ).toFixed(3)}
                         </span>{" "}
                         <br />
                         &times; <strong>Additional Sheer DMG Multiplier:</strong> (1 +{" "}
                         {finalAttackModifiers.additionalSheerDmgBonusMultiplierAttacker} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             = {(1 + finalAttackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100).toFixed(3)}
                         </span>
                         <br />
                         &times; <strong>RES Multiplier:</strong> (1 - {finalAttackModifiers.resTarget} / 100 +{" "}
                         {finalAttackModifiers.resReductionTarget} / 100 + {finalAttackModifiers.resIgnore} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculateResMultiplier(
@@ -410,7 +409,7 @@ function DamageCalculator({
                         <br />
                         &times; <strong>DMG Taken Multiplier:</strong> (1 + {finalAttackModifiers.dmgTakenIncrease} / 100 -{" "}
                         {finalAttackModifiers.dmgTakenReduction} / 100)
-                        <span className="text-blue-600">
+                        <span className="text-blue-300">
                             {" "}
                             ={" "}
                             {calculatedmgTakenMultiplierTarget(
@@ -420,7 +419,7 @@ function DamageCalculator({
                         </span>
                         <br />
                         &times; <strong>Stun Multiplier:</strong> ({finalAttackModifiers.stunMultiplier} / 100)
-                        <span className="text-blue-600"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
+                        <span className="text-blue-300"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
                         <br />
                         <br />
                     </p>
@@ -429,51 +428,51 @@ function DamageCalculator({
         }
         return (
             <>
-                <p className="text-sm text-gray-500 mt-2">
-                    <strong>Base DMG:</strong> ({multiplierValue} / 100 &times; {modifiedStats?.ATTACK_FLAT.toFixed(3)})
-                    <span className="text-blue-600">
+                <p className="text-sm text-gray-300 mt-2">
+                    <strong>Base DMG:</strong> ({multiplierValue} / 100 &times; {finalStats?.ATTACK_FLAT.toFixed(3)})
+                    <span className="text-blue-300">
                         {" "}
-                        = {calculateBaseDamage(multiplierValue, modifiedStats?.ATTACK_FLAT ?? 0).toFixed(3)}
+                        = {calculateBaseDamage(multiplierValue, finalStats?.ATTACK_FLAT ?? 0).toFixed(3)}
                     </span>
                     <br />
-                    &times; <strong>DMG Bonus Multiplier:</strong> (1 + {modifiedStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
+                    &times; <strong>DMG Bonus Multiplier:</strong> (1 + {finalStats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
                     {finalAttackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
-                    <span className="text-blue-600">
+                    <span className="text-blue-300">
                         {" "}
                         ={" "}
                         {dmgBonusMultiplierAttacker(
-                            modifiedStats?.ELEMENT_PERCENT ?? 0,
+                            finalStats?.ELEMENT_PERCENT ?? 0,
                             finalAttackModifiers.additionalDmgBonusMultiplierAttacker
                         ).toFixed(3)}
                     </span>
                     <br />
                     &times; <strong>Crit Multiplier:</strong> {getCritFormula()}
-                    <span className="text-blue-600">
+                    <span className="text-blue-300">
                         {" "}
                         ={" "}
                         {critMultiplierAttacker(
                             finalAttackModifiers.critMode,
-                            modifiedStats?.CRIT_RATE ?? 0,
-                            modifiedStats?.CRIT_DAMAGE ?? 0
+                            finalStats?.CRIT_RATE ?? 0,
+                            finalStats?.CRIT_DAMAGE ?? 0
                         ).toFixed(3)}
                     </span>
                     <br />
                     &times; <strong>DEF Multiplier:</strong> ({levelFactor} / ({finalDef.toFixed(3)} + {levelFactor}))
-                    <span className="text-blue-600">
+                    <span className="text-blue-300">
                         {" "}
                         ={" "}
                         {calculateDefenseMultiplier(
                             levelFactorAttacker[60 - 1],
                             finalAttackModifiers.defenseTarget,
                             finalAttackModifiers.defenseShred,
-                            modifiedStats?.PEN_PERCENT ?? 0,
-                            modifiedStats?.PEN_FLAT ?? 0
+                            finalStats?.PEN_PERCENT ?? 0,
+                            finalStats?.PEN_FLAT ?? 0
                         ).toFixed(3)}
                     </span>
                     <br />
                     &times; <strong>RES Multiplier:</strong> (1 - {finalAttackModifiers.resTarget} / 100 +{" "}
                     {finalAttackModifiers.resReductionTarget} / 100 + {finalAttackModifiers.resIgnore} / 100)
-                    <span className="text-blue-600">
+                    <span className="text-blue-300">
                         {" "}
                         ={" "}
                         {calculateResMultiplier(
@@ -485,7 +484,7 @@ function DamageCalculator({
                     <br />
                     &times; <strong>DMG Taken Multiplier:</strong> (1 + {finalAttackModifiers.dmgTakenIncrease} / 100 -{" "}
                     {finalAttackModifiers.dmgTakenReduction} / 100)
-                    <span className="text-blue-600">
+                    <span className="text-blue-300">
                         {" "}
                         ={" "}
                         {calculatedmgTakenMultiplierTarget(
@@ -495,7 +494,7 @@ function DamageCalculator({
                     </span>
                     <br />
                     &times; <strong>Stun Multiplier:</strong> ({finalAttackModifiers.stunMultiplier} / 100)
-                    <span className="text-blue-600"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
+                    <span className="text-blue-300"> = {(finalAttackModifiers.stunMultiplier / 100).toFixed(3)}</span>
                     <br />
                     <br />
                 </p>
@@ -507,7 +506,7 @@ function DamageCalculator({
         <div className="">
             <div className="mt-4 text-center mb-5">
                 <div className=" text-3xl font-bold">
-                    Calculated Damage: <span className="font-mono text-blue-600">{calculatedDamage.toFixed(1)}</span>
+                    Calculated Damage: <span className="font-mono text-blue-300">{calculatedDamage.toFixed(1)}</span>
                 </div>
             </div>
 
