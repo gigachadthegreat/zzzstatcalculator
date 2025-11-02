@@ -1,13 +1,30 @@
-import { levelFactorAttacker, type AttackModifiers, type Stats } from "../constants/types";
-import { calculateBaseDamage, calculateDefenseMultiplier, calculatedmgTakenMultiplierTarget, calculateResMultiplier, critMultiplierAttacker, dmgBonusMultiplierAttacker } from "../lib/Calculations";
+import { type AttackModifiers, type Stats } from "../constants/types";
+import {
+    calculateBaseDamage,
+    calculateDefenseMultiplier,
+    calculatedmgTakenMultiplierTarget,
+    calculateResMultiplier,
+    critMultiplierAttacker,
+    dmgBonusMultiplierAttacker,
+} from "../lib/Calculations";
 
-function DamageFormulaStandard({multiplier, attackModifiers, stats}: {multiplier: number, attackModifiers: AttackModifiers, stats: Stats}) {
+function DamageFormulaStandard({
+    multiplier,
+    attackModifiers,
+    stats,
+    additionalDamage,
+}: {
+    multiplier: number;
+    attackModifiers: AttackModifiers;
+    stats: Stats;
+    additionalDamage: number;
+}) {
     const getCritFormula = () => {
         switch (attackModifiers.critMode) {
             case "avg":
-                return `(1 + (min(${stats?.CRIT_RATE}, 100) / 100) * (${stats?.CRIT_DAMAGE} / 100))`;
+                return `(1 + (min(${stats.CRIT_RATE.toFixed(1)}, 100) / 100) * (${stats.CRIT_DAMAGE.toFixed(1)} / 100))`;
             case "crit":
-                return `(1 + ${stats?.CRIT_DAMAGE} / 100)`;
+                return `(1 + ${stats.CRIT_DAMAGE.toFixed(1)} / 100)`;
             case "noCrit":
                 return "1";
             default:
@@ -17,57 +34,55 @@ function DamageFormulaStandard({multiplier, attackModifiers, stats}: {multiplier
 
     const finalDef = stats
         ? Math.max(
-              attackModifiers.defenseTarget *
-                  (1 - attackModifiers.defenseShred / 100) *
-                  (1 - (stats.PEN_PERCENT ?? 0) / 100) -
-                  (stats.PEN_FLAT ?? 0),
+              attackModifiers.defenseTarget * (1 - attackModifiers.defenseShred / 100) * (1 - stats.PEN_PERCENT / 100) - stats.PEN_FLAT,
               0
           )
         : 0;
 
     return (
         <>
-            <p className="text-sm text-gray-300 mt-2">
-                <strong>Base DMG:</strong> ({multiplier} / 100 &times; {stats?.ATTACK_FLAT.toFixed(3)})
-                <span className="text-blue-300"> = {calculateBaseDamage(multiplier, stats?.ATTACK_FLAT ?? 0).toFixed(3)}</span>
-                <br />
-                &times; <strong>DMG Bonus Multiplier:</strong> (1 + {stats?.ELEMENT_PERCENT.toFixed(3)} / 100 +{" "}
-                {attackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
+            <p className="mt-2 grid grid-cols-[auto_auto_1fr] gap-x-6 ">
+                <strong>Base DMG:</strong> ({multiplier.toFixed(1)} / 100 &times; {stats.ATTACK_FLAT.toFixed(1)})
+                <span className="text-blue-300"> = {calculateBaseDamage(multiplier, stats.ATTACK_FLAT).toFixed(1)}</span>
+                <div>
+                    &times; <strong>DMG Bonus Multiplier:</strong>
+                </div>{" "}
+                (1 + {stats.ELEMENT_PERCENT.toFixed(1)} / 100 + {attackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
                 <span className="text-blue-300">
                     {" "}
-                    ={" "}
-                    {dmgBonusMultiplierAttacker(
-                        stats?.ELEMENT_PERCENT ?? 0,
-                        attackModifiers.additionalDmgBonusMultiplierAttacker
-                    ).toFixed(3)}
+                    = {dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker).toFixed(1)}
                 </span>
-                <br />
-                &times; <strong>Crit Multiplier:</strong> {getCritFormula()}
+                <div>
+                    &times; <strong>Crit Multiplier:</strong>
+                </div>{" "}
+                {getCritFormula()}
                 <span className="text-blue-300">
                     {" "}
-                    ={" "}
-                    {critMultiplierAttacker(
-                        attackModifiers.critMode,
-                        stats?.CRIT_RATE ?? 0,
-                        stats?.CRIT_DAMAGE ?? 0
-                    ).toFixed(3)}
+                    = {critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE).toFixed(1)}
                 </span>
-                <br />
-                &times; <strong>DEF Multiplier:</strong> ({attackModifiers.levelFactorAttacker} / ({finalDef.toFixed(3)} + {attackModifiers.levelFactorAttacker}))
+                <div>
+                    &times; <strong>DEF Multiplier:</strong>
+                </div>{" "}
+                <div>
+                    ({attackModifiers.levelFactorAttacker} / ({finalDef.toFixed(1)} + {attackModifiers.levelFactorAttacker}))
+                </div>
                 <span className="text-blue-300">
                     {" "}
                     ={" "}
                     {calculateDefenseMultiplier(
-                        levelFactorAttacker[60 - 1],
+                        attackModifiers.levelFactorAttacker,
                         attackModifiers.defenseTarget,
                         attackModifiers.defenseShred,
-                        stats?.PEN_PERCENT ?? 0,
-                        stats?.PEN_FLAT ?? 0
-                    ).toFixed(3)}
+                        stats.PEN_PERCENT,
+                        stats.PEN_FLAT
+                    ).toFixed(1)}
                 </span>
-                <br />
-                &times; <strong>RES Multiplier:</strong> (1 - {attackModifiers.resTarget} / 100 +{" "}
-                {attackModifiers.resReductionTarget} / 100 + {attackModifiers.resIgnore} / 100)
+                <div>
+                    &times; <strong>RES Multiplier:</strong>
+                </div>{" "}
+                <div>
+                    (1 - {attackModifiers.resTarget} / 100 + {attackModifiers.resReductionTarget} / 100 + {attackModifiers.resIgnore} / 100)
+                </div>
                 <span className="text-blue-300">
                     {" "}
                     ={" "}
@@ -75,22 +90,26 @@ function DamageFormulaStandard({multiplier, attackModifiers, stats}: {multiplier
                         attackModifiers.resTarget,
                         attackModifiers.resReductionTarget,
                         attackModifiers.resIgnore
-                    ).toFixed(3)}
+                    ).toFixed(1)}
                 </span>
-                <br />
-                &times; <strong>DMG Taken Multiplier:</strong> (1 + {attackModifiers.dmgTakenIncrease} / 100 -{" "}
-                {attackModifiers.dmgTakenReduction} / 100)
+                <div>
+                    &times; <strong>DMG Taken Multiplier:</strong>
+                </div>{" "}
+                (1 + {attackModifiers.dmgTakenIncrease} / 100 - {attackModifiers.dmgTakenReduction} / 100)
                 <span className="text-blue-300">
                     {" "}
-                    ={" "}
-                    {calculatedmgTakenMultiplierTarget(
-                        attackModifiers.dmgTakenIncrease,
-                        attackModifiers.dmgTakenReduction
-                    ).toFixed(3)}
+                    = {calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction).toFixed(1)}
                 </span>
-                <br />
-                &times; <strong>Stun Multiplier:</strong> ({attackModifiers.stunMultiplier} / 100)
-                <span className="text-blue-300"> = {(attackModifiers.stunMultiplier / 100).toFixed(3)}</span>
+                <div>
+                    &times; <strong>Stun Multiplier:</strong>
+                </div>{" "}
+                ({attackModifiers.stunMultiplier} / 100)
+                <span className="text-blue-300"> = {(attackModifiers.stunMultiplier / 100).toFixed(1)}</span>
+                <div>
+                    &times; <strong>Additional DMG:</strong>
+                </div>
+                <div></div>
+                <span className="text-blue-300"> {additionalDamage.toFixed(1)}</span>
                 <br />
                 <br />
             </p>
@@ -98,4 +117,4 @@ function DamageFormulaStandard({multiplier, attackModifiers, stats}: {multiplier
     );
 }
 
-export default DamageFormulaStandard
+export default DamageFormulaStandard;

@@ -8,7 +8,7 @@ function LabelWithTextInput({
 }: {
     labelText: string;
     infoText: string;
-    inputValue: string | number;
+    inputValue: number;
     onInputChange: (newValue: number) => void;
     inputType?: string;
     placeholder?: string;
@@ -19,7 +19,7 @@ function LabelWithTextInput({
 
             <input
                 type="number"
-                value={inputValue}
+                value={inputValue.toFixed(1)}
                 onChange={(e) => onInputChange(Number(e.target.value))} // prettier-ignore
                 className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-19 text-center"
             />

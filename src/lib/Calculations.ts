@@ -280,7 +280,8 @@ export const calculateDamageDealt = (
     critDamage: number,
     penPercent: number,
     penFlat: number,
-    attackModifiers: AttackModifiers
+    attackModifiers: AttackModifiers,
+    additionalDamage: number
 ) => {
     return (
         calculateBaseDamage(multiplierValue, attackFlat) *
@@ -290,6 +291,7 @@ export const calculateDamageDealt = (
         calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
         calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
         (attackModifiers.stunMultiplier / 100)
+        + additionalDamage
     );
 };
 
@@ -300,7 +302,8 @@ export const calculateSheerDamageDealt = (
     elementPercent: number,
     critRate: number,
     critDamage: number,
-    attackModifiers: AttackModifiers
+    attackModifiers: AttackModifiers,
+    additionalDamage: number
 ) => {
     return (
         calculateBaseSheerDamage(multiplierValue, hpFlat, attackFlat, attackModifiers.additionalSheerPercent, attackModifiers.additionalSheerFlat) *
@@ -310,6 +313,7 @@ export const calculateSheerDamageDealt = (
         calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
         (attackModifiers.stunMultiplier / 100) *
         (attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100 + 1)
+        + additionalDamage
     );
 };
 
@@ -320,7 +324,8 @@ export const calculateAnomalyDamageDealt = (
     elementPercent: number,
     penPercent: number,
     penFlat: number,
-    attackModifiers: AttackModifiers
+    attackModifiers: AttackModifiers,
+    additionalDamage: number
 ) => {
     return (
         calculateAnomalyBaseDamage(anomalyType, attackFlat) *
@@ -337,5 +342,6 @@ export const calculateAnomalyDamageDealt = (
         calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
         calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
         (attackModifiers.stunMultiplier / 100)
+        + additionalDamage
     );
 };

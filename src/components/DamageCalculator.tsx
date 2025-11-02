@@ -11,7 +11,17 @@ import { calculateDamageDealt, calculateSheerDamageDealt, calculateAnomalyDamage
 
 import LabelWithInfo from "./LabelWithInfo";
 import { Attacks } from "../constants/AttackStats.tsx";
-import { EvelynAdditionalActive } from "../lib/CustomCalculators.tsx";
+import {
+    EvelynAdditionalActive,
+    HarumasaAdditionalActive,
+    LuciaHpBonus,
+    YanagiEXSpecial,
+    YanagiUltimate,
+    YixuanAdditionalActiveStunned,
+    YixuanBonus,
+    ZhuYuanInStun,
+    ZhuYuanOutOfStun,
+} from "../lib/CustomCalculators.tsx";
 
 function DamageCalculator({
     calculatedStats,
@@ -108,7 +118,7 @@ function DamageCalculator({
     const [attackUsed, setAttackUsed] = useState<AttackStats>(
         Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0]
     );
-    const [attackLevel, setAttackLevel] = useState<number>(1);
+    const [attackLevel, setAttackLevel] = useState<number>(12);
 
     useEffect(() => {
         const baseMultiplier = getMultiplierFromAttack(
@@ -147,6 +157,7 @@ function DamageCalculator({
 
     // If the selected attack has a custom calculator, compute derived stats and a custom multiplier locally
     // but avoid calling setters during render. We'll sync the parent's multiplier in an effect below.
+    let additionalDamage = 0;
     let newMultiplier = undefined;
     if (attackUsed.calculatorType !== undefined) {
         let additionalStats: Stats | null = null;
@@ -154,7 +165,63 @@ function DamageCalculator({
         switch (attackUsed.calculatorType) {
             case "EvelynAdditionalActive":
                 if (!finalStats) throw new Error("finalStats is null, cannot apply EvelynAdditionalActive");
-                [additionalStats, newMultiplier, additionalAttackModifiers] = EvelynAdditionalActive(finalStats, baseMultiplier);
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = EvelynAdditionalActive(
+                    finalStats,
+                    baseMultiplier
+                );
+                break;
+            case "ZhuYuanOutOfStun":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply ZhuYuanOutOfStun");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = ZhuYuanOutOfStun(
+                    finalStats,
+                    baseMultiplier
+                );
+                break;
+            case "ZhuYuanInStun":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply ZhuYuanInStun");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = ZhuYuanInStun(finalStats, baseMultiplier);
+                break;
+            case "YixuanBonus":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply YixuanBonus");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YixuanBonus(finalStats, baseMultiplier);
+                break;
+            case "YixuanAdditionalActiveStunned":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply YixuanAdditionalActiveStunned");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YixuanAdditionalActiveStunned(
+                    finalStats,
+                    baseMultiplier
+                );
+                break;
+            case "LuciaHpBonus":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply LuciaHpBonus");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = LuciaHpBonus(
+                    finalStats,
+                    baseMultiplier,
+                    attackLevel
+                );
+                break;
+            case "YanagiEXSpecial":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply YanagiEXSpecial");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YanagiEXSpecial(
+                    finalStats,
+                    baseMultiplier,
+                    attackLevel
+                );
+                break;
+            case "YanagiUltimate":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply YanagiUltimate");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YanagiUltimate(
+                    finalStats,
+                    baseMultiplier,
+                    attackLevel
+                );
+                break;
+            case "HarumasaAdditionalActive":
+                if (!finalStats) throw new Error("finalStats is null, cannot apply HarumasaAdditionalActive");
+                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = HarumasaAdditionalActive(
+                    finalStats,
+                    baseMultiplier
+                );
                 break;
             default:
                 throw "Unknown Calculator Type";
@@ -168,7 +235,6 @@ function DamageCalculator({
         }
 
         if (finalAttackModifiers && additionalAttackModifiers) {
-            // Merge additional attack modifiers for calculation only (do not call setter here)
             Object.keys(finalAttackModifiers).forEach((key) => {
                 if (key !== "critMode") {
                     const k = key as keyof AttackModifiers;
@@ -190,7 +256,8 @@ function DamageCalculator({
                   finalStats.ELEMENT_PERCENT,
                   finalStats.PEN_PERCENT,
                   finalStats.PEN_FLAT,
-                  finalAttackModifiers
+                  finalAttackModifiers,
+                  additionalDamage
               )
             : 0;
     } else if (isRupture) {
@@ -203,7 +270,8 @@ function DamageCalculator({
                       finalStats.ELEMENT_PERCENT,
                       finalStats.CRIT_RATE,
                       finalStats.CRIT_DAMAGE,
-                      finalAttackModifiers
+                      finalAttackModifiers,
+                      additionalDamage
                   )
                 : 0;
         }
@@ -217,7 +285,8 @@ function DamageCalculator({
                   finalStats.CRIT_DAMAGE,
                   finalStats.PEN_PERCENT,
                   finalStats.PEN_FLAT,
-                  finalAttackModifiers
+                  finalAttackModifiers,
+                  additionalDamage
               )
             : 0;
     }
@@ -246,11 +315,26 @@ function DamageCalculator({
                 >
                     <div className="font-mono text-base text-left pt-1">
                         {isRupture ? (
-                            <DamageFormulaRupture multiplier={multiplier} attackModifiers={finalAttackModifiers} stats={finalStats} />
+                            <DamageFormulaRupture
+                                multiplier={multiplier}
+                                attackModifiers={finalAttackModifiers}
+                                stats={finalStats}
+                                additionalDamage={additionalDamage}
+                            />
                         ) : isAnomaly ? (
-                            <DamageFormulaAnomaly anomalyType={anomalyType} attackModifiers={finalAttackModifiers} stats={finalStats} />
+                            <DamageFormulaAnomaly
+                                anomalyType={anomalyType}
+                                attackModifiers={finalAttackModifiers}
+                                stats={finalStats}
+                                additionalDamage={additionalDamage}
+                            />
                         ) : (
-                            <DamageFormulaStandard multiplier={multiplier} attackModifiers={finalAttackModifiers} stats={finalStats} />
+                            <DamageFormulaStandard
+                                multiplier={multiplier}
+                                attackModifiers={finalAttackModifiers}
+                                stats={finalStats}
+                                additionalDamage={additionalDamage}
+                            />
                         )}
                     </div>
                 </div>
@@ -555,3 +639,10 @@ function DamageCalculator({
     );
 }
 export default DamageCalculator;
+function YanagiExSpecial(
+    finalStats: Stats,
+    baseMultiplier: number,
+    attackLevel: number
+): [Stats | null, any, AttackModifiers | null, number] {
+    throw new Error("Function not implemented.");
+}
