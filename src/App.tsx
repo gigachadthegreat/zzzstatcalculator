@@ -40,7 +40,7 @@ function App() {
             if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
             if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SeletedSubstats);
             if (settings.defTarget != null) setAttackModifiers(settings.attackModifiers);
-            if (settings.multiplierValue != null) setMultiplierValue(settings.multiplierValue);
+            if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
             if (settings.anomalyType != null) setAnomalyType(settings.anomalyType);
@@ -102,7 +102,7 @@ function App() {
     );
 
     // Damage Calculator State
-    const [multiplierValue, setMultiplierValue] = useState<number>(100);
+    const [multiplier, setMultiplier] = useState<number>(100);
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
@@ -308,7 +308,7 @@ function App() {
             additionalSheerDmgBonusMultiplierAttacker: 0,
         });
 
-        setMultiplierValue(100);
+        setMultiplier(100);
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
         setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
         setAnomalyType("Burn");
@@ -364,7 +364,7 @@ function App() {
                                         wengineName,
                                         selectedDrives,
                                         selectedSubstats,
-                                        multiplierValue,
+                                        multiplier,
                                         isRupture,
                                         isAnomaly,
                                         anomalyType,
@@ -433,8 +433,8 @@ function App() {
                                     characterName={characterName}
                                     attackModifiers={attackModifiers}
                                     setAttackModifiers={(value) => setAttackModifiers(value)}
-                                    multiplierValue={multiplierValue}
-                                    setMultiplierValue={(value) => setMultiplierValue(value)}
+                                    multiplier={multiplier}
+                                    setMultiplier={(value) => setMultiplier(value)}
                                     isRupture={isRupture}
                                     setIsRupture={(value) => setIsRupture(value)}
                                     isAnomaly={isAnomaly}
