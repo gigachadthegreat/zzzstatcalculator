@@ -248,47 +248,13 @@ function DamageCalculator({
 
     let calculatedDamage = 0;
     if (isAnomaly) {
-        calculatedDamage = finalStats
-            ? calculateAnomalyDamageDealt(
-                  anomalyType,
-                  finalStats.ATTACK_FLAT,
-                  finalStats.ANOMALY_PROFICIENCY_FLAT,
-                  finalStats.ELEMENT_PERCENT,
-                  finalStats.PEN_PERCENT,
-                  finalStats.PEN_FLAT,
-                  finalAttackModifiers,
-                  additionalDamage
-              )
-            : 0;
+        calculatedDamage = finalStats ? calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage) : 0;
     } else if (isRupture) {
         {
-            calculatedDamage = finalStats
-                ? calculateSheerDamageDealt(
-                      multiplier,
-                      finalStats.HP_FLAT,
-                      finalStats.ATTACK_FLAT,
-                      finalStats.ELEMENT_PERCENT,
-                      finalStats.CRIT_RATE,
-                      finalStats.CRIT_DAMAGE,
-                      finalAttackModifiers,
-                      additionalDamage
-                  )
-                : 0;
+            calculatedDamage = finalStats ? calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
         }
     } else {
-        calculatedDamage = finalStats
-            ? calculateDamageDealt(
-                  multiplier,
-                  finalStats.ATTACK_FLAT,
-                  finalStats.ELEMENT_PERCENT,
-                  finalStats.CRIT_RATE,
-                  finalStats.CRIT_DAMAGE,
-                  finalStats.PEN_PERCENT,
-                  finalStats.PEN_FLAT,
-                  finalAttackModifiers,
-                  additionalDamage
-              )
-            : 0;
+        calculatedDamage = finalStats ? calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
     }
 
     return (
@@ -639,10 +605,3 @@ function DamageCalculator({
     );
 }
 export default DamageCalculator;
-function YanagiExSpecial(
-    finalStats: Stats,
-    baseMultiplier: number,
-    attackLevel: number
-): [Stats | null, any, AttackModifiers | null, number] {
-    throw new Error("Function not implemented.");
-}

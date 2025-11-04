@@ -246,7 +246,7 @@ export const LuciaHpBonus = (stats: Stats, multiplierValue: number, attackLevel:
     };
 
     const additionalDamage =
-        stats.ANOMALY_PROFICIENCY_FLAT * ((additionalDamageLvl1Multiplier + additionalDamageGrowthPerLevel * attackLevel) / 100);
+        stats.HP_FLAT * ((additionalDamageLvl1Multiplier + additionalDamageGrowthPerLevel * attackLevel) / 100);
 
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, additionalDamage];

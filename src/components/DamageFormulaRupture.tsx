@@ -31,10 +31,11 @@ function DamageFormulaRupture({
                 return "1";
         }
     };
+    
 
     return (
         <>
-            <p className="mt-2 grid grid-cols-[auto_auto_1fr] gap-x-6 ">
+            <div className="mt-2 grid grid-cols-[auto_auto_1fr] gap-x-6 ">
                 <strong>Base DMG:</strong> ({multiplier.toFixed(1)} / 100 &times; (
                 {calculateSheer(stats!.HP_FLAT, stats!.ATTACK_FLAT).toFixed(1)} &times; (1 + {attackModifiers.additionalSheerPercent} / 100)
                 + {attackModifiers.additionalSheerFlat}))
@@ -52,10 +53,10 @@ function DamageFormulaRupture({
                 <div>
                     &times; <strong>DMG Bonus Multiplier:</strong>{" "}
                 </div>{" "}
-                (1 + {stats.ELEMENT_PERCENT.toFixed(1)} / 100 + {attackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
+                (1 + {stats.ELEMENT_PERCENT.toFixed(0)} / 100 + {attackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
                 <span className="text-blue-300">
                     {" "}
-                    = {dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker).toFixed(3)}
+                    = {dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker).toPrecision(4)}
                 </span>
                 <div>
                     &times; <strong>Crit Multiplier:</strong>{" "}
@@ -63,13 +64,13 @@ function DamageFormulaRupture({
                 {getCritFormula()}
                 <span className="text-blue-300">
                     {" "}
-                    = {critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE).toFixed(1)}
+                    = {critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE).toPrecision(4)}
                 </span>{" "}
                 <div>
                     &times; <strong>Additional Sheer DMG Multiplier:</strong>{" "}
                 </div>{" "}
                 <div>(1 + {attackModifiers.additionalSheerDmgBonusMultiplierAttacker} / 100)</div>
-                <span className="text-blue-300"> = {(1 + attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100).toFixed(1)}</span>
+                <span className="text-blue-300"> = {(1 + attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100).toPrecision(4)}</span>
                 <div>
                     &times; <strong>RES Multiplier:</strong>{" "}
                 </div>{" "}
@@ -83,7 +84,7 @@ function DamageFormulaRupture({
                         attackModifiers.resTarget,
                         attackModifiers.resReductionTarget,
                         attackModifiers.resIgnore
-                    ).toFixed(1)}
+                    ).toPrecision(4)}
                 </span>
                 <div>
                     &times; <strong>DMG Taken Multiplier:</strong>{" "}
@@ -93,21 +94,21 @@ function DamageFormulaRupture({
                 </div>
                 <span className="text-blue-300">
                     {" "}
-                    = {calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction).toFixed(1)}
+                    = {calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction).toPrecision(4)}
                 </span>
                 <div>
                     &times; <strong>Stun Multiplier:</strong>{" "}
                 </div>{" "}
                 ({attackModifiers.stunMultiplier} / 100)
-                <span className="text-blue-300"> = {(attackModifiers.stunMultiplier / 100).toFixed(1)}</span>
+                <span className="text-blue-300"> = {(attackModifiers.stunMultiplier / 100).toPrecision(4)}</span>
                 <div>
-                    &times; <strong>Additional DMG:</strong>{" "}
+                    + <strong>Additional DMG:</strong>{" "}
                 </div>
                 <div></div>
-                <span className="text-blue-300"> {additionalDamage.toFixed(1)}</span>
+                <span className="text-blue-300"> {additionalDamage.toFixed(0)}</span>
                 <br />
                 <br />
-            </p>
+            </div>
         </>
     );
 }

@@ -10,6 +10,7 @@ import {
     SheerAttackConsersionFactor,
     AnomalyMultipliers,
     type AttackModifiers,
+    type Stats,
 } from "../constants/types";
 
 export const AddIndividualStatToBase = (_baseStats: CalculatedStats, _statTypeToAdd: string, _statsToAdd: number) => {
@@ -272,76 +273,70 @@ export const calculateAnomalyBaseDamage = (anomalyType: keyof typeof AnomalyMult
     return AnomalyMultipliers[anomalyType] * attackFlat;
 };
 
-export const calculateDamageDealt = (
-    multiplierValue: number,
-    attackFlat: number,
-    elementPercent: number,
-    critRate: number,
-    critDamage: number,
-    penPercent: number,
-    penFlat: number,
-    attackModifiers: AttackModifiers,
-    additionalDamage: number
-) => {
+export const calculateDamageDealt = (multiplierValue: number, stats: Stats, attackModifiers: AttackModifiers, additionalDamage: number) => {
     return (
-        calculateBaseDamage(multiplierValue, attackFlat) *
-        dmgBonusMultiplierAttacker(elementPercent, attackModifiers.additionalDmgBonusMultiplierAttacker) *
-        critMultiplierAttacker(attackModifiers.critMode, critRate, critDamage) *
-        calculateDefenseMultiplier(attackModifiers.levelFactorAttacker, attackModifiers.defenseTarget, attackModifiers.defenseShred, penPercent, penFlat) *
-        calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
-        calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
-        (attackModifiers.stunMultiplier / 100)
-        + additionalDamage
+        calculateBaseDamage(multiplierValue, stats.ATTACK_FLAT) *
+            dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker) *
+            critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE) *
+            calculateDefenseMultiplier(
+                attackModifiers.levelFactorAttacker,
+                attackModifiers.defenseTarget,
+                attackModifiers.defenseShred,
+                stats.PEN_PERCENT,
+                stats.PEN_FLAT
+            ) *
+            calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
+            calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
+            (attackModifiers.stunMultiplier / 100) +
+        additionalDamage
     );
 };
 
 export const calculateSheerDamageDealt = (
     multiplierValue: number,
-    hpFlat: number,
-    attackFlat: number,
-    elementPercent: number,
-    critRate: number,
-    critDamage: number,
+    stats: Stats,
     attackModifiers: AttackModifiers,
     additionalDamage: number
 ) => {
     return (
-        calculateBaseSheerDamage(multiplierValue, hpFlat, attackFlat, attackModifiers.additionalSheerPercent, attackModifiers.additionalSheerFlat) *
-        dmgBonusMultiplierAttacker(elementPercent, attackModifiers.additionalDmgBonusMultiplierAttacker) *
-        critMultiplierAttacker(attackModifiers.critMode, critRate, critDamage) *
-        calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
-        calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
-        (attackModifiers.stunMultiplier / 100) *
-        (attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100 + 1)
-        + additionalDamage
+        calculateBaseSheerDamage(
+            multiplierValue,
+            stats.HP_FLAT,
+            stats.ATTACK_FLAT,
+            attackModifiers.additionalSheerPercent,
+            attackModifiers.additionalSheerFlat
+        ) *
+            dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker) *
+            critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE) *
+            calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
+            calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
+            (attackModifiers.stunMultiplier / 100) *
+            (attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100 + 1) +
+        additionalDamage
     );
 };
 
 export const calculateAnomalyDamageDealt = (
     anomalyType: keyof typeof AnomalyMultipliers,
-    attackFlat: number,
-    anomalyProficiency: number,
-    elementPercent: number,
-    penPercent: number,
-    penFlat: number,
+    stats: Stats,
     attackModifiers: AttackModifiers,
     additionalDamage: number
 ) => {
     return (
-        calculateAnomalyBaseDamage(anomalyType, attackFlat) *
-        calculateAnomalyProficiencyMultiplier(anomalyProficiency) *
-        calculateAnomalyLevelMultiplier() *
-        dmgBonusMultiplierAttacker(elementPercent, attackModifiers.additionalDmgBonusMultiplierAttacker) *
-        calculateDefenseMultiplier(
-            attackModifiers.levelFactorAttacker,
-            attackModifiers.defenseTarget,
-            attackModifiers.defenseShred,
-            penPercent,
-            penFlat
-        ) *
-        calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
-        calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
-        (attackModifiers.stunMultiplier / 100)
-        + additionalDamage
+        calculateAnomalyBaseDamage(anomalyType, stats.ATTACK_FLAT) *
+            calculateAnomalyProficiencyMultiplier(stats.ANOMALY_PROFICIENCY_FLAT) *
+            calculateAnomalyLevelMultiplier() *
+            dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker) *
+            calculateDefenseMultiplier(
+                attackModifiers.levelFactorAttacker,
+                attackModifiers.defenseTarget,
+                attackModifiers.defenseShred,
+                stats.PEN_PERCENT,
+                stats.PEN_FLAT
+            ) *
+            calculateResMultiplier(attackModifiers.resTarget, attackModifiers.resReductionTarget, attackModifiers.resIgnore) *
+            calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction) *
+            (attackModifiers.stunMultiplier / 100) +
+        additionalDamage
     );
 };
