@@ -150,18 +150,18 @@ export const calculateStats = (character: Character, wengineSt: Wengine, drives:
     const drive2PscAdditionalStat1 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc1,
-        drives.drive2psc1 in DriveStats.Drive2Psc1 ? DriveStats.Drive2Psc1[drives.drive2psc1 as keyof typeof DriveStats.Drive2Psc1] : 0
+        drives.drive2psc1 in DriveStats.Drive2Psc ? DriveStats.Drive2Psc[drives.drive2psc1 as keyof typeof DriveStats.Drive2Psc] : 0
     );
     const drive2PscAdditionalStat2 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc2,
-        drives.drive2psc2 in DriveStats.Drive2Psc2 ? DriveStats.Drive2Psc2[drives.drive2psc2 as keyof typeof DriveStats.Drive2Psc2] : 0
+        drives.drive2psc2 in DriveStats.Drive2Psc ? DriveStats.Drive2Psc[drives.drive2psc2 as keyof typeof DriveStats.Drive2Psc] : 0
     );
 
     const drive2PscAdditionalStat3 = AddIndividualStatToBase(
         baseStats,
         drives.drive2psc3,
-        drives.drive2psc3 in DriveStats.Drive2Psc3 ? DriveStats.Drive2Psc3[drives.drive2psc3 as keyof typeof DriveStats.Drive2Psc3] : 0
+        drives.drive2psc3 in DriveStats.Drive2Psc ? DriveStats.Drive2Psc[drives.drive2psc3 as keyof typeof DriveStats.Drive2Psc] : 0
     );
 
     finalStats = AddNewStatsToBaseStats(baseStats, wengineSecondaryAdditionalStats);

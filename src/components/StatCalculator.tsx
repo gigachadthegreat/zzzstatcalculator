@@ -4,7 +4,6 @@ import {
     type SelectedDrives,
     type statTypeKeys,
     Speciality,
-    StatType,
     DriveStats,
     numberOfPossibleSubstats,
     type SeletedSubstats,
@@ -51,6 +50,35 @@ function StatCalculator({
         setSubstatCount(substatCount);
     }, [selectedSubstats]);
 
+    const statNameMapSlot = {
+        HP_PERCENT: `HP ${DriveStats.Drive4.HP_PERCENT}%`,
+        ATTACK_PERCENT: `Attack ${DriveStats.Drive4.ATTACK_PERCENT}%`,
+        DEFENSE_PERCENT: `Defense ${DriveStats.Drive4.DEFENSE_PERCENT}%`,
+        CRIT_RATE: `Crit Rate ${DriveStats.Drive4.CRIT_RATE}%`,
+        CRIT_DAMAGE: `Crit DMG ${DriveStats.Drive4.CRIT_DAMAGE}%`,
+        ELEMENT_PERCENT: `Element ${DriveStats.Drive5.ELEMENT_PERCENT}%`,
+        ANOMALY_PROFICIENCY_FLAT: `Anomaly Proficiency ${DriveStats.Drive4.ANOMALY_PROFICIENCY_FLAT}`,
+        ANOMALY_MASTERY_PERCENT: `Anomaly Mastery ${DriveStats.Drive6.ANOMALY_MASTERY_PERCENT}%`,
+        PEN_PERCENT: `Pen ${DriveStats.Drive5.PEN_PERCENT}%`,
+        IMPACT_PERCENT: `Impact ${DriveStats.Drive6.IMPACT_PERCENT}%`,
+        ENERGY_REGEN_PERCENT: `Energy Regen ${DriveStats.Drive6.ENERGY_REGEN_PERCENT}%`,
+        NONE: `None`,
+    };
+
+    const statNameMap2psc = {
+        HP_PERCENT: `HP ${DriveStats.Drive2Psc.HP_PERCENT}%`,
+        ATTACK_PERCENT: `Attack ${DriveStats.Drive2Psc.ATTACK_PERCENT}%`,
+        DEFENSE_PERCENT: `Defense ${DriveStats.Drive2Psc.DEFENSE_PERCENT}%`,
+        CRIT_RATE: `Crit Rate ${DriveStats.Drive2Psc.CRIT_RATE}%`,
+        CRIT_DAMAGE: `Crit DMG ${DriveStats.Drive2Psc.CRIT_DAMAGE}%`,
+        ELEMENT_PERCENT: `Element ${DriveStats.Drive2Psc.ELEMENT_PERCENT}%`,
+        ANOMALY_PROFICIENCY_FLAT: `Anomaly Proficiency ${DriveStats.Drive2Psc.ANOMALY_PROFICIENCY_FLAT}`,
+        ANOMALY_MASTERY_PERCENT: `Anomaly Mastery ${DriveStats.Drive2Psc.ANOMALY_MASTERY_PERCENT}%`,
+        PEN_PERCENT: `Pen ${DriveStats.Drive2Psc.HP_PERCENT}%`,
+        IMPACT_PERCENT: `Impact ${DriveStats.Drive2Psc.IMPACT_PERCENT}%`,
+        ENERGY_REGEN_PERCENT: `Energy Regen ${DriveStats.Drive2Psc.ENERGY_REGEN_PERCENT}%`,
+        NONE: `None`,
+    };
     const substatColors = {
         HP_PERCENT: "#00A000", // green
         HP_FLAT: "#40C040", // lighter green
@@ -99,7 +127,7 @@ function StatCalculator({
                                 <select
                                     value={characterName}
                                     onChange={(e) => handeCharacterChange(e.target.value)}
-                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 text-center"
+                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
@@ -121,7 +149,7 @@ function StatCalculator({
                                 <select
                                     value={wengineName}
                                     onChange={(e) => handeWengineChange(e.target.value)}
-                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 text-center"
+                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
@@ -186,12 +214,11 @@ function StatCalculator({
                                 <select
                                     value={selectedDrives.drive4}
                                     onChange={(e) => handleDriveChange("drive4", e.target.value as statTypeKeys)}
-                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 text-center"
+                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
-                                    <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive4) as Array<keyof typeof DriveStats.Drive4>).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMapSlot[stat as keyof typeof statNameMapSlot]}
                                         </option>
                                     ))}
                                 </select>
@@ -201,12 +228,11 @@ function StatCalculator({
                                 <select
                                     value={selectedDrives.drive5}
                                     onChange={(e) => handleDriveChange("drive5", e.target.value as statTypeKeys)}
-                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 text-center"
+                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
-                                    <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive5) as Array<keyof typeof DriveStats.Drive5>).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMapSlot[stat as keyof typeof statNameMapSlot]}
                                         </option>
                                     ))}
                                 </select>
@@ -216,12 +242,11 @@ function StatCalculator({
                                 <select
                                     value={selectedDrives.drive6}
                                     onChange={(e) => handleDriveChange("drive6", e.target.value as statTypeKeys)}
-                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 text-center"
+                                    className="w-3/4 p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
-                                    <option value={StatType.NONE}>None</option>
                                     {(Object.keys(DriveStats.Drive6) as Array<keyof typeof DriveStats.Drive6>).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMapSlot[stat as keyof typeof statNameMapSlot]}
                                         </option>
                                     ))}
                                 </select>
@@ -236,10 +261,9 @@ function StatCalculator({
                                     onChange={(e) => handleDriveChange("drive2psc1", e.target.value as statTypeKeys)}
                                     className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
                                 >
-                                    <option value="NONE">None</option>
-                                    {Object.keys(DriveStats.Drive2Psc1).map((stat) => (
+                                    {Object.keys(DriveStats.Drive2Psc).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMap2psc[stat as keyof typeof statNameMap2psc]}
                                         </option>
                                     ))}
                                 </select>
@@ -250,10 +274,9 @@ function StatCalculator({
                                     onChange={(e) => handleDriveChange("drive2psc2", e.target.value as statTypeKeys)}
                                     className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
                                 >
-                                    <option value="NONE">None</option>
-                                    {Object.keys(DriveStats.Drive2Psc2).map((stat) => (
+                                    {Object.keys(DriveStats.Drive2Psc).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMap2psc[stat as keyof typeof statNameMap2psc]}
                                         </option>
                                     ))}
                                 </select>
@@ -264,10 +287,9 @@ function StatCalculator({
                                     onChange={(e) => handleDriveChange("drive2psc3", e.target.value as statTypeKeys)}
                                     className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
                                 >
-                                    <option value="NONE">None</option>
-                                    {Object.keys(DriveStats.Drive2Psc3).map((stat) => (
+                                    {Object.keys(DriveStats.Drive2Psc).map((stat) => (
                                         <option key={stat} value={stat}>
-                                            {stat.replace(/_/g, " ")}
+                                            {statNameMap2psc[stat as keyof typeof statNameMap2psc]}
                                         </option>
                                     ))}
                                 </select>

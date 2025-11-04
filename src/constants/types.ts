@@ -138,6 +138,8 @@ export interface Wengine {
 }
 
 export type DriveStatRecord<T extends statTypeKeys> = Record<T, number>;
+
+    
 export const DriveStats = {
     Drive1HpFlat: 2200,
     Drive2AttackFlat: 316,
@@ -190,69 +192,7 @@ export const DriveStats = {
             | "NONE"
         >]
     >,
-    Drive2Psc1: {
-        HP_PERCENT: 10,
-        ATTACK_PERCENT: 10,
-        DEFENSE_PERCENT: 16,
-        CRIT_RATE: 8,
-        CRIT_DAMAGE: 16,
-        ELEMENT_PERCENT: 10,
-        ANOMALY_PROFICIENCY_FLAT: 30,
-        ANOMALY_MASTERY_PERCENT: 8,
-        PEN_PERCENT: 8,
-        IMPACT_PERCENT: 6,
-        ENERGY_REGEN_PERCENT: 20,
-        NONE: 0,
-    } as DriveStatRecord<
-        (typeof StatType)[
-            | keyof Pick<
-                  typeof StatType,
-                  | "HP_PERCENT"
-                  | "ATTACK_PERCENT"
-                  | "DEFENSE_PERCENT"
-                  | "CRIT_RATE"
-                  | "CRIT_DAMAGE"
-                  | "ELEMENT_PERCENT"
-                  | "ANOMALY_PROFICIENCY_FLAT"
-                  | "ANOMALY_MASTERY_PERCENT"
-                  | "PEN_PERCENT"
-                  | "IMPACT_PERCENT"
-                  | "ENERGY_REGEN_PERCENT"
-              >
-            | "NONE"]
-    >,
-    Drive2Psc2: {
-        HP_PERCENT: 10,
-        ATTACK_PERCENT: 10,
-        DEFENSE_PERCENT: 16,
-        CRIT_RATE: 8,
-        CRIT_DAMAGE: 16,
-        ELEMENT_PERCENT: 10,
-        ANOMALY_PROFICIENCY_FLAT: 30,
-        ANOMALY_MASTERY_PERCENT: 8,
-        PEN_PERCENT: 8,
-        IMPACT_PERCENT: 6,
-        ENERGY_REGEN_PERCENT: 20,
-        NONE: 0,
-    } as DriveStatRecord<
-        (typeof StatType)[
-            | keyof Pick<
-                  typeof StatType,
-                  | "HP_PERCENT"
-                  | "ATTACK_PERCENT"
-                  | "DEFENSE_PERCENT"
-                  | "CRIT_RATE"
-                  | "CRIT_DAMAGE"
-                  | "ELEMENT_PERCENT"
-                  | "ANOMALY_PROFICIENCY_FLAT"
-                  | "ANOMALY_MASTERY_PERCENT"
-                  | "PEN_PERCENT"
-                  | "IMPACT_PERCENT"
-                  | "ENERGY_REGEN_PERCENT"
-              >
-            | "NONE"]
-    >,
-    Drive2Psc3: {
+    Drive2Psc: {
         HP_PERCENT: 10,
         ATTACK_PERCENT: 10,
         DEFENSE_PERCENT: 16,
@@ -313,6 +253,9 @@ export const DriveStats = {
             )
     >,
 };
+
+
+
 
 export const numberOfPossibleSubstats = 54;
 export const SheerHpConversionFactor = 0.1;
