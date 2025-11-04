@@ -1287,8 +1287,8 @@ export const Attacks: CharacterAttacks[] = [
             // DODGE
             { attackName: "Blossom Burst", attackType: "DASH", Level1Damage: 320.1, growthPerLevel: 29.1 },
             // ASSIST
-            { attackName: "", attackType: "ASSIST", Level1Damage: 154, growthPerLevel: 14 },
-            { attackName: "", attackType: "ASSIST", Level1Damage: 456, growthPerLevel: 41.5 },
+            { attackName: "Barrage of Raining Flowers", attackType: "ASSIST", Level1Damage: 154, growthPerLevel: 14 },
+            { attackName: "Crimson Core Burst", attackType: "ASSIST", Level1Damage: 456, growthPerLevel: 41.5 },
             // SPECIAL
             { attackName: "Withered in Frost", attackType: "SPECIAL", Level1Damage: 47.7, growthPerLevel: 4.4 },
             // EX SPECIAL
