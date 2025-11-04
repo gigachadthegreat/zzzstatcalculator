@@ -320,9 +320,9 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Enthusiastic Drills - 2", attackType: "BASIC", Level1Damage: 92.3, growthPerLevel: 8.4 },
             { attackName: "Enthusiastic Drills - 3", attackType: "BASIC", Level1Damage: 109.3, growthPerLevel: 9.9 },
             { attackName: "Enthusiastic Drills - 4", attackType: "BASIC", Level1Damage: 229.1, growthPerLevel: 20.9 },
-            { attackName: "Enthusiastic Drills (Burst Mode) - 1", attackType: "BASIC", Level1Damage: 240.9, growthPerLevel: 262.8 },
-            { attackName: "Enthusiastic Drills (Burst Mode) - 2", attackType: "BASIC", Level1Damage: 469.2, growthPerLevel: 511.9 },
-            { attackName: "Enthusiastic Drills (Burst Mode) - 3", attackType: "BASIC", Level1Damage: 456.9, growthPerLevel: 498.6 },
+            { attackName: "Enthusiastic Drills (Burst Mode) - 1", attackType: "BASIC", Level1Damage: 240.9, growthPerLevel: 23.9 },
+            { attackName: "Enthusiastic Drills (Burst Mode) - 2", attackType: "BASIC", Level1Damage: 469.2, growthPerLevel: 42.7 },
+            { attackName: "Enthusiastic Drills (Burst Mode) - 3", attackType: "BASIC", Level1Damage: 456.9, growthPerLevel: 41.7 },
             // DASH
             { attackName: " Fire With Fire", attackType: "DASH", Level1Damage: 68.4, growthPerLevel: 6.3 },
             // DODGE
@@ -525,7 +525,7 @@ export const Attacks: CharacterAttacks[] = [
             
             { attackName: "Monstrous Wave", attackType: "DASH", Level1Damage: 77, growthPerLevel: 7 },
 
-            { attackName: "Cold Snap", attackType: "DASH", Level1Damage: 145.7, growthPerLevel: 159 },
+            { attackName: "Cold Snap", attackType: "DASH", Level1Damage: 145.7, growthPerLevel: 13.3 },
             // DODGE
             { attackName: "Reef Rock", attackType: "DASH", Level1Damage: 152.6, growthPerLevel: 13.9 },
             // ASSIST
@@ -629,8 +629,8 @@ export const Attacks: CharacterAttacks[] = [
             // SPECIAL
             { attackName: "Thunder Shield Rush", attackType: "SPECIAL", Level1Damage: 69.2, growthPerLevel: 75.5 },
             // EX SPECIAL
-            { attackName: "Thunder Shield Rush - High Voltage", attackType: "EXSPECIAL", Level1Damage: 646, growthPerLevel: 704.8 },
-            { attackName: "Thunder Shield Rush - High Voltage - Charged", attackType: "EXSPECIAL", Level1Damage: 999.8, growthPerLevel: 1090.7 },
+            { attackName: "Thunder Shield Rush - High Voltage", attackType: "EXSPECIAL", Level1Damage: 646, growthPerLevel: 58.8 },
+            { attackName: "Thunder Shield Rush - High Voltage - Charged", attackType: "EXSPECIAL", Level1Damage: 999.8, growthPerLevel: 90.9 },
             // CHAIN
             { attackName: "Final Judgement", attackType: "CHAIN", Level1Damage: 704.1, growthPerLevel: 64.1 },
             // ULT
@@ -661,9 +661,9 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Shockwave Shield Bash", attackType: "SPECIAL", Level1Damage: 53.3, growthPerLevel: 53.3 },
             { attackName: "Roaring Thrust", attackType: "SPECIAL", Level1Damage: 58.8, growthPerLevel: 58.8 },
             // EX SPECIAL
-            { attackName: "Parry Counter", attackType: "EXSPECIAL", Level1Damage: 387.2, growthPerLevel: 387.2 },
-            { attackName: "Parry Counter - Perfect", attackType: "EXSPECIAL", Level1Damage: 387.2, growthPerLevel: 387.2 },
-            { attackName: "Overpowered Shield Bash", attackType: "EXSPECIAL", Level1Damage: 425.7, growthPerLevel: 425.7 },
+            { attackName: "Parry Counter", attackType: "EXSPECIAL", Level1Damage: 387.2, growthPerLevel: 35.2 },
+            { attackName: "Parry Counter - Perfect", attackType: "EXSPECIAL", Level1Damage: 387.2, growthPerLevel: 7 },
+            { attackName: "Overpowered Shield Bash", attackType: "EXSPECIAL", Level1Damage: 425.7, growthPerLevel: 38.7 },
             // CHAIN
             { attackName: "Road Rage Slam", attackType: "CHAIN", Level1Damage: 638.8, growthPerLevel: 58.1 },
             // ULT
