@@ -462,11 +462,27 @@ function DamageCalculator({
                             labelText={"Use Rupture caltulation"}
                             infoText={"Use Sheerforce in Damage calculation instead of Attack"}
                         />
-                        <input className="h-4 w-4" checked={isRupture} onChange={(e) => setIsRupture(e.target.checked)} type="checkbox" />
+                        <input
+                            className="h-4 w-4"
+                            checked={isRupture}
+                            onChange={(e) => {
+                                setIsAnomaly(false);
+                                setIsRupture(e.target.checked);
+                            }}
+                            type="checkbox"
+                        />
                     </div>
                     <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between  pr-6">
                         <LabelWithInfo labelText={"Use Anomaly caltulation"} infoText={"Use Anomalydamage in Damage calculation"} />
-                        <input className="h-4 w-4" checked={isAnomaly} onChange={(e) => setIsAnomaly(e.target.checked)} type="checkbox" />
+                        <input
+                            className="h-4 w-4"
+                            checked={isAnomaly}
+                            onChange={(e) => {
+                                setIsRupture(false);
+                                setIsAnomaly(e.target.checked);
+                            }}
+                            type="checkbox"
+                        />
                     </div>
                     <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
                         <LabelWithInfo
