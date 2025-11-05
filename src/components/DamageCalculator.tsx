@@ -320,12 +320,13 @@ function DamageCalculator({
     let calculatedDamage = 0;
 
     if (isAnomaly) {
-        calculatedDamage = finalStats ? calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage) : 0;
+        calculatedDamage = calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage);
     } else if (isRupture) {
-        calculatedDamage = finalStats ? calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
+        calculatedDamage = calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
     } else {
-        calculatedDamage = finalStats ? calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
+        calculatedDamage = calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
     }
+
 
     return (
         <div className="">
