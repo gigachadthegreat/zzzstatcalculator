@@ -61,6 +61,8 @@ export const getParameterizedStatsAsUrl = (
     attackUsed: string,
     attackLevel: number,
 
+    isCustomMultiplier: boolean,
+
     isRupture: boolean,
     isAnomaly: boolean,
     anomalyType: keyof typeof AnomalyMultipliers,
@@ -87,6 +89,8 @@ export const getParameterizedStatsAsUrl = (
     params.set("multiplierValue", multiplierValue.toString());
     params.set("attackUsed", attackUsed.toString());
     params.set("attackLevel", attackLevel.toString());
+
+    params.set("isCustomMultiplier", isCustomMultiplier.toString());
 
     params.set("isRupture", isRupture.toString());
     params.set("isAnomaly", isAnomaly.toString());
@@ -137,6 +141,8 @@ export const getsettingsFromUrl = () => {
     settings.multiplierValue = parseParam("multiplierValue", "number");
     settings.attackUsed = parseParam("attackUsed", "string");
     settings.attackLevel = parseParam("attackLevel", "number");
+
+    settings.isCustomMultiplier = parseParam("isCustomMultiplier", "boolean");
 
     settings.isRupture = parseParam("isRupture", "boolean");
     settings.isAnomaly = parseParam("isAnomaly", "boolean");

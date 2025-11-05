@@ -5,11 +5,13 @@ function LabelWithTextInput({
     infoText,
     inputValue,
     onInputChange,
+    disabled,
 }: {
     labelText: string;
     infoText: string;
     inputValue: number;
     onInputChange: (newValue: number) => void;
+    disabled?: boolean;
     inputType?: string;
     placeholder?: string;
 }) {
@@ -18,6 +20,7 @@ function LabelWithTextInput({
             <LabelWithInfo labelText={labelText} infoText={infoText} />
 
             <input
+                disabled={disabled}
                 type="number"
                 value={inputValue.toFixed(1)}
                 onChange={(e) => onInputChange(Number(e.target.value))} // prettier-ignore

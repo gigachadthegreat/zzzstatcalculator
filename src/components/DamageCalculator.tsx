@@ -39,6 +39,9 @@ function DamageCalculator({
     multiplier,
     setMultiplier,
 
+    isCustomMultiplier,
+    setIsCustomMultiplier,
+
     isRupture,
     setIsRupture,
 
@@ -90,6 +93,9 @@ function DamageCalculator({
     multiplier: number;
     setMultiplier: (value: number) => void;
 
+    isCustomMultiplier: boolean;
+    setIsCustomMultiplier: (value: boolean) => void;
+
     isRupture: boolean;
     setIsRupture: (value: boolean) => void;
 
@@ -128,8 +134,6 @@ function DamageCalculator({
 }) {
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
 
-
-
     const [finalStats, setFinalStats] = useState<Stats>({
         ...calculatedStats,
         HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
@@ -144,20 +148,30 @@ function DamageCalculator({
     const [finalAttackModifiers, setFinalAttackModifiers] = useState<AttackModifiers>(JSON.parse(JSON.stringify(attackModifiers)));
     const [additionalDamage, setAdditionalDamage] = useState(0);
 
-    
     useEffect(() => {
         setFinalStats({
-                    ...calculatedStats,
-        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
-        ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
-        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
-        PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
-        CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
-        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
-        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
-
-        })
-    }, [characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent])
+            ...calculatedStats,
+            HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
+            ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
+            PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
+            PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
+            CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
+            CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
+            ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
+        });
+    }, [
+        characterName,
+        calculatedStats,
+        additionalHpFlat,
+        additionalHpPercent,
+        additionalAttackFlat,
+        additionalAttackPercent,
+        additionalPenPercent,
+        additionalPenFlat,
+        additionalCritRate,
+        additionalCritDamage,
+        additionalElementPercent,
+    ]);
 
     // Helper to compute the base final stats from calculatedStats + additional inputs
     const computeBaseStats = (): Stats => ({
@@ -236,7 +250,21 @@ function DamageCalculator({
         if (changed) setFinalStats(newStats);
         // NOTE: finalStats is derived state and is intentionally NOT included in the dependency list.
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent, attackUsed, attackLevel]);
+    }, [
+        characterName,
+        calculatedStats,
+        additionalHpFlat,
+        additionalHpPercent,
+        additionalAttackFlat,
+        additionalAttackPercent,
+        additionalPenPercent,
+        additionalPenFlat,
+        additionalCritRate,
+        additionalCritDamage,
+        additionalElementPercent,
+        attackUsed,
+        attackLevel,
+    ]);
 
     // Effect: compute finalAttackModifiers (base attackModifiers + any additionalAttackModifiers from calculators)
     useEffect(() => {
@@ -271,7 +299,22 @@ function DamageCalculator({
 
         if (changed) setFinalAttackModifiers(newAttackModifiers);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent, attackModifiers]);
+    }, [
+        attackUsed,
+        attackLevel,
+        characterName,
+        calculatedStats,
+        additionalHpFlat,
+        additionalHpPercent,
+        additionalAttackFlat,
+        additionalAttackPercent,
+        additionalPenPercent,
+        additionalPenFlat,
+        additionalCritRate,
+        additionalCritDamage,
+        additionalElementPercent,
+        attackModifiers,
+    ]);
 
     // Effect: compute additionalDamage
     useEffect(() => {
@@ -293,10 +336,28 @@ function DamageCalculator({
 
         if (additionalDamageCalculated !== additionalDamage) setAdditionalDamage(additionalDamageCalculated);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent]);
+    }, [
+        attackUsed,
+        attackLevel,
+        characterName,
+        calculatedStats,
+        additionalHpFlat,
+        additionalHpPercent,
+        additionalAttackFlat,
+        additionalAttackPercent,
+        additionalPenPercent,
+        additionalPenFlat,
+        additionalCritRate,
+        additionalCritDamage,
+        additionalElementPercent,
+    ]);
 
     // Effect: compute multiplier
     useEffect(() => {
+        if (isCustomMultiplier) {
+            return;
+        }
+
         const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
             characterName,
@@ -315,7 +376,21 @@ function DamageCalculator({
 
         setMultiplier(newMultiplier);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent]);
+    }, [
+        attackUsed,
+        attackLevel,
+        characterName,
+        calculatedStats,
+        additionalHpFlat,
+        additionalHpPercent,
+        additionalAttackFlat,
+        additionalAttackPercent,
+        additionalPenPercent,
+        additionalPenFlat,
+        additionalCritRate,
+        additionalCritDamage,
+        additionalElementPercent,
+    ]);
 
     let calculatedDamage = 0;
 
@@ -326,7 +401,6 @@ function DamageCalculator({
     } else {
         calculatedDamage = calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
     }
-
 
     return (
         <div className="">
@@ -453,14 +527,33 @@ function DamageCalculator({
                 <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-bold mb-2">Attacker Modifiers</h3>
                     <div className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} `}>
+                        <LabelWithInfo
+                            labelText="Use Custom Multiplier"
+                            infoText="Use a custom multiplier. Attack specific calculations are ignored."
+                        />
+                        <input
+                            type="checkbox"
+                            checked={isCustomMultiplier}
+                            onChange={(e) => {
+                                setIsCustomMultiplier(e.target.checked);
+                            }}
+                            className="h-4 w-4"
+                        />
+                    </div>
+                    <div
+                        className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} ${
+                            isCustomMultiplier ? "" : "opacity-50"
+                        }`}
+                    >
                         <LabelWithTextInput
                             labelText="Multiplier Value %"
                             infoText="The percentage multiplier for the specific attack."
                             onInputChange={(value) => setMultiplier(Number(value))}
                             inputValue={multiplier}
+                            disabled={!isCustomMultiplier}
                         />
                     </div>
-                    <div className="flex flex-col gap-2 mb-2">
+                    <div className={`flex flex-col gap-2 mb-2 ${!isCustomMultiplier ? "" : "opacity-50"}`}>
                         <div className="flex items-center justify-between">
                             <LabelWithInfo labelText={"Attack Level"} infoText={"Choose attack level (1-16)"} />
                             <div className="text-sm font-mono">Level {attackLevel}</div>
@@ -476,7 +569,7 @@ function DamageCalculator({
                             />
                         </div>
                     </div>
-                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
+                    <div className={`flex items-center gap-2 mb-2 py-1 w-80 justify-between ${!isCustomMultiplier ? "" : "opacity-50"}`}>
                         <LabelWithInfo labelText={"Attack"} infoText={"The attack used by the the character."} />
                         <select
                             value={attackUsed.attackName}

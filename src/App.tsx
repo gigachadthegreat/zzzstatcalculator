@@ -50,8 +50,15 @@ function App() {
             if (settings.attackModifiers != null) setAttackModifiers(settings.attackModifiers);
 
             if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
-            if (settings.attackUsed != null) setAttackUsed(Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter((attack) => attack.attackName === settings.attackUsed)[0]);
+            if (settings.attackUsed != null)
+                setAttackUsed(
+                    Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter(
+                        (attack) => attack.attackName === settings.attackUsed
+                    )[0]
+                );
             if (settings.attackLevel != null) setAttackLevel(settings.attackLevel);
+
+            if (settings.isCustomMultiplier != null) setIsCustomMultiplier(settings.isCustomMultiplier);
 
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
@@ -121,6 +128,7 @@ function App() {
     const [multiplier, setMultiplier] = useState<number>(
         getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel)
     );
+    const [isCustomMultiplier, setIsCustomMultiplier] = useState<boolean>(false);
 
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
@@ -224,7 +232,7 @@ function App() {
             setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
             setIsAnomaly(getCharacterFromName(newCharacterName, Characters).speciality == "ANOMALY");
 
-            setAttackUsed(Attacks.filter((attack) => attack.characterName === newCharacterName)[0].attackStats[0])
+            setAttackUsed(Attacks.filter((attack) => attack.characterName === newCharacterName)[0].attackStats[0]);
 
             return newCharacterName;
         });
@@ -330,6 +338,11 @@ function App() {
         });
 
         setMultiplier(100);
+        setAttackLevel(12);
+        setMultiplier(getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
+        setIsCustomMultiplier(false);
+
+
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
         setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
         setAnomalyType("Burn");
@@ -388,6 +401,7 @@ function App() {
                                         multiplier,
                                         attackUsed.attackName,
                                         attackLevel,
+                                        isCustomMultiplier,
                                         isRupture,
                                         isAnomaly,
                                         anomalyType,
@@ -462,6 +476,8 @@ function App() {
                                     setAttackLevel={(value) => setAttackLevel(value)}
                                     multiplier={multiplier}
                                     setMultiplier={(value) => setMultiplier(value)}
+                                    isCustomMultiplier={isCustomMultiplier}
+                                    setIsCustomMultiplier={(value) => setIsCustomMultiplier(value)}
                                     isRupture={isRupture}
                                     setIsRupture={(value) => setIsRupture(value)}
                                     isAnomaly={isAnomaly}
