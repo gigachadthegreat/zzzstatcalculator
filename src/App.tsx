@@ -9,13 +9,21 @@ import {
     type statTypeKeys,
     type AttackModifiers,
     levelFactorAttacker,
+    type AttackStats,
 } from "./constants/types";
 import { useState, useEffect, useRef } from "react";
-import { getCharacterFromName, getParameterizedStatsAsUrl, getsettingsFromUrl, getWengineFromName } from "./lib/Utility";
+import {
+    getCharacterFromName,
+    getMultiplierFromAttack,
+    getParameterizedStatsAsUrl,
+    getsettingsFromUrl,
+    getWengineFromName,
+} from "./lib/Utility";
 import { Characters } from "./constants/Characters";
 import { Wengines } from "./constants/Wengines";
 import { calculateStats, calculateSheer } from "./lib/Calculations";
 import Results from "./components/Results";
+import { Attacks } from "./constants/AttackStats";
 
 function App() {
     const imgRef = useRef<HTMLImageElement>(null);
@@ -39,7 +47,7 @@ function App() {
             if (settings.wengineName) setWengineName(settings.wengineName);
             if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
             if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SeletedSubstats);
-            if (settings.defTarget != null) setAttackModifiers(settings.attackModifiers);
+            if (settings.attackModifiers != null) setAttackModifiers(settings.attackModifiers);
             if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
@@ -102,7 +110,14 @@ function App() {
     );
 
     // Damage Calculator State
-    const [multiplier, setMultiplier] = useState<number>(100);
+    const [attackUsed, setAttackUsed] = useState<AttackStats>(
+        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0]
+    );
+    const [attackLevel, setAttackLevel] = useState<number>(12);
+    const [multiplier, setMultiplier] = useState<number>(
+        getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel)
+    );
+
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
@@ -204,6 +219,8 @@ function App() {
 
             setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
             setIsAnomaly(getCharacterFromName(newCharacterName, Characters).speciality == "ANOMALY");
+
+            setAttackUsed(Attacks.filter((attack) => attack.characterName === newCharacterName)[0].attackStats[0])
 
             return newCharacterName;
         });
@@ -376,7 +393,7 @@ function App() {
                                         additionalPenFlat,
                                         additionalCritRate,
                                         additionalCritDamage,
-                                        additionalElementPercent,
+                                        additionalElementPercent
                                         // characterLevel
                                     )
                                 )
@@ -433,6 +450,10 @@ function App() {
                                     characterName={characterName}
                                     attackModifiers={attackModifiers}
                                     setAttackModifiers={(value) => setAttackModifiers(value)}
+                                    attackUsed={attackUsed}
+                                    setAttackUsed={(value) => setAttackUsed(value)}
+                                    attackLevel={attackLevel}
+                                    setAttackLevel={(value) => setAttackLevel(value)}
                                     multiplier={multiplier}
                                     setMultiplier={(value) => setMultiplier(value)}
                                     isRupture={isRupture}

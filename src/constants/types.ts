@@ -78,12 +78,6 @@ export interface AttackModifiers {
     additionalSheerDmgBonusMultiplierAttacker: number;
 }
 
-export interface ParameterizedStats {
-    characterName: string;
-    wengineName: string;
-    selectedDrives: SelectedDrives;
-    selectedSubstats: SeletedSubstats;
-}
 
 export interface SelectedDrives {
     drive1Enabled: boolean;

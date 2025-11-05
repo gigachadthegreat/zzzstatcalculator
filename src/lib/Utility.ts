@@ -132,6 +132,9 @@ export const getsettingsFromUrl = () => {
     settings.isAnomaly = parseParam("isAnomaly", "boolean");
     settings.anomalyType = parseParam("anomalyType", "string");
 
+    settings.attackModifiers = parseParam("attackModifiers", "json");
+
+
     settings.additionalHpFlat = parseParam("additionalHpFlat", "number");
     settings.additionalHpPercent = parseParam("additionalHpPercent", "number");
     settings.additionalAttackFlat = parseParam("additionalAttackFlat", "number");
@@ -143,7 +146,6 @@ export const getsettingsFromUrl = () => {
     settings.additionalElementPercent = parseParam("additionalElementPercent", "number");
     settings.additionalSheerFlat = parseParam("additionalSheerFlat", "number");
     settings.additionalSheerPercent = parseParam("additionalSheerPercent", "number");
-    // settings.characterLevel = parseParam("characterLevel", "number");
 
     // Filter out null values so we only return settings that were present in the URL
     return Object.fromEntries(Object.entries(settings).filter(([, value]) => value !== null));

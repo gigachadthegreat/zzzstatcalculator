@@ -1,12 +1,12 @@
 import { type AttackModifiers, type Stats } from "../constants/types";
 
-export const EvelynAdditionalActive = (stats: Stats, multiplierValue: number): [Stats, number, AttackModifiers, number] => {
+export const EvelynAdditionalActive = (stats: Stats, multiplier: number): [Stats, number, AttackModifiers, number] => {
     // returns additional stats to be added later; new mulitpler, additional attack modifiers to be added later, additional damage added to final damage number
     // Evelyn Chain with additinal ability active:
     // UNCONDITIONAL: Add 30% additional damage
     // CONDITIONAL: If CRIT Rate >= 80%, increase Multiplier Value damage by 25%
 
-    let newMulitplier = multiplierValue;
+    let newMulitplier = multiplier;
     if (stats.CRIT_RATE >= 80) {
         newMulitplier *= 1.25;
     }
@@ -245,9 +245,7 @@ export const LuciaHpBonus = (stats: Stats, multiplierValue: number, attackLevel:
         ENERGY_REGEN_FLAT: 0,
     };
 
-    const additionalDamage =
-        stats.HP_FLAT * ((additionalDamageLvl1Multiplier + additionalDamageGrowthPerLevel * attackLevel) / 100);
-
+    const additionalDamage = stats.HP_FLAT * ((additionalDamageLvl1Multiplier + additionalDamageGrowthPerLevel * attackLevel) / 100);
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, additionalDamage];
 };
@@ -383,4 +381,3 @@ export const HarumasaAdditionalActive = (stats: Stats, multiplierValue: number):
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
 };
-

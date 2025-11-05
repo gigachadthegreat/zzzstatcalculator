@@ -16,17 +16,17 @@ const RangeSlider: React.FC<SliderProps> = ({ maxValue, value, onChange, unavail
   return (
     <div className="relative w-full h-6">
       {/* Track background */}
-      <div className="absolute top-1/2 -translate-y-1/2 w-full h-2 rounded-full bg-gray-200 dark:bg-slate-600" />
+      <div className="absolute top-1/2 -translate-y-1/2 w-full h-2 rounded-full bg-gray-200 dark:bg-white" />
 
       {/* Greyed out unavailable section */}
       <div
-        className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full bg-black opacity-60"
+        className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full bg-gray-700"
         style={{ left: `${unavailablePercent}%`, right: 0 }}
       />
 
       {/* Filled section up to value */}
       <div
-        className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full bg-blue-500"
+        className="absolute top-1/2 -translate-y-1/2 h-2 rounded-full bg-gray-500"
         style={{ width: `${filledPercent}%` }}
       />
 
@@ -42,13 +42,13 @@ const RangeSlider: React.FC<SliderProps> = ({ maxValue, value, onChange, unavail
           [&::-webkit-slider-thumb]:h-4
           [&::-webkit-slider-thumb]:w-4
           [&::-webkit-slider-thumb]:rounded-full
-          [&::-webkit-slider-thumb]:bg-blue-600
+          [&::-webkit-slider-thumb]:bg-gray-500
           [&::-webkit-slider-thumb]:cursor-pointer
           [&::-moz-range-thumb]:appearance-none
           [&::-moz-range-thumb]:h-4
           [&::-moz-range-thumb]:w-4
           [&::-moz-range-thumb]:rounded-full
-          [&::-moz-range-thumb]:bg-blue-600
+          [&::-moz-range-thumb]:bg-gray-500
           [&::-moz-range-thumb]:cursor-pointer"
       />
     </div>

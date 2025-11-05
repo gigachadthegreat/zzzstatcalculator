@@ -30,6 +30,12 @@ function DamageCalculator({
     attackModifiers,
     setAttackModifiers,
 
+    attackUsed,
+    setAttackUsed,
+
+    attackLevel,
+    setAttackLevel,
+
     multiplier,
     setMultiplier,
 
@@ -75,6 +81,12 @@ function DamageCalculator({
     attackModifiers: AttackModifiers;
     setAttackModifiers: (value: AttackModifiers) => void;
 
+    attackUsed: AttackStats;
+    setAttackUsed: (value: AttackStats) => void;
+
+    attackLevel: number;
+    setAttackLevel: (value: number) => void;
+
     multiplier: number;
     setMultiplier: (value: number) => void;
 
@@ -115,34 +127,10 @@ function DamageCalculator({
     setAdditionalElementPercent: (value: number) => void;
 }) {
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
-    const [attackUsed, setAttackUsed] = useState<AttackStats>(
-        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0]
-    );
-    const [attackLevel, setAttackLevel] = useState<number>(12);
 
-    useEffect(() => {
-        const baseMultiplier = getMultiplierFromAttack(
-            Attacks,
-            characterName,
-            attackUsed.Level1Damage,
-            attackUsed.growthPerLevel,
-            attackLevel
-        );
-        // Only update the parent's multiplierValue when there is no custom calculator on the attack.
-        if (attackUsed.calculatorType === undefined) {
-            setMultiplier(baseMultiplier);
-        }
-    }, [attackUsed, attackLevel, characterName, setMultiplier]);
 
-    // compute baseMultiplier once for use with custom calculators
-    const baseMultiplier = getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel);
 
-    useEffect(() => {
-        setAttackUsed(Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0]);
-    }, [characterName]);
-
-    // Character Stats
-    const finalStats: Stats = {
+    const [finalStats, setFinalStats] = useState<Stats>({
         ...calculatedStats,
         HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
         ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
@@ -151,108 +139,176 @@ function DamageCalculator({
         CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
         CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
         ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
-    };
+    });
 
-    const finalAttackModifiers: AttackModifiers = JSON.parse(JSON.stringify(attackModifiers));
+    const [finalAttackModifiers, setFinalAttackModifiers] = useState<AttackModifiers>(JSON.parse(JSON.stringify(attackModifiers)));
+    const [additionalDamage, setAdditionalDamage] = useState(0);
 
-    // If the selected attack has a custom calculator, compute derived stats and a custom multiplier locally
-    // but avoid calling setters during render. We'll sync the parent's multiplier in an effect below.
-    let additionalDamage = 0;
-    let newMultiplier = undefined;
-    if (attackUsed.calculatorType !== undefined) {
-        let additionalStats: Stats | null = null;
-        let additionalAttackModifiers: AttackModifiers | null;
-        switch (attackUsed.calculatorType) {
-            case "EvelynAdditionalActive":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply EvelynAdditionalActive");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = EvelynAdditionalActive(
-                    finalStats,
-                    baseMultiplier
-                );
-                break;
-            case "ZhuYuanOutOfStun":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply ZhuYuanOutOfStun");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = ZhuYuanOutOfStun(
-                    finalStats,
-                    baseMultiplier
-                );
-                break;
-            case "ZhuYuanInStun":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply ZhuYuanInStun");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = ZhuYuanInStun(finalStats, baseMultiplier);
-                break;
-            case "YixuanBonus":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply YixuanBonus");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YixuanBonus(finalStats, baseMultiplier);
-                break;
-            case "YixuanAdditionalActiveStunned":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply YixuanAdditionalActiveStunned");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YixuanAdditionalActiveStunned(
-                    finalStats,
-                    baseMultiplier
-                );
-                break;
-            case "LuciaHpBonus":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply LuciaHpBonus");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = LuciaHpBonus(
-                    finalStats,
-                    baseMultiplier,
-                    attackLevel
-                );
-                break;
-            case "YanagiEXSpecial":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply YanagiEXSpecial");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YanagiEXSpecial(
-                    finalStats,
-                    baseMultiplier,
-                    attackLevel
-                );
-                break;
-            case "YanagiUltimate":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply YanagiUltimate");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = YanagiUltimate(
-                    finalStats,
-                    baseMultiplier,
-                    attackLevel
-                );
-                break;
-            case "HarumasaAdditionalActive":
-                if (!finalStats) throw new Error("finalStats is null, cannot apply HarumasaAdditionalActive");
-                [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamage] = HarumasaAdditionalActive(
-                    finalStats,
-                    baseMultiplier
-                );
-                break;
-            default:
-                throw "Unknown Calculator Type";
-        }
+    
+    useEffect(() => {
+        setFinalStats({
+                    ...calculatedStats,
+        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
+        ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
+        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
+        PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
+        CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
+        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
+        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
 
-        if (finalStats && additionalStats) {
+        })
+    }, [characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent])
+
+    useEffect(() => {
+        console.log("finalStats", finalStats);
+        console.log("calculatedStats", calculatedStats);
+
+        const baseMultiplier = getMultiplierFromAttack(
+            Attacks,
+            characterName,
+            attackUsed.Level1Damage,
+            attackUsed.growthPerLevel,
+            attackLevel
+        );
+
+        if (attackUsed.calculatorType === undefined) {
+            setMultiplier(baseMultiplier);
+
+            setFinalAttackModifiers(attackModifiers);
+
+            setAdditionalDamage(0);
+
+        } else {
+            let additionalStats: Stats;
+            let additionalAttackModifiers: AttackModifiers;
+            let newMultiplier: number;
+            const baseMultiplier = getMultiplierFromAttack(
+                Attacks,
+                characterName,
+                attackUsed.Level1Damage,
+                attackUsed.growthPerLevel,
+                attackLevel
+            );
+
+            let additionalDamageCalculated = 0;
+
+            switch (attackUsed.calculatorType) {
+                case "EvelynAdditionalActive":
+
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = EvelynAdditionalActive(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                case "ZhuYuanOutOfStun":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = ZhuYuanOutOfStun(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                case "ZhuYuanInStun":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = ZhuYuanInStun(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                case "YixuanBonus":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YixuanBonus(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                case "YixuanAdditionalActiveStunned":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YixuanAdditionalActiveStunned(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                case "LuciaHpBonus":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = LuciaHpBonus(
+                        finalStats,
+                        baseMultiplier,
+                        attackLevel
+                    );
+                    break;
+                case "YanagiEXSpecial":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YanagiEXSpecial(
+                        finalStats,
+                        baseMultiplier,
+                        attackLevel
+                    );
+                    break;
+                case "YanagiUltimate":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YanagiUltimate(
+                        finalStats,
+                        baseMultiplier,
+                        attackLevel
+                    );
+                    break;
+                case "HarumasaAdditionalActive":
+                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = HarumasaAdditionalActive(
+                        finalStats,
+                        baseMultiplier
+                    );
+                    break;
+                default:
+                    throw "Unknown Calculator Type";
+            }
+
+            const newStats = { ...finalStats };
+            const newAttackModifiers = { ...finalAttackModifiers };
+
             Object.keys(finalStats).forEach((key) => {
                 const k = key as keyof Stats;
-                (finalStats[k] as number) = (finalStats[k] as number) + (additionalStats[k] as number);
+                (newStats[k] as number) = (finalStats[k] as number) + (additionalStats[k] as number);
             });
-        }
 
-        if (finalAttackModifiers && additionalAttackModifiers) {
-            Object.keys(finalAttackModifiers).forEach((key) => {
+            Object.keys(newAttackModifiers).forEach((key) => {
                 if (key !== "critMode") {
                     const k = key as keyof AttackModifiers;
-                    (finalAttackModifiers[k] as number) =
-                        (finalAttackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
+                    (newAttackModifiers[k] as number) = (attackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
                 }
             });
+
+            const changed1 = Object.keys(newAttackModifiers).some((k) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return (finalAttackModifiers as any)[k] !== (newAttackModifiers as any)[k];
+            });
+
+            const changed2 = Object.keys(newStats).some((k) => {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                return (finalStats as any)[k] !== (newStats as any)[k];
+            });
+
+            if (changed1) {
+                setFinalAttackModifiers(newAttackModifiers);
+            }
+            if (changed2) {
+                setFinalStats(newStats);
+            }
+            if (additionalDamageCalculated !== additionalDamage) {
+                setAdditionalDamage(additionalDamageCalculated);
+            }
+
+            if (newMultiplier !== multiplier) {
+                setMultiplier(newMultiplier);
+            }
         }
-        setMultiplier(newMultiplier ?? multiplier);
-    }
+
+        // NOTE: Do not include derived state (`finalAttackModifiers`, `additionalDamage`, `multiplier`) in the
+        // dependency array. Those are updated in this effect and would cause a re-trigger loop if included.
+        // Only include the true inputs that should trigger a recalculation.
+        // We intentionally omit derived state (finalAttackModifiers, additionalDamage, multiplier) from the
+        // dependency list because those values are updated inside this effect and would cause a re-trigger loop.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [attackUsed, attackLevel, characterName, finalStats, calculatedStats, attackModifiers]);
 
     let calculatedDamage = 0;
+
     if (isAnomaly) {
         calculatedDamage = finalStats ? calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage) : 0;
     } else if (isRupture) {
-        {
-            calculatedDamage = finalStats ? calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
-        }
+        calculatedDamage = finalStats ? calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
     } else {
         calculatedDamage = finalStats ? calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage) : 0;
     }
@@ -260,8 +316,16 @@ function DamageCalculator({
     return (
         <div className="">
             <div className="mt-4 text-center mb-5">
-                <div className=" text-3xl font-bold">
-                    Calculated Damage: <span className="font-mono text-blue-300">{calculatedDamage.toFixed(1)}</span>
+                <div className=" text-3xl ">
+                    Calculated
+                    {isAnomaly ? (
+                        <span className="font-bold"> Anomaly </span>
+                    ) : isRupture ? (
+                        <span className="font-bold"> Sheer </span>
+                    ) : (
+                        " "
+                    )}
+                    Damage: <span className="font-mono text-blue-300">{calculatedDamage.toFixed(1)}</span>
                 </div>
             </div>
 
@@ -373,7 +437,7 @@ function DamageCalculator({
                 </div>
                 <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                     <h3 className="font-bold mb-2">Attacker Modifiers</h3>
-                    <div className="flex items-center gap-2 mb-2">
+                    <div className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} `}>
                         <LabelWithTextInput
                             labelText="Multiplier Value %"
                             infoText="The percentage multiplier for the specific attack."

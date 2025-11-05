@@ -210,7 +210,7 @@ function StatCalculator({
                         </div>
                         <div className="grid grid-cols-1  gap-4 mt-4">
                             <div className="flex items-center gap-2 justify-between">
-                                <label className="block font-semibold ">Drive 4</label>
+                                <label className="block font-semibold ">Drive Slot 4</label>
                                 <select
                                     value={selectedDrives.drive4}
                                     onChange={(e) => handleDriveChange("drive4", e.target.value as statTypeKeys)}
@@ -224,7 +224,7 @@ function StatCalculator({
                                 </select>
                             </div>
                             <div className="flex items-center gap-2 justify-between ">
-                                <label className="block font-semibold ">Drive 5</label>
+                                <label className="block font-semibold ">Drive Slot 5</label>
                                 <select
                                     value={selectedDrives.drive5}
                                     onChange={(e) => handleDriveChange("drive5", e.target.value as statTypeKeys)}
@@ -238,7 +238,7 @@ function StatCalculator({
                                 </select>
                             </div>
                             <div className="flex items-center gap-2 justify-between">
-                                <label className="block font-semibold ">Drive 6</label>
+                                <label className="block font-semibold ">Drive Slot 6</label>
                                 <select
                                     value={selectedDrives.drive6}
                                     onChange={(e) => handleDriveChange("drive6", e.target.value as statTypeKeys)}
@@ -253,7 +253,7 @@ function StatCalculator({
                             </div>
                         </div>
                         <div className="grid grid-cols-1  gap-4 mt-4">
-                            <label className="block mb-2 font-semibold">Drive 2 piece effects</label>
+                            <label className="block mb-2 font-semibold">Drive two piece effects</label>
 
                             <div>
                                 <select
