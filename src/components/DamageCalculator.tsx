@@ -159,11 +159,145 @@ function DamageCalculator({
         })
     }, [characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent])
 
-    useEffect(() => {
-        console.log("finalStats", finalStats);
-        console.log("calculatedStats", calculatedStats);
+    // Helper to compute the base final stats from calculatedStats + additional inputs
+    const computeBaseStats = (): Stats => ({
+        ...calculatedStats,
+        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
+        ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
+        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
+        PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
+        CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
+        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
+        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
+    });
 
-        const baseMultiplier = getMultiplierFromAttack(
+    // Helper to run the custom calculator (if any) and return the tuple used by the calculators
+    const runCustomCalculator = (
+        type: string | undefined,
+        stats: Stats,
+        baseMultiplierLocal: number
+    ): [Stats, number, AttackModifiers, number] => {
+        if (!type) return [{} as Stats, baseMultiplierLocal, {} as AttackModifiers, 0];
+
+        switch (type) {
+            case "EvelynAdditionalActive":
+                return EvelynAdditionalActive(stats, baseMultiplierLocal);
+            case "ZhuYuanOutOfStun":
+                return ZhuYuanOutOfStun(stats, baseMultiplierLocal);
+            case "ZhuYuanInStun":
+                return ZhuYuanInStun(stats, baseMultiplierLocal);
+            case "YixuanBonus":
+                return YixuanBonus(stats, baseMultiplierLocal);
+            case "YixuanAdditionalActiveStunned":
+                return YixuanAdditionalActiveStunned(stats, baseMultiplierLocal);
+            case "LuciaHpBonus":
+                return LuciaHpBonus(stats, baseMultiplierLocal, attackLevel);
+            case "YanagiEXSpecial":
+                return YanagiEXSpecial(stats, baseMultiplierLocal, attackLevel);
+            case "YanagiUltimate":
+                return YanagiUltimate(stats, baseMultiplierLocal, attackLevel);
+            case "HarumasaAdditionalActive":
+                return HarumasaAdditionalActive(stats, baseMultiplierLocal);
+            default:
+                throw "Unknown Calculator Type";
+        }
+    };
+
+    // Effect: compute finalStats (base + any additionalStats from custom calculators)
+    useEffect(() => {
+        const baseStats = computeBaseStats();
+
+        if (attackUsed.calculatorType === undefined) {
+            setFinalStats(baseStats);
+            return;
+        }
+
+        const baseMultiplierLocal = getMultiplierFromAttack(
+            Attacks,
+            characterName,
+            attackUsed.Level1Damage,
+            attackUsed.growthPerLevel,
+            attackLevel
+        );
+
+        const [additionalStats] = runCustomCalculator(attackUsed.calculatorType, baseStats, baseMultiplierLocal);
+
+        const newStats = { ...baseStats } as Stats;
+        Object.keys(newStats).forEach((key) => {
+            const k = key as keyof Stats;
+            (newStats[k] as number) = (baseStats[k] as number) + ((additionalStats[k] as number) || 0);
+        });
+
+        const changed = Object.keys(newStats).some((k) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return (finalStats as any)[k] !== (newStats as any)[k];
+        });
+
+        if (changed) setFinalStats(newStats);
+        // NOTE: finalStats is derived state and is intentionally NOT included in the dependency list.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent, attackUsed, attackLevel]);
+
+    // Effect: compute finalAttackModifiers (base attackModifiers + any additionalAttackModifiers from calculators)
+    useEffect(() => {
+        if (attackUsed.calculatorType === undefined) {
+            setFinalAttackModifiers(attackModifiers);
+            return;
+        }
+
+        const baseStats = computeBaseStats();
+        const baseMultiplierLocal = getMultiplierFromAttack(
+            Attacks,
+            characterName,
+            attackUsed.Level1Damage,
+            attackUsed.growthPerLevel,
+            attackLevel
+        );
+
+        const [, , additionalAttackModifiers] = runCustomCalculator(attackUsed.calculatorType, baseStats, baseMultiplierLocal);
+
+        const newAttackModifiers = { ...attackModifiers } as AttackModifiers;
+        Object.keys(newAttackModifiers).forEach((key) => {
+            if (key !== "critMode") {
+                const k = key as keyof AttackModifiers;
+                (newAttackModifiers[k] as number) = (attackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
+            }
+        });
+
+        const changed = Object.keys(newAttackModifiers).some((k) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            return (finalAttackModifiers as any)[k] !== (newAttackModifiers as any)[k];
+        });
+
+        if (changed) setFinalAttackModifiers(newAttackModifiers);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent, attackModifiers]);
+
+    // Effect: compute additionalDamage
+    useEffect(() => {
+        if (attackUsed.calculatorType === undefined) {
+            setAdditionalDamage(0);
+            return;
+        }
+
+        const baseStats = computeBaseStats();
+        const baseMultiplierLocal = getMultiplierFromAttack(
+            Attacks,
+            characterName,
+            attackUsed.Level1Damage,
+            attackUsed.growthPerLevel,
+            attackLevel
+        );
+
+        const [, , , additionalDamageCalculated] = runCustomCalculator(attackUsed.calculatorType, baseStats, baseMultiplierLocal);
+
+        if (additionalDamageCalculated !== additionalDamage) setAdditionalDamage(additionalDamageCalculated);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent]);
+
+    // Effect: compute multiplier
+    useEffect(() => {
+        const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
             characterName,
             attackUsed.Level1Damage,
@@ -172,136 +306,16 @@ function DamageCalculator({
         );
 
         if (attackUsed.calculatorType === undefined) {
-            setMultiplier(baseMultiplier);
-
-            setFinalAttackModifiers(attackModifiers);
-
-            setAdditionalDamage(0);
-
-        } else {
-            let additionalStats: Stats;
-            let additionalAttackModifiers: AttackModifiers;
-            let newMultiplier: number;
-            const baseMultiplier = getMultiplierFromAttack(
-                Attacks,
-                characterName,
-                attackUsed.Level1Damage,
-                attackUsed.growthPerLevel,
-                attackLevel
-            );
-
-            let additionalDamageCalculated = 0;
-
-            switch (attackUsed.calculatorType) {
-                case "EvelynAdditionalActive":
-
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = EvelynAdditionalActive(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                case "ZhuYuanOutOfStun":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = ZhuYuanOutOfStun(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                case "ZhuYuanInStun":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = ZhuYuanInStun(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                case "YixuanBonus":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YixuanBonus(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                case "YixuanAdditionalActiveStunned":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YixuanAdditionalActiveStunned(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                case "LuciaHpBonus":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = LuciaHpBonus(
-                        finalStats,
-                        baseMultiplier,
-                        attackLevel
-                    );
-                    break;
-                case "YanagiEXSpecial":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YanagiEXSpecial(
-                        finalStats,
-                        baseMultiplier,
-                        attackLevel
-                    );
-                    break;
-                case "YanagiUltimate":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = YanagiUltimate(
-                        finalStats,
-                        baseMultiplier,
-                        attackLevel
-                    );
-                    break;
-                case "HarumasaAdditionalActive":
-                    [additionalStats, newMultiplier, additionalAttackModifiers, additionalDamageCalculated] = HarumasaAdditionalActive(
-                        finalStats,
-                        baseMultiplier
-                    );
-                    break;
-                default:
-                    throw "Unknown Calculator Type";
-            }
-
-            const newStats = { ...finalStats };
-            const newAttackModifiers = { ...finalAttackModifiers };
-
-            Object.keys(finalStats).forEach((key) => {
-                const k = key as keyof Stats;
-                (newStats[k] as number) = (finalStats[k] as number) + (additionalStats[k] as number);
-            });
-
-            Object.keys(newAttackModifiers).forEach((key) => {
-                if (key !== "critMode") {
-                    const k = key as keyof AttackModifiers;
-                    (newAttackModifiers[k] as number) = (attackModifiers[k] as number) + ((additionalAttackModifiers[k] as number) || 0);
-                }
-            });
-
-            const changed1 = Object.keys(newAttackModifiers).some((k) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return (finalAttackModifiers as any)[k] !== (newAttackModifiers as any)[k];
-            });
-
-            const changed2 = Object.keys(newStats).some((k) => {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                return (finalStats as any)[k] !== (newStats as any)[k];
-            });
-
-            if (changed1) {
-                setFinalAttackModifiers(newAttackModifiers);
-            }
-            if (changed2) {
-                setFinalStats(newStats);
-            }
-            if (additionalDamageCalculated !== additionalDamage) {
-                setAdditionalDamage(additionalDamageCalculated);
-            }
-
-            if (newMultiplier !== multiplier) {
-                setMultiplier(newMultiplier);
-            }
+            setMultiplier(baseMultiplierLocal);
+            return;
         }
 
-        // NOTE: Do not include derived state (`finalAttackModifiers`, `additionalDamage`, `multiplier`) in the
-        // dependency array. Those are updated in this effect and would cause a re-trigger loop if included.
-        // Only include the true inputs that should trigger a recalculation.
-        // We intentionally omit derived state (finalAttackModifiers, additionalDamage, multiplier) from the
-        // dependency list because those values are updated inside this effect and would cause a re-trigger loop.
+        const baseStats = computeBaseStats();
+        const [, newMultiplier] = runCustomCalculator(attackUsed.calculatorType, baseStats, baseMultiplierLocal);
+
+        setMultiplier(newMultiplier);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [attackUsed, attackLevel, characterName, finalStats, calculatedStats, attackModifiers]);
+    }, [attackUsed, attackLevel, characterName, calculatedStats, additionalHpFlat, additionalHpPercent, additionalAttackFlat, additionalAttackPercent, additionalPenPercent, additionalPenFlat, additionalCritRate, additionalCritDamage, additionalElementPercent]);
 
     let calculatedDamage = 0;
 
