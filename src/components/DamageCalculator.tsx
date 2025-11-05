@@ -197,13 +197,13 @@ function DamageCalculator({
             case "EvelynAdditionalActive":
                 return EvelynAdditionalActive(stats, baseMultiplierLocal);
             case "ZhuYuanOutOfStun":
-                return ZhuYuanOutOfStun(stats, baseMultiplierLocal);
+                return ZhuYuanOutOfStun(baseMultiplierLocal);
             case "ZhuYuanInStun":
-                return ZhuYuanInStun(stats, baseMultiplierLocal);
+                return ZhuYuanInStun(baseMultiplierLocal);
             case "YixuanBonus":
-                return YixuanBonus(stats, baseMultiplierLocal);
+                return YixuanBonus(baseMultiplierLocal);
             case "YixuanAdditionalActiveStunned":
-                return YixuanAdditionalActiveStunned(stats, baseMultiplierLocal);
+                return YixuanAdditionalActiveStunned(baseMultiplierLocal);
             case "LuciaHpBonus":
                 return LuciaHpBonus(stats, baseMultiplierLocal, attackLevel);
             case "YanagiEXSpecial":
@@ -211,7 +211,7 @@ function DamageCalculator({
             case "YanagiUltimate":
                 return YanagiUltimate(stats, baseMultiplierLocal, attackLevel);
             case "HarumasaAdditionalActive":
-                return HarumasaAdditionalActive(stats, baseMultiplierLocal);
+                return HarumasaAdditionalActive(baseMultiplierLocal);
             default:
                 throw "Unknown Calculator Type";
         }
@@ -220,6 +220,10 @@ function DamageCalculator({
     // Effect: compute finalStats (base + any additionalStats from custom calculators)
     useEffect(() => {
         const baseStats = computeBaseStats();
+
+        if (isCustomMultiplier) {
+            setFinalStats(baseStats);
+        }
 
         if (attackUsed.calculatorType === undefined) {
             setFinalStats(baseStats);
@@ -251,6 +255,7 @@ function DamageCalculator({
         // NOTE: finalStats is derived state and is intentionally NOT included in the dependency list.
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+        isCustomMultiplier,
         characterName,
         calculatedStats,
         additionalHpFlat,
@@ -268,6 +273,11 @@ function DamageCalculator({
 
     // Effect: compute finalAttackModifiers (base attackModifiers + any additionalAttackModifiers from calculators)
     useEffect(() => {
+        if (isCustomMultiplier) {
+            setFinalAttackModifiers(attackModifiers);
+            return;
+        }
+
         if (attackUsed.calculatorType === undefined) {
             setFinalAttackModifiers(attackModifiers);
             return;
@@ -300,6 +310,7 @@ function DamageCalculator({
         if (changed) setFinalAttackModifiers(newAttackModifiers);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+        isCustomMultiplier,
         attackUsed,
         attackLevel,
         characterName,
@@ -318,6 +329,10 @@ function DamageCalculator({
 
     // Effect: compute additionalDamage
     useEffect(() => {
+        if (isCustomMultiplier) {
+            setAdditionalDamage(0);
+            return;
+        }
         if (attackUsed.calculatorType === undefined) {
             setAdditionalDamage(0);
             return;
@@ -337,6 +352,7 @@ function DamageCalculator({
         if (additionalDamageCalculated !== additionalDamage) setAdditionalDamage(additionalDamageCalculated);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+        isCustomMultiplier,
         attackUsed,
         attackLevel,
         characterName,
@@ -377,6 +393,7 @@ function DamageCalculator({
         setMultiplier(newMultiplier);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
+        isCustomMultiplier,
         attackUsed,
         attackLevel,
         characterName,
