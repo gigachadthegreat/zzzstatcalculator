@@ -1405,8 +1405,49 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Musou Aratama", attackType: "ULT", Level1Damage: 1562.3, growthPerLevel: 142.1 },
         ],
     },
+    {
+        characterName: "Yidhari",
+        attackStats: [
+            // BASIC
+            { attackName: "Crushing Strike - 1", attackType: "BASIC", Level1Damage: 60.7, growthPerLevel: 5.6 },
+            { attackName: "Crushing Strike - 1 ALT", attackType: "BASIC", Level1Damage: 62.4, growthPerLevel: 5.7 },
+            { attackName: "Crushing Strike - 2", attackType: "BASIC", Level1Damage: 86, growthPerLevel: 7.9 },
+            { attackName: "Crushing Strike - 3", attackType: "BASIC", Level1Damage: 207.8, growthPerLevel: 18.9 },
+        
+            { attackName: "Frostbite Embrace - 1", attackType: "BASIC", Level1Damage: 161.4, growthPerLevel: 14.7 },
+            { attackName: "Frostbite Embrace - 2", attackType: "BASIC", Level1Damage: 254.1, growthPerLevel: 23.1 },
+            { attackName: "Frostbite Embrace - 3", attackType: "BASIC", Level1Damage: 345.9, growthPerLevel: 31.5 },
+            { attackName: "Frostbite Embrace - 3 Spin", attackType: "BASIC", Level1Damage: 235.8, growthPerLevel: 21.5 },
+          
+            { attackName: "Frost's Crushing Weight", attackType: "BASIC", Level1Damage: 48.7, growthPerLevel: 4.5 },
+            // DASH
+            { attackName: "Frostbloom Impact", attackType: "DASH", Level1Damage: 70.5, growthPerLevel: 6.5 },
+            // DODGE
+            { attackName: "Icehaul Reverb", attackType: "DASH", Level1Damage: 185.3, growthPerLevel: 16.9 },
+            // ASSIST
+            { attackName: "Frostshock Reinforcement", attackType: "ASSIST", Level1Damage: 82.2, growthPerLevel: 7.5 },
+            { attackName: "Glacial Onslaught", attackType: "ASSIST", Level1Damage: 313.4, growthPerLevel: 28.5 },
+            // SPECIAL
+            { attackName: "Cease Thoughts", attackType: "SPECIAL", Level1Damage: 39.6, growthPerLevel: 3.6 },
+        
+            { attackName: "Surging Cold, Crushing Pursuit", attackType: "SPECIAL", Level1Damage: 83.7, growthPerLevel: 7.7 },
+            // EX SPECIAL
+            { attackName: "Frost Coil", attackType: "EXSPECIAL", Level1Damage: 510.2, growthPerLevel: 46.4 },
+           
+            { attackName: "Glacial Crush - inlcuding Tentacle", attackType: "EXSPECIAL", Level1Damage: 1086.8, growthPerLevel: 98.8 },
+            { attackName: "Glacial Crush", attackType: "EXSPECIAL", Level1Damage: 1007.6, growthPerLevel: 91.6 },
+            { attackName: "Glacial Crush - Tentacle only", attackType: "EXSPECIAL", Level1Damage: 79.2, growthPerLevel: 7.2 },
+           
+            // CHAIN
+            { attackName: "Frostbound Oath", attackType: "CHAIN", Level1Damage: 572.7, growthPerLevel: 52.1 },
+            { attackName: "Frostbound Oath - with Tentacles/ in Either Veil", attackType: "CHAIN", Level1Damage: 629.9, growthPerLevel: 57.3 },
+            // ULT
+            { attackName: "Crossing the River of Regret", attackType: "ULT", Level1Damage: 1522.1, growthPerLevel: 138.4 },
+        ],
+    },
 
 
+    // EMPTY TEMPLATE
     // {
     //     characterName: "",
     //     attackStats: [

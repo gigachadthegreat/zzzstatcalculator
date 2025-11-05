@@ -48,7 +48,11 @@ function App() {
             if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
             if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SeletedSubstats);
             if (settings.attackModifiers != null) setAttackModifiers(settings.attackModifiers);
+
             if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
+            if (settings.attackUsed != null) setAttackUsed(Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter((attack) => attack.attackName === settings.attackUsed)[0]);
+            if (settings.attackLevel != null) setAttackLevel(settings.attackLevel);
+
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
             if (settings.anomalyType != null) setAnomalyType(settings.anomalyType);
@@ -382,6 +386,8 @@ function App() {
                                         selectedDrives,
                                         selectedSubstats,
                                         multiplier,
+                                        attackUsed.attackName,
+                                        attackLevel,
                                         isRupture,
                                         isAnomaly,
                                         anomalyType,

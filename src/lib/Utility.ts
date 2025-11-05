@@ -58,6 +58,9 @@ export const getParameterizedStatsAsUrl = (
     selectedSubstats: SeletedSubstats,
 
     multiplierValue: number,
+    attackUsed: string,
+    attackLevel: number,
+
     isRupture: boolean,
     isAnomaly: boolean,
     anomalyType: keyof typeof AnomalyMultipliers,
@@ -82,6 +85,9 @@ export const getParameterizedStatsAsUrl = (
     params.set("attackModifiers", JSON.stringify(attackModifiers));
 
     params.set("multiplierValue", multiplierValue.toString());
+    params.set("attackUsed", attackUsed.toString());
+    params.set("attackLevel", attackLevel.toString());
+
     params.set("isRupture", isRupture.toString());
     params.set("isAnomaly", isAnomaly.toString());
     params.set("anomalyType", anomalyType.toString());
@@ -127,13 +133,16 @@ export const getsettingsFromUrl = () => {
     settings.wengineName = parseParam("wengineName", "string");
     settings.selectedDrives = parseParam("selectedDrives", "json");
     settings.selectedSubstats = parseParam("selectedSubstats", "json");
+
     settings.multiplierValue = parseParam("multiplierValue", "number");
+    settings.attackUsed = parseParam("attackUsed", "string");
+    settings.attackLevel = parseParam("attackLevel", "number");
+
     settings.isRupture = parseParam("isRupture", "boolean");
     settings.isAnomaly = parseParam("isAnomaly", "boolean");
     settings.anomalyType = parseParam("anomalyType", "string");
 
     settings.attackModifiers = parseParam("attackModifiers", "json");
-
 
     settings.additionalHpFlat = parseParam("additionalHpFlat", "number");
     settings.additionalHpPercent = parseParam("additionalHpPercent", "number");

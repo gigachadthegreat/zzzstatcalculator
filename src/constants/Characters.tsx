@@ -628,7 +628,7 @@ export const Characters: Character[] = [
             PEN_PERCENT: 0,
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
-            ENERGY_REGEN_FLAT: 1.2,
+            ENERGY_REGEN_FLAT: 2,
         },
     },
     {
@@ -755,6 +755,24 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 1.2,
+        },
+    },
+    {
+        name: "Yidhari",
+        speciality: "RUPTURE",
+        stats: {
+            HP_FLAT: 8497,
+            ATTACK_FLAT: 859,
+            DEFENSE_FLAT: 448,
+            CRIT_RATE: 19.4,
+            CRIT_DAMAGE: 50,
+            ELEMENT_PERCENT: 0,
+            ANOMALY_PROFICIENCY_FLAT: 90,
+            ANOMALY_MASTERY_FLAT: 87,
+            PEN_PERCENT: 0,
+            PEN_FLAT: 0,
+            IMPACT_FLAT: 95,
+            ENERGY_REGEN_FLAT: 2,
         },
     },
 ];

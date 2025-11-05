@@ -524,20 +524,27 @@ export const Wengines: Wengine[] = [
         speciality: "SUPPORT",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 713,
-        WengineStatValue: 30
+        WengineStatValue: 30,
     },
     {
         name: "Grill O'Wisp",
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 624,
-        WengineStatValue: 25
+        WengineStatValue: 25,
+    },
+    {
+        name: "Kraken's Cradle",
+        speciality: "RUPTURE",
+        WengineStatSelected: "HP_PERCENT",
+        WengineFlatAttack: 713,
+        WengineStatValue: 30,
     },
     {
         name: "None",
         speciality: "DEFENSE",
         WengineStatSelected: "NONE",
         WengineFlatAttack: 0,
-        WengineStatValue: 0
-    }
+        WengineStatValue: 0,
+    },
 ];
