@@ -375,7 +375,7 @@ function App() {
     };
 
     return (
-        <div className={`min-h-screen bg-gray-100 text-gray-800 dark:bg-slate-950 dark:text-gray-200`}>
+        <div className={`relative min-h-screen  text-gray-800 dark:bg-slate-950 dark:text-gray-200`}>
             <header className="bg-white shadow sticky top-0 z-20 dark:bg-slate-900 dark:border-b dark:border-slate-800">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">ZZZ Stat Calculator</h1>
@@ -424,6 +424,12 @@ function App() {
                     </div>
                 </div>
             </header>
+
+            <div
+                className="absolute inset-0 bg-[url(/assets/images/background.png)] bg-cover bg-center z-0 pointer-events-none opacity-50 blur-sm -left-100"
+                aria-hidden="true"
+            />
+
 
             <div className="grid grid-cols-5 ">
                 <div className="pt-15">
