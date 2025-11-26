@@ -1445,7 +1445,39 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Crossing the River of Regret", attackType: "ULT", Level1Damage: 1522.1, growthPerLevel: 138.4 },
         ],
     },
+    {
+        characterName: "Dialyn",
+        attackStats: [
+            // BASIC
+            { attackName: "Happy to Be of Service - 1", attackType: "BASIC", Level1Damage: 25.6, growthPerLevel: 2.4 },
+            { attackName: "Happy to Be of Service - 2", attackType: "BASIC", Level1Damage: 51.3, growthPerLevel: 4.7 },
+            { attackName: "Happy to Be of Service - 3", attackType: "BASIC", Level1Damage: 64.8, growthPerLevel: 5.9 },
+            { attackName: "Happy to Be of Service - 4", attackType: "BASIC", Level1Damage: 99.5, growthPerLevel: 9.1 },
 
+            { attackName: "Rock, Paper, Scissors - 1", attackType: "BASIC", Level1Damage: 89.5, growthPerLevel: 8.2 },
+            { attackName: "Rock, Paper, Scissors - 2", attackType: "BASIC", Level1Damage: 113.9, growthPerLevel: 10.4 },
+            { attackName: "Rock, Paper, Scissors - 3", attackType: "BASIC", Level1Damage: 103.1, growthPerLevel: 9.4 },
+            { attackName: "Rock, Paper, Scissors - 4", attackType: "BASIC", Level1Damage: 100.3, growthPerLevel: 9.2 },
+            // DASH
+            { attackName: "Sudden Call", attackType: "DASH", Level1Damage: 60.5, growthPerLevel: 5.5 },
+            // DODGE
+            { attackName: "Number Unavailable", attackType: "DASH", Level1Damage: 267.3, growthPerLevel: 24.3 },
+            // ASSIST
+            { attackName: "Forward Call", attackType: "ASSIST", Level1Damage: 121, growthPerLevel: 11 },
+            { attackName: "Back-to-Back Calls", attackType: "ASSIST", Level1Damage: 376.4, growthPerLevel: 34.3 },
+            // SPECIAL
+            { attackName: "Welcome Gesture", attackType: "SPECIAL", Level1Damage: 54.2, growthPerLevel: 5 },
+            // EX SPECIAL
+            { attackName: "Get Lost!", attackType: "EXSPECIAL", Level1Damage: 549.7, growthPerLevel: 50 },
+            { attackName: "Rock", attackType: "EXSPECIAL", Level1Damage: 404, growthPerLevel: 36.8 },
+            { attackName: "Scissors", attackType: "EXSPECIAL", Level1Damage: 524.9, growthPerLevel: 47.8 },
+            { attackName: "Paper!", attackType: "EXSPECIAL", Level1Damage: 701.7, growthPerLevel: 63.8 },
+            // CHAIN
+            { attackName: "", attackType: "CHAIN", Level1Damage: 620.4, growthPerLevel: 56.4 },
+            // ULT
+            { attackName: "", attackType: "ULT", Level1Damage: 1622.5, growthPerLevel: 147.5 },
+        ],
+    },
 
     // EMPTY TEMPLATE
     // {

@@ -541,6 +541,13 @@ export const Wengines: Wengine[] = [
         WengineStatValue: 30,
     },
     {
+        name: "Yesterday Calls",
+        speciality: "STUN",
+        WengineStatSelected: "CRIT_RATE",
+        WengineFlatAttack: 713,
+        WengineStatValue: 24,
+    },
+    {
         name: "None",
         speciality: "DEFENSE",
         WengineStatSelected: "NONE",
@@ -548,3 +555,4 @@ export const Wengines: Wengine[] = [
         WengineStatValue: 0,
     },
 ];
+

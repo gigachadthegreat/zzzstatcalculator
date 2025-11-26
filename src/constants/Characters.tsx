@@ -775,4 +775,22 @@ export const Characters: Character[] = [
             ENERGY_REGEN_FLAT: 2,
         },
     },
+    {
+        name: "Dialyn",
+        speciality: "STUN",
+        stats: {
+            HP_FLAT: 8250,
+            ATTACK_FLAT: 758,
+            DEFENSE_FLAT: 612,
+            CRIT_RATE: 19.4,
+            CRIT_DAMAGE: 50,
+            ELEMENT_PERCENT: 0,
+            ANOMALY_PROFICIENCY_FLAT: 93,
+            ANOMALY_MASTERY_FLAT: 94,
+            PEN_PERCENT: 0,
+            PEN_FLAT: 0,
+            IMPACT_FLAT: 110,
+            ENERGY_REGEN_FLAT: 1.2,
+        },
+    },
 ];
