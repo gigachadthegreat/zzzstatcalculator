@@ -1473,9 +1473,9 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Scissors", attackType: "EXSPECIAL", Level1Damage: 524.9, growthPerLevel: 47.8 },
             { attackName: "Paper!", attackType: "EXSPECIAL", Level1Damage: 701.7, growthPerLevel: 63.8 },
             // CHAIN
-            { attackName: "", attackType: "CHAIN", Level1Damage: 620.4, growthPerLevel: 56.4 },
+            { attackName: "Welcome Mat", attackType: "CHAIN", Level1Damage: 620.4, growthPerLevel: 56.4 },
             // ULT
-            { attackName: "", attackType: "ULT", Level1Damage: 1622.5, growthPerLevel: 147.5 },
+            { attackName: "Service Stopped for Number Dialed", attackType: "ULT", Level1Damage: 1622.5, growthPerLevel: 147.5 },
         ],
     },
 
