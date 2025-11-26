@@ -426,7 +426,7 @@ function App() {
             </header>
 
             <div
-                className="absolute inset-0 bg-[url(/assets/images/background.png)] bg-cover bg-center z-0 pointer-events-none opacity-50 blur-sm -left-100"
+                className="absolute inset-0 bg-[url(/assets/images/background.webp)] bg-cover bg-center z-0 pointer-events-none opacity-50 blur-sm -left-100"
                 aria-hidden="true"
             />
 
@@ -436,7 +436,7 @@ function App() {
                     <img
                         ref={imgRef}
                         className={` w-3/5  left-25 z-0 scale-700 top-135 sticky`} //top-135
-                        src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.PNG`}
+                        src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.webp`}
                         alt="character avatar"
                     />
                 </div>
