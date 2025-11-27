@@ -74,7 +74,7 @@ function StatCalculator({
         ELEMENT_PERCENT: `Element ${DriveStats.Drive2Psc.ELEMENT_PERCENT}%`,
         ANOMALY_PROFICIENCY_FLAT: `Anomaly Proficiency ${DriveStats.Drive2Psc.ANOMALY_PROFICIENCY_FLAT}`,
         ANOMALY_MASTERY_PERCENT: `Anomaly Mastery ${DriveStats.Drive2Psc.ANOMALY_MASTERY_PERCENT}%`,
-        PEN_PERCENT: `Pen ${DriveStats.Drive2Psc.HP_PERCENT}%`,
+        PEN_PERCENT: `Pen ${DriveStats.Drive2Psc.PEN_PERCENT}%`,
         IMPACT_PERCENT: `Impact ${DriveStats.Drive2Psc.IMPACT_PERCENT}%`,
         ENERGY_REGEN_PERCENT: `Energy Regen ${DriveStats.Drive2Psc.ENERGY_REGEN_PERCENT}%`,
         NONE: `None`,
