@@ -3,6 +3,7 @@ import type { Character } from "./types";
 export const Characters: Character[] = [
     {
         name: "Nicole",
+        id: 1031,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8145,
@@ -21,6 +22,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ben",
+        id: 1121,
         speciality: "DEFENSE",
         stats: {
             HP_FLAT: 8577,
@@ -39,6 +41,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Anby",
+        id: 1011,
         speciality: "STUN",
         stats: {
             HP_FLAT: 7500,
@@ -57,6 +60,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lucy",
+        id: 1151,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8025,
@@ -75,6 +79,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soukaku",
+        id: 1131,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8025,
@@ -93,6 +98,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Rina",
+        id: 1211,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8609,
@@ -111,6 +117,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lycaon",
+        id: 1141,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8416,
@@ -129,6 +136,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Koleda",
+        id: 1101,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8127,
@@ -147,6 +155,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Piper",
+        id: 1281,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 6976,
@@ -165,6 +174,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Billy",
+        id: 1081,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 6907,
@@ -183,6 +193,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Anton",
+        id: 1111,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7219,
@@ -201,6 +212,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Corin",
+        id: 1061,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 6976,
@@ -219,6 +231,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Grace",
+        id: 1181,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7482,
@@ -237,6 +250,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soldier 11",
+        id: 1041,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7673,
@@ -255,6 +269,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Nekomata",
+        id: 1021,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7560,
@@ -273,6 +288,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Zhu Yuan",
+        id: 1241,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7482,
@@ -291,6 +307,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ellen",
+        id: 1191,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7673,
@@ -309,6 +326,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Qingyi",
+        id: 1251,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8250,
@@ -327,6 +345,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Jane Doe",
+        id: 1261,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7788,
@@ -345,6 +364,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Seth",
+        id: 1271,
         speciality: "DEFENSE",
         stats: {
             HP_FLAT: 8701,
@@ -363,6 +383,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Caesar",
+        id: 1071,
         speciality: "DEFENSE",
         stats: {
             HP_FLAT: 9526,
@@ -381,6 +402,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Burnice",
+        id: 1171,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7368,
@@ -399,6 +421,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yanagi",
+        id: 1221,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7788,
@@ -417,6 +440,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lighter",
+        id: 1161,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8253,
@@ -435,6 +459,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Miyabi",
+        id: 1091,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7673,
@@ -453,6 +478,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Harumasa",
+        id: 1201,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7405,
@@ -471,6 +497,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Astra Yao",
+        id: 1311,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8609,
@@ -489,6 +516,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Evelyn",
+        id: 1321,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7788,
@@ -507,6 +535,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soldier 0 Anby",
+        id: 1381,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7673,
@@ -525,6 +554,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Pulchra",
+        id: 1351,
         speciality: "STUN",
         stats: {
             HP_FLAT: 7612,
@@ -543,6 +573,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Trigger",
+        id: 1361,
         speciality: "STUN",
         stats: {
             HP_FLAT: 7923,
@@ -561,6 +592,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Vivian",
+        id: 1331,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7673,
@@ -579,6 +611,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Hugo",
+        id: 1291,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7940,
@@ -597,6 +630,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Pan Yinhu",
+        id: 1421,
         speciality: "DEFENSE",
         stats: {
             HP_FLAT: 8453,
@@ -615,6 +649,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yixuan",
+        id: 1371,
         speciality: "RUPTURE",
         stats: {
             HP_FLAT: 8373,
@@ -633,6 +668,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ju Fufu",
+        id: 1391,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8250,
@@ -651,6 +687,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yuzuha",
+        id: 1411,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8829,
@@ -669,6 +706,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Alice",
+        id: 1401,
         speciality: "ANOMALY",
         stats: {
             HP_FLAT: 7673,
@@ -687,6 +725,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Seed",
+        id: 1461,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7673,
@@ -705,6 +744,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Orphie & Magus",
+        id: 1301,
         speciality: "ATTACK",
         stats: {
             HP_FLAT: 7788,
@@ -723,6 +763,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lucia",
+        id: 1451,
         speciality: "SUPPORT",
         stats: {
             HP_FLAT: 8477,
@@ -741,6 +782,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Manato",
+        id: 1441,
         speciality: "RUPTURE",
         stats: {
             HP_FLAT: 7724,
@@ -759,6 +801,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yidhari",
+        id: 1051,
         speciality: "RUPTURE",
         stats: {
             HP_FLAT: 8497,
@@ -777,6 +820,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Dialyn",
+        id: 1481,
         speciality: "STUN",
         stats: {
             HP_FLAT: 8250,
@@ -793,4 +837,7 @@ export const Characters: Character[] = [
             ENERGY_REGEN_FLAT: 1.2,
         },
     },
+
+
+    
 ];

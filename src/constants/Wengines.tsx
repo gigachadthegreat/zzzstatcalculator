@@ -3,6 +3,7 @@ import type { Wengine } from "./types";
 export const Wengines: Wengine[] = [
     {
         name: "Bellicose Blaze",
+        id: 14130,
         speciality: "ATTACK",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 713,
@@ -10,6 +11,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Cordis Germina",
+        id: 14146,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -17,6 +19,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Practiced Perfection",
+        id: 14140,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 713,
@@ -24,6 +27,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Metanukimorphosis",
+        id: 14141,
         speciality: "SUPPORT",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 713,
@@ -31,6 +35,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Cinder] Cobalt",
+        id: 12015,
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 475,
@@ -38,6 +43,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Reel Projector",
+        id: 13016,
         speciality: "DEFENSE",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 594,
@@ -45,6 +51,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Roaring Fur-nace",
+        id: 13128,
         speciality: "STUN",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 713,
@@ -52,6 +59,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Tremor Trigram Vessel",
+        id: 13142,
         speciality: "DEFENSE",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -59,6 +67,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Radiowave Journey",
+        id: 13014,
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 594,
@@ -66,6 +75,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Puzzle Sphere",
+        id: 13012,
         speciality: "RUPTURE",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -73,6 +83,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Qingming Birdcage",
+        id: 14137,
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 743,
@@ -80,6 +91,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Myriad Eclipse",
+        id: 14129,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -87,6 +99,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Timeweaver",
+        id: 14122,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 713,
@@ -94,6 +107,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Flight of Fancy",
+        id: 14133,
         speciality: "ANOMALY",
         WengineStatSelected: "ANOMALY_PROFICIENCY_FLAT",
         WengineFlatAttack: 713,
@@ -101,6 +115,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Spectral Gaze",
+        id: 14136,
         speciality: "STUN",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -108,6 +123,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Box Cutter",
+        id: 13135,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 624,
@@ -115,6 +131,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Severed Innocence",
+        id: 14138,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_DAMAGE",
         WengineFlatAttack: 713,
@@ -122,6 +139,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Heartstring Nocturne",
+        id: 14132,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -129,6 +147,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Elegant Vanity",
+        id: 14131,
         speciality: "SUPPORT",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 713,
@@ -136,6 +155,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Marcato Desire",
+        id: 13015,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 594,
@@ -143,6 +163,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Hailstorm Shrine",
+        id: 14109,
         speciality: "ANOMALY",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 743,
@@ -150,6 +171,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Zanshin Herb Case",
+        id: 14120,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_DAMAGE",
         WengineFlatAttack: 713,
@@ -157,6 +179,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Blazing Laurel",
+        id: 14116,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 713,
@@ -164,6 +187,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Hellfire Gears",
+        id: 14110,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 684,
@@ -171,6 +195,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Flamemaker Shaker",
+        id: 14117,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 713,
@@ -178,6 +203,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Demara Battery Mark II",
+        id: 13101,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 624,
@@ -185,6 +211,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Tusks of Fury",
+        id: 14107,
         speciality: "DEFENSE",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 713,
@@ -192,6 +219,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Ice-Jade Teapot",
+        id: 14125,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 713,
@@ -199,6 +227,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Peacekeeper - Specialized",
+        id: 13127,
         speciality: "DEFENSE",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -206,6 +235,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Sharpened Stinger",
+        id: 14126,
         speciality: "ANOMALY",
         WengineStatSelected: "ANOMALY_PROFICIENCY_FLAT",
         WengineFlatAttack: 713,
@@ -213,6 +243,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Gilded Blossom",
+        id: 13013,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -220,6 +251,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Kaboom the Cannon",
+        id: 13115,
         speciality: "SUPPORT",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 624,
@@ -227,6 +259,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Roaring Ride",
+        id: 13128,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -234,6 +267,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Riot Suppressor Mark VI",
+        id: 14124,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_DAMAGE",
         WengineFlatAttack: 713,
@@ -241,6 +275,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Deep Sea Visitor",
+        id: 14119,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -248,6 +283,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Weeping Gemini",
+        id: 14121,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -255,6 +291,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Weeping Cradle",
+        id: 14121,
         speciality: "SUPPORT",
         WengineStatSelected: "PEN_PERCENT",
         WengineFlatAttack: 684,
@@ -262,6 +299,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Unfettered Game Ball",
+        id: 14002,
         speciality: "SUPPORT",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 594,
@@ -269,6 +307,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "The Vault",
+        id: 13103,
         speciality: "SUPPORT",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 624,
@@ -276,6 +315,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "The Restrained",
+        id: 14114,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 684,
@@ -283,6 +323,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "The Brimstone",
+        id: 14104,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 684,
@@ -290,6 +331,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Street Superstar",
+        id: 13001,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -297,6 +339,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Steel Cushion",
+        id: 14102,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 684,
@@ -304,6 +347,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Steam Oven",
+        id: 13005,
         speciality: "STUN",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 594,
@@ -311,6 +355,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Starlight Engine Replica",
+        id: 13108,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -318,6 +363,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Starlight Engine",
+        id: 13004,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -325,6 +371,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Spring Embrace",
+        id: 13011,
         speciality: "DEFENSE",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 594,
@@ -332,6 +379,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Slice of Time",
+        id: 13002,
         speciality: "ATTACK",
         WengineStatSelected: "PEN_PERCENT",
         WengineFlatAttack: 594,
@@ -339,6 +387,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Six Shooter",
+        id: 14003,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 594,
@@ -346,6 +395,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Rainforest Gourmet",
+        id: 13003,
         speciality: "ANOMALY",
         WengineStatSelected: "ANOMALY_PROFICIENCY_FLAT",
         WengineFlatAttack: 594,
@@ -353,6 +403,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Precious Fossilized Core",
+        id: 13006,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 594,
@@ -360,6 +411,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Original Transmorpher",
+        id: 13007,
         speciality: "DEFENSE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 594,
@@ -367,6 +419,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Housekeeper",
+        id: 13106,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -374,6 +427,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Fusion Compiler",
+        id: 14118,
         speciality: "ANOMALY",
         WengineStatSelected: "PEN_PERCENT",
         WengineFlatAttack: 684,
@@ -381,6 +435,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Electro-Lip Gloss",
+        id: 13009,
         speciality: "ANOMALY",
         WengineStatSelected: "ANOMALY_PROFICIENCY_FLAT",
         WengineFlatAttack: 594,
@@ -388,6 +443,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Drill Rig - Red Axis",
+        id: 13111,
         speciality: "ATTACK",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 624,
@@ -395,6 +451,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Cannon Rotor",
+        id: 14001,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 594,
@@ -402,6 +459,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Bunny Band",
+        id: 13010,
         speciality: "DEFENSE",
         WengineStatSelected: "DEFENSE_PERCENT",
         WengineFlatAttack: 594,
@@ -409,6 +467,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Big Cylinder",
+        id: 13112,
         speciality: "DEFENSE",
         WengineStatSelected: "DEFENSE_PERCENT",
         WengineFlatAttack: 624,
@@ -416,6 +475,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Bashful Demon",
+        id: 13113,
         speciality: "SUPPORT",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 624,
@@ -423,6 +483,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Vortex] Revolver",
+        id: 12007,
         speciality: "STUN",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 475,
@@ -430,6 +491,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Vortex] Hatchet",
+        id: 12009,
         speciality: "STUN",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 475,
@@ -437,6 +499,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Vortex] Arrow",
+        id: 12008,
         speciality: "STUN",
         WengineStatSelected: "IMPACT_FLAT",
         WengineFlatAttack: 475,
@@ -444,6 +507,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Reverb] Mark III",
+        id: 12006,
         speciality: "SUPPORT",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 475,
@@ -451,6 +515,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Reverb] Mark II",
+        id: 12005,
         speciality: "SUPPORT",
         WengineStatSelected: "ENERGY_REGEN_PERCENT",
         WengineFlatAttack: 475,
@@ -458,6 +523,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Reverb] Mark I",
+        id: 12004,
         speciality: "SUPPORT",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 475,
@@ -465,6 +531,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Magnetic Storm] Charlie",
+        id: 12012,
         speciality: "ANOMALY",
         WengineStatSelected: "PEN_PERCENT",
         WengineFlatAttack: 475,
@@ -472,6 +539,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Magnetic Storm] Bravo",
+        id: 12011,
         speciality: "ANOMALY",
         WengineStatSelected: "ANOMALY_PROFICIENCY_FLAT",
         WengineFlatAttack: 475,
@@ -479,6 +547,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Magnetic Storm] Alpha",
+        id: 12010,
         speciality: "ANOMALY",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 475,
@@ -486,6 +555,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Lunar] Pleniluna",
+        id: 12001,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 475,
@@ -493,6 +563,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Lunar] Noviluna",
+        id: 12003,
         speciality: "ATTACK",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 475,
@@ -500,6 +571,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Lunar] Decrescent",
+        id: 12002,
         speciality: "ATTACK",
         WengineStatSelected: "ATTACK_PERCENT",
         WengineFlatAttack: 475,
@@ -507,6 +579,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Identity] Inflection",
+        id: 12014,
         speciality: "DEFENSE",
         WengineStatSelected: "DEFENSE_PERCENT",
         WengineFlatAttack: 475,
@@ -514,6 +587,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "[Identity] Base",
+        id: 12013,
         speciality: "DEFENSE",
         WengineStatSelected: "DEFENSE_PERCENT",
         WengineFlatAttack: 475,
@@ -521,6 +595,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Dreamlit Hearth",
+        id: 14145,
         speciality: "SUPPORT",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 713,
@@ -528,6 +603,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Grill O'Wisp",
+        id: 13144,
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 624,
@@ -535,6 +611,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Kraken's Cradle",
+        id: 14105,
         speciality: "RUPTURE",
         WengineStatSelected: "HP_PERCENT",
         WengineFlatAttack: 713,
@@ -542,6 +619,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "Yesterday Calls",
+        id: 14148,
         speciality: "STUN",
         WengineStatSelected: "CRIT_RATE",
         WengineFlatAttack: 713,
@@ -549,6 +627,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "None",
+        id: ,
         speciality: "DEFENSE",
         WengineStatSelected: "NONE",
         WengineFlatAttack: 0,

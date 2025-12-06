@@ -106,6 +106,7 @@ export interface SeletedSubstats {
 
 export interface Character {
     name: string;
+    id: number;
     speciality: specialityKeys;
     stats: Stats;
 }
@@ -125,6 +126,7 @@ export interface AttackStats {
 
 export interface Wengine {
     name: string;
+    id: number;
     speciality: specialityKeys;
     WengineFlatAttack: number;
     WengineStatValue: number;
