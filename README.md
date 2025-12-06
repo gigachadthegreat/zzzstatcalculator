@@ -76,3 +76,11 @@ To run this project on your local machine, follow these steps.
 ## Contributing
 
 Found a bug or have a suggestion for a new feature? Feel free to open an issue on the GitHub Issues page. The "Report an issue" button in the app will take you there directly.
+
+### To add a new characters and wengines:
+1. Add characters stats, Id, name and speciality to `src/constants/Characters.tsx`
+2. Add the characters attack stats and to `src/constants/AttackStats.tsx`.
+If an attack needs any additional damage calculation add the calculator identifier to the Attack, add the custom calculator to `src/lib/CustomCalculators.tsx` and 
+3. Add W-engines name, Id, speciality, main-stat value and type to `src/constants/Wengines.tsx`, and add it to the switch-case in runCustomCalculator() in `src/components/DamageCalculator.tsx`
+
+To get character, W-engine and Drive Disk IDs use https://zzz3.hakush.in. Open the character page, open devtools -> Network tab. Crtl + F and search for you character. You will find the characters.json which contains characters and their Ids. The same technique can be used for W-engines and Drive Disks.
