@@ -18,12 +18,15 @@ import {
     getParameterizedStatsAsUrl,
     getsettingsFromUrl,
     getWengineFromName,
+    getEnkaData,
 } from "./lib/Utility";
 import { Characters } from "./constants/Characters";
 import { Wengines } from "./constants/Wengines";
 import { calculateStats, calculateSheer } from "./lib/Calculations";
 import Results from "./components/Results";
 import { Attacks } from "./constants/AttackStats";
+
+import Spinner from "./components/Spinner";
 
 function App() {
     const imgRef = useRef<HTMLImageElement>(null);
@@ -85,6 +88,7 @@ function App() {
         }
     }, []);
 
+    const [showEnkaOverlay, setShowEnkaOverlay] = useState<boolean>(false);
     const [characterName, setCharacterName] = useState<string>(Characters[0].name);
     const [wengineName, setWengineName] = useState<string>("None");
     const [selectedDrives, setSelectedDrives] = useState<SelectedDrives>({
@@ -142,6 +146,11 @@ function App() {
     const [additionalCritRate, setAdditionalCritRate] = useState(0);
     const [additionalCritDamage, setAdditionalCritDamage] = useState(0);
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
+
+
+    const [enkaCharacters, setEnkaCharacters] = useState<string[]>([]);
+    const [enkaPlayerName, setEnkaPlayerName] = useState<string>("");
+    const [loadingEnkaData, setLoadingEnkaData] = useState<boolean>(false);
 
     // const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
     // const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
@@ -342,7 +351,6 @@ function App() {
         setMultiplier(getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
         setIsCustomMultiplier(false);
 
-
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
         setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
         setAnomalyType("Burn");
@@ -373,10 +381,59 @@ function App() {
         // - newUrl: The new URL to display in the address bar
         window.history.replaceState(null, "", newUrl);
     };
+    const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            setLoadingEnkaData(true);
+            if(isNaN(Number(event.currentTarget.value))){
+                // TODO: Display to user that this is unacceptable!!!!! HERETIC!!!
+                return;
+                
+            }
+            const result = (await getEnkaData(event.currentTarget.value)).PlayerInfo;
+            setEnkaPlayerName(result.SocialDetail.ProfileDetail.Nickname); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state. 
+            setEnkaCharacters(result.ShowcaseDetail.AvatarList)
+            setLoadingEnkaData(false);
+            console.log(result)
+
+        }
+    }
+
+    
+
+
+
 
     return (
         <div className={`relative min-h-screen  text-gray-800 dark:bg-slate-950 dark:text-gray-200`}>
-            <header className="bg-white shadow sticky top-0 z-20 dark:bg-slate-900 dark:border-b dark:border-slate-800">
+            {showEnkaOverlay ? (
+                <div className="absolute z-50 w-full h-full">
+                    <div className="absolute w-full h-full opacity-80 z-50 bg-black"></div>
+                    <div className="fixed w-full h-full flex justify-center items-center z-60">
+                        <div className="opacity-100 w-150 p-2 border rounded bg-gray-50 dark:bg-slate-800 dark:border-slate-600 flex flex-col">
+                            <div className="cursor-pointer hover:bg-gray-900 rounded-sm ml-auto py-2 px-3 text-xl font-bold" onClick={() => setShowEnkaOverlay(false)}>&#x2715;</div>
+                            
+                            <div>
+
+                                <input className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"  type="number" onKeyDown={handleKeyDown}></input>
+                                <br/>
+                                {loadingEnkaData ? <Spinner/> : <></>}
+                                <div>Player: {enkaPlayerName}</div>
+                                <div>
+                                {
+                                    enkaCharacters.map((enkaCharacter) => {
+                                        return <h1>{Characters.find((character) => character.id === enkaCharacter.Id)?.name.toString()}</h1>
+                                    })
+                                }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <></>
+            )}
+            <header className="bg-white shadow sticky top-0 z-30 dark:bg-slate-900 dark:border-b dark:border-slate-800">
                 <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
                     <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">ZZZ Stat Calculator</h1>
 
@@ -386,6 +443,15 @@ function App() {
                             onClick={() => resetEveryState()}
                         >
                             Reset everything
+                        </button>
+
+                        <button
+                            className="right-5 cursor-pointer px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
+                            onClick={async () => {
+                                setShowEnkaOverlay(true);
+                            }}
+                        >
+                            Import Data from Enka.net
                         </button>
 
                         <button
@@ -426,21 +492,20 @@ function App() {
             </header>
 
             <div
-                className="absolute inset-0 bg-[url(/assets/images/background.webp)] bg-cover bg-center z-0 pointer-events-none opacity-50 blur-sm -left-100"
+                className="z-0 absolute inset-0 bg-[url(/assets/images/background.webp)] bg-cover bg-center z-10 pointer-events-none opacity-50 blur-sm -left-100"
                 aria-hidden="true"
             />
-
 
             <div className="grid grid-cols-5 ">
                 <div className="pt-15">
                     <img
                         ref={imgRef}
-                        className={` w-3/5  left-25 z-0 scale-700 top-135 sticky`} //top-135
+                        className={` w-3/5  left-25 z-10 scale-700 top-135 sticky`} //top-135
                         src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.webp`}
                         alt="character avatar"
                     />
                 </div>
-                <div className="col-span-3 z-10">
+                <div className="col-span-3 z-20">
                     <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
                         <div className="space-y-8">
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
@@ -517,7 +582,7 @@ function App() {
                 </div>
             </div>
             <div
-                className="fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-700 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-800"
+                className="z-10 fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-500 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-600"
                 onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}
             >
                 Report an issue
