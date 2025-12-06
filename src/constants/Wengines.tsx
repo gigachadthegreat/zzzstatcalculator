@@ -627,7 +627,7 @@ export const Wengines: Wengine[] = [
     },
     {
         name: "None",
-        id: ,
+        id: 0,
         speciality: "DEFENSE",
         WengineStatSelected: "NONE",
         WengineFlatAttack: 0,
