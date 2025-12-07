@@ -10,7 +10,7 @@ import {
     type AttackModifiers,
     levelFactorAttacker,
     type AttackStats,
-    DriveIdTypeMapping,
+    DriveDisks
 } from "./constants/types";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -480,7 +480,7 @@ function App() {
         for (const [driveId, count] of map.entries()) {
             if (count >= 2) {
                 const twoPieceIds = Number(Object.entries(DiskIds).find(([key, val]) => Number(key) === Number(driveId))[0]);
-                twoPscEffect.push(Object.entries(DriveIdTypeMapping).find(([key, val]) => Number(key) === twoPieceIds)[1]);
+                twoPscEffect.push(Object.entries(DriveDisks).find(([key, val]) => Number(val.id) === twoPieceIds)[1].mainStat);
             }
         }
 

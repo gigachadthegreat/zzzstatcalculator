@@ -36,6 +36,105 @@ export const StatType = {
     NONE: "NONE",
 } as const;
 
+export const DriveDisks = {
+    WoodpeckerElectro: {
+        id: 31000,
+        mainStat: StatType.CRIT_RATE,
+    },
+    PufferElectro: {
+        id: 31100,
+        mainStat: StatType.PEN_PERCENT,
+    },
+    ShockstarDisco: {
+        id: 31200,
+        mainStat: StatType.IMPACT_PERCENT,
+    },
+    FreedomBlues: {
+        id: 31300,
+        mainStat: StatType.ANOMALY_PROFICIENCY_FLAT,
+    },
+    HormonePunk: {
+        id: 31400,
+        mainStat: StatType.ATTACK_PERCENT,
+    },
+    SoulRocks: {
+        id: 31500,
+        mainStat: StatType.DEFENSE_PERCENT,
+    },
+    SwingJazz: {
+        id: 31600,
+        mainStat: StatType.ENERGY_REGEN_PERCENT,
+    },
+    ChaosJazz: {
+        id: 31800,
+        mainStat: StatType.ANOMALY_PROFICIENCY_FLAT,
+    },
+    ProtoPunk: {
+        id: 31900,
+        mainStat: StatType.NONE,
+    },
+    InfernoMetal: {
+        id: 32200,
+        mainStat: StatType.ELEMENT_PERCENT,
+    },
+    ChaosMetal: {
+        id: 32300,
+        mainStat: StatType.ELEMENT_PERCENT,
+    },
+    ThunderMetal: {
+        id: 32400,
+        mainStat: StatType.ELEMENT_PERCENT,
+    },
+    PolarMetal: {
+        id: 32500,
+        mainStat: StatType.ELEMENT_PERCENT,
+    },
+    FangedMetal: {
+        id: 32600,
+        mainStat: StatType.ELEMENT_PERCENT,
+    },
+    BranchBlade: {
+        id: 32700,
+        mainStat: StatType.CRIT_DAMAGE,
+    },
+    AstralVoice: {
+        id: 32800,
+        mainStat: StatType.ATTACK_PERCENT,
+    },
+    ShadowHarmony: {
+        id: 32900,
+        mainStat: StatType.NONE,
+    },
+    PhaethonsMelody: {
+        id: 33000,
+        mainStat: StatType.ANOMALY_MASTERY_PERCENT,
+    },
+    YunkuiTales: {
+        id: 33100,
+        mainStat: StatType.HP_PERCENT,
+    },
+    KingOfTheSummit: {
+        id: 33200,
+        mainStat: StatType.NONE,
+    },
+    DawnsBlossom: {
+        id: 33300,
+        mainStat: StatType.NONE,
+    },
+    MoonlightLulaby: {
+        id: 33400,
+        mainStat: StatType.ENERGY_REGEN_PERCENT,
+    },
+    WhiteWaterBallad: {
+        id: 33500,
+        mainStat: StatType.NONE,
+    },
+    ShiningAria: {
+        id: 33600,
+        mainStat: StatType.NONE,
+    },
+};
+
 export type specialityKeys = keyof typeof Speciality;
 export const Speciality = {
     ATTACK: "ATTACK",
@@ -77,7 +176,6 @@ export interface AttackModifiers {
     stunMultiplier: number;
     additionalSheerDmgBonusMultiplierAttacker: number;
 }
-
 
 export interface SelectedDrives {
     drive1Enabled: boolean;
@@ -135,7 +233,6 @@ export interface Wengine {
 
 export type DriveStatRecord<T extends statTypeKeys> = Record<T, number>;
 
-    
 export const DriveStats = {
     Drive1HpFlat: 2200,
     Drive2AttackFlat: 316,
@@ -250,9 +347,6 @@ export const DriveStats = {
     >,
 };
 
-
-
-
 export const numberOfPossibleSubstats = 54;
 export const SheerHpConversionFactor = 0.1;
 export const SheerAttackConsersionFactor = 0.3;
@@ -270,30 +364,3 @@ export const AnomalyMultipliers = {
     Shatter: 5.0,
     Assault: 7.13,
 };
-
-export const DriveIdTypeMapping = {
-    31000: "CRIT_RATE",// "WoodpeckerElectro",
-    31100: "PEN_PERCENT",// "Puffer Electro",
-    31200: "IMPACT_PERCENT",// "ShockstarDisco",
-    31300: "ANOMALY_PROFICIENCY_FLAT",// "FreedomBlues",
-    31400: "ATTACK_PERCENT",// "HormonePunk",
-    31500: "DEFENSE_PERCENT",// "SoulRocks",
-    31600: "ENERGY_REGEN_PERCENT",// "SwingJazz",
-    31800: "ANOMALY_PROFICIENCY_FLAT",// "ChaosJazz",
-    31900: "NONE",// "ProtoPunk",
-    32200: "ELEMENT_PERCENT",// "InfernoMetal",
-    32300: "ELEMENT_PERCENT",// "ChaosMetal",
-    32400: "ELEMENT_PERCENT",// "ThunderMetal",
-    32500: "ELEMENT_PERCENT",// "PolarMetal",
-    32600: "ELEMENT_PERCENT",// "FangedMetal",
-    32700: "CRIT_DAMAGE",// "Branch&Blade",
-    32800: "ATTACK_PERCENT",// "AstralVoice",
-    32900: "NONE",// "ShadowHarmony",
-    33000: "ANOMALY_MASTERY_PERCENT",// "PhaethonsMelody",
-    33100: "HP_PERCENT",// "YunkuiTales",
-    33200: "NONE",// "KingOfTheSummit",
-    33300: "NONE",// "DawnsBlossom",
-    33400: "ENERGY_REGEN_PERCENT",// "MoonlightLulaby",
-    33500: "NONE",// "WhiteWaterBallad",
-    33600: "NONE",// "ShiningAria",
-}
