@@ -10,7 +10,7 @@ import {
     type AttackModifiers,
     levelFactorAttacker,
     type AttackStats,
-    DriveIdTypeMapping
+    DriveIdTypeMapping,
 } from "./constants/types";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -27,7 +27,7 @@ import { calculateStats, calculateSheer } from "./lib/Calculations";
 import Results from "./components/Results";
 import { Attacks } from "./constants/AttackStats";
 
-import {DiskIds, StatIds} from "./constants/GameIds";
+import { DiskIds, StatIds } from "./constants/GameIds";
 import Spinner from "./components/Spinner";
 
 function App() {
@@ -149,9 +149,8 @@ function App() {
     const [additionalCritDamage, setAdditionalCritDamage] = useState(0);
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
 
-
     const [enkaCharacters, setEnkaCharacters] = useState<any[]>([]);
-    const [enkaPlayerName, setEnkaPlayerName] = useState<string>("");
+    const [enkaPlayerName, setEnkaPlayer] = useState();
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     // const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
@@ -384,23 +383,21 @@ function App() {
         window.history.replaceState(null, "", newUrl);
     };
     const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             setLoadingEnkaDataSpinner(true);
-            if(isNaN(Number(event.currentTarget.value))){
+            if (isNaN(Number(event.currentTarget.value))) {
                 // TODO: Display to user that this is unacceptable!!!!! HERETIC!!!
                 return;
-                
             }
             const result = (await getEnkaData(event.currentTarget.value)).PlayerInfo;
-            setEnkaPlayerName(result.SocialDetail.ProfileDetail.Nickname); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state. 
-            setEnkaCharacters(result.ShowcaseDetail.AvatarList)
+            console.log("result.SocialDetail:", result.SocialDetail);
+
+            setEnkaPlayer(result.SocialDetail); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state.
+            setEnkaCharacters(result.ShowcaseDetail.AvatarList);
             setLoadingEnkaDataSpinner(false);
-            console.log(result)
-
         }
-    }
+    };
 
-    
     const getDriveMainStatType = (statId: number) => {
         const driveMainStatEntry = Object.entries(StatIds).find(([key, val]) => Number(key) === Number(statId));
 
@@ -416,9 +413,9 @@ function App() {
     };
 
     const handleEnkaCharacterSelect = (character: any) => {
-        console.log(character)
+        console.log(character);
         setCharacterName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name);
-        setWengineName(Wengines.find((wengine) => wengine.id === character.Weapon.Id)?.name || Wengines[0].name)
+        setWengineName(Wengines.find((wengine) => wengine.id === character.Weapon.Id)?.name || Wengines[0].name);
 
         const disk1 = character.EquippedList.find((disk: any) => disk.Slot === 1);
         const disk2 = character.EquippedList.find((disk: any) => disk.Slot === 2);
@@ -427,33 +424,51 @@ function App() {
         const disk5 = character.EquippedList.find((disk: any) => disk.Slot === 5);
         const disk6 = character.EquippedList.find((disk: any) => disk.Slot === 6);
 
-        const drive4MainStatId = disk4?.Equipment?.MainPropertyList?.[0]?.PropertyId ? parseInt(disk4.Equipment.MainPropertyList[0].PropertyId) : undefined;
-        const drive5MainStatId = disk5?.Equipment?.MainPropertyList?.[0]?.PropertyId ? parseInt(disk5.Equipment.MainPropertyList[0].PropertyId) : undefined;
-        const drive6MainStatId = disk6?.Equipment?.MainPropertyList?.[0]?.PropertyId ? parseInt(disk6.Equipment.MainPropertyList[0].PropertyId) : undefined;
+        const drive4MainStatId = disk4?.Equipment?.MainPropertyList?.[0]?.PropertyId
+            ? parseInt(disk4.Equipment.MainPropertyList[0].PropertyId)
+            : undefined;
+        const drive5MainStatId = disk5?.Equipment?.MainPropertyList?.[0]?.PropertyId
+            ? parseInt(disk5.Equipment.MainPropertyList[0].PropertyId)
+            : undefined;
+        const drive6MainStatId = disk6?.Equipment?.MainPropertyList?.[0]?.PropertyId
+            ? parseInt(disk6.Equipment.MainPropertyList[0].PropertyId)
+            : undefined;
 
-        const driveIds = []
+        const driveIds = [];
         // Normalize disk IDs to the nearest lower hundred (e.g. 33341 -> 33300)
-        driveIds.push( disk1?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk1.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
-        driveIds.push( disk2?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk2.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
-        driveIds.push( disk3?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk3.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
-        driveIds.push( disk4?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk4.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
-        driveIds.push( disk5?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk5.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
-        driveIds.push( disk6?.Equipment?.MainPropertyList?.[0]?.PropertyId
-            ? (Math.floor(parseInt(disk6.Equipment.Id, 10) / 100) * 100) .toString()
-            : undefined)
+        driveIds.push(
+            disk1?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk1.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
+        driveIds.push(
+            disk2?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk2.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
+        driveIds.push(
+            disk3?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk3.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
+        driveIds.push(
+            disk4?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk4.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
+        driveIds.push(
+            disk5?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk5.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
+        driveIds.push(
+            disk6?.Equipment?.MainPropertyList?.[0]?.PropertyId
+                ? (Math.floor(parseInt(disk6.Equipment.Id, 10) / 100) * 100).toString()
+                : undefined
+        );
 
         const map = new Map();
-        
+
         for (const driveId of driveIds) {
             if (driveId) {
                 const currentCount = map.get(driveId) || 0;
@@ -461,12 +476,11 @@ function App() {
             }
         }
 
-
-        const twoPscEffect = []
-        for(const [driveId, count] of map.entries()){
-            if(count >= 2){
-                const twoPieceIds = (Number(Object.entries(DiskIds).find(([key, val]) => Number(key) === Number(driveId))[0]))
-                twoPscEffect.push(Object.entries(DriveIdTypeMapping).find(([key, val]) => Number(key) === twoPieceIds)[1])
+        const twoPscEffect = [];
+        for (const [driveId, count] of map.entries()) {
+            if (count >= 2) {
+                const twoPieceIds = Number(Object.entries(DiskIds).find(([key, val]) => Number(key) === Number(driveId))[0]);
+                twoPscEffect.push(Object.entries(DriveIdTypeMapping).find(([key, val]) => Number(key) === twoPieceIds)[1]);
             }
         }
 
@@ -480,26 +494,26 @@ function App() {
             drive2psc1: twoPscEffect[0] ?? StatType.NONE,
             drive2psc2: twoPscEffect[1] ?? StatType.NONE,
             drive2psc3: twoPscEffect[2] ?? StatType.NONE,
-        }
-        setSelectedDrives(drives)
+        };
+        setSelectedDrives(drives);
 
         // Parse substats from all equipped disks (slots 4-6)
         const substatMap = new Map<string, number>();
         const diskSlots = [disk1, disk2, disk3, disk4, disk5, disk6];
 
         for (const disk of diskSlots) {
-            if(disk != undefined)
-            for (const substat of disk.Equipment.RandomPropertyList) {
-                const substatId = Number(substat.PropertyId);
-                // Look up the substat key from StatIds
-                const substatEntry = (Object.entries(StatIds).find(([key]) => Number(key) === substatId))[1];
-                const substatCount = substat.PropertyLevel;
-                const currentCount = substatMap.get(substatEntry) || 0;
-                substatMap.set(substatEntry, currentCount + substatCount);
-            }
+            if (disk != undefined)
+                for (const substat of disk.Equipment.RandomPropertyList) {
+                    const substatId = Number(substat.PropertyId);
+                    // Look up the substat key from StatIds
+                    const substatEntry = Object.entries(StatIds).find(([key]) => Number(key) === substatId)[1];
+                    const substatCount = substat.PropertyLevel;
+                    const currentCount = substatMap.get(substatEntry) || 0;
+                    substatMap.set(substatEntry, currentCount + substatCount);
+                }
         }
 
-        console.log(substatMap)
+        console.log(substatMap);
         // Build selectedSubstats object from the accumulated map
         const newSubstats: SeletedSubstats = {
             HP_PERCENT: substatMap.get("HP_PERCENT") || 0,
@@ -512,15 +526,9 @@ function App() {
             CRIT_DAMAGE: substatMap.get("CRIT_DAMAGE") || 0,
             ANOMALY_PROFICIENCY_FLAT: substatMap.get("ANOMALY_PROFICIENCY_FLAT") || 0,
             PEN_FLAT: substatMap.get("PEN_FLAT") || 0,
-        }
-        setSelectedSubstats(newSubstats)
-
-
-
-
-
-    }
-
+        };
+        setSelectedSubstats(newSubstats);
+    };
 
     return (
         <div className={`relative min-h-screen  text-gray-800 dark:bg-slate-950 dark:text-gray-200`}>
@@ -529,22 +537,42 @@ function App() {
                     <div className="absolute w-full h-full opacity-80 z-50 bg-black"></div>
                     <div className="fixed w-full h-full flex justify-center items-center z-60">
                         <div className="opacity-100 w-150 p-2 border rounded bg-gray-50 dark:bg-slate-800 dark:border-slate-600 flex flex-col">
-                            <div className="cursor-pointer hover:bg-gray-900 rounded-sm ml-auto py-2 px-3 text-xl font-bold" onClick={() => setShowEnkaOverlay(false)}>&#x2715;</div>
-                            
-                            <div>
+                            <div
+                                className="cursor-pointer hover:bg-gray-900 rounded-sm ml-auto py-2 px-3 text-xl font-bold"
+                                onClick={() => setShowEnkaOverlay(false)}
+                            >
+                                &#x2715;
+                            </div>
 
-                                <input className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"  type="number" onKeyDown={handleKeyDown}></input>
-                                <br/>
-                                {loadingEnkaDataSpinner ? <Spinner/> : <></>}
-                                <div>Player: {enkaPlayerName}</div>
+                            <div>
+                                <input
+                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
+                                    type="number"
+                                    onKeyDown={handleKeyDown}
+                                ></input>
+                                <br />
+                                {loadingEnkaDataSpinner ? <Spinner /> : <></>}
+                                <div className="flex items-center">
+                                <div className="-2 text-3xl font-bold text-gray-900 dark:text-gray-100">Account: </div> 
                                 <div>
-                                {
-                                    enkaCharacters.map((enkaCharacter) => {
-                                        return <div key={enkaCharacter.Id} onClick={() => handleEnkaCharacterSelect(enkaCharacter)}>{Characters.find((character) => character.id === enkaCharacter.Id)?.name.toString()}</div>
-                                    })
-                                }
+                                <div className="m-2 text-3xl  text-gray-900 dark:text-gray-100"> {enkaPlayerName?.ProfileDetail?.Nickname}</div>
+                                <div className="m-2 text-xl  text-gray-900 dark:text-gray-100">&nbsp;{enkaPlayerName?.Desc}</div>
+                                </div>
                                 </div>
 
+                                <div>
+                                    {enkaCharacters.map((enkaCharacter) => {
+                                        return (
+                                            <div
+                                                className="p-2 text-3xl  text-gray-900 dark:text-gray-100 cursor-pointer hover:bg-gray-900"
+                                                key={enkaCharacter.Id}
+                                                onClick={() => handleEnkaCharacterSelect(enkaCharacter)}
+                                            >
+                                                {Characters.find((character) => character.id === enkaCharacter.Id)?.name.toString()}
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         </div>
                     </div>
