@@ -1,5 +1,6 @@
 import {
     AnomalyMultipliers,
+    type AdditionalStats,
     type AttackModifiers,
     type Character,
     type CharacterAttacks,
@@ -67,15 +68,7 @@ export const getParameterizedStatsAsUrl = (
     isAnomaly: boolean,
     anomalyType: keyof typeof AnomalyMultipliers,
 
-    additionalHpFlat: number,
-    additionalHpPercent: number,
-    additionalAttackFlat: number,
-    additionalAttackPercent: number,
-    additionalPenPercent: number,
-    additionalPenFlat: number,
-    additionalCritRate: number,
-    additionalCritDamage: number,
-    additionalElementPercent: number
+    additionalStatsUI: AdditionalStats
     // characterLevel: number
 ) => {
     const params = new URLSearchParams();
@@ -95,15 +88,7 @@ export const getParameterizedStatsAsUrl = (
     params.set("isRupture", isRupture.toString());
     params.set("isAnomaly", isAnomaly.toString());
     params.set("anomalyType", anomalyType.toString());
-    params.set("additionalHpFlat", additionalHpFlat.toString());
-    params.set("additionalHpPercent", additionalHpPercent.toString());
-    params.set("additionalAttackFlat", additionalAttackFlat.toString());
-    params.set("additionalAttackPercent", additionalAttackPercent.toString());
-    params.set("additionalPenPercent", additionalPenPercent.toString());
-    params.set("additionalPenFlat", additionalPenFlat.toString());
-    params.set("additionalCritRate", additionalCritRate.toString());
-    params.set("additionalCritDamage", additionalCritDamage.toString());
-    params.set("additionalElementPercent", additionalElementPercent.toString());
+    params.set("additionalStatsUI", JSON.stringify(additionalStatsUI));
     // params.set("characterLevel", characterLevel.toString());
 
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
@@ -149,18 +134,9 @@ export const getsettingsFromUrl = () => {
     settings.anomalyType = parseParam("anomalyType", "string");
 
     settings.attackModifiers = parseParam("attackModifiers", "json");
+    settings.additionalStatsUI = parseParam("additionalStatsUI", "json");
 
-    settings.additionalHpFlat = parseParam("additionalHpFlat", "number");
-    settings.additionalHpPercent = parseParam("additionalHpPercent", "number");
-    settings.additionalAttackFlat = parseParam("additionalAttackFlat", "number");
-    settings.additionalAttackPercent = parseParam("additionalAttackPercent", "number");
-    settings.additionalPenPercent = parseParam("additionalPenPercent", "number");
-    settings.additionalPenFlat = parseParam("additionalPenFlat", "number");
-    settings.additionalCritRate = parseParam("additionalCritRate", "number");
-    settings.additionalCritDamage = parseParam("additionalCritDamage", "number");
-    settings.additionalElementPercent = parseParam("additionalElementPercent", "number");
-    settings.additionalSheerFlat = parseParam("additionalSheerFlat", "number");
-    settings.additionalSheerPercent = parseParam("additionalSheerPercent", "number");
+
 
     // Filter out null values so we only return settings that were present in the URL
     return Object.fromEntries(Object.entries(settings).filter(([, value]) => value !== null));

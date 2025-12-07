@@ -161,7 +161,6 @@ export interface Stats {
 }
 
 export interface AttackModifiers {
-
     additionalDmgBonusMultiplierAttacker: number;
     critMode: "avg" | "crit" | "noCrit";
     defenseTarget: number;
@@ -174,6 +173,20 @@ export interface AttackModifiers {
     dmgTakenReduction: number;
     stunMultiplier: number;
     additionalSheerDmgBonusMultiplierAttacker: number;
+}
+
+export interface AdditionalStats {
+    additionalHpFlat: number;
+    additionalHpPercent: number;
+    additionalAttackFlat: number;
+    additionalAttackPercent: number;
+    additionalPenPercent: number;
+    additionalPenFlat: number;
+    additionalCritRate: number;
+    additionalCritDamage: number;
+    additionalElementPercent: number;
+    additionalSheerPercent: number;
+    additionalSheerFlat: number;
 }
 
 export interface SelectedDrives {

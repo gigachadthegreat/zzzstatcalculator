@@ -1,5 +1,12 @@
 import { useEffect, useState } from "react";
-import { type Stats, AnomalyMultipliers, type AttackStats, AttackTypes, type AttackModifiers } from "../constants/types";
+import {
+    type Stats,
+    AnomalyMultipliers,
+    type AttackStats,
+    AttackTypes,
+    type AttackModifiers,
+    type AdditionalStats,
+} from "../constants/types";
 import LabelWithTextInput from "./LabelWithTextInput";
 import DamageFormulaStandard from "./DamageFormulaStandard.tsx";
 import DamageFormulaAnomaly from "./DamageFormulaAnomaly.tsx";
@@ -51,38 +58,8 @@ function DamageCalculator({
     anomalyType,
     setAnomalyType,
 
-    additionalHpFlat,
-    setAdditionalHpFlat,
-
-    additionalHpPercent,
-    setAdditionalHpPercent,
-
-    additionalAttackFlat,
-    setAdditionalAttackFlat,
-
-    additionalAttackPercent,
-    setAdditionalAttackPercent,
-
-    additionalPenPercent,
-    setAdditionalPenPercent,
-
-    additionalPenFlat,
-    setAdditionalPenFlat,
-
-    additionalCritRate,
-    setAdditionalCritRate,
-
-    additionalCritDamage,
-    setAdditionalCritDamage,
-
-    additionalElementPercent,
-    setAdditionalElementPercent,
-
-    additionalSheerFlat,
-    setAdditionalSheerFlat,
-
-    additionalSheerPercent,
-    setAdditionalSheerPercent,
+    additionalStatsUI,
+    setAdditionalStatsUI,
 }: {
     calculatedStats: Stats;
     characterName: string;
@@ -111,51 +88,21 @@ function DamageCalculator({
     anomalyType: keyof typeof AnomalyMultipliers;
     setAnomalyType: (value: keyof typeof AnomalyMultipliers) => void;
 
-    additionalHpFlat: number;
-    setAdditionalHpFlat: (value: number) => void;
-
-    additionalHpPercent: number;
-    setAdditionalHpPercent: (value: number) => void;
-
-    additionalAttackFlat: number;
-    setAdditionalAttackFlat: (value: number) => void;
-
-    additionalAttackPercent: number;
-    setAdditionalAttackPercent: (value: number) => void;
-
-    additionalPenPercent: number;
-    setAdditionalPenPercent: (value: number) => void;
-
-    additionalPenFlat: number;
-    setAdditionalPenFlat: (value: number) => void;
-
-    additionalCritRate: number;
-    setAdditionalCritRate: (value: number) => void;
-
-    additionalCritDamage: number;
-    setAdditionalCritDamage: (value: number) => void;
-
-    additionalElementPercent: number;
-    setAdditionalElementPercent: (value: number) => void;
-
-    additionalSheerFlat: number
-    setAdditionalSheerFlat: (value: number) => void;
-
-    additionalSheerPercent: number
-    setAdditionalSheerPercent: (value: number) => void;
-
+    additionalStatsUI: AdditionalStats;
+    setAdditionalStatsUI: (value: AdditionalStats) => void;
 }) {
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
 
     const [finalStats, setFinalStats] = useState<Stats>({
         ...calculatedStats,
-        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
-        ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
-        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
-        PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
-        CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
-        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
-        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
+        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
+        ATTACK_FLAT:
+            calculatedStats.ATTACK_FLAT * (1 + additionalStatsUI.additionalAttackPercent / 100) + additionalStatsUI.additionalAttackFlat,
+        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStatsUI.additionalPenPercent,
+        PEN_FLAT: calculatedStats.PEN_FLAT + additionalStatsUI.additionalPenFlat,
+        CRIT_RATE: calculatedStats.CRIT_RATE + additionalStatsUI.additionalCritRate,
+        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStatsUI.additionalCritDamage,
+        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStatsUI.additionalElementPercent,
     });
 
     const [finalAttackModifiers, setFinalAttackModifiers] = useState<AttackModifiers>(JSON.parse(JSON.stringify(attackModifiers)));
@@ -164,38 +111,41 @@ function DamageCalculator({
     useEffect(() => {
         setFinalStats({
             ...calculatedStats,
-            HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
-            ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
-            PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
-            PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
-            CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
-            CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
-            ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
+            HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
+            ATTACK_FLAT:
+                calculatedStats.ATTACK_FLAT * (1 + additionalStatsUI.additionalAttackPercent / 100) +
+                additionalStatsUI.additionalAttackFlat,
+            PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStatsUI.additionalPenPercent,
+            PEN_FLAT: calculatedStats.PEN_FLAT + additionalStatsUI.additionalPenFlat,
+            CRIT_RATE: calculatedStats.CRIT_RATE + additionalStatsUI.additionalCritRate,
+            CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStatsUI.additionalCritDamage,
+            ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStatsUI.additionalElementPercent,
         });
     }, [
         characterName,
         calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
+        additionalStatsUI.additionalHpFlat,
+        additionalStatsUI.additionalHpPercent,
+        additionalStatsUI.additionalAttackFlat,
+        additionalStatsUI.additionalAttackPercent,
+        additionalStatsUI.additionalPenPercent,
+        additionalStatsUI.additionalPenFlat,
+        additionalStatsUI.additionalCritRate,
+        additionalStatsUI.additionalCritDamage,
+        additionalStatsUI.additionalElementPercent,
     ]);
 
     // Helper to compute the base final stats from calculatedStats + additional inputs
     const computeBaseStats = (): Stats => ({
         ...calculatedStats,
-        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalHpPercent / 100) + additionalHpFlat,
-        ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (1 + additionalAttackPercent / 100) + additionalAttackFlat,
-        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalPenPercent,
-        PEN_FLAT: calculatedStats.PEN_FLAT + additionalPenFlat,
-        CRIT_RATE: calculatedStats.CRIT_RATE + additionalCritRate,
-        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalCritDamage,
-        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalElementPercent,
+        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
+        ATTACK_FLAT:
+            calculatedStats.ATTACK_FLAT * (1 + additionalStatsUI.additionalAttackPercent / 100) + additionalStatsUI.additionalAttackFlat,
+        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStatsUI.additionalPenPercent,
+        PEN_FLAT: calculatedStats.PEN_FLAT + additionalStatsUI.additionalPenFlat,
+        CRIT_RATE: calculatedStats.CRIT_RATE + additionalStatsUI.additionalCritRate,
+        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStatsUI.additionalCritDamage,
+        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStatsUI.additionalElementPercent,
     });
 
     // Helper to run the custom calculator (if any) and return the tuple used by the calculators
@@ -271,15 +221,15 @@ function DamageCalculator({
         isCustomMultiplier,
         characterName,
         calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
+        additionalStatsUI.additionalHpFlat,
+        additionalStatsUI.additionalHpPercent,
+        additionalStatsUI.additionalAttackFlat,
+        additionalStatsUI.additionalAttackPercent,
+        additionalStatsUI.additionalPenPercent,
+        additionalStatsUI.additionalPenFlat,
+        additionalStatsUI.additionalCritRate,
+        additionalStatsUI.additionalCritDamage,
+        additionalStatsUI.additionalElementPercent,
         attackUsed,
         attackLevel,
     ]);
@@ -328,15 +278,15 @@ function DamageCalculator({
         attackLevel,
         characterName,
         calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
+        additionalStatsUI.additionalHpFlat,
+        additionalStatsUI.additionalHpPercent,
+        additionalStatsUI.additionalAttackFlat,
+        additionalStatsUI.additionalAttackPercent,
+        additionalStatsUI.additionalPenPercent,
+        additionalStatsUI.additionalPenFlat,
+        additionalStatsUI.additionalCritRate,
+        additionalStatsUI.additionalCritDamage,
+        additionalStatsUI.additionalElementPercent,
         attackModifiers,
     ]);
 
@@ -370,15 +320,15 @@ function DamageCalculator({
         attackLevel,
         characterName,
         calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
+        additionalStatsUI.additionalHpFlat,
+        additionalStatsUI.additionalHpPercent,
+        additionalStatsUI.additionalAttackFlat,
+        additionalStatsUI.additionalAttackPercent,
+        additionalStatsUI.additionalPenPercent,
+        additionalStatsUI.additionalPenFlat,
+        additionalStatsUI.additionalCritRate,
+        additionalStatsUI.additionalCritDamage,
+        additionalStatsUI.additionalElementPercent,
     ]);
 
     // Effect: compute multiplier
@@ -411,15 +361,15 @@ function DamageCalculator({
         attackLevel,
         characterName,
         calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
+        additionalStatsUI.additionalHpFlat,
+        additionalStatsUI.additionalHpPercent,
+        additionalStatsUI.additionalAttackFlat,
+        additionalStatsUI.additionalAttackPercent,
+        additionalStatsUI.additionalPenPercent,
+        additionalStatsUI.additionalPenFlat,
+        additionalStatsUI.additionalCritRate,
+        additionalStatsUI.additionalCritDamage,
+        additionalStatsUI.additionalElementPercent,
     ]);
 
     let calculatedDamage = 0;
@@ -427,7 +377,14 @@ function DamageCalculator({
     if (isAnomaly) {
         calculatedDamage = calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage);
     } else if (isRupture) {
-        calculatedDamage = calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage, additionalSheerFlat, additionalSheerPercent);
+        calculatedDamage = calculateSheerDamageDealt(
+            multiplier,
+            finalStats,
+            finalAttackModifiers,
+            additionalDamage,
+            additionalStatsUI.additionalSheerFlat,
+            additionalStatsUI.additionalSheerPercent
+        );
     } else {
         calculatedDamage = calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
     }
@@ -470,8 +427,8 @@ function DamageCalculator({
                                     attackModifiers={finalAttackModifiers}
                                     stats={finalStats}
                                     additionalDamage={additionalDamage}
-                                    additionalSheerFlat={additionalSheerFlat}
-                                    additionalSheerPercent={additionalSheerPercent}
+                                    additionalSheerFlat={additionalStatsUI.additionalSheerFlat}
+                                    additionalSheerPercent={additionalStatsUI.additionalSheerPercent}
                                 />
                             ) : isAnomaly ? (
                                 <DamageFormulaAnomaly
@@ -520,7 +477,9 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="DMG Taken Increase %"
                                 infoText="Debuffs on the enemy that increase damage taken."
-                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenIncrease: Number(value) })}
+                                onInputChange={(value) =>
+                                    setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenIncrease: Number(value) })
+                                }
                                 inputValue={attackModifiers.dmgTakenIncrease}
                             />
                         </div>
@@ -529,7 +488,9 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="DMG Taken Reduction"
                                 infoText="Buffs on the enemy that reduce damage taken."
-                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenReduction: Number(value) })}
+                                onInputChange={(value) =>
+                                    setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenReduction: Number(value) })
+                                }
                                 inputValue={attackModifiers.dmgTakenReduction}
                             />
                         </div>
@@ -545,7 +506,9 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="RES Reduction %"
                                 infoText="Percentage to reduce enemies resistance to your character's element by. Additive with RES Ignore %"
-                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resReductionTarget: Number(value) })}
+                                onInputChange={(value) =>
+                                    setAttackModifiers({ ...(attackModifiers ?? {}), resReductionTarget: Number(value) })
+                                }
                                 inputValue={attackModifiers.resReductionTarget}
                             />
                         </div>
@@ -604,7 +567,9 @@ function DamageCalculator({
                                 />
                             </div>
                         </div>
-                        <div className={`flex items-center gap-2 mb-2 py-1 w-80 justify-between ${!isCustomMultiplier ? "" : "opacity-50"}`}>
+                        <div
+                            className={`flex items-center gap-2 mb-2 py-1 w-80 justify-between ${!isCustomMultiplier ? "" : "opacity-50"}`}
+                        >
                             <LabelWithInfo labelText={"Attack"} infoText={"The attack used by the the character."} />
                             <select
                                 value={attackUsed.attackName}
@@ -732,48 +697,78 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="Add. HP Flat"
                                 infoText="Additional flat hp from buffs or other sources."
-                                onInputChange={(value) => setAdditionalHpFlat(Number(value))}
-                                inputValue={additionalHpFlat}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalHpFlat: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalHpFlat}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. HP %"
                                 infoText="Additional percent hp from buffs or other sources."
-                                onInputChange={(value) => setAdditionalHpPercent(Number(value))}
-                                inputValue={additionalHpPercent}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalHpPercent: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalHpPercent}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. ATK Flat"
                                 infoText="Additional flat attack from buffs or other sources."
-                                onInputChange={(value) => setAdditionalAttackFlat(Number(value))}
-                                inputValue={additionalAttackFlat}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalAttackFlat: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalAttackFlat}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. ATK %"
                                 infoText="Additional percent attack from buffs or other sources."
-                                onInputChange={(value) => setAdditionalAttackPercent(Number(value))}
-                                inputValue={additionalAttackPercent}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalAttackPercent: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalAttackPercent}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. CRIT Rate %"
                                 infoText="Additional critical rate percentage."
-                                onInputChange={(value) => setAdditionalCritRate(Number(value))}
-                                inputValue={additionalCritRate}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalCritRate: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalCritRate}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. CRIT DMG %"
                                 infoText="Additional critical damage percentage."
-                                onInputChange={(value) => setAdditionalCritDamage(Number(value))}
-                                inputValue={additionalCritDamage}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalCritDamage: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalCritDamage}
                             />
                         </div>
 
@@ -781,24 +776,39 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="Add. Element DMG %"
                                 infoText="Additional elemental damage percentage."
-                                onInputChange={(value) => setAdditionalElementPercent(Number(value))}
-                                inputValue={additionalElementPercent}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalElementPercent: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalElementPercent}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. PEN %"
                                 infoText="Additional percentage penetration."
-                                onInputChange={(value) => setAdditionalPenPercent(Number(value))}
-                                inputValue={additionalPenPercent}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalPenPercent: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalPenPercent}
                             />
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. PEN Flat"
                                 infoText="Additional flat penetration."
-                                onInputChange={(value) => setAdditionalPenFlat(Number(value))}
-                                inputValue={additionalPenFlat}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalPenFlat: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalPenFlat}
                             />
                         </div>
 
@@ -806,19 +816,29 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="Add. Sheer Flat"
                                 infoText="Additional flat sheer"
-                                onInputChange={(value) => setAdditionalSheerFlat(Number(value))}
-                                inputValue={additionalSheerFlat}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalSheerFlat: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalSheerFlat}
                             />
                         </div>
                         <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
                             <LabelWithTextInput
                                 labelText="Add. Sheer %"
                                 infoText="Additional sheer percentage"
-                                onInputChange={(value) => setAdditionalSheerPercent(Number(value))}
-                                inputValue={additionalSheerPercent}
+                                onInputChange={(value) =>
+                                    setAdditionalStatsUI({
+                                        ...(additionalStatsUI ?? {}),
+                                        additionalSheerPercent: Number(value),
+                                    })
+                                }
+                                inputValue={additionalStatsUI.additionalSheerPercent}
                             />
                         </div>
-                </div>
+                    </div>
                 </div>
             </div>
         </div>

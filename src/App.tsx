@@ -10,7 +10,8 @@ import {
     type AttackModifiers,
     levelFactorAttacker,
     type AttackStats,
-    DriveDisks
+    DriveDisks,
+    type AdditionalStats,
 } from "./constants/types";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -68,15 +69,8 @@ function App() {
             if (settings.isRupture != null) setIsRupture(settings.isRupture);
             if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
             if (settings.anomalyType != null) setAnomalyType(settings.anomalyType);
-            if (settings.additionalHpFlat != null) setAdditionalHpFlat(settings.additionalHpFlat);
-            if (settings.additionalHpPercent != null) setAdditionalHpPercent(settings.additionalHpPercent);
-            if (settings.additionalAttackFlat != null) setAdditionalAttackFlat(settings.additionalAttackFlat);
-            if (settings.additionalAttackPercent != null) setAdditionalAttackPercent(settings.additionalAttackPercent);
-            if (settings.additionalPenPercent != null) setAdditionalPenPercent(settings.additionalPenPercent);
-            if (settings.additionalPenFlat != null) setAdditionalPenFlat(settings.additionalPenFlat);
-            if (settings.additionalCritRate != null) setAdditionalCritRate(settings.additionalCritRate);
-            if (settings.additionalCritDamage != null) setAdditionalCritDamage(settings.additionalCritDamage);
-            if (settings.additionalElementPercent != null) setAdditionalElementPercent(settings.additionalElementPercent);
+            if (settings.additionalStatsUI != null) setAdditionalStatsUI(settings.additionalStatsUI);
+
             // if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
 
             setCalculatedStats(
@@ -140,24 +134,25 @@ function App() {
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
 
-    const [additionalHpFlat, setAdditionalHpFlat] = useState(0);
-    const [additionalHpPercent, setAdditionalHpPercent] = useState(0);
-    const [additionalAttackFlat, setAdditionalAttackFlat] = useState(0);
-    const [additionalAttackPercent, setAdditionalAttackPercent] = useState(0);
-    const [additionalPenPercent, setAdditionalPenPercent] = useState(0);
-    const [additionalPenFlat, setAdditionalPenFlat] = useState(0);
-    const [additionalCritRate, setAdditionalCritRate] = useState(0);
-    const [additionalCritDamage, setAdditionalCritDamage] = useState(0);
-    const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
-    const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
-    const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
+    const [additionalStatsUI, setAdditionalStatsUI] = useState<AdditionalStats>({
+        additionalHpFlat: 0,
+        additionalHpPercent: 0,
+        additionalAttackFlat: 0,
+        additionalAttackPercent: 0,
+        additionalPenPercent: 0,
+        additionalPenFlat: 0,
+        additionalCritRate: 0,
+        additionalCritDamage: 0,
+        additionalElementPercent: 0,
+        additionalSheerPercent: 0,
+        additionalSheerFlat: 0,
+    });
 
     const [enkaCharacters, setEnkaCharacters] = useState<any[]>([]);
     const [enkaPlayerName, setEnkaPlayer] = useState();
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
-
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -189,31 +184,21 @@ function App() {
 
     useEffect(() => {
         setAdditionalStats({
-            HP_FLAT: calculatedStats.HP_FLAT * (additionalHpPercent / 100) + additionalHpFlat,
-            ATTACK_FLAT: calculatedStats.ATTACK_FLAT * (additionalAttackPercent / 100) + additionalAttackFlat,
+            HP_FLAT: calculatedStats.HP_FLAT * (additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
+            ATTACK_FLAT:
+                calculatedStats.ATTACK_FLAT * (additionalStatsUI.additionalAttackPercent / 100) + additionalStatsUI.additionalAttackFlat,
             DEFENSE_FLAT: 0,
-            CRIT_RATE: additionalCritRate,
-            CRIT_DAMAGE: additionalCritDamage,
-            ELEMENT_PERCENT: additionalElementPercent,
+            CRIT_RATE: additionalStatsUI.additionalCritRate,
+            CRIT_DAMAGE: additionalStatsUI.additionalCritDamage,
+            ELEMENT_PERCENT: additionalStatsUI.additionalElementPercent,
             ANOMALY_PROFICIENCY_FLAT: 0,
             ANOMALY_MASTERY_FLAT: 0,
-            PEN_PERCENT: additionalPenPercent,
-            PEN_FLAT: additionalPenFlat,
+            PEN_PERCENT: additionalStatsUI.additionalPenPercent,
+            PEN_FLAT: additionalStatsUI.additionalPenFlat,
             IMPACT_FLAT: 0,
             ENERGY_REGEN_FLAT: 0,
         });
-    }, [
-        calculatedStats,
-        additionalHpFlat,
-        additionalHpPercent,
-        additionalAttackFlat,
-        additionalAttackPercent,
-        additionalPenPercent,
-        additionalPenFlat,
-        additionalCritRate,
-        additionalCritDamage,
-        additionalElementPercent,
-    ]);
+    }, [calculatedStats, additionalStatsUI]);
 
     const handeCharacterChange = (newCharacterName: string) => {
         setCharacterName(() => {
@@ -339,18 +324,19 @@ function App() {
         setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
         setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
         setAnomalyType("Burn");
-        setAdditionalHpFlat(0);
-        setAdditionalHpPercent(0);
-        setAdditionalAttackFlat(0);
-        setAdditionalAttackPercent(0);
-        setAdditionalPenPercent(0);
-        setAdditionalPenFlat(0);
-        setAdditionalCritRate(0);
-        setAdditionalCritDamage(0);
-        setAdditionalElementPercent(0);
-        setAdditionalSheerFlat(0);
-        setAdditionalSheerPercent(0);
-
+        setAdditionalStatsUI({
+            additionalHpFlat: 0,
+            additionalHpPercent: 0,
+            additionalAttackFlat: 0,
+            additionalAttackPercent: 0,
+            additionalPenPercent: 0,
+            additionalPenFlat: 0,
+            additionalCritRate: 0,
+            additionalCritDamage: 0,
+            additionalElementPercent: 0,
+            additionalSheerPercent: 0,
+            additionalSheerFlat: 0,
+        })
 
 
         setCalculatedStats(
@@ -373,7 +359,6 @@ function App() {
                 return;
             }
             const result = (await getEnkaData(event.currentTarget.value)).PlayerInfo;
-            console.log("result.SocialDetail:", result.SocialDetail);
 
             setEnkaPlayer(result.SocialDetail); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state.
             setEnkaCharacters(result.ShowcaseDetail.AvatarList);
@@ -396,7 +381,6 @@ function App() {
     };
 
     const handleEnkaCharacterSelect = (character: any) => {
-        console.log(character);
         setCharacterName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name);
         setWengineName(Wengines.find((wengine) => wengine.id === character.Weapon.Id)?.name || Wengines[0].name);
 
@@ -496,7 +480,6 @@ function App() {
                 }
         }
 
-        console.log(substatMap);
         // Build selectedSubstats object from the accumulated map
         const newSubstats: SeletedSubstats = {
             HP_PERCENT: substatMap.get("HP_PERCENT") || 0,
@@ -536,11 +519,14 @@ function App() {
                                 <br />
                                 {loadingEnkaDataSpinner ? <Spinner /> : <></>}
                                 <div className="flex items-center">
-                                <div className="-2 text-3xl font-bold text-gray-900 dark:text-gray-100">Account: </div> 
-                                <div>
-                                <div className="m-2 text-3xl  text-gray-900 dark:text-gray-100"> {enkaPlayerName?.ProfileDetail?.Nickname}</div>
-                                <div className="m-2 text-xl  text-gray-900 dark:text-gray-100">&nbsp;{enkaPlayerName?.Desc}</div>
-                                </div>
+                                    <div className="-2 text-3xl font-bold text-gray-900 dark:text-gray-100">Account: </div>
+                                    <div>
+                                        <div className="m-2 text-3xl  text-gray-900 dark:text-gray-100">
+                                            {" "}
+                                            {enkaPlayerName?.ProfileDetail?.Nickname}
+                                        </div>
+                                        <div className="m-2 text-xl  text-gray-900 dark:text-gray-100">&nbsp;{enkaPlayerName?.Desc}</div>
+                                    </div>
                                 </div>
 
                                 <div>
@@ -601,16 +587,7 @@ function App() {
                                         isRupture,
                                         isAnomaly,
                                         anomalyType,
-                                        additionalHpFlat,
-                                        additionalHpPercent,
-                                        additionalAttackFlat,
-                                        additionalAttackPercent,
-                                        additionalPenPercent,
-                                        additionalPenFlat,
-                                        additionalCritRate,
-                                        additionalCritDamage,
-                                        additionalElementPercent
-                                        // characterLevel
+                                        additionalStatsUI
                                     )
                                 )
                             }
@@ -627,7 +604,6 @@ function App() {
             />
 
             <div className="grid grid-cols-5 ">
-
                 {/* Character Image */}
                 <div className="pt-15">
                     <img
@@ -660,9 +636,9 @@ function App() {
                                     additionalStats={additionalStats}
                                     isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
                                     additionalSheer={
-                                        additionalSheerFlat +
+                                        additionalStatsUI.additionalSheerFlat +
                                         calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) *
-                                            (additionalSheerPercent / 100)
+                                            (additionalStatsUI.additionalSheerPercent / 100)
                                     }
                                 />
                             </div>
@@ -687,31 +663,8 @@ function App() {
                                     setIsAnomaly={(value) => setIsAnomaly(value)}
                                     anomalyType={anomalyType}
                                     setAnomalyType={(value) => setAnomalyType(value)}
-                                    additionalHpFlat={additionalHpFlat}
-                                    setAdditionalHpFlat={(value) => setAdditionalHpFlat(value)}
-                                    additionalHpPercent={additionalHpPercent}
-                                    setAdditionalHpPercent={(value) => setAdditionalHpPercent(value)}
-                                    additionalAttackFlat={additionalAttackFlat}
-                                    setAdditionalAttackFlat={(value) => setAdditionalAttackFlat(value)}
-                                    additionalAttackPercent={additionalAttackPercent}
-                                    setAdditionalAttackPercent={(value) => setAdditionalAttackPercent(value)}
-                                    additionalPenPercent={additionalPenPercent}
-                                    setAdditionalPenPercent={(value) => setAdditionalPenPercent(value)}
-                                    additionalPenFlat={additionalPenFlat}
-                                    setAdditionalPenFlat={(value) => setAdditionalPenFlat(value)}
-                                    additionalCritRate={additionalCritRate}
-                                    setAdditionalCritRate={(value) => setAdditionalCritRate(value)}
-                                    additionalCritDamage={additionalCritDamage}
-                                    setAdditionalCritDamage={(value) => setAdditionalCritDamage(value)}
-                                    additionalElementPercent={additionalElementPercent}
-                                    setAdditionalElementPercent={(value) => setAdditionalElementPercent(value)}
-                                    additionalSheerFlat={additionalSheerFlat}
-                                    setAdditionalSheerFlat ={(value) => setAdditionalSheerFlat(value)}
-                                    additionalSheerPercent={additionalSheerPercent}
-                                    setAdditionalSheerPercent ={(value) => setAdditionalSheerPercent(value)}
-
-                                    // characterLevel={characterLevel}
-                                    // setCharacterLevel={(value) => setCharacterLevel(value)}
+                                    additionalStatsUI={additionalStatsUI}
+                                    setAdditionalStatsUI={(value) => setAdditionalStatsUI(value)}
                                 />
                             </div>
                         </div>
