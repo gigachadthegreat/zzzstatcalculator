@@ -153,21 +153,6 @@ function App() {
     const [enkaPlayerName, setEnkaPlayer] = useState();
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
-    // const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
-    // const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
-    // const [additionalSheerDmgBonusMultiplierAttacker, setAdditionalSheerDmgBonusMultiplierAttacker] = useState(0);
-
-    // const [additionalDmgBonusMultiplierAttacker, setAdditionalDmgBonusMultiplierAttacker] = useState(0);
-    // const [critMode, setCritMode] = useState<"avg" | "crit" | "noCrit">("avg");
-    // const [defTarget, setDefTarget] = useState(953);
-    // const [defenseShred, setDefenseShred] = useState(0);
-    // const [resTarget, setResTarget] = useState(0);
-    // const [resReductionTarget, setResReductionTarget] = useState(0);
-    // const [dmgTakenIncrease, setDmgTakenIncrease] = useState(0);
-    // const [dmgTakenReduction, setDmgTakenReduction] = useState(0);
-    // const [stunMultiplier, setStunMultiplier] = useState(100);
-    // const [resIgnore, setResIgnore] = useState(0);
-
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
         additionalSheerPercent: 0,
         additionalSheerFlat: 0,
@@ -184,7 +169,6 @@ function App() {
         stunMultiplier: 100,
         resIgnore: 0,
     });
-    // const [characterLevel, setCharacterLevel] = useState(60);
 
     const [additionalStats, setAdditionalStats] = useState<Stats>({
         HP_FLAT: 0,
@@ -375,11 +359,6 @@ function App() {
         );
 
         const newUrl = window.location.origin + window.location.pathname + window.location.hash;
-
-        // 2. Use the History API to update the URL
-        // - null: The state object (can be any data you want to associate with the history entry)
-        // - '': The title (most browsers ignore this, so an empty string is common)
-        // - newUrl: The new URL to display in the address bar
         window.history.replaceState(null, "", newUrl);
     };
     const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -644,6 +623,8 @@ function App() {
             />
 
             <div className="grid grid-cols-5 ">
+
+                {/* Character Image */}
                 <div className="pt-15">
                     <img
                         ref={imgRef}
@@ -728,6 +709,8 @@ function App() {
                     </main>
                 </div>
             </div>
+
+            {/* "Report and Issue" button */}
             <div
                 className="z-10 fixed bottom-5 right-5 cursor-pointer rounded-full bg-gray-500 px-4 py-2 text-white shadow-lg transition-colors hover:bg-gray-600"
                 onClick={() => window.open("https://github.com/gigachadthegreat/zzzstatcalculator/issues")}

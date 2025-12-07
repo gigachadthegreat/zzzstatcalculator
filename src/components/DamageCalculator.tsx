@@ -421,7 +421,7 @@ function DamageCalculator({
 
     return (
         <div className="">
-            <div className="mt-4 text-center mb-5">
+            <div className="mt-4 text-center mb-5 ">
                 <div className=" text-3xl ">
                     Calculated
                     {isAnomaly ? (
@@ -435,375 +435,379 @@ function DamageCalculator({
                 </div>
             </div>
 
-            <div className="mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
-                <h4
-                    className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 p-4 ${
-                        isFormulaVisible ? "rounded-t-md" : "rounded-md"
-                    } transition-colors`}
-                    onClick={() => setIsFormulaVisible(!isFormulaVisible)}
-                >
-                    <span className="text-center block">Damage Formula</span>
-                </h4>
-                <div
-                    className={`transition-all duration-500 ease-in-out overflow-hidden px-4 ${
-                        isFormulaVisible ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
-                    }`}
-                >
-                    <div className="font-mono text-base text-left pt-1">
-                        {isRupture ? (
-                            <DamageFormulaRupture
-                                multiplier={multiplier}
-                                attackModifiers={finalAttackModifiers}
-                                stats={finalStats}
-                                additionalDamage={additionalDamage}
-                            />
-                        ) : isAnomaly ? (
-                            <DamageFormulaAnomaly
-                                anomalyType={anomalyType}
-                                attackModifiers={finalAttackModifiers}
-                                stats={finalStats}
-                                additionalDamage={additionalDamage}
-                            />
-                        ) : (
-                            <DamageFormulaStandard
-                                multiplier={multiplier}
-                                attackModifiers={finalAttackModifiers}
-                                stats={finalStats}
-                                additionalDamage={additionalDamage}
-                            />
-                        )}
+            <div className="flex justify-center">
+                <div className=" w-3/4 mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
+                    <h4
+                        className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 p-4 ${
+                            isFormulaVisible ? "rounded-t-md" : "rounded-md"
+                        } transition-colors`}
+                        onClick={() => setIsFormulaVisible(!isFormulaVisible)}
+                    >
+                        <span className="text-center block">Damage Formula</span>
+                    </h4>
+                    <div
+                        className={`transition-all duration-500 ease-in-out overflow-hidden px-4 ${
+                            isFormulaVisible ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                        }`}
+                    >
+                        <div className="font-mono text-base text-left pt-1">
+                            {isRupture ? (
+                                <DamageFormulaRupture
+                                    multiplier={multiplier}
+                                    attackModifiers={finalAttackModifiers}
+                                    stats={finalStats}
+                                    additionalDamage={additionalDamage}
+                                />
+                            ) : isAnomaly ? (
+                                <DamageFormulaAnomaly
+                                    anomalyType={anomalyType}
+                                    attackModifiers={finalAttackModifiers}
+                                    stats={finalStats}
+                                    additionalDamage={additionalDamage}
+                                />
+                            ) : (
+                                <DamageFormulaStandard
+                                    multiplier={multiplier}
+                                    attackModifiers={finalAttackModifiers}
+                                    stats={finalStats}
+                                    additionalDamage={additionalDamage}
+                                />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div className="flex justify-between ">
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                    <div className="flex items-center space-x-2 ">
-                        <h3 className="font-bold ">Enemy Stats</h3>
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="DEF Target"
-                            infoText="Enemy Defense. All Deadly Asssault and most Shiyu enemies have 953 DEF. Tryfing has 572 DEF at Level 70. "
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), defenseTarget: Number(value) })}
-                            inputValue={attackModifiers.defenseTarget}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Defense Shred %"
-                            infoText="Debuffs on the enemy that reduce their defense."
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), defenseShred: Number(value) })}
-                            inputValue={attackModifiers.defenseShred}
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="DMG Taken Increase %"
-                            infoText="Debuffs on the enemy that increase damage taken."
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenIncrease: Number(value) })}
-                            inputValue={attackModifiers.dmgTakenIncrease}
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="DMG Taken Reduction"
-                            infoText="Buffs on the enemy that reduce damage taken."
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenReduction: Number(value) })}
-                            inputValue={attackModifiers.dmgTakenReduction}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="RES Target %"
-                            infoText="Enemy resistance to your character's element."
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resTarget: Number(value) })}
-                            inputValue={attackModifiers.resTarget}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="RES Reduction %"
-                            infoText="Percentage to reduce enemies resistance to your character's element by. Additive with RES Ignore %"
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resReductionTarget: Number(value) })}
-                            inputValue={attackModifiers.resReductionTarget}
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Stun Multiplier %"
-                            infoText="Damage multiplier when the enemy is stunned."
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), stunMultiplier: Number(value) })}
-                            inputValue={attackModifiers.stunMultiplier}
-                        />
-                    </div>
-                </div>
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                    <h3 className="font-bold mb-2">Attacker Modifiers</h3>
-                    <div className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} `}>
-                        <LabelWithInfo
-                            labelText="Use Custom Multiplier"
-                            infoText="Use a custom multiplier. Attack specific calculations are ignored."
-                        />
-                        <input
-                            type="checkbox"
-                            checked={isCustomMultiplier}
-                            onChange={(e) => {
-                                setIsCustomMultiplier(e.target.checked);
-                            }}
-                            className="h-4 w-4"
-                        />
-                    </div>
-                    <div
-                        className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} ${
-                            isCustomMultiplier ? "" : "opacity-50"
-                        }`}
-                    >
-                        <LabelWithTextInput
-                            labelText="Multiplier Value %"
-                            infoText="The percentage multiplier for the specific attack."
-                            onInputChange={(value) => setMultiplier(Number(value))}
-                            inputValue={multiplier}
-                            disabled={!isCustomMultiplier}
-                        />
-                    </div>
-                    <div className={`flex flex-col gap-2 mb-2 ${!isCustomMultiplier ? "" : "opacity-50"}`}>
-                        <div className="flex items-center justify-between">
-                            <LabelWithInfo labelText={"Attack Level"} infoText={"Choose attack level (1-16)"} />
-                            <div className="text-sm font-mono">Level {attackLevel}</div>
+            <div className=" w-full  ">
+                <div className="w-fuill flex justify-center flex-wrap gap-6">
+                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <div className="flex items-center space-x-2 ">
+                            <h3 className="font-bold ">Enemy Stats</h3>
                         </div>
-                        <div className="w-3/4">
-                            <input
-                                type="range"
-                                min={1}
-                                max={16}
-                                value={attackLevel}
-                                onChange={(e) => setAttackLevel(Number(e.target.value))}
-                                className="w-full"
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="DEF Target"
+                                infoText="Enemy Defense. All Deadly Asssault and most Shiyu enemies have 953 DEF. Tryfing has 572 DEF at Level 70. "
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), defenseTarget: Number(value) })}
+                                inputValue={attackModifiers.defenseTarget}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Defense Shred %"
+                                infoText="Debuffs on the enemy that reduce their defense."
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), defenseShred: Number(value) })}
+                                inputValue={attackModifiers.defenseShred}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="DMG Taken Increase %"
+                                infoText="Debuffs on the enemy that increase damage taken."
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenIncrease: Number(value) })}
+                                inputValue={attackModifiers.dmgTakenIncrease}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="DMG Taken Reduction"
+                                infoText="Buffs on the enemy that reduce damage taken."
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), dmgTakenReduction: Number(value) })}
+                                inputValue={attackModifiers.dmgTakenReduction}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="RES Target %"
+                                infoText="Enemy resistance to your character's element."
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resTarget: Number(value) })}
+                                inputValue={attackModifiers.resTarget}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="RES Reduction %"
+                                infoText="Percentage to reduce enemies resistance to your character's element by. Additive with RES Ignore %"
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resReductionTarget: Number(value) })}
+                                inputValue={attackModifiers.resReductionTarget}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Stun Multiplier %"
+                                infoText="Damage multiplier when the enemy is stunned."
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), stunMultiplier: Number(value) })}
+                                inputValue={attackModifiers.stunMultiplier}
                             />
                         </div>
                     </div>
-                    <div className={`flex items-center gap-2 mb-2 py-1 w-80 justify-between ${!isCustomMultiplier ? "" : "opacity-50"}`}>
-                        <LabelWithInfo labelText={"Attack"} infoText={"The attack used by the the character."} />
-                        <select
-                            value={attackUsed.attackName}
-                            onChange={(e) =>
-                                setAttackUsed(
-                                    Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats.filter(
-                                        (attack) => attack.attackName == e.target.value
-                                    )[0]
-                                )
-                            }
-                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-3/4 "
+                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 className="font-bold mb-2">Attacker Modifiers</h3>
+                        <div className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} `}>
+                            <LabelWithInfo
+                                labelText="Use Custom Multiplier"
+                                infoText="Use a custom multiplier. Attack specific calculations are ignored."
+                            />
+                            <input
+                                type="checkbox"
+                                checked={isCustomMultiplier}
+                                onChange={(e) => {
+                                    setIsCustomMultiplier(e.target.checked);
+                                }}
+                                className="h-4 w-4"
+                            />
+                        </div>
+                        <div
+                            className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} ${
+                                isCustomMultiplier ? "" : "opacity-50"
+                            }`}
                         >
-                            {Object.keys(AttackTypes).map((type) => (
-                                <optgroup label={type} key={type}>
-                                    {Attacks.filter((attack) => attack.characterName === characterName)[0]
-                                        .attackStats.filter((attackStat) => attackStat.attackType === type)
-                                        .map((key) => (
-                                            <option value={key.attackName} key={key.attackName}>
-                                                {key.attackName}
-                                            </option>
-                                        ))}
-                                </optgroup>
-                            ))}
-                        </select>{" "}
+                            <LabelWithTextInput
+                                labelText="Multiplier Value %"
+                                infoText="The percentage multiplier for the specific attack."
+                                onInputChange={(value) => setMultiplier(Number(value))}
+                                inputValue={multiplier}
+                                disabled={!isCustomMultiplier}
+                            />
+                        </div>
+                        <div className={`flex flex-col gap-2 mb-2 ${!isCustomMultiplier ? "" : "opacity-50"}`}>
+                            <div className="flex items-center justify-between">
+                                <LabelWithInfo labelText={"Attack Level"} infoText={"Choose attack level (1-16)"} />
+                                <div className="text-sm font-mono">Level {attackLevel}</div>
+                            </div>
+                            <div className="w-3/4">
+                                <input
+                                    type="range"
+                                    min={1}
+                                    max={16}
+                                    value={attackLevel}
+                                    onChange={(e) => setAttackLevel(Number(e.target.value))}
+                                    className="w-full"
+                                />
+                            </div>
+                        </div>
+                        <div className={`flex items-center gap-2 mb-2 py-1 w-80 justify-between ${!isCustomMultiplier ? "" : "opacity-50"}`}>
+                            <LabelWithInfo labelText={"Attack"} infoText={"The attack used by the the character."} />
+                            <select
+                                value={attackUsed.attackName}
+                                onChange={(e) =>
+                                    setAttackUsed(
+                                        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats.filter(
+                                            (attack) => attack.attackName == e.target.value
+                                        )[0]
+                                    )
+                                }
+                                className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-3/4 "
+                            >
+                                {Object.keys(AttackTypes).map((type) => (
+                                    <optgroup label={type} key={type}>
+                                        {Attacks.filter((attack) => attack.characterName === characterName)[0]
+                                            .attackStats.filter((attackStat) => attackStat.attackType === type)
+                                            .map((key) => (
+                                                <option value={key.attackName} key={key.attackName}>
+                                                    {key.attackName}
+                                                </option>
+                                            ))}
+                                    </optgroup>
+                                ))}
+                            </select>{" "}
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="RES Ignore %"
+                                infoText="Attacker's resistance penetration. Additive with RES Reduction %"
+                                onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resIgnore: Number(value) })}
+                                inputValue={attackModifiers.resIgnore}
+                            />
+                        </div>{" "}
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Additional DMG %"
+                                infoText="Additional damage bonus from other sources. E.G. Lighters 75% Fire % Ice, Pulchras 30%, "
+                                onInputChange={(value) =>
+                                    setAttackModifiers({
+                                        ...(attackModifiers ?? {}),
+                                        additionalDmgBonusMultiplierAttacker: Number(value),
+                                    })
+                                }
+                                inputValue={attackModifiers.additionalDmgBonusMultiplierAttacker}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Additional Sheer DMG %"
+                                infoText="Additional sheer damage bonus from other sources. This is different from Additional DMG % is is multiplicative with the damage formula. Sources include anything that says 'Sheer DMG' such as Yixuans W-Engine"
+                                onInputChange={(value) =>
+                                    setAttackModifiers({
+                                        ...(attackModifiers ?? {}),
+                                        additionalSheerDmgBonusMultiplierAttacker: Number(value),
+                                    })
+                                }
+                                inputValue={attackModifiers.additionalSheerDmgBonusMultiplierAttacker}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between pr-6">
+                            <LabelWithInfo
+                                labelText={"Use Rupture caltulation"}
+                                infoText={"Use Sheerforce in Damage calculation instead of Attack"}
+                            />
+                            <input
+                                className="h-4 w-4"
+                                checked={isRupture}
+                                onChange={(e) => {
+                                    setIsAnomaly(false);
+                                    setIsRupture(e.target.checked);
+                                }}
+                                type="checkbox"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between  pr-6">
+                            <LabelWithInfo labelText={"Use Anomaly caltulation"} infoText={"Use Anomalydamage in Damage calculation"} />
+                            <input
+                                className="h-4 w-4"
+                                checked={isAnomaly}
+                                onChange={(e) => {
+                                    setIsRupture(false);
+                                    setIsAnomaly(e.target.checked);
+                                }}
+                                type="checkbox"
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
+                            <LabelWithInfo
+                                labelText={"Anomaly Type"}
+                                infoText={"The attribute/element of the anomaly. Affects Damage calculation"}
+                            />
+                            <select
+                                value={anomalyType}
+                                onChange={(e) => setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)}
+                                className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
+                            >
+                                {Object.keys(AnomalyMultipliers).map((key) => (
+                                    <option value={key} key={key}>
+                                        {key}
+                                    </option>
+                                ))}
+                            </select>{" "}
+                        </div>
+                        <div className="flex items-center gap-2 mb-2 w-80 justify-between">
+                            <label>Crit Mode:</label>
+                            <select
+                                value={attackModifiers.critMode}
+                                onChange={(e) =>
+                                    setAttackModifiers({
+                                        ...(attackModifiers ?? {}),
+                                        critMode: e.target.value as "avg" | "crit" | "noCrit",
+                                    })
+                                }
+                                className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
+                            >
+                                <option value="avg">Average</option>
+                                <option value="crit">Always Crit</option>
+                                <option value="noCrit">No Crit</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="RES Ignore %"
-                            infoText="Attacker's resistance penetration. Additive with RES Reduction %"
-                            onInputChange={(value) => setAttackModifiers({ ...(attackModifiers ?? {}), resIgnore: Number(value) })}
-                            inputValue={attackModifiers.resIgnore}
-                        />
-                    </div>{" "}
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Additional DMG %"
-                            infoText="Additional damage bonus from other sources. E.G. Lighters 75% Fire % Ice, Pulchras 30%, "
-                            onInputChange={(value) =>
-                                setAttackModifiers({
-                                    ...(attackModifiers ?? {}),
-                                    additionalDmgBonusMultiplierAttacker: Number(value),
-                                })
-                            }
-                            inputValue={attackModifiers.additionalDmgBonusMultiplierAttacker}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Additional Sheer DMG %"
-                            infoText="Additional sheer damage bonus from other sources. This is different from Additional DMG % is is multiplicative with the damage formula. Sources include anything that says 'Sheer DMG' such as Yixuans W-Engine"
-                            onInputChange={(value) =>
-                                setAttackModifiers({
-                                    ...(attackModifiers ?? {}),
-                                    additionalSheerDmgBonusMultiplierAttacker: Number(value),
-                                })
-                            }
-                            inputValue={attackModifiers.additionalSheerDmgBonusMultiplierAttacker}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between pr-6">
-                        <LabelWithInfo
-                            labelText={"Use Rupture caltulation"}
-                            infoText={"Use Sheerforce in Damage calculation instead of Attack"}
-                        />
-                        <input
-                            className="h-4 w-4"
-                            checked={isRupture}
-                            onChange={(e) => {
-                                setIsAnomaly(false);
-                                setIsRupture(e.target.checked);
-                            }}
-                            type="checkbox"
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between  pr-6">
-                        <LabelWithInfo labelText={"Use Anomaly caltulation"} infoText={"Use Anomalydamage in Damage calculation"} />
-                        <input
-                            className="h-4 w-4"
-                            checked={isAnomaly}
-                            onChange={(e) => {
-                                setIsRupture(false);
-                                setIsAnomaly(e.target.checked);
-                            }}
-                            type="checkbox"
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2 py-1 w-80 justify-between">
-                        <LabelWithInfo
-                            labelText={"Anomaly Type"}
-                            infoText={"The attribute/element of the anomaly. Affects Damage calculation"}
-                        />
-                        <select
-                            value={anomalyType}
-                            onChange={(e) => setAnomalyType(e.target.value as keyof typeof AnomalyMultipliers)}
-                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
-                        >
-                            {Object.keys(AnomalyMultipliers).map((key) => (
-                                <option value={key} key={key}>
-                                    {key}
-                                </option>
-                            ))}
-                        </select>{" "}
-                    </div>
-                    <div className="flex items-center gap-2 mb-2 w-80 justify-between">
-                        <label>Crit Mode:</label>
-                        <select
-                            value={attackModifiers.critMode}
-                            onChange={(e) =>
-                                setAttackModifiers({
-                                    ...(attackModifiers ?? {}),
-                                    critMode: e.target.value as "avg" | "crit" | "noCrit",
-                                })
-                            }
-                            className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-28 text-center"
-                        >
-                            <option value="avg">Average</option>
-                            <option value="crit">Always Crit</option>
-                            <option value="noCrit">No Crit</option>
-                        </select>
-                    </div>
+                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 className="font-bold mb-2">Additional Stats</h3>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. HP Flat"
+                                infoText="Additional flat hp from buffs or other sources."
+                                onInputChange={(value) => setAdditionalHpFlat(Number(value))}
+                                inputValue={additionalHpFlat}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. HP %"
+                                infoText="Additional percent hp from buffs or other sources."
+                                onInputChange={(value) => setAdditionalHpPercent(Number(value))}
+                                inputValue={additionalHpPercent}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. ATK Flat"
+                                infoText="Additional flat attack from buffs or other sources."
+                                onInputChange={(value) => setAdditionalAttackFlat(Number(value))}
+                                inputValue={additionalAttackFlat}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. ATK %"
+                                infoText="Additional percent attack from buffs or other sources."
+                                onInputChange={(value) => setAdditionalAttackPercent(Number(value))}
+                                inputValue={additionalAttackPercent}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. CRIT Rate %"
+                                infoText="Additional critical rate percentage."
+                                onInputChange={(value) => setAdditionalCritRate(Number(value))}
+                                inputValue={additionalCritRate}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. CRIT DMG %"
+                                infoText="Additional critical damage percentage."
+                                onInputChange={(value) => setAdditionalCritDamage(Number(value))}
+                                inputValue={additionalCritDamage}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. Element DMG %"
+                                infoText="Additional elemental damage percentage."
+                                onInputChange={(value) => setAdditionalElementPercent(Number(value))}
+                                inputValue={additionalElementPercent}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. PEN %"
+                                infoText="Additional percentage penetration."
+                                onInputChange={(value) => setAdditionalPenPercent(Number(value))}
+                                inputValue={additionalPenPercent}
+                            />
+                        </div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <LabelWithTextInput
+                                labelText="Add. PEN Flat"
+                                infoText="Additional flat penetration."
+                                onInputChange={(value) => setAdditionalPenFlat(Number(value))}
+                                inputValue={additionalPenFlat}
+                            />
+                        </div>
+
+                        <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
+                            <LabelWithTextInput
+                                labelText="Add. Sheer Flat"
+                                infoText="Additional flat sheer"
+                                onInputChange={(value) =>
+                                    setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerFlat: Number(value) })
+                                }
+                                inputValue={attackModifiers.additionalSheerFlat}
+                            />
+                        </div>
+                        <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
+                            <LabelWithTextInput
+                                labelText="Add. Sheer %"
+                                infoText="Additional sheer percentage"
+                                onInputChange={(value) =>
+                                    setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerPercent: Number(value) })
+                                }
+                                inputValue={attackModifiers.additionalSheerPercent}
+                            />
+                        </div>
                 </div>
-                <div className="w-screen mx-2 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                    <h3 className="font-bold mb-2">Additional Stats</h3>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. HP Flat"
-                            infoText="Additional flat hp from buffs or other sources."
-                            onInputChange={(value) => setAdditionalHpFlat(Number(value))}
-                            inputValue={additionalHpFlat}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. HP %"
-                            infoText="Additional percent hp from buffs or other sources."
-                            onInputChange={(value) => setAdditionalHpPercent(Number(value))}
-                            inputValue={additionalHpPercent}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. ATK Flat"
-                            infoText="Additional flat attack from buffs or other sources."
-                            onInputChange={(value) => setAdditionalAttackFlat(Number(value))}
-                            inputValue={additionalAttackFlat}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. ATK %"
-                            infoText="Additional percent attack from buffs or other sources."
-                            onInputChange={(value) => setAdditionalAttackPercent(Number(value))}
-                            inputValue={additionalAttackPercent}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. CRIT Rate %"
-                            infoText="Additional critical rate percentage."
-                            onInputChange={(value) => setAdditionalCritRate(Number(value))}
-                            inputValue={additionalCritRate}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. CRIT DMG %"
-                            infoText="Additional critical damage percentage."
-                            onInputChange={(value) => setAdditionalCritDamage(Number(value))}
-                            inputValue={additionalCritDamage}
-                        />
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. Element DMG %"
-                            infoText="Additional elemental damage percentage."
-                            onInputChange={(value) => setAdditionalElementPercent(Number(value))}
-                            inputValue={additionalElementPercent}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. PEN %"
-                            infoText="Additional percentage penetration."
-                            onInputChange={(value) => setAdditionalPenPercent(Number(value))}
-                            inputValue={additionalPenPercent}
-                        />
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                        <LabelWithTextInput
-                            labelText="Add. PEN Flat"
-                            infoText="Additional flat penetration."
-                            onInputChange={(value) => setAdditionalPenFlat(Number(value))}
-                            inputValue={additionalPenFlat}
-                        />
-                    </div>
-
-                    <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
-                        <LabelWithTextInput
-                            labelText="Add. Sheer Flat"
-                            infoText="Additional flat sheer"
-                            onInputChange={(value) =>
-                                setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerFlat: Number(value) })
-                            }
-                            inputValue={attackModifiers.additionalSheerFlat}
-                        />
-                    </div>
-                    <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
-                        <LabelWithTextInput
-                            labelText="Add. Sheer %"
-                            infoText="Additional sheer percentage"
-                            onInputChange={(value) =>
-                                setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerPercent: Number(value) })
-                            }
-                            inputValue={attackModifiers.additionalSheerPercent}
-                        />
-                    </div>
                 </div>
             </div>
         </div>
