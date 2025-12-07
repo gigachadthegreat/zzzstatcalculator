@@ -77,6 +77,12 @@ function DamageCalculator({
 
     additionalElementPercent,
     setAdditionalElementPercent,
+
+    additionalSheerFlat,
+    setAdditionalSheerFlat,
+
+    additionalSheerPercent,
+    setAdditionalSheerPercent,
 }: {
     calculatedStats: Stats;
     characterName: string;
@@ -131,6 +137,13 @@ function DamageCalculator({
 
     additionalElementPercent: number;
     setAdditionalElementPercent: (value: number) => void;
+
+    additionalSheerFlat: number
+    setAdditionalSheerFlat: (value: number) => void;
+
+    additionalSheerPercent: number
+    setAdditionalSheerPercent: (value: number) => void;
+
 }) {
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
 
@@ -414,7 +427,7 @@ function DamageCalculator({
     if (isAnomaly) {
         calculatedDamage = calculateAnomalyDamageDealt(anomalyType, finalStats, finalAttackModifiers, additionalDamage);
     } else if (isRupture) {
-        calculatedDamage = calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
+        calculatedDamage = calculateSheerDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage, additionalSheerFlat, additionalSheerPercent);
     } else {
         calculatedDamage = calculateDamageDealt(multiplier, finalStats, finalAttackModifiers, additionalDamage);
     }
@@ -457,6 +470,8 @@ function DamageCalculator({
                                     attackModifiers={finalAttackModifiers}
                                     stats={finalStats}
                                     additionalDamage={additionalDamage}
+                                    additionalSheerFlat={additionalSheerFlat}
+                                    additionalSheerPercent={additionalSheerPercent}
                                 />
                             ) : isAnomaly ? (
                                 <DamageFormulaAnomaly
@@ -791,20 +806,16 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="Add. Sheer Flat"
                                 infoText="Additional flat sheer"
-                                onInputChange={(value) =>
-                                    setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerFlat: Number(value) })
-                                }
-                                inputValue={attackModifiers.additionalSheerFlat}
+                                onInputChange={(value) => setAdditionalSheerFlat(Number(value))}
+                                inputValue={additionalSheerFlat}
                             />
                         </div>
                         <div className={`flex items-center gap-2 mb-2 ${isRupture ? "" : "opacity-50"}`}>
                             <LabelWithTextInput
                                 labelText="Add. Sheer %"
                                 infoText="Additional sheer percentage"
-                                onInputChange={(value) =>
-                                    setAttackModifiers({ ...(attackModifiers ?? {}), additionalSheerPercent: Number(value) })
-                                }
-                                inputValue={attackModifiers.additionalSheerPercent}
+                                onInputChange={(value) => setAdditionalSheerPercent(Number(value))}
+                                inputValue={additionalSheerPercent}
                             />
                         </div>
                 </div>

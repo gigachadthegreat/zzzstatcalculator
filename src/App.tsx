@@ -139,6 +139,7 @@ function App() {
     const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
     const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
+
     const [additionalHpFlat, setAdditionalHpFlat] = useState(0);
     const [additionalHpPercent, setAdditionalHpPercent] = useState(0);
     const [additionalAttackFlat, setAdditionalAttackFlat] = useState(0);
@@ -148,14 +149,15 @@ function App() {
     const [additionalCritRate, setAdditionalCritRate] = useState(0);
     const [additionalCritDamage, setAdditionalCritDamage] = useState(0);
     const [additionalElementPercent, setAdditionalElementPercent] = useState(0);
+    const [additionalSheerPercent, setAdditionalSheerPercent] = useState(0);
+    const [additionalSheerFlat, setAdditionalSheerFlat] = useState(0);
 
     const [enkaCharacters, setEnkaCharacters] = useState<any[]>([]);
     const [enkaPlayerName, setEnkaPlayer] = useState();
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
+
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -315,8 +317,6 @@ function App() {
 
         // Damage Calculator State
         setAttackModifiers({
-            additionalSheerPercent: 0,
-            additionalSheerFlat: 0,
             additionalDmgBonusMultiplierAttacker: 0,
             critMode: "avg",
             defenseTarget: 953,
@@ -348,6 +348,10 @@ function App() {
         setAdditionalCritRate(0);
         setAdditionalCritDamage(0);
         setAdditionalElementPercent(0);
+        setAdditionalSheerFlat(0);
+        setAdditionalSheerPercent(0);
+
+
 
         setCalculatedStats(
             calculateStats(
@@ -656,9 +660,9 @@ function App() {
                                     additionalStats={additionalStats}
                                     isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
                                     additionalSheer={
-                                        attackModifiers.additionalSheerFlat +
+                                        additionalSheerFlat +
                                         calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) *
-                                            (attackModifiers.additionalSheerPercent / 100)
+                                            (additionalSheerPercent / 100)
                                     }
                                 />
                             </div>
@@ -701,6 +705,11 @@ function App() {
                                     setAdditionalCritDamage={(value) => setAdditionalCritDamage(value)}
                                     additionalElementPercent={additionalElementPercent}
                                     setAdditionalElementPercent={(value) => setAdditionalElementPercent(value)}
+                                    additionalSheerFlat={additionalSheerFlat}
+                                    setAdditionalSheerFlat ={(value) => setAdditionalSheerFlat(value)}
+                                    additionalSheerPercent={additionalSheerPercent}
+                                    setAdditionalSheerPercent ={(value) => setAdditionalSheerPercent(value)}
+
                                     // characterLevel={characterLevel}
                                     // setCharacterLevel={(value) => setCharacterLevel(value)}
                                 />

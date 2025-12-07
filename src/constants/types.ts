@@ -161,8 +161,7 @@ export interface Stats {
 }
 
 export interface AttackModifiers {
-    additionalSheerPercent: number;
-    additionalSheerFlat: number;
+
     additionalDmgBonusMultiplierAttacker: number;
     critMode: "avg" | "crit" | "noCrit";
     defenseTarget: number;

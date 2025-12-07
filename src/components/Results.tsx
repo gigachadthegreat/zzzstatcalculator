@@ -24,6 +24,7 @@ const StatRow = ({
     </>
 );
 
+
 function Results({
     header,
     calculatedStats,
@@ -37,6 +38,8 @@ function Results({
     isRupture: boolean;
     additionalSheer: number | null;
 }) {
+
+    console.log(additionalSheer)
     const statsToDisplay: { key: statTypeKeys; label: string; toFixed: number }[] = [
         { key: "HP_FLAT", label: "HP", toFixed: 0 },
         { key: "ATTACK_FLAT", label: "Attack", toFixed: 0 },
