@@ -39,20 +39,19 @@ function Results({
     additionalSheer: number | null;
 }) {
 
-    console.log(additionalSheer)
     const statsToDisplay: { key: statTypeKeys; label: string; toFixed: number }[] = [
         { key: "HP_FLAT", label: "HP", toFixed: 0 },
         { key: "ATTACK_FLAT", label: "Attack", toFixed: 0 },
         { key: "DEFENSE_FLAT", label: "Defense", toFixed: 0 },
         { key: "CRIT_RATE", label: "Crit Rate", toFixed: 1 },
-        { key: "CRIT_DAMAGE", label: "Crit Damage", toFixed: 0 },
+        { key: "CRIT_DAMAGE", label: "Crit Damage", toFixed: 1 },
         { key: "ELEMENT_PERCENT", label: "Element %", toFixed: 0 },
         { key: "ANOMALY_PROFICIENCY_FLAT", label: "Anomaly Proficiency", toFixed: 0 },
         { key: "ANOMALY_MASTERY_FLAT", label: "Anomaly Mastery", toFixed: 0 },
-        { key: "PEN_PERCENT", label: "Pen %", toFixed: 0 },
+        { key: "PEN_PERCENT", label: "Pen %", toFixed: 1 },
         { key: "PEN_FLAT", label: "Pen flat", toFixed: 0 },
         { key: "IMPACT_FLAT", label: "Impact", toFixed: 0 },
-        { key: "ENERGY_REGEN_FLAT", label: "Energy Regen", toFixed: 0 },
+        { key: "ENERGY_REGEN_FLAT", label: "Energy Regen", toFixed: 2 },
     ];
 
     if (calculatedStats === null) {
