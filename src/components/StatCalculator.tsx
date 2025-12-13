@@ -6,7 +6,7 @@ import {
     Speciality,
     DriveStats,
     numberOfPossibleSubstats,
-    type SeletedSubstats,
+    type SelectedSubstats,
 } from "../constants/types";
 
 import { Characters } from "../constants/Characters";
@@ -40,7 +40,7 @@ function StatCalculator({
     selectedDrives: SelectedDrives;
     onDriveChange: (drivePosition: keyof SelectedDrives, driveValue: statTypeKeys | boolean) => void;
 
-    selectedSubstats: SeletedSubstats;
+    selectedSubstats: SelectedSubstats;
     onSubstatChange: (stat: string, count: number) => void;
 }) {
     // const [selectedCharacter, setSelectedCharacterName] = useState<string>(Characters[0].name);

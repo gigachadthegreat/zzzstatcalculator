@@ -5,7 +5,7 @@ import {
     type Character,
     type CharacterAttacks,
     type SelectedDrives,
-    type SeletedSubstats,
+    type SelectedSubstats,
 } from "../constants/types";
 import { type Wengine } from "../constants/types";
 
@@ -56,7 +56,7 @@ export const getParameterizedStatsAsUrl = (
     characterName: string,
     wengineName: string,
     selectedDrives: SelectedDrives,
-    selectedSubstats: SeletedSubstats,
+    selectedSubstats: SelectedSubstats,
 
     multiplierValue: number,
     attackUsed: string,

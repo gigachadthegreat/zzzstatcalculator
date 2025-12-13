@@ -203,7 +203,7 @@ export interface SelectedDrives {
     drive2psc3: statTypeKeys;
 }
 
-export interface SeletedSubstats {
+export interface SelectedSubstats {
     HP_PERCENT: number;
     HP_FLAT: number;
     ATTACK_PERCENT: number;

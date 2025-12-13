@@ -4,7 +4,7 @@ import {
     type Character,
     type Wengine,
     type SelectedDrives,
-    type SeletedSubstats,
+    type SelectedSubstats,
     DriveStats,
     SheerHpConversionFactor,
     SheerAttackConsersionFactor,
@@ -119,7 +119,7 @@ export const AddNewStatsToBaseStats = (_baseStats: CalculatedStats, _statsToAdd:
     return finalStats;
 };
 
-export const calculateStats = (character: Character, wengineSt: Wengine, drives: SelectedDrives, substatsSt: SeletedSubstats) => {
+export const calculateStats = (character: Character, wengineSt: Wengine, drives: SelectedDrives, substatsSt: SelectedSubstats) => {
     let baseStats = JSON.parse(JSON.stringify(character.stats));
     let finalStats = JSON.parse(JSON.stringify(character.stats));
 

@@ -4,7 +4,7 @@ import {
     StatType,
     type Stats,
     type SelectedDrives,
-    type SeletedSubstats,
+    type SelectedSubstats,
     AnomalyMultipliers,
     type statTypeKeys,
     type AttackModifiers,
@@ -31,6 +31,24 @@ import { Attacks } from "./constants/AttackStats";
 import { DiskIds, StatIds } from "./constants/GameIds";
 import Spinner from "./components/Spinner";
 
+// Define types for the Enka network data structure for better type safety
+type EnkaCharacter = {
+    Id: number;
+    Weapon?: { Id: number };
+    EquippedList: {
+        Slot: number;
+        Equipment?: {
+            Id: string;
+            MainPropertyList?: { PropertyId: string }[];
+            RandomPropertyList: { PropertyId: string; PropertyLevel: number }[];
+        };
+    }[];
+};
+
+type EnkaPlayer = {
+    ProfileDetail?: { Nickname: string };
+    Desc?: string;
+};
 function App() {
     const imgRef = useRef<HTMLImageElement>(null);
 
@@ -52,7 +70,7 @@ function App() {
             if (settings.characterName) setCharacterName(settings.characterName);
             if (settings.wengineName) setWengineName(settings.wengineName);
             if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
-            if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SeletedSubstats);
+            if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SelectedSubstats);
             if (settings.attackModifiers != null) setAttackModifiers(settings.attackModifiers);
 
             if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
@@ -98,7 +116,7 @@ function App() {
         drive2psc2: StatType.NONE,
         drive2psc3: StatType.NONE,
     });
-    const [selectedSubstats, setSelectedSubstats] = useState<SeletedSubstats>({
+    const [selectedSubstats, setSelectedSubstats] = useState<SelectedSubstats>({
         HP_PERCENT: 0,
         HP_FLAT: 0,
         ATTACK_PERCENT: 0,
@@ -148,12 +166,14 @@ function App() {
         additionalSheerFlat: 0,
     });
 
-    const [enkaCharacters, setEnkaCharacters] = useState<any[]>([]);
-    const [enkaPlayer, setEnkaPlayer] = useState<any>();
+    const [enkaCharacters, setEnkaCharacters] = useState<EnkaCharacter[]>([]);
+    const [enkaPlayer, setEnkaPlayer] = useState<EnkaPlayer>();
     const [errorText, setErrorText] = useState<string>("");
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
+        additionalSheerFlat: 0,
+        additionalSheerPercent: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -303,6 +323,8 @@ function App() {
 
         // Damage Calculator State
         setAttackModifiers({
+            additionalSheerFlat: 0,
+            additionalSheerPercent: 0,
             additionalDmgBonusMultiplierAttacker: 0,
             critMode: "avg",
             defenseTarget: 953,
@@ -359,7 +381,7 @@ function App() {
             }
 
             try {
-                const result = await getEnkaData(event.currentTarget.value);
+                const result = await getEnkaData(Number(event.currentTarget.value));
                 // allorigins.win always return 200 OK even on errors, so we need to check the contents.
                 if (result.status != 200) {
                     console.error("Failed to fetch ENKA data via allorigins:", result.statusText);
@@ -402,7 +424,7 @@ function App() {
     };
 
     const getDriveMainStatType = (statId: number) => {
-        const driveMainStatEntry = Object.entries(StatIds).find(([key, val]) => Number(key) === Number(statId));
+        const driveMainStatEntry = Object.entries(StatIds).find(([key]) => Number(key) === Number(statId));
 
         if (!driveMainStatEntry) {
             console.warn("Unknown substat id (no matching entry in SubstatIds):", statId);
@@ -415,7 +437,7 @@ function App() {
         return (StatType as Record<string, string>)[keyName] ?? StatType.NONE;
     };
 
-    const handleEnkaCharacterSelect = (character: any) => {
+    const handleEnkaCharacterSelect = (character: EnkaCharacter) => {
         const _characterName = Characters.find((char) => char.id === character.Id)?.name || Characters[0].name;
         setCharacterName(_characterName);
         setWengineName(
@@ -424,12 +446,12 @@ function App() {
         );
 
         // HANDLE DISK DRIVES
-        const disk1 = character.EquippedList.find((disk: any) => disk.Slot === 1);
-        const disk2 = character.EquippedList.find((disk: any) => disk.Slot === 2);
-        const disk3 = character.EquippedList.find((disk: any) => disk.Slot === 3);
-        const disk4 = character.EquippedList.find((disk: any) => disk.Slot === 4);
-        const disk5 = character.EquippedList.find((disk: any) => disk.Slot === 5);
-        const disk6 = character.EquippedList.find((disk: any) => disk.Slot === 6);
+        const disk1 = character.EquippedList.find((disk) => disk.Slot === 1);
+        const disk2 = character.EquippedList.find((disk) => disk.Slot === 2);
+        const disk3 = character.EquippedList.find((disk) => disk.Slot === 3);
+        const disk4 = character.EquippedList.find((disk) => disk.Slot === 4);
+        const disk5 = character.EquippedList.find((disk) => disk.Slot === 5);
+        const disk6 = character.EquippedList.find((disk) => disk.Slot === 6);
 
         const drive4MainStatId = disk4?.Equipment?.MainPropertyList?.[0]?.PropertyId
             ? parseInt(disk4.Equipment.MainPropertyList[0].PropertyId)
@@ -486,21 +508,21 @@ function App() {
         const twoPscEffect = [];
         for (const [driveId, count] of map.entries()) {
             if (count >= 2) {
-                const twoPieceIds = Number(Object.entries(DiskIds).find(([key, val]) => Number(key) === Number(driveId))[0]);
-                twoPscEffect.push(Object.entries(DriveDisks).find(([key, val]) => Number(val.id) === twoPieceIds)[1].mainStat);
+                const twoPieceIds = Number(Object.entries(DiskIds).find(([key]) => Number(key) === Number(driveId))?.[0]);
+                twoPscEffect.push(Object.values(DriveDisks).find((val) => val.id === twoPieceIds)?.mainStat);
             }
         }
 
         const drives = {
-            drive1Enabled: character.EquippedList.some((disk: any) => disk.Slot === 1),
-            drive2Enabled: character.EquippedList.some((disk: any) => disk.Slot === 2),
-            drive3Enabled: character.EquippedList.some((disk: any) => disk.Slot === 3),
-            drive4: drive4MainStatId ? getDriveMainStatType(drive4MainStatId) : StatType.NONE,
-            drive5: drive5MainStatId ? getDriveMainStatType(drive5MainStatId) : StatType.NONE,
-            drive6: drive6MainStatId ? getDriveMainStatType(drive6MainStatId) : StatType.NONE,
-            drive2psc1: twoPscEffect[0] ?? StatType.NONE,
-            drive2psc2: twoPscEffect[1] ?? StatType.NONE,
-            drive2psc3: twoPscEffect[2] ?? StatType.NONE,
+            drive1Enabled: character.EquippedList.some((disk) => disk.Slot === 1),
+            drive2Enabled: character.EquippedList.some((disk) => disk.Slot === 2),
+            drive3Enabled: character.EquippedList.some((disk) => disk.Slot === 3),
+            drive4: drive4MainStatId ? getDriveMainStatType(drive4MainStatId) as keyof typeof StatType: StatType.NONE,
+            drive5: drive5MainStatId ? getDriveMainStatType(drive5MainStatId) as keyof typeof StatType : StatType.NONE,
+            drive6: drive6MainStatId ? getDriveMainStatType(drive6MainStatId) as keyof typeof StatType : StatType.NONE,
+            drive2psc1: twoPscEffect[0] as keyof typeof StatType ?? StatType.NONE,
+            drive2psc2: twoPscEffect[1] as keyof typeof StatType ?? StatType.NONE,
+            drive2psc3: twoPscEffect[2] as keyof typeof StatType ?? StatType.NONE,
         };
         setSelectedDrives(drives);
 
@@ -509,11 +531,12 @@ function App() {
         const diskSlots = [disk1, disk2, disk3, disk4, disk5, disk6];
 
         for (const disk of diskSlots) {
-            if (disk != undefined)
+            if (disk?.Equipment)
                 for (const substat of disk.Equipment.RandomPropertyList) {
                     const substatId = Number(substat.PropertyId);
                     // Look up the substat key from StatIds
-                    const substatEntry = Object.entries(StatIds).find(([key]) => Number(key) === substatId)[1];
+                    const substatEntry = Object.entries(StatIds).find(([key]) => Number(key) === substatId)?.[1];
+                    if (!substatEntry) continue;
                     const substatCount = substat.PropertyLevel;
                     const currentCount = substatMap.get(substatEntry) || 0;
                     substatMap.set(substatEntry, currentCount + substatCount);
@@ -521,7 +544,7 @@ function App() {
         }
 
         // Build selectedSubstats object from the accumulated map
-        const newSubstats: SeletedSubstats = {
+        const newSubstats: SelectedSubstats = {
             HP_PERCENT: substatMap.get("HP_PERCENT") || 0,
             HP_FLAT: substatMap.get("HP_FLAT") || 0,
             ATTACK_PERCENT: substatMap.get("ATTACK_PERCENT") || 0,
