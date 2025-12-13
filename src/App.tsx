@@ -335,8 +335,7 @@ function App() {
             additionalElementPercent: 0,
             additionalSheerPercent: 0,
             additionalSheerFlat: 0,
-        })
-
+        });
 
         setCalculatedStats(
             calculateStats(
@@ -381,7 +380,10 @@ function App() {
 
     const handleEnkaCharacterSelect = (character: any) => {
         setCharacterName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name);
-        setWengineName(Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1") )?.name || Wengines[Wengines.length-1].name);
+        setWengineName(
+            Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
+                Wengines[Wengines.length - 1].name
+        );
 
         const disk1 = character.EquippedList.find((disk: any) => disk.Slot === 1);
         const disk2 = character.EquippedList.find((disk: any) => disk.Slot === 2);
@@ -496,16 +498,32 @@ function App() {
 
         const calculatedStats = calculateStats(
             getCharacterFromName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name, Characters),
-            getWengineFromName(Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1") )?.name || Wengines[Wengines.length-1].name, Wengines),
+            getWengineFromName(
+                Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
+                    Wengines[Wengines.length - 1].name,
+                Wengines
+            ),
             drives,
             newSubstats
         );
         setCalculatedStats(calculatedStats);
-        setAttackUsed(Attacks.filter((attack) => attack.characterName === Characters.find((char) => char.id === character.Id)?.name || Characters[0].name)[0].attackStats[0]);
+        setAttackUsed(
+            Attacks.filter(
+                (attack) => attack.characterName === Characters.find((char) => char.id === character.Id)?.name || Characters[0].name
+            )[0].attackStats[0]
+        );
 
-        setMultiplier(getMultiplierFromAttack(Attacks, Characters.find((char) => char.id === character.Id)?.name || Characters[0].name, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
+        setMultiplier(
+            getMultiplierFromAttack(
+                Attacks,
+                Characters.find((char) => char.id === character.Id)?.name || Characters[0].name,
+                attackUsed.Level1Damage,
+                attackUsed.growthPerLevel,
+                attackLevel
+            )
+        );
 
-        setShowEnkaOverlay(false)
+        setShowEnkaOverlay(false);
     };
 
     return (
@@ -530,15 +548,11 @@ function App() {
                                 ></input>
                                 <br />
                                 {loadingEnkaDataSpinner ? <Spinner /> : <></>}
-                                <div className="flex items-center">
-                                    <div className="-2 text-3xl font-bold text-gray-900 dark:text-gray-100">Account: </div>
-                                    <div>
-                                        <div className="m-2 text-3xl  text-gray-900 dark:text-gray-100">
-                                            {" "}
-                                            {enkaPlayerName?.ProfileDetail?.Nickname}
-                                        </div>
-                                        <div className="m-2 text-xl  text-gray-900 dark:text-gray-100">&nbsp;{enkaPlayerName?.Desc}</div>
+                                <div className="items-center">
+                                    <div className="w-full m-2 text-3xl  text-gray-900 dark:text-gray-100 text-center">
+                                        {enkaPlayerName?.ProfileDetail?.Nickname}
                                     </div>
+                                    <div className="w-full m-2 text-xl  text-gray-900 dark:text-gray-100 text-center">&nbsp;{enkaPlayerName?.Desc}</div>
                                 </div>
 
                                 <div>
@@ -579,7 +593,7 @@ function App() {
                                 setShowEnkaOverlay(true);
                             }}
                         >
-                            Import Data from Enka.net
+                            Import Data from enka.network
                         </button>
 
                         <button
