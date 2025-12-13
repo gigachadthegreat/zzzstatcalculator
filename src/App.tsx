@@ -379,12 +379,14 @@ function App() {
     };
 
     const handleEnkaCharacterSelect = (character: any) => {
-        setCharacterName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name);
+        const _characterName = Characters.find((char) => char.id === character.Id)?.name || Characters[0].name
+        setCharacterName(_characterName);
         setWengineName(
             Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
                 Wengines[Wengines.length - 1].name
         );
 
+        // HANDLE DISK DRIVES
         const disk1 = character.EquippedList.find((disk: any) => disk.Slot === 1);
         const disk2 = character.EquippedList.find((disk: any) => disk.Slot === 2);
         const disk3 = character.EquippedList.find((disk: any) => disk.Slot === 3);
@@ -465,7 +467,7 @@ function App() {
         };
         setSelectedDrives(drives);
 
-        // Parse substats from all equipped disks (slots 4-6)
+        // HANDLE SUBSTATS
         const substatMap = new Map<string, number>();
         const diskSlots = [disk1, disk2, disk3, disk4, disk5, disk6];
 
@@ -497,7 +499,7 @@ function App() {
         setSelectedSubstats(newSubstats);
 
         const calculatedStats = calculateStats(
-            getCharacterFromName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name, Characters),
+            getCharacterFromName(_characterName, Characters),
             getWengineFromName(
                 Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
                     Wengines[Wengines.length - 1].name,
@@ -506,17 +508,19 @@ function App() {
             drives,
             newSubstats
         );
+
         setCalculatedStats(calculatedStats);
-        setAttackUsed(
-            Attacks.filter(
-                (attack) => attack.characterName === Characters.find((char) => char.id === character.Id)?.name || Characters[0].name
-            )[0].attackStats[0]
-        );
+        const _attackUsed = Attacks.filter(
+            (attack) => attack.characterName === _characterName
+        )[0].attackStats[0];
+
+        console.log(_attackUsed)
+        setAttackUsed(_attackUsed);
 
         setMultiplier(
             getMultiplierFromAttack(
                 Attacks,
-                Characters.find((char) => char.id === character.Id)?.name || Characters[0].name,
+                _characterName,
                 attackUsed.Level1Damage,
                 attackUsed.growthPerLevel,
                 attackLevel
@@ -552,7 +556,9 @@ function App() {
                                     <div className="w-full m-2 text-3xl  text-gray-900 dark:text-gray-100 text-center">
                                         {enkaPlayerName?.ProfileDetail?.Nickname}
                                     </div>
-                                    <div className="w-full m-2 text-xl  text-gray-900 dark:text-gray-100 text-center">&nbsp;{enkaPlayerName?.Desc}</div>
+                                    <div className="w-full m-2 text-xl  text-gray-900 dark:text-gray-100 text-center">
+                                        &nbsp;{enkaPlayerName?.Desc}
+                                    </div>
                                 </div>
 
                                 <div>
