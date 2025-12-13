@@ -1103,8 +1103,7 @@ export const getEnkaData = async (id: number) => {
     // return (await fetch(`https://zzzenka.free.beeceptor.com/${id}`)).json();
 
     // Production API using ENKA. Using allorigins as a proxy to bypass CORS issues. I want to keep this in a single react app. The only way to circumvent CORS is to use a separate backend which makes the actual request to ENKA.
-    const enkaUrl = `https://enka.network/api/zzz/uid/${id}`
-    const res = JSON.parse((await (await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(enkaUrl)}`)).json()).contents)
-    console.log(res)
-    return res
+    const enkaUrl = `https://enka.network/api/zzz/uid/${id}`;
+    const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(enkaUrl)}`);
+    return res;
 };

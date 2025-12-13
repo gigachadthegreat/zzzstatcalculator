@@ -149,7 +149,8 @@ function App() {
     });
 
     const [enkaCharacters, setEnkaCharacters] = useState<any[]>([]);
-    const [enkaPlayerName, setEnkaPlayer] = useState();
+    const [enkaPlayer, setEnkaPlayer] = useState<any>();
+    const [errorText, setErrorText] = useState<string>("");
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
@@ -356,11 +357,49 @@ function App() {
                 // TODO: Display to user that this is unacceptable!!!!! HERETIC!!!
                 return;
             }
-            const result = (await getEnkaData(event.currentTarget.value)).PlayerInfo;
 
-            setEnkaPlayer(result.SocialDetail); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state.
-            setEnkaCharacters(result.ShowcaseDetail.AvatarList);
-            setLoadingEnkaDataSpinner(false);
+            try {
+                const result = await getEnkaData(event.currentTarget.value);
+                console.log("result", result);
+                // allorigins.win always return 200 OK even on errors, so we need to check the contents.
+                if (result.status != 200) {
+                    console.error("Failed to fetch ENKA data via allorigins:", result.statusText);
+                    setLoadingEnkaDataSpinner(false);
+                    setErrorText("Unknown Error. Please try again later");
+                    return;
+                }
+
+                const resultJson = await result.json();
+                if (resultJson.status.http_code != 200) {
+                    if (resultJson.status.http_code == 404) {
+                        console.error("Unknown UID. Player not found");
+                        setLoadingEnkaDataSpinner(false);
+                        setErrorText("Unknown UID. Player not found");
+                    } else if (resultJson.status.http_code == 400) {
+                        console.error("Malformed UID:", result.statusText);
+                        setLoadingEnkaDataSpinner(false);
+                        setErrorText("Malformed UID");
+                    } else {
+                        console.error("Failed to fetch ENKA data:", result.statusText);
+                        setLoadingEnkaDataSpinner(false);
+                        setErrorText("Unknown error. Please try again later");
+                    }
+                    return;
+                }
+
+                const resJson = JSON.parse(await resultJson.contents).PlayerInfo;
+
+                console.log(resJson);
+                setEnkaPlayer(resJson.SocialDetail); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state.
+                setEnkaCharacters(resJson.ShowcaseDetail.AvatarList);
+                setErrorText("");
+                setLoadingEnkaDataSpinner(false);
+            } catch (error) {
+                console.log("Error fetching data through allorigins.win:", error);
+                setLoadingEnkaDataSpinner(false);
+                setErrorText("Unknown Error. Please try again later");
+                return;
+            }
         }
     };
 
@@ -379,7 +418,7 @@ function App() {
     };
 
     const handleEnkaCharacterSelect = (character: any) => {
-        const _characterName = Characters.find((char) => char.id === character.Id)?.name || Characters[0].name
+        const _characterName = Characters.find((char) => char.id === character.Id)?.name || Characters[0].name;
         setCharacterName(_characterName);
         setWengineName(
             Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
@@ -510,22 +549,12 @@ function App() {
         );
 
         setCalculatedStats(calculatedStats);
-        const _attackUsed = Attacks.filter(
-            (attack) => attack.characterName === _characterName
-        )[0].attackStats[0];
+        const _attackUsed = Attacks.filter((attack) => attack.characterName === _characterName)[0].attackStats[0];
 
-        console.log(_attackUsed)
+        console.log(_attackUsed);
         setAttackUsed(_attackUsed);
 
-        setMultiplier(
-            getMultiplierFromAttack(
-                Attacks,
-                _characterName,
-                attackUsed.Level1Damage,
-                attackUsed.growthPerLevel,
-                attackLevel
-            )
-        );
+        setMultiplier(getMultiplierFromAttack(Attacks, _characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
 
         setShowEnkaOverlay(false);
     };
@@ -546,18 +575,20 @@ function App() {
 
                             <div>
                                 <input
-                                    className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
+                                    className="placeholder-gray-400 w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
                                     type="number"
+                                    placeholder="Your ZZZ UID. (E.g., 1000000123)"
                                     onKeyDown={handleKeyDown}
                                 ></input>
                                 <br />
                                 {loadingEnkaDataSpinner ? <Spinner /> : <></>}
                                 <div className="items-center">
+                                    <div className="text-red-400">{errorText}</div>
                                     <div className="w-full m-2 text-3xl  text-gray-900 dark:text-gray-100 text-center">
-                                        {enkaPlayerName?.ProfileDetail?.Nickname}
+                                        {enkaPlayer?.ProfileDetail?.Nickname}
                                     </div>
                                     <div className="w-full m-2 text-xl  text-gray-900 dark:text-gray-100 text-center">
-                                        &nbsp;{enkaPlayerName?.Desc}
+                                        &nbsp;{enkaPlayer?.Desc}
                                     </div>
                                 </div>
 
