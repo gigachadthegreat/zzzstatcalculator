@@ -406,7 +406,7 @@ function DamageCalculator({
             </div>
 
             <div className=" flex justify-center">
-                <div className=" w-3/4 mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
+                <div className="  mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
                     <h4
                         className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 p-4 ${
                             isFormulaVisible ? "rounded-t-md" : "rounded-md"
