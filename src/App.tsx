@@ -360,7 +360,6 @@ function App() {
 
             try {
                 const result = await getEnkaData(event.currentTarget.value);
-                console.log("result", result);
                 // allorigins.win always return 200 OK even on errors, so we need to check the contents.
                 if (result.status != 200) {
                     console.error("Failed to fetch ENKA data via allorigins:", result.statusText);
@@ -389,13 +388,12 @@ function App() {
 
                 const resJson = JSON.parse(await resultJson.contents).PlayerInfo;
 
-                console.log(resJson);
                 setEnkaPlayer(resJson.SocialDetail); // TODO: Create and write Enka Data into proper data structure, instead of just dumping it into a state.
                 setEnkaCharacters(resJson.ShowcaseDetail.AvatarList);
                 setErrorText("");
                 setLoadingEnkaDataSpinner(false);
             } catch (error) {
-                console.log("Error fetching data through allorigins.win:", error);
+                console.error("Error fetching data through allorigins.win:", error);
                 setLoadingEnkaDataSpinner(false);
                 setErrorText("Unknown Error. Please try again later");
                 return;
@@ -551,7 +549,6 @@ function App() {
         setCalculatedStats(calculatedStats);
         const _attackUsed = Attacks.filter((attack) => attack.characterName === _characterName)[0].attackStats[0];
 
-        console.log(_attackUsed);
         setAttackUsed(_attackUsed);
 
         setMultiplier(getMultiplierFromAttack(Attacks, _characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
