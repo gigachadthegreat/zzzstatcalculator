@@ -16,6 +16,7 @@ import ProgressBar from "./ProgressBar";
 import RangeSlider from "./RangeSlider";
 
 import { getSortedList } from "../lib/Utility";
+import LabelWithInfo from "./LabelWithInfo";
 
 function StatCalculator({
     characterName,
@@ -50,6 +51,8 @@ function StatCalculator({
         setSubstatCount(substatCount);
     }, [selectedSubstats]);
 
+
+    // Quite a bit of repeated Code. Could be optimized later.
     const statNameMapSlot = {
         HP_PERCENT: `HP ${DriveStats.Drive4.HP_PERCENT}%`,
         ATTACK_PERCENT: `Attack ${DriveStats.Drive4.ATTACK_PERCENT}%`,
@@ -79,6 +82,21 @@ function StatCalculator({
         ENERGY_REGEN_PERCENT: `Energy Regen ${DriveStats.Drive2Psc.ENERGY_REGEN_PERCENT}%`,
         NONE: `None`,
     };
+
+    const substatNameMap = {
+        HP_PERCENT: `HP ${DriveStats.SubstatValues.HP_PERCENT}%`,
+        HP_FLAT: `HP ${DriveStats.SubstatValues.HP_FLAT}`,
+        ATTACK_PERCENT: `Attack ${DriveStats.SubstatValues.ATTACK_PERCENT}%`,
+        ATTACK_FLAT: `Attack ${DriveStats.SubstatValues.ATTACK_FLAT}`,
+        DEFENSE_PERCENT: `Defense ${DriveStats.SubstatValues.DEFENSE_PERCENT}%`,
+        DEFENSE_FLAT: `Defense ${DriveStats.SubstatValues.DEFENSE_FLAT}`,
+        CRIT_RATE: `Crit Rate ${DriveStats.SubstatValues.CRIT_RATE}%`,
+        CRIT_DAMAGE: `Crit DMG ${DriveStats.SubstatValues.CRIT_DAMAGE}%`,
+        ANOMALY_PROFICIENCY_FLAT: `Anomaly Proficiency ${DriveStats.SubstatValues.ANOMALY_PROFICIENCY_FLAT}`,
+        PEN_FLAT: `Pen ${DriveStats.SubstatValues.PEN_FLAT}`,
+        NONE: `None`,
+    };
+
     const substatColors = {
         HP_PERCENT: "#00A000", // green
         HP_FLAT: "#40C040", // lighter green
@@ -116,9 +134,9 @@ function StatCalculator({
     };
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <div className="space-y-6">
+        <div className="w-full">
+            <div className="w-full flex justify-center flex-wrap gap-6 ">
+                <div className="space-y-6 w-3/7">
                     <div className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
                         <h2 className="text-xl font-bold mb-4">Character & W-Engine</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -297,49 +315,45 @@ function StatCalculator({
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                <h2 className="text-xl font-bold mb-4">Substats</h2>
-
-                <div className="flex items-center gap-4 mb-4">
-                    <label className="font-semibold">
-                        Total Substat Rolls: {substatCount} / {numberOfPossibleSubstats}
-                    </label>
-                    <div className="grow">
-                        <ProgressBar
-                            maximum={numberOfPossibleSubstats}
-                            amount={Object.values(selectedSubstats)}
-                            colors={Object.values(substatColors)}
+                <div className="w-3/7 min-w-80 p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                    <h2 className="text-xl font-bold mb-4">Substats</h2>
+                    <div className="flex">
+                        <LabelWithInfo
+                            labelText={`Total Substats: ${substatCount} / ${numberOfPossibleSubstats}`}
+                            infoText="54 is the total amount of possible Substats with every Disk having 4 stats at Lvl 0"
                         />
                     </div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 mt-6">
-                    {Object.keys(selectedSubstats).map((substat) => (
-                        <div key={substat} className="grid grid-cols-[1fr,auto,auto] items-center gap-4">
-                            <div className="flex items-center justify-between">
-                                <label className="block font-medium text-sm mr-2">
-                                    {substat.replace(/_/g, " ")} (+
-                                    {DriveStats.SubstatValues[substat as keyof typeof DriveStats.SubstatValues]})
-                                </label>
-                                <input
-                                    type="number"
-                                    min="0"
-                                    max={numberOfPossibleSubstats}
+                    <ProgressBar
+                        maximum={numberOfPossibleSubstats}
+                        amount={Object.values(selectedSubstats)}
+                        colors={Object.values(substatColors)}
+                    />
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4 mt-6">
+                        {Object.keys(selectedSubstats).map((substat) => (
+                            <div key={substat} className="grid grid-cols-[1fr,auto,auto] items-center gap-4">
+                                <div className="flex items-center justify-between">
+                                    <label className="block font-medium text-sm mr-2">
+                                        {substatNameMap[substat as keyof typeof substatNameMap]}
+                                    </label>
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        max={numberOfPossibleSubstats}
+                                        value={selectedSubstats[substat as keyof typeof selectedSubstats]}
+                                        onChange={(e) => handleSubstatChange(substat, parseInt(e.target.value) || 0)}
+                                        className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-16 text-center"
+                                    />
+                                </div>
+                                <RangeSlider
+                                    maxValue={numberOfPossibleSubstats}
                                     value={selectedSubstats[substat as keyof typeof selectedSubstats]}
-                                    onChange={(e) => handleSubstatChange(substat, parseInt(e.target.value) || 0)}
-                                    className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-16 text-center"
+                                    onChange={(value) => handleSubstatChange(substat, value || 0)}
+                                    unavailableValue={substatCount}
                                 />
                             </div>
-                            <RangeSlider
-                                maxValue={numberOfPossibleSubstats}
-                                value={selectedSubstats[substat as keyof typeof selectedSubstats]}
-                                onChange={(value) => handleSubstatChange(substat, value || 0)}
-                                unavailableValue={substatCount}
-                            />
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

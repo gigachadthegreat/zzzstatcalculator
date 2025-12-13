@@ -198,7 +198,7 @@ function App() {
             IMPACT_FLAT: 0,
             ENERGY_REGEN_FLAT: 0,
         });
-    }, [calculatedStats, additionalStatsUI]);
+    }, [calculatedStats, additionalStatsUI, characterName]);
 
     const handeCharacterChange = (newCharacterName: string) => {
         setCharacterName(() => {
@@ -316,7 +316,6 @@ function App() {
             additionalSheerDmgBonusMultiplierAttacker: 0,
         });
 
-        setMultiplier(100);
         setAttackLevel(12);
         setMultiplier(getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
         setIsCustomMultiplier(false);
@@ -382,7 +381,7 @@ function App() {
 
     const handleEnkaCharacterSelect = (character: any) => {
         setCharacterName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name);
-        setWengineName(Wengines.find((wengine) => wengine.id === character.Weapon.Id)?.name || Wengines[0].name);
+        setWengineName(Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1") )?.name || Wengines[Wengines.length-1].name);
 
         const disk1 = character.EquippedList.find((disk: any) => disk.Slot === 1);
         const disk2 = character.EquippedList.find((disk: any) => disk.Slot === 2);
@@ -494,6 +493,19 @@ function App() {
             PEN_FLAT: substatMap.get("PEN_FLAT") || 0,
         };
         setSelectedSubstats(newSubstats);
+
+        const calculatedStats = calculateStats(
+            getCharacterFromName(Characters.find((char) => char.id === character.Id)?.name || Characters[0].name, Characters),
+            getWengineFromName(Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1") )?.name || Wengines[Wengines.length-1].name, Wengines),
+            drives,
+            newSubstats
+        );
+        setCalculatedStats(calculatedStats);
+        setAttackUsed(Attacks.filter((attack) => attack.characterName === Characters.find((char) => char.id === character.Id)?.name || Characters[0].name)[0].attackStats[0]);
+
+        setMultiplier(getMultiplierFromAttack(Attacks, Characters.find((char) => char.id === character.Id)?.name || Characters[0].name, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
+
+        setShowEnkaOverlay(false)
     };
 
     return (
@@ -614,7 +626,7 @@ function App() {
                     />
                 </div>
                 <div className="col-span-3 z-20">
-                    <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8 ">
+                    <main className="max-w-9xl mx-auto py-6 sm:px-6 lg:px-8 ">
                         <div className="space-y-8">
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <StatCalculator

@@ -23,7 +23,6 @@ function DamageFormulaRupture({
     additionalSheerFlat: number;
     additionalSheerPercent: number;
 }) {
-    console.log()
     const getCritFormula = () => {
         switch (attackModifiers.critMode) {
             case "avg":

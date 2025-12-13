@@ -16,7 +16,7 @@ function LabelWithTextInput({
     placeholder?: string;
 }) {
     return (
-        <div className="w-80 flex justify-between">
+        <div className="w-full flex justify-between items-center gap-6">
             <LabelWithInfo labelText={labelText} infoText={infoText} />
 
             <input

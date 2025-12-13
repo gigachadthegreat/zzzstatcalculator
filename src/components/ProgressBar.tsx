@@ -14,7 +14,7 @@ function ProgressBar({ maximum, amount, colors }: { maximum: number; amount: num
     }
 
     return (
-        <div className="relative w-75 h-5">
+        <div className="relative w-full h-5">
             {/* Background bar */}
             <div className="absolute w-full h-full border-2 border-gray-400 bg-gray-200">
                 {/* Color segments */}

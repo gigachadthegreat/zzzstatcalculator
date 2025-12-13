@@ -14,7 +14,7 @@ const RangeSlider: React.FC<SliderProps> = ({ maxValue, value, onChange, unavail
   const unavailablePercent = 100 - ((unavailableValue / (maxValue)) * 100  - (value / (maxValue)) * 100);
 
   return (
-    <div className="relative w-full h-6">
+    <div className="relative  h-6">
       {/* Track background */}
       <div className="absolute top-1/2 -translate-y-1/2 w-full h-2 rounded-full bg-gray-200 dark:bg-white" />
 

@@ -405,7 +405,7 @@ function DamageCalculator({
                 </div>
             </div>
 
-            <div className="flex justify-center">
+            <div className=" flex justify-center">
                 <div className=" w-3/4 mt-4 mb-6  bg-gray-100 dark:bg-slate-800 rounded-lg shadow-inner">
                     <h4
                         className={`text-lg font-bold  cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-700 p-4 ${
@@ -451,10 +451,10 @@ function DamageCalculator({
             </div>
 
             <div className=" w-full  ">
-                <div className="w-fuill flex justify-center flex-wrap gap-6">
-                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                        <div className="flex items-center space-x-2 ">
-                            <h3 className="font-bold ">Enemy Stats</h3>
+                <div className="w-full flex justify-center flex-wrap gap-6">
+                    <div className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <div className="flex items-center">
+                            <h3 className="font-bold text-xl  ">Enemy Stats</h3>
                         </div>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
@@ -522,8 +522,8 @@ function DamageCalculator({
                             />
                         </div>
                     </div>
-                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                        <h3 className="font-bold mb-2">Attacker Modifiers</h3>
+                    <div className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 className="font-bold text-xl mb-2">Attacker Modifiers</h3>
                         <div className={`flex items-center gap-2 mb-2 ${!isAnomaly ? "" : "opacity-50"} `}>
                             <LabelWithInfo
                                 labelText="Use Custom Multiplier"
@@ -691,8 +691,8 @@ function DamageCalculator({
                             </select>
                         </div>
                     </div>
-                    <div className="  p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
-                        <h3 className="font-bold mb-2">Additional Stats</h3>
+                    <div className="p-4 border rounded-lg bg-gray-50 dark:bg-slate-800 dark:border-slate-700">
+                        <h3 className="font-bold text-xl mb-2">Additional Stats</h3>
                         <div className="flex items-center gap-2 mb-2">
                             <LabelWithTextInput
                                 labelText="Add. HP Flat"
