@@ -401,7 +401,8 @@ function DamageCalculator({
                     ) : (
                         " "
                     )}
-                    Damage: <span className="font-mono text-blue-300">{calculatedDamage.toFixed(1)}</span>
+
+                    Damage: <span className="font-mono text-blue-300">{new Intl.NumberFormat("de-DE").format(Number(calculatedDamage.toFixed(0)))}</span>
                 </div>
             </div>
 
