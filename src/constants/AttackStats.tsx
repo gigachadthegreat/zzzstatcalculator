@@ -1478,6 +1478,96 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Service Stopped for Number Dialed", attackType: "ULT", Level1Damage: 1622.5, growthPerLevel: 147.5 },
         ],
     },
+    {
+        characterName: "Banyue",
+        attackStats: [
+            // BASIC
+            { attackName: "Towering Peaks - 1", attackType: "BASIC", Level1Damage: 39.6, growthPerLevel: 3.6 },
+            { attackName: "Towering Peaks - 2", attackType: "BASIC", Level1Damage: 49.8, growthPerLevel: 4.6 },
+            { attackName: "Towering Peaks - 3", attackType: "BASIC", Level1Damage: 101.3, growthPerLevel: 9.3 },
+            { attackName: "Towering Peaks - 4", attackType: "BASIC", Level1Damage: 116.3, growthPerLevel: 10.6 },
+
+            { attackName: "Majestic Summit - 1", attackType: "BASIC", Level1Damage: 52.8, growthPerLevel: 4.8 },
+            { attackName: "Majestic Summit - 2", attackType: "BASIC", Level1Damage: 70.4, growthPerLevel: 6.4 },
+            { attackName: "Majestic Summit - 3", attackType: "BASIC", Level1Damage: 135.5, growthPerLevel: 12.4 },
+            { attackName: "Majestic Summit - 4", attackType: "BASIC", Level1Damage: 92.4, growthPerLevel: 8.4 },
+
+            { attackName: "Immolate", attackType: "BASIC", Level1Damage: 110.6, growthPerLevel: 10.1 },
+
+            { attackName: "Toppling Mountain", attackType: "BASIC", Level1Damage: 869.8, growthPerLevel: 79.1 },
+
+            { attackName: "Crushing Peaks", attackType: "BASIC", Level1Damage: 378.3, growthPerLevel: 34.4 },
+            // DASH
+            { attackName: "Scattering Sands", attackType: "DASH", Level1Damage: 39.7, growthPerLevel: 3.7 },
+            // DODGE
+            { attackName: "Stoneburst", attackType: "DASH", Level1Damage: 194.9, growthPerLevel: 17.8 },
+            // ASSIST
+            { attackName: "Batholith", attackType: "ASSIST", Level1Damage: 73.4, growthPerLevel: 6.7 },
+            { attackName: "Lofty Ascent", attackType: "ASSIST", Level1Damage: 241.6, growthPerLevel: 22 },
+            { attackName: "Pierce Heavens", attackType: "ASSIST", Level1Damage: 221.6, growthPerLevel: 20.2 },
+            // SPECIAL
+            // Banyue simply doesn't have a normal special I guess...
+            // EX SPECIAL
+            { attackName: "Earth Shaker", attackType: "EXSPECIAL", Level1Damage: 254.8, growthPerLevel: 23.2 },
+            { attackName: "Mountain Tremor", attackType: "EXSPECIAL", Level1Damage: 171.3, growthPerLevel: 15.6 },
+            { attackName: "One's Path", attackType: "EXSPECIAL", Level1Damage: 162.4, growthPerLevel: 14.8 },
+            { attackName: "Lion's Roar", attackType: "EXSPECIAL", Level1Damage: 153.7, growthPerLevel: 14 },
+            { attackName: "Mountain Tremor - Wrath", attackType: "EXSPECIAL", Level1Damage: 325, growthPerLevel: 29.6 },
+            { attackName: "Lion's Roar - Wrath", attackType: "EXSPECIAL", Level1Damage: 300.1, growthPerLevel: 27.3 },
+            // CHAIN
+            { attackName: "Blazing Wrath", attackType: "CHAIN", Level1Damage: 560.9, growthPerLevel: 51 },
+            // ULT
+            { attackName: "The World Trembles", attackType: "ULT", Level1Damage: 1598.4, growthPerLevel: 145.4 },
+        ],
+    },
+    {
+        characterName: "Zhao",
+        attackStats: [
+            // BASIC
+            { attackName: " - ", attackType: "BASIC", Level1Damage: 0, growthPerLevel:  0},
+            // DASH
+            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            // DODGE
+            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            // ASSIST
+            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            // SPECIAL
+            { attackName: "", attackType: "SPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            // EX SPECIAL
+            { attackName: "", attackType: "EXSPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            // CHAIN
+            { attackName: "", attackType: "CHAIN", Level1Damage: 0, growthPerLevel:  0},
+            // ULT
+            { attackName: "", attackType: "ULT", Level1Damage: 0, growthPerLevel:  0},
+        ],
+    },
+    {
+        characterName: "Ye Shunguang",
+        attackStats: [
+            // BASIC
+            { attackName: " - ", attackType: "BASIC", Level1Damage: 0, growthPerLevel:  0},
+            // DASH
+            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            // DODGE
+            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            // ASSIST
+            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            // SPECIAL
+            { attackName: "", attackType: "SPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            // EX SPECIAL
+            { attackName: "", attackType: "EXSPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            // CHAIN
+            { attackName: "", attackType: "CHAIN", Level1Damage: 0, growthPerLevel:  0},
+            // ULT
+            { attackName: "", attackType: "ULT", Level1Damage: 0, growthPerLevel:  0},
+        ],
+    },
+
+
+
+
 
     // EMPTY TEMPLATE
     // {
