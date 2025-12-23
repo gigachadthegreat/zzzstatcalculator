@@ -169,11 +169,11 @@ function StatCalculator({
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
-                                            {getSortedList(
+                                            {
                                                 Wengines.filter((wengine) => wengine.speciality === speciality).map(
                                                     (wengine) => wengine.name
                                                 )
-                                            ).map((wengineName) => (
+                                            .map((wengineName) => (
                                                 <option key={wengineName} value={wengineName}>
                                                     {wengineName}
                                                 </option>

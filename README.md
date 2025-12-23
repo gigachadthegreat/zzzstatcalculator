@@ -12,7 +12,7 @@ A web-based tool for the game *Zenless Zone Zero* designed to help players theor
 -   **Damage Simulation**: A detailed damage calculator that considers a wide range of in-game variables:
     -   **Target Stats**: Enemy DEF, RES, and Stun state.
     -   **Buffs & Debuffs**: DEF Shred, RES Reduction, Damage Taken Increase, etc.
-    -   **Attacker Modifiers**: Character Level, Skill Multipliers, and additional damage bonuses.
+    -   **Attacker Modifiers**: Additional damage, Skill Multipliers, and additional damage bonuses.
     -   **Special Damage Types**: Includes specific calculation modes for Rupture (Sheer) and Anomaly damage. Does currently not support Disorder damage.
     -   **Crit Modes**: Calculate damage as an always-crit, no-crit, or an average hit.
 -   **Shareable Builds**: Generate and share a unique URL that contains your complete character build and calculator settings.
