@@ -1524,44 +1524,80 @@ export const Attacks: CharacterAttacks[] = [
         characterName: "Zhao",
         attackStats: [
             // BASIC
-            { attackName: " - ", attackType: "BASIC", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Glacial Judgment - 1", attackType: "BASIC", Level1Damage: 73.4, growthPerLevel: 6.7},
+            { attackName: "Glacial Judgment - 2", attackType: "BASIC", Level1Damage: 66, growthPerLevel: 6},
+            { attackName: "Glacial Judgment - 3", attackType: "BASIC", Level1Damage: 115.8, growthPerLevel: 10.6},
+            { attackName: "Glacial Judgment - 4", attackType: "BASIC", Level1Damage: 185.6, growthPerLevel: 16.9},
+            { attackName: "Glacial Judgment - 5", attackType: "BASIC", Level1Damage: 386.4, growthPerLevel: 35.2},
+
+            { attackName: "Final Verdict", attackType: "BASIC", Level1Damage: 69.7, growthPerLevel: 6.4},
             // DASH
-            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Bouncing Dash", attackType: "DASH", Level1Damage: 86.3, growthPerLevel: 7.9},
             // DODGE
-            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Swift Blink", attackType: "DASH", Level1Damage: 338.8, growthPerLevel: 30.8},
             // ASSIST
-            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
-            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Burst of Frost", attackType: "ASSIST", Level1Damage: 680.3, growthPerLevel: 61.9},
+            { attackName: "Patch the Gaps", attackType: "ASSIST", Level1Damage: 176, growthPerLevel: 16},
+            { attackName: "Frostlight Reflection", attackType: "ASSIST", Level1Damage: 366.1, growthPerLevel: 33.3},
             // SPECIAL
-            { attackName: "", attackType: "SPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Shatterfrost Surge", attackType: "SPECIAL", Level1Damage: 56.9, growthPerLevel:  5.2},
             // EX SPECIAL
-            { attackName: "", attackType: "EXSPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Frostflow Tundra", attackType: "EXSPECIAL", Level1Damage: 1210.8, growthPerLevel:  110.1},
             // CHAIN
-            { attackName: "", attackType: "CHAIN", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Temporary Alliance", attackType: "CHAIN", Level1Damage: 770.8, growthPerLevel: 70.1},
             // ULT
-            { attackName: "", attackType: "ULT", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Bunny Barrage", attackType: "ULT", Level1Damage: 2187.3, growthPerLevel: 198.9},
         ],
     },
     {
         characterName: "Ye Shunguang",
         attackStats: [
             // BASIC
-            { attackName: " - ", attackType: "BASIC", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Swiftedge - 1", attackType: "BASIC", Level1Damage: 79.4, growthPerLevel: 7.3},
+            { attackName: "Swiftedge - 2", attackType: "BASIC", Level1Damage: 244.1, growthPerLevel: 22.2},
+            { attackName: "Swiftedge - 3", attackType: "BASIC", Level1Damage: 124.6, growthPerLevel: 11.4},
+            { attackName: "Swiftedge - 4", attackType: "BASIC", Level1Damage: 368, growthPerLevel: 33.5},
+
+            { attackName: "Cloudstream Sword Will", attackType: "BASIC", Level1Damage: 16.7, growthPerLevel: 1.5},
+
+            { attackName: "Enlightened Mind - Splitting Currents - 1", attackType: "BASIC", Level1Damage: 112.6, growthPerLevel: 10.3},
+            { attackName: "Enlightened Mind - Splitting Currents - 2", attackType: "BASIC", Level1Damage: 155.9, growthPerLevel: 14.2},
+            { attackName: "Enlightened Mind - Splitting Currents - 3", attackType: "BASIC", Level1Damage: 216.6, growthPerLevel: 19.7},
+
+            { attackName: "Enlightened Mind - Skyward Ascent", attackType: "BASIC", Level1Damage: 91, growthPerLevel: 8.3},
+
+            { attackName: "Enlightened Mind - Sunderlight Maximum", attackType: "BASIC", Level1Damage: 604.8, growthPerLevel: 55},
+
+            { attackName: "Enlightened Mind - Sunderlight - 1", attackType: "BASIC", Level1Damage: 120.7, growthPerLevel: 11},
+            { attackName: "Enlightened Mind - Sunderlight - 2", attackType: "BASIC", Level1Damage: 156.5, growthPerLevel: 14.3},
+           
+            { attackName: "Enlightened Mind - Sunderlight Annihilation - With Force", attackType: "BASIC", Level1Damage: 891.2, growthPerLevel: 81.1},
+            { attackName: "Enlightened Mind - Sunderlight Annihilation - Without Force", attackType: "BASIC", Level1Damage: 159.9, growthPerLevel: 14.6},
             // DASH
-            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Shadow Sprint", attackType: "DASH", Level1Damage: 105, growthPerLevel: 9.6},
             // DODGE
-            { attackName: "", attackType: "DASH", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Swallow Strike", attackType: "DASH", Level1Damage: 346.3, growthPerLevel: 31.5},
             // ASSIST
-            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
-            { attackName: "", attackType: "ASSIST", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Illuminating Darkness", attackType: "ASSIST", Level1Damage: 400.4, growthPerLevel: 36.4},
+            { attackName: "Support Guard", attackType: "ASSIST", Level1Damage: 80.5, growthPerLevel: 7.4},
+            { attackName: "Cease Hostility", attackType: "ASSIST", Level1Damage: 413.7, growthPerLevel: 37.7},
+            { attackName: "Enlightened Mind - Tactical Support", attackType: "ASSIST", Level1Damage: 67.3, growthPerLevel: 6.2},
+            { attackName: "Enlightened Mind - Unification", attackType: "ASSIST", Level1Damage: 430, growthPerLevel: 39.1},
             // SPECIAL
-            { attackName: "", attackType: "SPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Guiding Tides", attackType: "SPECIAL", Level1Damage: 98.9, growthPerLevel: 9},
+            { attackName: "Guiding Tides - Perfect Dodge", attackType: "SPECIAL", Level1Damage: 315.9, growthPerLevel: 28.8},
+            { attackName: "Enlightened Mind - Clean Exit", attackType: "SPECIAL", Level1Damage: 71, growthPerLevel: 6.5},
             // EX SPECIAL
-            { attackName: "", attackType: "EXSPECIAL", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Gale Suppression", attackType: "EXSPECIAL", Level1Damage: 1178.4, growthPerLevel: 107.2},
+            { attackName: "Enlightened Mind - Soaring Light - 1 Stack consumed", attackType: "EXSPECIAL", Level1Damage: 176.3, growthPerLevel: 16.1},
+            { attackName: "Enlightened Mind - Soaring Light - 6 Stacks consumed", attackType: "EXSPECIAL", Level1Damage: 1058, growthPerLevel: 96.2},
+            { attackName: "Enlightened Mind - Return to Dust", attackType: "EXSPECIAL", Level1Damage: 1161.1, growthPerLevel: 105.6},
             // CHAIN
-            { attackName: "", attackType: "CHAIN", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Smite the Wicked", attackType: "CHAIN", Level1Damage: 871.6, growthPerLevel: 79.3},
+            { attackName: "Enlightened Mind - Lure Thunder", attackType: "CHAIN", Level1Damage: 908.6, growthPerLevel: 82.6},
             // ULT
-            { attackName: "", attackType: "ULT", Level1Damage: 0, growthPerLevel:  0},
+            { attackName: "Chasing Storms", attackType: "ULT", Level1Damage: 1925, growthPerLevel: 175},
+            { attackName: "Cleaving Heavens", attackType: "ULT", Level1Damage: 3084.3, growthPerLevel: 280.4},
         ],
     },
 
@@ -1574,7 +1610,7 @@ export const Attacks: CharacterAttacks[] = [
     //     characterName: "",
     //     attackStats: [
     //         // BASIC
-    //         { attackName: " - ", attackType: "BASIC", Level1Damage: , growthPerLevel:  },
+    //         { attackName: "", attackType: "BASIC", Level1Damage: , growthPerLevel:  },
     //         // DASH
     //         { attackName: "", attackType: "DASH", Level1Damage: , growthPerLevel:  },
     //         // DODGE
