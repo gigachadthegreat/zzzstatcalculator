@@ -3,6 +3,7 @@ import type { Character } from "./types";
 export const Characters: Character[] = [
     {
         name: "Nicole",
+        version:"", 
         id: 1031,
         speciality: "SUPPORT",
         stats: {
@@ -22,6 +23,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ben",
+        version:"", 
         id: 1121,
         speciality: "DEFENSE",
         stats: {
@@ -41,6 +43,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Anby",
+        version:"", 
         id: 1011,
         speciality: "STUN",
         stats: {
@@ -60,6 +63,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lucy",
+        version:"", 
         id: 1151,
         speciality: "SUPPORT",
         stats: {
@@ -79,6 +83,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soukaku",
+        version:"", 
         id: 1131,
         speciality: "SUPPORT",
         stats: {
@@ -98,6 +103,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Rina",
+        version:"", 
         id: 1211,
         speciality: "SUPPORT",
         stats: {
@@ -117,6 +123,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lycaon",
+        version:"", 
         id: 1141,
         speciality: "STUN",
         stats: {
@@ -136,6 +143,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Koleda",
+        version:"", 
         id: 1101,
         speciality: "STUN",
         stats: {
@@ -155,6 +163,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Piper",
+        version:"", 
         id: 1281,
         speciality: "ANOMALY",
         stats: {
@@ -174,6 +183,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Billy",
+        version:"", 
         id: 1081,
         speciality: "ATTACK",
         stats: {
@@ -193,6 +203,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Anton",
+        version:"", 
         id: 1111,
         speciality: "ATTACK",
         stats: {
@@ -212,6 +223,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Corin",
+        version:"", 
         id: 1061,
         speciality: "ATTACK",
         stats: {
@@ -231,6 +243,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Grace",
+        version:"", 
         id: 1181,
         speciality: "ANOMALY",
         stats: {
@@ -250,6 +263,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soldier 11",
+        version:"", 
         id: 1041,
         speciality: "ATTACK",
         stats: {
@@ -269,6 +283,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Nekomata",
+        version:"", 
         id: 1021,
         speciality: "ATTACK",
         stats: {
@@ -288,6 +303,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Zhu Yuan",
+        version:"", 
         id: 1241,
         speciality: "ATTACK",
         stats: {
@@ -307,6 +323,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ellen",
+        version:"", 
         id: 1191,
         speciality: "ATTACK",
         stats: {
@@ -326,6 +343,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Qingyi",
+        version:"", 
         id: 1251,
         speciality: "STUN",
         stats: {
@@ -345,6 +363,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Jane Doe",
+        version:"", 
         id: 1261,
         speciality: "ANOMALY",
         stats: {
@@ -364,6 +383,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Seth",
+        version:"", 
         id: 1271,
         speciality: "DEFENSE",
         stats: {
@@ -383,6 +403,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Caesar",
+        version:"", 
         id: 1071,
         speciality: "DEFENSE",
         stats: {
@@ -402,6 +423,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Burnice",
+        version:"", 
         id: 1171,
         speciality: "ANOMALY",
         stats: {
@@ -421,6 +443,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yanagi",
+        version:"", 
         id: 1221,
         speciality: "ANOMALY",
         stats: {
@@ -440,6 +463,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lighter",
+        version:"", 
         id: 1161,
         speciality: "STUN",
         stats: {
@@ -459,6 +483,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Miyabi",
+        version:"", 
         id: 1091,
         speciality: "ANOMALY",
         stats: {
@@ -478,6 +503,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Harumasa",
+        version:"", 
         id: 1201,
         speciality: "ATTACK",
         stats: {
@@ -497,6 +523,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Astra Yao",
+        version:"", 
         id: 1311,
         speciality: "SUPPORT",
         stats: {
@@ -516,6 +543,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Evelyn",
+        version:"", 
         id: 1321,
         speciality: "ATTACK",
         stats: {
@@ -535,6 +563,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Soldier 0 Anby",
+        version:"", 
         id: 1381,
         speciality: "ATTACK",
         stats: {
@@ -554,6 +583,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Pulchra",
+        version:"", 
         id: 1351,
         speciality: "STUN",
         stats: {
@@ -573,6 +603,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Trigger",
+        version:"", 
         id: 1361,
         speciality: "STUN",
         stats: {
@@ -592,6 +623,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Vivian",
+        version:"", 
         id: 1331,
         speciality: "ANOMALY",
         stats: {
@@ -611,6 +643,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Hugo",
+        version:"", 
         id: 1291,
         speciality: "ATTACK",
         stats: {
@@ -630,6 +663,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Pan Yinhu",
+        version:"", 
         id: 1421,
         speciality: "DEFENSE",
         stats: {
@@ -649,6 +683,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yixuan",
+        version:"", 
         id: 1371,
         speciality: "RUPTURE",
         stats: {
@@ -668,6 +703,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Ju Fufu",
+        version:"", 
         id: 1391,
         speciality: "STUN",
         stats: {
@@ -687,6 +723,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yuzuha",
+        version:"", 
         id: 1411,
         speciality: "SUPPORT",
         stats: {
@@ -706,6 +743,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Alice",
+        version:"", 
         id: 1401,
         speciality: "ANOMALY",
         stats: {
@@ -725,6 +763,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Seed",
+        version:"", 
         id: 1461,
         speciality: "ATTACK",
         stats: {
@@ -744,6 +783,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Orphie & Magus",
+        version:"", 
         id: 1301,
         speciality: "ATTACK",
         stats: {
@@ -763,6 +803,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Lucia",
+        version:"", 
         id: 1451,
         speciality: "SUPPORT",
         stats: {
@@ -782,6 +823,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Manato",
+        version:"", 
         id: 1441,
         speciality: "RUPTURE",
         stats: {
@@ -801,6 +843,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Yidhari",
+        version:"", 
         id: 1051,
         speciality: "RUPTURE",
         stats: {
@@ -820,6 +863,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Dialyn",
+        version:"", 
         id: 1481,
         speciality: "STUN",
         stats: {
@@ -839,6 +883,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Banyue",
+        version:"", 
         id: 1471,
         speciality: "RUPTURE",
         stats: {
@@ -858,6 +903,7 @@ export const Characters: Character[] = [
     },
     {
         name: "Zhao",
+        version:"v2.5.12", 
         id: 1341,
         speciality: "DEFENSE",
         stats: {
@@ -877,6 +923,7 @@ export const Characters: Character[] = [
     },
         {
         name: "Ye Shunguang",
+        version:"v2.5.12", 
         id: 1431,
         speciality: "ATTACK",
         stats: {

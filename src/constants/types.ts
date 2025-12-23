@@ -219,6 +219,7 @@ export interface SelectedSubstats {
 export interface Character {
     name: string;
     id: number;
+    version: string,
     speciality: specialityKeys;
     stats: Stats;
 }

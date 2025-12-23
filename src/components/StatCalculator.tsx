@@ -149,13 +149,11 @@ function StatCalculator({
                                 >
                                     {Object.keys(Speciality).map((speciality) => (
                                         <optgroup label={speciality} key={speciality}>
-                                            {getSortedList(
-                                                Characters.filter((character) => character.speciality === speciality).map(
-                                                    (character) => character.name
-                                                )
-                                            ).map((characterName) => (
-                                                <option key={characterName} value={characterName}>
-                                                    {characterName}
+                                            {(
+                                                Characters.filter((character) => character.speciality === speciality)
+                                            ).map((character) => (
+                                                <option key={character.name} value={character.name}>
+                                                    {character.name} {character.version}
                                                 </option>
                                             ))}
                                         </optgroup>
