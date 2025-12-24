@@ -31,6 +31,21 @@ import { Attacks } from "./constants/AttackStats";
 import { DiskIds, StatIds } from "./constants/GameIds";
 import Spinner from "./components/Spinner";
 
+import {
+    defaultCharacterName,
+    defaultWengineName,
+    defaultSelectedDrives,
+    defaultSelectedSubstats,
+    defaultAttackUsed,
+    defaultAttackLevel,
+    defaultAttackMultiplier,
+    defaultIsCustomMultipler,
+    defaultAdditionalStatsUI,
+    defaultAnomalyType,
+    defaultAttackModifiers,
+    defaultIsRupture,
+    defaultIsAnomaly,
+} from "./constants/defaultSettings";
 // Define types for the Enka network data structure for better type safety
 type EnkaCharacter = {
     Id: number;
@@ -103,90 +118,28 @@ function App() {
     }, []);
 
     const [showEnkaOverlay, setShowEnkaOverlay] = useState<boolean>(false);
-    const [characterName, setCharacterName] = useState<string>(Characters[0].name);
-    const [wengineName, setWengineName] = useState<string>("None");
-    const [selectedDrives, setSelectedDrives] = useState<SelectedDrives>({
-        drive1Enabled: false,
-        drive2Enabled: false,
-        drive3Enabled: false,
-        drive4: StatType.NONE,
-        drive5: StatType.NONE,
-        drive6: StatType.NONE,
-        drive2psc1: StatType.NONE,
-        drive2psc2: StatType.NONE,
-        drive2psc3: StatType.NONE,
-    });
-    const [selectedSubstats, setSelectedSubstats] = useState<SelectedSubstats>({
-        HP_PERCENT: 0,
-        HP_FLAT: 0,
-        ATTACK_PERCENT: 0,
-        ATTACK_FLAT: 0,
-        DEFENSE_PERCENT: 0,
-        DEFENSE_FLAT: 0,
-        CRIT_RATE: 0,
-        CRIT_DAMAGE: 0,
-        ANOMALY_PROFICIENCY_FLAT: 0,
-        PEN_FLAT: 0,
-    });
+    const [characterName, setCharacterName] = useState<string>(defaultCharacterName);
+    const [wengineName, setWengineName] = useState<string>(defaultWengineName);
+    const [selectedDrives, setSelectedDrives] = useState<SelectedDrives>(defaultSelectedDrives);
+    const [selectedSubstats, setSelectedSubstats] = useState<SelectedSubstats>(defaultSelectedSubstats);
 
-    const [calculatedStats, setCalculatedStats] = useState<Stats>(
-        calculateStats(
-            getCharacterFromName(characterName, Characters),
-            getWengineFromName(wengineName, Wengines),
-            selectedDrives,
-            selectedSubstats
-        )
-    );
+    const [attackUsed, setAttackUsed] = useState<AttackStats>(defaultAttackUsed);
+    const [attackLevel, setAttackLevel] = useState<number>(defaultAttackLevel);
+    const [multiplier, setMultiplier] = useState<number>(defaultAttackMultiplier);
+    const [isCustomMultiplier, setIsCustomMultiplier] = useState<boolean>(defaultIsCustomMultipler);
 
-    // Damage Calculator State
-    const [attackUsed, setAttackUsed] = useState<AttackStats>(
-        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats[0]
-    );
-    const [attackLevel, setAttackLevel] = useState<number>(12);
-    const [multiplier, setMultiplier] = useState<number>(
-        getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel)
-    );
-    const [isCustomMultiplier, setIsCustomMultiplier] = useState<boolean>(false);
+    const [isRupture, setIsRupture] = useState<boolean>(defaultIsRupture);
+    const [isAnomaly, setIsAnomaly] = useState<boolean>(defaultIsAnomaly);
+    const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>(defaultAnomalyType);
 
-    const [isRupture, setIsRupture] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
-    const [isAnomaly, setIsAnomaly] = useState<boolean>(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
-    const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>("Burn");
-
-    const [additionalStatsUI, setAdditionalStatsUI] = useState<AdditionalStats>({
-        additionalHpFlat: 0,
-        additionalHpPercent: 0,
-        additionalAttackFlat: 0,
-        additionalAttackPercent: 0,
-        additionalPenPercent: 0,
-        additionalPenFlat: 0,
-        additionalCritRate: 0,
-        additionalCritDamage: 0,
-        additionalElementPercent: 0,
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
-    });
+    const [additionalStatsUI, setAdditionalStatsUI] = useState<AdditionalStats>(defaultAdditionalStatsUI);
 
     const [enkaCharacters, setEnkaCharacters] = useState<EnkaCharacter[]>([]);
     const [enkaPlayer, setEnkaPlayer] = useState<EnkaPlayer>();
     const [errorText, setErrorText] = useState<string>("");
     const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
-    const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>({
-        additionalSheerFlat: 0,
-        additionalSheerPercent: 0,
-        additionalSheerDmgBonusMultiplierAttacker: 0,
-        additionalDmgBonusMultiplierAttacker: 0,
-        critMode: "avg",
-        defenseTarget: 953,
-        defenseShred: 0,
-        levelFactorAttacker: levelFactorAttacker[60 - 1],
-        resTarget: 0,
-        resReductionTarget: 0,
-        dmgTakenIncrease: 0,
-        dmgTakenReduction: 0,
-        stunMultiplier: 100,
-        resIgnore: 0,
-    });
+    const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>(defaultAttackModifiers);
 
     const [additionalStats, setAdditionalStats] = useState<Stats>({
         HP_FLAT: 0,
@@ -202,6 +155,15 @@ function App() {
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
     });
+
+    const [calculatedStats, setCalculatedStats] = useState<Stats>(
+        calculateStats(
+            getCharacterFromName(characterName, Characters),
+            getWengineFromName(wengineName, Wengines),
+            selectedDrives,
+            selectedSubstats
+        )
+    );
 
     useEffect(() => {
         setAdditionalStats({
@@ -289,83 +251,30 @@ function App() {
     };
 
     const resetEveryState = () => {
-        const newCharacterName = Characters[0].name;
-        const newWengineName = "None";
-        const newSelectedDrives = {
-            drive1Enabled: false,
-            drive2Enabled: false,
-            drive3Enabled: false,
-            drive4: StatType.NONE,
-            drive5: StatType.NONE,
-            drive6: StatType.NONE,
-            drive2psc1: StatType.NONE,
-            drive2psc2: StatType.NONE,
-            drive2psc3: StatType.NONE,
-        };
-        const newSelectedSubstats = {
-            HP_PERCENT: 0,
-            HP_FLAT: 0,
-            ATTACK_PERCENT: 0,
-            ATTACK_FLAT: 0,
-            DEFENSE_PERCENT: 0,
-            DEFENSE_FLAT: 0,
-            CRIT_RATE: 0,
-            CRIT_DAMAGE: 0,
-            ANOMALY_PROFICIENCY_FLAT: 0,
-            PEN_FLAT: 0,
-        };
+        setCharacterName(defaultCharacterName);
+        setWengineName(defaultWengineName);
+        setSelectedDrives(defaultSelectedDrives);
 
-        setCharacterName(newCharacterName);
-        setWengineName(newWengineName);
-        setSelectedDrives(newSelectedDrives);
+        setSelectedSubstats(defaultSelectedSubstats);
 
-        setSelectedSubstats(newSelectedSubstats);
+        setAttackModifiers(defaultAttackModifiers);
 
-        // Damage Calculator State
-        setAttackModifiers({
-            additionalSheerFlat: 0,
-            additionalSheerPercent: 0,
-            additionalDmgBonusMultiplierAttacker: 0,
-            critMode: "avg",
-            defenseTarget: 953,
-            defenseShred: 0,
-            levelFactorAttacker: levelFactorAttacker[60 - 1],
-            resTarget: 0,
-            resReductionTarget: 0,
-            dmgTakenIncrease: 0,
-            dmgTakenReduction: 0,
-            stunMultiplier: 100,
-            resIgnore: 0,
-            additionalSheerDmgBonusMultiplierAttacker: 0,
-        });
+        setAttackUsed(defaultAttackUsed);
+        setAttackLevel(defaultAttackLevel);
+        setMultiplier(defaultAttackMultiplier);
+        setIsCustomMultiplier(defaultIsCustomMultipler);
 
-        setAttackLevel(12);
-        setMultiplier(getMultiplierFromAttack(Attacks, characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
-        setIsCustomMultiplier(false);
-
-        setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
-        setIsAnomaly(getWengineFromName(newWengineName, Wengines).speciality == "ANOMALY");
-        setAnomalyType("Burn");
-        setAdditionalStatsUI({
-            additionalHpFlat: 0,
-            additionalHpPercent: 0,
-            additionalAttackFlat: 0,
-            additionalAttackPercent: 0,
-            additionalPenPercent: 0,
-            additionalPenFlat: 0,
-            additionalCritRate: 0,
-            additionalCritDamage: 0,
-            additionalElementPercent: 0,
-            additionalSheerPercent: 0,
-            additionalSheerFlat: 0,
-        });
+        setIsRupture(defaultIsRupture);
+        setIsAnomaly(defaultIsAnomaly);
+        setAnomalyType(defaultAnomalyType);
+        setAdditionalStatsUI(defaultAdditionalStatsUI);
 
         setCalculatedStats(
             calculateStats(
-                getCharacterFromName(newCharacterName, Characters),
-                getWengineFromName(newWengineName, Wengines),
-                newSelectedDrives,
-                newSelectedSubstats
+                getCharacterFromName(defaultCharacterName, Characters),
+                getWengineFromName(defaultWengineName, Wengines),
+                defaultSelectedDrives,
+                defaultSelectedSubstats
             )
         );
 
@@ -517,12 +426,12 @@ function App() {
             drive1Enabled: character.EquippedList.some((disk) => disk.Slot === 1),
             drive2Enabled: character.EquippedList.some((disk) => disk.Slot === 2),
             drive3Enabled: character.EquippedList.some((disk) => disk.Slot === 3),
-            drive4: drive4MainStatId ? getDriveMainStatType(drive4MainStatId) as keyof typeof StatType: StatType.NONE,
-            drive5: drive5MainStatId ? getDriveMainStatType(drive5MainStatId) as keyof typeof StatType : StatType.NONE,
-            drive6: drive6MainStatId ? getDriveMainStatType(drive6MainStatId) as keyof typeof StatType : StatType.NONE,
-            drive2psc1: twoPscEffect[0] as keyof typeof StatType ?? StatType.NONE,
-            drive2psc2: twoPscEffect[1] as keyof typeof StatType ?? StatType.NONE,
-            drive2psc3: twoPscEffect[2] as keyof typeof StatType ?? StatType.NONE,
+            drive4: drive4MainStatId ? (getDriveMainStatType(drive4MainStatId) as keyof typeof StatType) : StatType.NONE,
+            drive5: drive5MainStatId ? (getDriveMainStatType(drive5MainStatId) as keyof typeof StatType) : StatType.NONE,
+            drive6: drive6MainStatId ? (getDriveMainStatType(drive6MainStatId) as keyof typeof StatType) : StatType.NONE,
+            drive2psc1: (twoPscEffect[0] as keyof typeof StatType) ?? StatType.NONE,
+            drive2psc2: (twoPscEffect[1] as keyof typeof StatType) ?? StatType.NONE,
+            drive2psc3: (twoPscEffect[2] as keyof typeof StatType) ?? StatType.NONE,
         };
         setSelectedDrives(drives);
 

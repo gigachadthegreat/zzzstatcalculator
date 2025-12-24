@@ -1,5 +1,9 @@
+import { Attacks } from "../constants/AttackStats";
+import { Characters } from "../constants/Characters";
 import {
     AnomalyMultipliers,
+    levelFactorAttacker,
+    StatType,
     type AdditionalStats,
     type AttackModifiers,
     type Character,
@@ -8,6 +12,7 @@ import {
     type SelectedSubstats,
 } from "../constants/types";
 import { type Wengine } from "../constants/types";
+import { Wengines } from "../constants/Wengines";
 
 export const getCharacterFromName = (name: string, characters: Character[]): Character => {
     const foundCharacter = characters.find((char) => char.name === name);
@@ -135,8 +140,6 @@ export const getsettingsFromUrl = () => {
 
     settings.attackModifiers = parseParam("attackModifiers", "json");
     settings.additionalStatsUI = parseParam("additionalStatsUI", "json");
-
-
 
     // Filter out null values so we only return settings that were present in the URL
     return Object.fromEntries(Object.entries(settings).filter(([, value]) => value !== null));

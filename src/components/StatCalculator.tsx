@@ -15,7 +15,6 @@ import { Wengines } from "../constants/Wengines";
 import ProgressBar from "./ProgressBar";
 import RangeSlider from "./RangeSlider";
 
-import { getSortedList } from "../lib/Utility";
 import LabelWithInfo from "./LabelWithInfo";
 
 function StatCalculator({

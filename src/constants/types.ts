@@ -161,8 +161,8 @@ export interface Stats {
 }
 
 export interface AttackModifiers {
-    additionalSheerPercent: number,
-    additionalSheerFlat: number,
+    additionalSheerPercent: number;
+    additionalSheerFlat: number;
     additionalDmgBonusMultiplierAttacker: number;
     critMode: "avg" | "crit" | "noCrit";
     defenseTarget: number;
@@ -219,7 +219,7 @@ export interface SelectedSubstats {
 export interface Character {
     name: string;
     id: number;
-    version: string,
+    version: string;
     speciality: specialityKeys;
     stats: Stats;
 }
