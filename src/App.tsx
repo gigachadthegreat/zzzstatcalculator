@@ -8,7 +8,6 @@ import {
     AnomalyMultipliers,
     type statTypeKeys,
     type AttackModifiers,
-    levelFactorAttacker,
     type AttackStats,
     DriveDisks,
     type AdditionalStats,
@@ -45,7 +44,7 @@ import {
     defaultAttackModifiers,
     defaultIsRupture,
     defaultIsAnomaly,
-} from "./constants/defaultSettings";
+} from "./lib/Utility";
 // Define types for the Enka network data structure for better type safety
 type EnkaCharacter = {
     Id: number;
@@ -82,29 +81,27 @@ function App() {
     useEffect(() => {
         const settings = getsettingsFromUrl();
         if (Object.keys(settings).length > 0) {
-            if (settings.characterName) setCharacterName(settings.characterName);
-            if (settings.wengineName) setWengineName(settings.wengineName);
-            if (settings.selectedDrives) setSelectedDrives(settings.selectedDrives as SelectedDrives);
-            if (settings.selectedSubstats) setSelectedSubstats(settings.selectedSubstats as SelectedSubstats);
-            if (settings.attackModifiers != null) setAttackModifiers(settings.attackModifiers);
+            setCharacterName(settings.characterName);
+            setWengineName(settings.wengineName);
+            setSelectedDrives(settings.selectedDrives as SelectedDrives);
+            setSelectedSubstats(settings.selectedSubstats as SelectedSubstats);
+            setAttackModifiers(settings.attackModifiers);
 
-            if (settings.multiplierValue != null) setMultiplier(settings.multiplierValue);
-            if (settings.attackUsed != null)
-                setAttackUsed(
-                    Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter(
-                        (attack) => attack.attackName === settings.attackUsed
-                    )[0]
-                );
-            if (settings.attackLevel != null) setAttackLevel(settings.attackLevel);
+            setMultiplier(settings.multiplierValue);
 
-            if (settings.isCustomMultiplier != null) setIsCustomMultiplier(settings.isCustomMultiplier);
+            setAttackUsed(
+                Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter(
+                    (attack) => attack.attackName === settings.attackUsed
+                )[0]
+            );
+            setAttackLevel(settings.attackLevel);
 
-            if (settings.isRupture != null) setIsRupture(settings.isRupture);
-            if (settings.isAnomaly != null) setIsAnomaly(settings.isAnomaly);
-            if (settings.anomalyType != null) setAnomalyType(settings.anomalyType);
-            if (settings.additionalStatsUI != null) setAdditionalStatsUI(settings.additionalStatsUI);
+            setIsCustomMultiplier(settings.isCustomMultiplier);
 
-            // if (settings.characterLevel != null) setCharacterLevel(settings.characterLevel);
+            setIsRupture(settings.isRupture);
+            setIsAnomaly(settings.isAnomaly);
+            setAnomalyType(settings.anomalyType);
+            setAdditionalStatsUI(settings.additionalStatsUI);
 
             setCalculatedStats(
                 calculateStats(
@@ -259,7 +256,15 @@ function App() {
 
         setAttackModifiers(defaultAttackModifiers);
 
-        setAttackUsed(defaultAttackUsed);
+        const attackSet = Attacks.find((attack) => attack.characterName === defaultCharacterName) 
+        if(attackSet == undefined){
+            throw new Error(`Attack-set for ${defaultCharacterName} not found.`)
+        }
+        setAttackUsed(
+            attackSet.attackStats.filter(
+                (attack) => attack === defaultAttackUsed
+            )[0]
+        );
         setAttackLevel(defaultAttackLevel);
         setMultiplier(defaultAttackMultiplier);
         setIsCustomMultiplier(defaultIsCustomMultipler);
@@ -573,7 +578,7 @@ function App() {
                                         selectedDrives,
                                         selectedSubstats,
                                         multiplier,
-                                        attackUsed.attackName,
+                                        attackUsed,
                                         attackLevel,
                                         isCustomMultiplier,
                                         isRupture,
