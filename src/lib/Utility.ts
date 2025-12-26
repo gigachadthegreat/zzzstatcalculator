@@ -127,8 +127,8 @@ export const getParameterizedStatsAsUrl = (
 
     if (anomalyType !== defaultAnomalyType) params.set("anomalyType", anomalyType.toString());
 
-    if (JSON.stringify(additionalStatsUI) !== JSON.stringify(defaultAdditionalStatsUI))
-        params.set("additionalStatsUI", JSON.stringify(Difference(defaultAdditionalStatsUI, additionalStatsUI)));
+    if (JSON.stringify(additionalStatsUI) !== JSON.stringify(defaultAdditionalCombatStats))
+        params.set("additionalStatsUI", JSON.stringify(Difference(defaultAdditionalCombatStats, additionalStatsUI)));
     // params.set("characterLevel", characterLevel.toString());
 
     return `${window.location.origin}${window.location.pathname}?${params.toString()}`;
@@ -178,8 +178,8 @@ export const getsettingsFromUrl = () => {
 
     settings.attackModifiers = AddDifference(defaultAttackModifiers, parseParam("attackModifiers", "json", defaultAttackModifiers) || {});
     settings.additionalStatsUI = AddDifference(
-        defaultAdditionalStatsUI,
-        parseParam("additionalStatsUI", "json", defaultAdditionalStatsUI) || {}
+        defaultAdditionalCombatStats,
+        parseParam("additionalStatsUI", "json", defaultAdditionalCombatStats) || {}
     );
 
     // Filter out null values so we only return settings that were present in the URL
@@ -254,7 +254,7 @@ export const defaultIsCustomMultipler = false;
 export const defaultIsRupture = defaultCharacter.speciality == "RUPTURE";
 export const defaultIsAnomaly = defaultWengine.speciality == "ANOMALY";
 export const defaultAnomalyType = "Burn";
-export const defaultAdditionalStatsUI = {
+export const defaultAdditionalCombatStats = {
     additionalHpFlat: 0,
     additionalHpPercent: 0,
     additionalAttackFlat: 0,

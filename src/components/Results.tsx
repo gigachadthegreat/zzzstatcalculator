@@ -1,5 +1,14 @@
-import { type Stats, type statTypeKeys } from "../constants/types";
-import { calculateSheer} from "../lib/Calculations"
+import { useCallback, useEffect, useState } from "react";
+import {
+    type AdditionalStats,
+    type Character,
+    type DriveDisks,
+    type Stats,
+    type statTypeKeys,
+    type Substats,
+    type Wengine,
+} from "../constants/types";
+import { calculateSheer, calculateStats } from "../lib/Calculations";
 
 const StatRow = ({
     label,
@@ -24,22 +33,26 @@ const StatRow = ({
     </>
 );
 
-
 function Results({
+    character,
+    wengine,
+    driveDisks,
+    substats,
     header,
-    calculatedStats,
-    additionalStats,
+    additionalCombatStats,
     isRupture,
     additionalSheer,
 }: {
+    character: Character;
+    wengine: Wengine;
+    driveDisks: DriveDisks;
+    substats: Substats;
     header: string;
-    calculatedStats: Stats | null;
-    additionalStats: Stats | null;
+    additionalCombatStats: AdditionalStats;
     isRupture: boolean;
-    additionalSheer: number | null;
+    additionalSheer: number;
 }) {
-
-    const statsToDisplay: { key: statTypeKeys; label: string; toFixed: number }[] = [
+    const statConfiguration: { key: statTypeKeys; label: string; toFixed: number }[] = [
         { key: "HP_FLAT", label: "HP", toFixed: 0 },
         { key: "ATTACK_FLAT", label: "Attack", toFixed: 0 },
         { key: "DEFENSE_FLAT", label: "Defense", toFixed: 0 },
@@ -54,9 +67,28 @@ function Results({
         { key: "ENERGY_REGEN_FLAT", label: "Energy Regen", toFixed: 2 },
     ];
 
-    if (calculatedStats === null) {
-        return <div>No stats calculated yet.</div>;
-    }
+    const getCalculatedStats = useCallback(() => {
+        return calculateStats(character, wengine, driveDisks, substats);
+    }, [character, driveDisks, substats, wengine]);
+
+    const calculatedStats: Stats = getCalculatedStats();
+    const additionalStats: Stats = {
+        HP_FLAT: getCalculatedStats().HP_FLAT * (additionalCombatStats.additionalHpPercent / 100) + additionalCombatStats.additionalHpFlat,
+        ATTACK_FLAT:
+            getCalculatedStats().ATTACK_FLAT * (additionalCombatStats.additionalAttackPercent / 100) +
+            additionalCombatStats.additionalAttackFlat,
+        DEFENSE_FLAT: 0,
+        CRIT_RATE: additionalCombatStats.additionalCritRate,
+        CRIT_DAMAGE: additionalCombatStats.additionalCritDamage,
+        ELEMENT_PERCENT: additionalCombatStats.additionalElementPercent,
+        ANOMALY_PROFICIENCY_FLAT: 0,
+        ANOMALY_MASTERY_FLAT: 0,
+        PEN_PERCENT: additionalCombatStats.additionalPenPercent,
+        PEN_FLAT: additionalCombatStats.additionalPenFlat,
+        IMPACT_FLAT: 0,
+        ENERGY_REGEN_FLAT: 0,
+    };
+
     return (
         <div className="w-fit p-4 bg-gray-100 dark:bg-slate-800 rounded-lg mx-auto">
             <h2 className="text-2xl font-bold text-center mb-5">{header}</h2>
@@ -65,9 +97,9 @@ function Results({
                 <span className="font-mono font-bold text-center ">Base</span>
                 <span className="font-mono font-bold text-center ">Additional</span>
                 <span className="font-mono font-bold text-center">In-Combat</span>
-                {statsToDisplay.map(({ key, label, toFixed }, index) => {
-                    const baseValue = calculatedStats ? calculatedStats[key as keyof Stats] : 0;
-                    const additionalValue = additionalStats ? additionalStats[key as keyof Stats] : 0;
+                {statConfiguration.map(({ key, label, toFixed }, index) => {
+                    const baseValue = calculatedStats[key as keyof Stats];
+                    const additionalValue = additionalStats[key as keyof Stats];
                     const combatValue = baseValue + additionalValue;
                     const className = index % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800";
 
@@ -83,32 +115,36 @@ function Results({
                         />
                     );
                 })}
-                <span className={`font-bold ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${isRupture ? "" : "opacity-50"}`}>
+                <span
+                    className={`font-bold ${statConfiguration.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
+                        isRupture ? "" : "opacity-50"
+                    }`}
+                >
                     Sheer Force
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
-                        isRupture ? "" : "opacity-50"
-                    }`}
+                    className={`font-mono text-center ${
+                        statConfiguration.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"
+                    } ${isRupture ? "" : "opacity-50"}`}
                 >
                     {calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT).toFixed(0)}
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
-                        isRupture ? "" : "opacity-50"
-                    }`}
+                    className={`font-mono text-center ${
+                        statConfiguration.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"
+                    } ${isRupture ? "" : "opacity-50"}`}
                 >
-                    {(calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0) + (additionalSheer ?? 0)).toFixed(0)}
+                    {(calculateSheer(additionalStats.HP_FLAT, additionalStats.ATTACK_FLAT) + additionalSheer).toFixed(0)}
                 </span>
                 <span
-                    className={`font-mono text-center ${statsToDisplay.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"} ${
-                        isRupture ? "" : "opacity-50"
-                    }`}
+                    className={`font-mono text-center ${
+                        statConfiguration.length % 2 === 0 ? "bg-gray-200 dark:bg-slate-700" : "dark:bg-slate-800"
+                    } ${isRupture ? "" : "opacity-50"}`}
                 >
                     {(
                         calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) +
-                        calculateSheer(additionalStats?.HP_FLAT ?? 0, additionalStats?.ATTACK_FLAT ?? 0) +
-                        (additionalSheer ?? 0)
+                        calculateSheer(additionalStats.HP_FLAT, additionalStats.ATTACK_FLAT) +
+                        additionalSheer
                     ).toFixed(0)}
                 </span>
             </div>

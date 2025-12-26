@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
     type Stats,
     AnomalyMultipliers,
@@ -7,6 +7,9 @@ import {
     type AttackModifiers,
     type AdditionalStats,
     type Character,
+    type Wengine,
+    type DriveDisks,
+    type Substats,
 } from "../constants/types";
 import LabelWithTextInput from "./LabelWithTextInput";
 import DamageFormulaStandard from "./DamageFormulaStandard.tsx";
@@ -15,7 +18,7 @@ import DamageFormulaRupture from "./DamageFormulaRupture.tsx";
 
 import { getMultiplierFromAttack } from "../lib/Utility";
 
-import { calculateDamageDealt, calculateSheerDamageDealt, calculateAnomalyDamageDealt } from "../lib/Calculations.ts";
+import { calculateDamageDealt, calculateSheerDamageDealt, calculateAnomalyDamageDealt, calculateStats } from "../lib/Calculations.ts";
 
 import LabelWithInfo from "./LabelWithInfo";
 import { Attacks } from "../constants/AttackStats.tsx";
@@ -32,8 +35,10 @@ import {
 } from "../lib/CustomCalculators.tsx";
 
 function DamageCalculator({
-    calculatedStats,
     character,
+    wengine,
+    driveDisks,
+    substats,
 
     attackModifiers,
     setAttackModifiers,
@@ -62,8 +67,10 @@ function DamageCalculator({
     additionalStatsUI,
     setAdditionalStatsUI,
 }: {
-    calculatedStats: Stats;
     character: Character;
+    wengine: Wengine;
+    driveDisks: DriveDisks;
+    substats: Substats;
 
     attackModifiers: AttackModifiers;
     setAttackModifiers: (value: AttackModifiers) => void;
@@ -92,6 +99,14 @@ function DamageCalculator({
     additionalStatsUI: AdditionalStats;
     setAdditionalStatsUI: (value: AdditionalStats) => void;
 }) {
+    const getCalculatedStats = useCallback(() => {
+        return calculateStats(character, wengine, driveDisks, substats);
+    }, [character, driveDisks, substats, wengine]);
+    
+    
+    const calculatedStats = getCalculatedStats();
+    
+    
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
 
     const [finalStats, setFinalStats] = useState<Stats>({
@@ -402,8 +417,10 @@ function DamageCalculator({
                     ) : (
                         " "
                     )}
-
-                    Damage: <span className="font-mono text-blue-300">{new Intl.NumberFormat("de-DE").format(Number(calculatedDamage.toFixed(0)))}</span>
+                    Damage:{" "}
+                    <span className="font-mono text-blue-300">
+                        {new Intl.NumberFormat("de-DE").format(Number(calculatedDamage.toFixed(0)))}
+                    </span>
                 </div>
             </div>
 

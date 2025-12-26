@@ -2,7 +2,6 @@ import StatCalculator from "./components/StatCalculator";
 import DamageCalculator from "./components/DamageCalculator";
 import {
     StatType,
-    type Stats,
     type DriveDisks,
     type Substats,
     AnomalyMultipliers,
@@ -14,7 +13,7 @@ import {
     type Character,
     type Wengine,
 } from "./constants/types";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
     getCharacterFromName,
     getMultiplierFromAttack,
@@ -41,7 +40,7 @@ import {
     defaultAttackLevel,
     defaultAttackMultiplier,
     defaultIsCustomMultipler,
-    defaultAdditionalStatsUI,
+    defaultAdditionalCombatStats as defaultAdditionalCombatStats,
     defaultAnomalyType,
     defaultAttackModifiers,
     defaultIsRupture,
@@ -103,7 +102,7 @@ function App() {
             setIsRupture(settings.isRupture);
             setIsAnomaly(settings.isAnomaly);
             setAnomalyType(settings.anomalyType);
-            setAdditionalStatsUI(settings.additionalStatsUI);
+            setAdditionalCombatStats(settings.additionalStatsUI);
         }
     }, []);
 
@@ -131,46 +130,9 @@ function App() {
     const [isAnomaly, setIsAnomaly] = useState<boolean>(defaultIsAnomaly);
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>(defaultAnomalyType);
 
-    const [additionalStatsUI, setAdditionalStatsUI] = useState<AdditionalStats>(defaultAdditionalStatsUI);
+    const [additionalCombatStats, setAdditionalCombatStats] = useState<AdditionalStats>(defaultAdditionalCombatStats);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>(defaultAttackModifiers);
-
-    const [additionalStats, setAdditionalStats] = useState<Stats>({
-        HP_FLAT: 0,
-        ATTACK_FLAT: 0,
-        DEFENSE_FLAT: 0,
-        CRIT_RATE: 0,
-        CRIT_DAMAGE: 0,
-        ELEMENT_PERCENT: 0,
-        ANOMALY_PROFICIENCY_FLAT: 0,
-        ANOMALY_MASTERY_FLAT: 0,
-        PEN_PERCENT: 0,
-        PEN_FLAT: 0,
-        IMPACT_FLAT: 0,
-        ENERGY_REGEN_FLAT: 0,
-    });
-
-    const getCalculatedStats = useCallback(() => {
-        return calculateStats(character, wengine, driveDisks, substats);
-    }, [character, driveDisks, substats, wengine]);
-    useEffect(() => {
-        setAdditionalStats({
-            HP_FLAT: getCalculatedStats().HP_FLAT * (additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
-            ATTACK_FLAT:
-                getCalculatedStats().ATTACK_FLAT * (additionalStatsUI.additionalAttackPercent / 100) +
-                additionalStatsUI.additionalAttackFlat,
-            DEFENSE_FLAT: 0,
-            CRIT_RATE: additionalStatsUI.additionalCritRate,
-            CRIT_DAMAGE: additionalStatsUI.additionalCritDamage,
-            ELEMENT_PERCENT: additionalStatsUI.additionalElementPercent,
-            ANOMALY_PROFICIENCY_FLAT: 0,
-            ANOMALY_MASTERY_FLAT: 0,
-            PEN_PERCENT: additionalStatsUI.additionalPenPercent,
-            PEN_FLAT: additionalStatsUI.additionalPenFlat,
-            IMPACT_FLAT: 0,
-            ENERGY_REGEN_FLAT: 0,
-        });
-    }, [additionalStatsUI, character, getCalculatedStats]);
 
     const handeCharacterChange = (characterName: string) => {
         setCharacter(() => {
@@ -228,12 +190,13 @@ function App() {
         setIsRupture(defaultIsRupture);
         setIsAnomaly(defaultIsAnomaly);
         setAnomalyType(defaultAnomalyType);
-        setAdditionalStatsUI(defaultAdditionalStatsUI);
+        setAdditionalCombatStats(defaultAdditionalCombatStats);
 
         const newUrl = window.location.origin + window.location.pathname + window.location.hash;
         window.history.replaceState(null, "", newUrl);
     };
-    const handleKeyDown = async (event: React.KeyboardEvent<HTMLInputElement>) => {
+
+    const handleEnkaEarch = async (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
             setLoadingEnkaDataSpinner(true);
             if (isNaN(Number(event.currentTarget.value))) {
@@ -446,7 +409,7 @@ function App() {
                                     className="placeholder-gray-400 w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600"
                                     type="number"
                                     placeholder="Your ZZZ UID. (E.g., 1000000123)"
-                                    onKeyDown={handleKeyDown}
+                                    onKeyDown={handleEnkaEarch}
                                 ></input>
                                 <br />
                                 {loadingEnkaDataSpinner ? <Spinner /> : <></>}
@@ -518,7 +481,7 @@ function App() {
                                         isRupture,
                                         isAnomaly,
                                         anomalyType,
-                                        additionalStatsUI
+                                        additionalCombatStats
                                     )
                                 )
                             }
@@ -562,22 +525,30 @@ function App() {
 
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <Results
+                                    character={character}
+                                    wengine={wengine}
+                                    driveDisks={driveDisks}
+                                    substats={substats}
                                     header="Character Stats"
-                                    calculatedStats={getCalculatedStats()}
-                                    additionalStats={additionalStats}
+                                    additionalCombatStats={additionalCombatStats}
                                     isRupture={character.speciality == "RUPTURE" || isRupture}
                                     additionalSheer={
-                                        additionalStatsUI.additionalSheerFlat +
-                                        calculateSheer(getCalculatedStats().HP_FLAT, getCalculatedStats().ATTACK_FLAT) *
-                                            (additionalStatsUI.additionalSheerPercent / 100)
+                                        additionalCombatStats.additionalSheerFlat +
+                                        calculateSheer(
+                                            calculateStats(character, wengine, driveDisks, substats).HP_FLAT,
+                                            calculateStats(character, wengine, driveDisks, substats).ATTACK_FLAT
+                                        ) *
+                                            (additionalCombatStats.additionalSheerPercent / 100)
                                     }
                                 />
                             </div>
 
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <DamageCalculator
-                                    calculatedStats={getCalculatedStats()}
                                     character={character}
+                                    wengine={wengine}
+                                    driveDisks={driveDisks}
+                                    substats={substats}
                                     attackModifiers={attackModifiers}
                                     setAttackModifiers={(value) => setAttackModifiers(value)}
                                     attackUsed={attackUsed}
@@ -594,8 +565,8 @@ function App() {
                                     setIsAnomaly={(value) => setIsAnomaly(value)}
                                     anomalyType={anomalyType}
                                     setAnomalyType={(value) => setAnomalyType(value)}
-                                    additionalStatsUI={additionalStatsUI}
-                                    setAdditionalStatsUI={(value) => setAdditionalStatsUI(value)}
+                                    additionalStatsUI={additionalCombatStats}
+                                    setAdditionalStatsUI={(value) => setAdditionalCombatStats(value)}
                                 />
                             </div>
                         </div>
