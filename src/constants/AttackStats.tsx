@@ -3,7 +3,7 @@ import type { CharacterAttacks } from "./types";
 export const Attacks: CharacterAttacks[] = [
     {
         characterName: "Nicole",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Cunning Combo - 1", attackType: "BASIC", Level1Damage: 65.9, growthPerLevel: 6 },
             { attackName: "Cunning Combo - 2", attackType: "BASIC", Level1Damage: 71.3, growthPerLevel: 6.5 },
@@ -39,7 +39,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Ben",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Debt Reconciliation - 1", attackType: "BASIC", Level1Damage: 65.9, growthPerLevel: 6 },
             { attackName: "Debt Reconciliation - 2", attackType: "BASIC", Level1Damage: 189.00, growthPerLevel: 17.2 },
@@ -67,7 +67,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Anby",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Turbo Volt - 1", attackType: "BASIC", Level1Damage: 31.2, growthPerLevel: 2.9 },
             { attackName: "Turbo Volt - 2", attackType: "BASIC", Level1Damage: 33.70, growthPerLevel: 3.1 },
@@ -93,7 +93,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Lucy",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Lady's Bat - 1", attackType: "BASIC", Level1Damage: 56.60, growthPerLevel: 5.2 },
             { attackName: "Lady's Bat - 2", attackType: "BASIC", Level1Damage: 77.80, growthPerLevel: 7.1 },
@@ -126,7 +126,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Soukaku",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Making Rice Cakes - 1", attackType: "BASIC", Level1Damage: 66.20, growthPerLevel: 6.1 },
             { attackName: "Making Rice Cakes - 2", attackType: "BASIC", Level1Damage: 216.30, growthPerLevel: 19.9 },
@@ -161,7 +161,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Rina",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Whack the Dimwit - 1", attackType: "BASIC", Level1Damage: 44.00, growthPerLevel: 4 },
             { attackName: "Whack the Dimwit - 2", attackType: "BASIC", Level1Damage: 111.40, growthPerLevel: 10.2 },
@@ -188,7 +188,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Lycaon",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Moon Hunter - 1 ", attackType: "BASIC", Level1Damage: 29.2, growthPerLevel: 2.7 },
             { attackName: "Moon Hunter - 1 Charged ", attackType: "BASIC", Level1Damage: 37.1, growthPerLevel: 3.4 },
@@ -222,7 +222,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Koleda",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Smash 'n' Bash - 1", attackType: "BASIC", Level1Damage: 63.6, growthPerLevel: 5.8 },
             { attackName: "Smash 'n' Bash - 2", attackType: "BASIC", Level1Damage: 79.2, growthPerLevel: 7.2 },
@@ -255,7 +255,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Piper",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Load Up and Roll Out - 1", attackType: "BASIC", Level1Damage: 59, growthPerLevel: 5.4 },
             { attackName: "Load Up and Roll Out - 2", attackType: "BASIC", Level1Damage: 78.8, growthPerLevel: 7.2 },
@@ -284,7 +284,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Billy",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Full Firepower - Standing Fire", attackType: "BASIC", Level1Damage: 68, growthPerLevel: 6.2 },
             { attackName: "Full Firepower - Standing Bullet", attackType: "BASIC", Level1Damage: 7.6, growthPerLevel: 0.7 },
@@ -314,7 +314,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Anton",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Enthusiastic Drills - 1", attackType: "BASIC", Level1Damage: 67.8, growthPerLevel: 6.2 },
             { attackName: "Enthusiastic Drills - 2", attackType: "BASIC", Level1Damage: 92.3, growthPerLevel: 8.4 },
@@ -345,7 +345,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Corin",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Wipeout - 1", attackType: "BASIC", Level1Damage: 82, growthPerLevel: 7.5 },
             { attackName: "Wipeout - 2", attackType: "BASIC", Level1Damage: 76.6, growthPerLevel:  7},
@@ -375,7 +375,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Grace",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "High-Pressure Spike - 1", attackType: "BASIC", Level1Damage: 55.1, growthPerLevel: 5.1 },
             { attackName: "High-Pressure Spike - 2", attackType: "BASIC", Level1Damage: 59.7, growthPerLevel: 5.5 },
@@ -401,7 +401,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Soldier 11",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Warmup Sparks - 1", attackType: "BASIC", Level1Damage: 34.4, growthPerLevel: 3.2 },
             { attackName: "Warmup Sparks - 2", attackType: "BASIC", Level1Damage: 41.2, growthPerLevel: 3.8 },
@@ -432,7 +432,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Nekomata",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Kitty Slash - 1", attackType: "BASIC", Level1Damage: 55.2, growthPerLevel: 5.1 },
             { attackName: "Kitty Slash - 2", attackType: "BASIC", Level1Damage: 62.6, growthPerLevel: 5.7 },
@@ -460,7 +460,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Zhu Yuan",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Don't Move! - 1", attackType: "BASIC", Level1Damage: 43.1, growthPerLevel: 4 },
             { attackName: "Don't Move! - 2", attackType: "BASIC", Level1Damage: 126.4, growthPerLevel: 11.5 },
@@ -499,7 +499,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Ellen",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Saw Teeth Trimming - 1", attackType: "BASIC", Level1Damage: 48.8, growthPerLevel: 4.5 },
             { attackName: "Saw Teeth Trimming - 2", attackType: "BASIC", Level1Damage: 111.1, growthPerLevel: 10.1 },
@@ -544,7 +544,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Qingyi",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Penultimate - 1", attackType: "BASIC", Level1Damage: 47.2, growthPerLevel: 4.3 },
             { attackName: "Penultimate - 1 Alt", attackType: "BASIC", Level1Damage: 110.3, growthPerLevel: 10.1 },
@@ -576,7 +576,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Jane Doe",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Dancing Blades - 1", attackType: "BASIC", Level1Damage: 36.1, growthPerLevel: 3.3 },
             { attackName: "Dancing Blades - 2", attackType: "BASIC", Level1Damage: 62.3, growthPerLevel: 5.7 },
@@ -610,7 +610,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Seth",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Lightning Strike - 1", attackType: "BASIC", Level1Damage: 36.2, growthPerLevel: 3.3 },
             { attackName: "Lightning Strike - 2", attackType: "BASIC", Level1Damage: 56.5, growthPerLevel: 5.2 },
@@ -639,7 +639,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Caesar",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Rampaging Slash - 1", attackType: "BASIC", Level1Damage: 47.2, growthPerLevel: 4.3 },
             { attackName: "Rampaging Slash - 2", attackType: "BASIC", Level1Damage: 40.9, growthPerLevel: 3.8 },
@@ -672,7 +672,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Burnice",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Direct Flame Blend - 1", attackType: "BASIC", Level1Damage: 44.8, growthPerLevel: 4.1 },
             { attackName: "Direct Flame Blend - 2", attackType: "BASIC", Level1Damage: 43.5, growthPerLevel: 4 },
@@ -706,7 +706,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Yanagi",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Tsukuyomi Kagura - Jougen - 1", attackType: "BASIC", Level1Damage: 56.6, growthPerLevel: 5.2 },
             { attackName: "Tsukuyomi Kagura - Jougen - 2", attackType: "BASIC", Level1Damage: 99.7, growthPerLevel: 9.1 },
@@ -739,7 +739,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Lighter",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "L-Form Thundering Fist - 1", attackType: "BASIC", Level1Damage: 39.2, growthPerLevel: 3.6 },
             { attackName: "L-Form Thundering Fist - 2", attackType: "BASIC", Level1Damage: 48, growthPerLevel: 4.4 },
@@ -777,7 +777,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Miyabi",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Kazahana - 1", attackType: "BASIC", Level1Damage: 26.9, growthPerLevel: 2.5 },
             { attackName: "Kazahana - 2", attackType: "BASIC", Level1Damage: 29.6, growthPerLevel: 2.7 },
@@ -808,7 +808,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Harumasa",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Cloud Piercer - 1- Additional Active Stun", attackType: "BASIC", Level1Damage: 42.4, growthPerLevel: 3.9, calculatorType: "HarumasaAdditionalActive" },
             { attackName: "Cloud Piercer - 1", attackType: "BASIC", Level1Damage: 42.4, growthPerLevel: 3.9 },
@@ -862,7 +862,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Astra Yao",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Capriccio - 1", attackType: "BASIC", Level1Damage: 43.8, growthPerLevel: 4 },
             { attackName: "Capriccio - 2", attackType: "BASIC", Level1Damage: 59.1, growthPerLevel: 5.4 },
@@ -899,7 +899,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Evelyn",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Razor Wire - 1", attackType: "BASIC", Level1Damage: 51.2, growthPerLevel: 4.7 },
             { attackName: "Razor Wire - 2", attackType: "BASIC", Level1Damage: 62.1, growthPerLevel: 5.7 },
@@ -934,7 +934,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Soldier 0 Anby",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Penetrating Shock - 1", attackType: "BASIC", Level1Damage: 32.7, growthPerLevel: 3 },
             { attackName: "Penetrating Shock - 2", attackType: "BASIC", Level1Damage: 62.2, growthPerLevel: 5.7 },
@@ -967,7 +967,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Pulchra",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Swift Strike - 1", attackType: "BASIC", Level1Damage: 35.7, growthPerLevel: 3.3 },
             { attackName: "Swift Strike - 2", attackType: "BASIC", Level1Damage: 94.1, growthPerLevel: 8.6 },
@@ -995,7 +995,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Trigger",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Cold-Bore Shot - 1", attackType: "BASIC", Level1Damage: 34.5, growthPerLevel: 3.2 },
             { attackName: "Cold-Bore Shot - 2", attackType: "BASIC", Level1Damage: 56.9, growthPerLevel: 5.2 },
@@ -1029,7 +1029,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Vivian",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Feathered Strike - 1", attackType: "BASIC", Level1Damage: 34.1, growthPerLevel: 3.1 },
             { attackName: "Feathered Strike - 2", attackType: "BASIC", Level1Damage: 24.2, growthPerLevel: 2.2 },
@@ -1060,7 +1060,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Hugo",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Dark Abyss Quartet - 1", attackType: "BASIC", Level1Damage: 43.1, growthPerLevel: 4 },
             { attackName: "Dark Abyss Quartet - 2", attackType: "BASIC", Level1Damage: 74.1, growthPerLevel: 6.8 },
@@ -1095,7 +1095,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Pan Yinhu",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Unyielding Strikes - 1", attackType: "BASIC", Level1Damage: 49.7, growthPerLevel: 4.6 },
             { attackName: "Unyielding Strikes - 2", attackType: "BASIC", Level1Damage: 49.8, growthPerLevel: 4.6 },
@@ -1123,7 +1123,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Yixuan",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Cirrus Strike - 1", attackType: "BASIC", Level1Damage: 45.8, growthPerLevel: 4.2 },
             { attackName: "Cirrus Strike - 2", attackType: "BASIC", Level1Damage: 65.5, growthPerLevel: 6 },
@@ -1169,7 +1169,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Ju Fufu",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Tiger Seven Forms - Flaming Claw - 1", attackType: "BASIC", Level1Damage: 42.5, growthPerLevel: 3.9 },
             { attackName: "Tiger Seven Forms - Flaming Claw - 2", attackType: "BASIC", Level1Damage: 45.2, growthPerLevel: 4.2 },
@@ -1200,7 +1200,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Yuzuha",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Tanuki Claws - 1", attackType: "BASIC", Level1Damage: 37.7, growthPerLevel: 3.5 },
             { attackName: "Tanuki Claws - 2", attackType: "BASIC", Level1Damage: 57.7, growthPerLevel: 5.3 },
@@ -1239,7 +1239,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Alice",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Celestial Overture - 1", attackType: "BASIC", Level1Damage: 55.1, growthPerLevel: 5.1 },
             { attackName: "Celestial Overture - 2", attackType: "BASIC", Level1Damage: 88, growthPerLevel: 8 },
@@ -1271,7 +1271,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Seed",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Chrysanthemum Wheel Dance - 1", attackType: "BASIC", Level1Damage: 46.5, growthPerLevel: 4.3 },
             { attackName: "Chrysanthemum Wheel Dance - 2", attackType: "BASIC", Level1Damage: 124.1, growthPerLevel: 11.3 },
@@ -1303,7 +1303,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Orphie & Magus",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "High-Pressure Flamethrower - 1", attackType: "BASIC", Level1Damage: 14.5, growthPerLevel: 1.4 },
             { attackName: "High-Pressure Flamethrower - 2", attackType: "BASIC", Level1Damage: 44.4, growthPerLevel: 4.1 },
@@ -1336,7 +1336,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Lucia",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Orbital Combo - 1", attackType: "BASIC", Level1Damage: 40.9, growthPerLevel: 3.8 },
             { attackName: "Orbital Combo - 2", attackType: "BASIC", Level1Damage: 27.8, growthPerLevel: 2.6 },
@@ -1372,7 +1372,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Manato",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Blazing Wind Slash - 1", attackType: "BASIC", Level1Damage: 28.7, growthPerLevel: 2.7 },
             { attackName: "Blazing Wind Slash - 2", attackType: "BASIC", Level1Damage: 82.7, growthPerLevel: 7.6 },
@@ -1407,7 +1407,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Yidhari",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Crushing Strike - 1", attackType: "BASIC", Level1Damage: 60.7, growthPerLevel: 5.6 },
             { attackName: "Crushing Strike - 1 ALT", attackType: "BASIC", Level1Damage: 62.4, growthPerLevel: 5.7 },
@@ -1447,7 +1447,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Dialyn",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Happy to Be of Service - 1", attackType: "BASIC", Level1Damage: 25.6, growthPerLevel: 2.4 },
             { attackName: "Happy to Be of Service - 2", attackType: "BASIC", Level1Damage: 51.3, growthPerLevel: 4.7 },
@@ -1480,7 +1480,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Banyue",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Towering Peaks - 1", attackType: "BASIC", Level1Damage: 39.6, growthPerLevel: 3.6 },
             { attackName: "Towering Peaks - 2", attackType: "BASIC", Level1Damage: 49.8, growthPerLevel: 4.6 },
@@ -1522,7 +1522,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Zhao",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Glacial Judgment - 1", attackType: "BASIC", Level1Damage: 73.4, growthPerLevel: 6.7},
             { attackName: "Glacial Judgment - 2", attackType: "BASIC", Level1Damage: 66, growthPerLevel: 6},
@@ -1551,7 +1551,7 @@ export const Attacks: CharacterAttacks[] = [
     },
     {
         characterName: "Ye Shunguang",
-        attackStats: [
+        attack: [
             // BASIC
             { attackName: "Swiftedge - 1", attackType: "BASIC", Level1Damage: 79.4, growthPerLevel: 7.3},
             { attackName: "Swiftedge - 2", attackType: "BASIC", Level1Damage: 244.1, growthPerLevel: 22.2},

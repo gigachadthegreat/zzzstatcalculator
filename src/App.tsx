@@ -3,16 +3,18 @@ import DamageCalculator from "./components/DamageCalculator";
 import {
     StatType,
     type Stats,
-    type SelectedDrives,
-    type SelectedSubstats,
+    type DriveDisks,
+    type Substats,
     AnomalyMultipliers,
     type statTypeKeys,
     type AttackModifiers,
-    type AttackStats,
-    DriveDisks,
+    type Attack,
+    DriveDisksIds,
     type AdditionalStats,
+    type Character,
+    type Wengine,
 } from "./constants/types";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
     getCharacterFromName,
     getMultiplierFromAttack,
@@ -31,8 +33,8 @@ import { DiskIds, StatIds } from "./constants/GameIds";
 import Spinner from "./components/Spinner";
 
 import {
-    defaultCharacterName,
-    defaultWengineName,
+    defaultCharacter as defaultCharacter,
+    defaultWengine,
     defaultSelectedDrives,
     defaultSelectedSubstats,
     defaultAttackUsed,
@@ -81,16 +83,16 @@ function App() {
     useEffect(() => {
         const settings = getsettingsFromUrl();
         if (Object.keys(settings).length > 0) {
-            setCharacterName(settings.characterName);
-            setWengineName(settings.wengineName);
-            setSelectedDrives(settings.selectedDrives as SelectedDrives);
-            setSelectedSubstats(settings.selectedSubstats as SelectedSubstats);
+            setCharacter(getCharacterFromName(settings.characterName, Characters));
+            setWengine(getWengineFromName(settings.wengineName, Wengines));
+            setDrivesDisks(settings.selectedDrives as DriveDisks);
+            setSubstats(settings.selectedSubstats as Substats);
             setAttackModifiers(settings.attackModifiers);
 
             setMultiplier(settings.multiplierValue);
 
             setAttackUsed(
-                Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attackStats.filter(
+                Attacks.filter((attack) => attack.characterName === settings.characterName)[0].attack.filter(
                     (attack) => attack.attackName === settings.attackUsed
                 )[0]
             );
@@ -102,25 +104,25 @@ function App() {
             setIsAnomaly(settings.isAnomaly);
             setAnomalyType(settings.anomalyType);
             setAdditionalStatsUI(settings.additionalStatsUI);
-
-            setCalculatedStats(
-                calculateStats(
-                    getCharacterFromName(settings.characterName, Characters),
-                    getWengineFromName(settings.wengineName, Wengines),
-                    settings.selectedDrives,
-                    settings.selectedSubstats
-                )
-            );
         }
     }, []);
 
+    // UI states
     const [showEnkaOverlay, setShowEnkaOverlay] = useState<boolean>(false);
-    const [characterName, setCharacterName] = useState<string>(defaultCharacterName);
-    const [wengineName, setWengineName] = useState<string>(defaultWengineName);
-    const [selectedDrives, setSelectedDrives] = useState<SelectedDrives>(defaultSelectedDrives);
-    const [selectedSubstats, setSelectedSubstats] = useState<SelectedSubstats>(defaultSelectedSubstats);
+    const [enkaPlayer, setEnkaPlayer] = useState<EnkaPlayer>();
+    const [errorText, setErrorText] = useState<string>("");
+    const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
-    const [attackUsed, setAttackUsed] = useState<AttackStats>(defaultAttackUsed);
+    // Other States
+    const [enkaCharacters, setEnkaCharacters] = useState<EnkaCharacter[]>([]);
+
+    // Logic states
+    const [character, setCharacter] = useState<Character>(Characters.filter((character) => character.name === defaultCharacter.name)[0]);
+    const [wengine, setWengine] = useState<Wengine>(defaultWengine);
+    const [driveDisks, setDrivesDisks] = useState<DriveDisks>(defaultSelectedDrives);
+    const [substats, setSubstats] = useState<Substats>(defaultSelectedSubstats);
+
+    const [attackUsed, setAttackUsed] = useState<Attack>(defaultAttackUsed);
     const [attackLevel, setAttackLevel] = useState<number>(defaultAttackLevel);
     const [multiplier, setMultiplier] = useState<number>(defaultAttackMultiplier);
     const [isCustomMultiplier, setIsCustomMultiplier] = useState<boolean>(defaultIsCustomMultipler);
@@ -130,11 +132,6 @@ function App() {
     const [anomalyType, setAnomalyType] = useState<keyof typeof AnomalyMultipliers>(defaultAnomalyType);
 
     const [additionalStatsUI, setAdditionalStatsUI] = useState<AdditionalStats>(defaultAdditionalStatsUI);
-
-    const [enkaCharacters, setEnkaCharacters] = useState<EnkaCharacter[]>([]);
-    const [enkaPlayer, setEnkaPlayer] = useState<EnkaPlayer>();
-    const [errorText, setErrorText] = useState<string>("");
-    const [loadingEnkaDataSpinner, setLoadingEnkaDataSpinner] = useState<boolean>(false);
 
     const [attackModifiers, setAttackModifiers] = useState<AttackModifiers>(defaultAttackModifiers);
 
@@ -153,20 +150,15 @@ function App() {
         ENERGY_REGEN_FLAT: 0,
     });
 
-    const [calculatedStats, setCalculatedStats] = useState<Stats>(
-        calculateStats(
-            getCharacterFromName(characterName, Characters),
-            getWengineFromName(wengineName, Wengines),
-            selectedDrives,
-            selectedSubstats
-        )
-    );
-
+    const getCalculatedStats = useCallback(() => {
+        return calculateStats(character, wengine, driveDisks, substats);
+    }, [character, driveDisks, substats, wengine]);
     useEffect(() => {
         setAdditionalStats({
-            HP_FLAT: calculatedStats.HP_FLAT * (additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
+            HP_FLAT: getCalculatedStats().HP_FLAT * (additionalStatsUI.additionalHpPercent / 100) + additionalStatsUI.additionalHpFlat,
             ATTACK_FLAT:
-                calculatedStats.ATTACK_FLAT * (additionalStatsUI.additionalAttackPercent / 100) + additionalStatsUI.additionalAttackFlat,
+                getCalculatedStats().ATTACK_FLAT * (additionalStatsUI.additionalAttackPercent / 100) +
+                additionalStatsUI.additionalAttackFlat,
             DEFENSE_FLAT: 0,
             CRIT_RATE: additionalStatsUI.additionalCritRate,
             CRIT_DAMAGE: additionalStatsUI.additionalCritDamage,
@@ -178,93 +170,57 @@ function App() {
             IMPACT_FLAT: 0,
             ENERGY_REGEN_FLAT: 0,
         });
-    }, [calculatedStats, additionalStatsUI, characterName]);
+    }, [additionalStatsUI, character, getCalculatedStats]);
 
-    const handeCharacterChange = (newCharacterName: string) => {
-        setCharacterName(() => {
-            const calculatedStats = calculateStats(
-                getCharacterFromName(newCharacterName, Characters),
-                getWengineFromName(wengineName, Wengines),
-                selectedDrives,
-                selectedSubstats
-            );
-            setCalculatedStats(calculatedStats);
+    const handeCharacterChange = (characterName: string) => {
+        setCharacter(() => {
+            setIsRupture(getCharacterFromName(characterName, Characters).speciality == "RUPTURE");
+            setIsAnomaly(getCharacterFromName(characterName, Characters).speciality == "ANOMALY");
 
-            setIsRupture(getCharacterFromName(newCharacterName, Characters).speciality == "RUPTURE");
-            setIsAnomaly(getCharacterFromName(newCharacterName, Characters).speciality == "ANOMALY");
+            setAttackUsed(Attacks.filter((attack) => attack.characterName === characterName)[0].attack[0]);
 
-            setAttackUsed(Attacks.filter((attack) => attack.characterName === newCharacterName)[0].attackStats[0]);
-
-            return newCharacterName;
+            return getCharacterFromName(characterName, Characters);
         });
     };
 
     const handeWengineChange = (newWengineName: string) => {
-        setWengineName(() => {
-            const calculatedStats = calculateStats(
-                getCharacterFromName(characterName, Characters),
-                getWengineFromName(newWengineName, Wengines),
-                selectedDrives,
-                selectedSubstats
-            );
-            setCalculatedStats(calculatedStats);
-
-            return newWengineName;
+        setWengine(() => {
+            return getWengineFromName(newWengineName, Wengines);
         });
     };
 
-    const handleDriveChange = (drivePosition: keyof SelectedDrives, driveValue: statTypeKeys | boolean) => {
-        setSelectedDrives((prev) => {
+    const handleDriveChange = (drivePosition: keyof DriveDisks, driveValue: statTypeKeys | boolean) => {
+        setDrivesDisks((prev) => {
             if (!prev) return prev;
             const newDrives = { ...prev, [drivePosition]: driveValue };
-
-            const calculatedStats = calculateStats(
-                getCharacterFromName(characterName, Characters),
-                getWengineFromName(wengineName, Wengines),
-                newDrives,
-                selectedSubstats
-            );
-            setCalculatedStats(calculatedStats);
 
             return newDrives;
         });
     };
 
     const handleSubstatChange = (stat: string, count: number) => {
-        setSelectedSubstats((prev) => {
+        setSubstats((prev) => {
             if (!prev) return prev;
             const newSubstats = { ...prev, [stat]: count };
-
-            const calculatedStats = calculateStats(
-                getCharacterFromName(characterName, Characters),
-                getWengineFromName(wengineName, Wengines),
-                selectedDrives,
-                newSubstats
-            );
-            setCalculatedStats(calculatedStats);
 
             return newSubstats;
         });
     };
 
     const resetEveryState = () => {
-        setCharacterName(defaultCharacterName);
-        setWengineName(defaultWengineName);
-        setSelectedDrives(defaultSelectedDrives);
+        setCharacter(defaultCharacter);
+        setWengine(defaultWengine);
+        setDrivesDisks(defaultSelectedDrives);
 
-        setSelectedSubstats(defaultSelectedSubstats);
+        setSubstats(defaultSelectedSubstats);
 
         setAttackModifiers(defaultAttackModifiers);
 
-        const attackSet = Attacks.find((attack) => attack.characterName === defaultCharacterName) 
-        if(attackSet == undefined){
-            throw new Error(`Attack-set for ${defaultCharacterName} not found.`)
+        const attackSet = Attacks.find((attack) => attack.characterName === defaultCharacter.name);
+        if (attackSet == undefined) {
+            throw new Error(`Attack-set for ${defaultCharacter} not found.`);
         }
-        setAttackUsed(
-            attackSet.attackStats.filter(
-                (attack) => attack === defaultAttackUsed
-            )[0]
-        );
+        setAttackUsed(attackSet.attack.filter((attack) => attack === defaultAttackUsed)[0]);
         setAttackLevel(defaultAttackLevel);
         setMultiplier(defaultAttackMultiplier);
         setIsCustomMultiplier(defaultIsCustomMultipler);
@@ -273,15 +229,6 @@ function App() {
         setIsAnomaly(defaultIsAnomaly);
         setAnomalyType(defaultAnomalyType);
         setAdditionalStatsUI(defaultAdditionalStatsUI);
-
-        setCalculatedStats(
-            calculateStats(
-                getCharacterFromName(defaultCharacterName, Characters),
-                getWengineFromName(defaultWengineName, Wengines),
-                defaultSelectedDrives,
-                defaultSelectedSubstats
-            )
-        );
 
         const newUrl = window.location.origin + window.location.pathname + window.location.hash;
         window.history.replaceState(null, "", newUrl);
@@ -352,11 +299,10 @@ function App() {
     };
 
     const handleEnkaCharacterSelect = (character: EnkaCharacter) => {
-        const _characterName = Characters.find((char) => char.id === character.Id)?.name || Characters[0].name;
-        setCharacterName(_characterName);
-        setWengineName(
-            Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
-                Wengines[Wengines.length - 1].name
+        const _character = Characters.find((char) => char.id === character.Id) || Characters[0];
+        setCharacter(_character);
+        setWengine(
+            Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1")) || Wengines[Wengines.length - 1]
         );
 
         // HANDLE DISK DRIVES
@@ -423,7 +369,7 @@ function App() {
         for (const [driveId, count] of map.entries()) {
             if (count >= 2) {
                 const twoPieceIds = Number(Object.entries(DiskIds).find(([key]) => Number(key) === Number(driveId))?.[0]);
-                twoPscEffect.push(Object.values(DriveDisks).find((val) => val.id === twoPieceIds)?.mainStat);
+                twoPscEffect.push(Object.values(DriveDisksIds).find((val) => val.id === twoPieceIds)?.mainStat);
             }
         }
 
@@ -438,7 +384,7 @@ function App() {
             drive2psc2: (twoPscEffect[1] as keyof typeof StatType) ?? StatType.NONE,
             drive2psc3: (twoPscEffect[2] as keyof typeof StatType) ?? StatType.NONE,
         };
-        setSelectedDrives(drives);
+        setDrivesDisks(drives);
 
         // HANDLE SUBSTATS
         const substatMap = new Map<string, number>();
@@ -458,7 +404,7 @@ function App() {
         }
 
         // Build selectedSubstats object from the accumulated map
-        const newSubstats: SelectedSubstats = {
+        const newSubstats: Substats = {
             HP_PERCENT: substatMap.get("HP_PERCENT") || 0,
             HP_FLAT: substatMap.get("HP_FLAT") || 0,
             ATTACK_PERCENT: substatMap.get("ATTACK_PERCENT") || 0,
@@ -470,25 +416,13 @@ function App() {
             ANOMALY_PROFICIENCY_FLAT: substatMap.get("ANOMALY_PROFICIENCY_FLAT") || 0,
             PEN_FLAT: substatMap.get("PEN_FLAT") || 0,
         };
-        setSelectedSubstats(newSubstats);
+        setSubstats(newSubstats);
 
-        const calculatedStats = calculateStats(
-            getCharacterFromName(_characterName, Characters),
-            getWengineFromName(
-                Wengines.find((wengine) => wengine.id === (character.Weapon ? character.Weapon.Id : "-1"))?.name ||
-                    Wengines[Wengines.length - 1].name,
-                Wengines
-            ),
-            drives,
-            newSubstats
-        );
-
-        setCalculatedStats(calculatedStats);
-        const _attackUsed = Attacks.filter((attack) => attack.characterName === _characterName)[0].attackStats[0];
+        const _attackUsed = Attacks.filter((attack) => attack.characterName === _character.name)[0].attack[0];
 
         setAttackUsed(_attackUsed);
 
-        setMultiplier(getMultiplierFromAttack(Attacks, _characterName, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
+        setMultiplier(getMultiplierFromAttack(Attacks, _character, attackUsed.Level1Damage, attackUsed.growthPerLevel, attackLevel));
 
         setShowEnkaOverlay(false);
     };
@@ -573,10 +507,10 @@ function App() {
                                 navigator.clipboard.writeText(
                                     getParameterizedStatsAsUrl(
                                         attackModifiers,
-                                        characterName,
-                                        wengineName,
-                                        selectedDrives,
-                                        selectedSubstats,
+                                        character,
+                                        wengine,
+                                        driveDisks,
+                                        substats,
                                         multiplier,
                                         attackUsed,
                                         attackLevel,
@@ -606,7 +540,7 @@ function App() {
                     <img
                         ref={imgRef}
                         className={` w-3/5  left-25 z-10 scale-700 top-135 sticky`} //top-135
-                        src={import.meta.env.BASE_URL + `/assets/images/Characters/${characterName}.webp`}
+                        src={import.meta.env.BASE_URL + `/assets/images/Characters/${character.name}.webp`}
                         alt="character avatar"
                     />
                 </div>
@@ -615,10 +549,10 @@ function App() {
                         <div className="space-y-8">
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <StatCalculator
-                                    characterName={characterName}
-                                    wengineName={wengineName}
-                                    selectedDrives={selectedDrives}
-                                    selectedSubstats={selectedSubstats}
+                                    character={character}
+                                    wengine={wengine}
+                                    selectedDrives={driveDisks}
+                                    selectedSubstats={substats}
                                     onCharacterChange={(characterName) => handeCharacterChange(characterName)}
                                     onWengineChange={(wengineName) => handeWengineChange(wengineName)}
                                     onDriveChange={(drivePosition, driveValue) => handleDriveChange(drivePosition, driveValue)}
@@ -629,12 +563,12 @@ function App() {
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <Results
                                     header="Character Stats"
-                                    calculatedStats={calculatedStats}
+                                    calculatedStats={getCalculatedStats()}
                                     additionalStats={additionalStats}
-                                    isRupture={getCharacterFromName(characterName, Characters).speciality == "RUPTURE" || isRupture}
+                                    isRupture={character.speciality == "RUPTURE" || isRupture}
                                     additionalSheer={
                                         additionalStatsUI.additionalSheerFlat +
-                                        calculateSheer(calculatedStats.HP_FLAT, calculatedStats.ATTACK_FLAT) *
+                                        calculateSheer(getCalculatedStats().HP_FLAT, getCalculatedStats().ATTACK_FLAT) *
                                             (additionalStatsUI.additionalSheerPercent / 100)
                                     }
                                 />
@@ -642,8 +576,8 @@ function App() {
 
                             <div className="bg-white shadow-md rounded-lg p-6 dark:bg-slate-900">
                                 <DamageCalculator
-                                    calculatedStats={calculatedStats}
-                                    characterName={characterName}
+                                    calculatedStats={getCalculatedStats()}
+                                    character={character}
                                     attackModifiers={attackModifiers}
                                     setAttackModifiers={(value) => setAttackModifiers(value)}
                                     attackUsed={attackUsed}

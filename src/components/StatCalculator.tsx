@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
 import {
-    type SelectedDrives,
+    type DriveDisks,
     type statTypeKeys,
     Speciality,
     DriveStats,
-    numberOfPossibleSubstats,
-    type SelectedSubstats,
+    NumberOfPossibleSubstats,
+    type Substats,
+    type Character,
+    type Wengine,
 } from "../constants/types";
 
 import { Characters } from "../constants/Characters";
@@ -18,10 +20,10 @@ import RangeSlider from "./RangeSlider";
 import LabelWithInfo from "./LabelWithInfo";
 
 function StatCalculator({
-    characterName,
+    character,
     onCharacterChange,
 
-    wengineName,
+    wengine,
     onWengineChange,
 
     selectedDrives,
@@ -30,16 +32,16 @@ function StatCalculator({
     selectedSubstats,
     onSubstatChange,
 }: {
-    characterName: string;
-    onCharacterChange: (characterName: string) => void;
+    character: Character;
+    onCharacterChange: (character: string) => void;
 
-    wengineName: string;
+    wengine: Wengine;
     onWengineChange: (wengineName: string) => void;
 
-    selectedDrives: SelectedDrives;
-    onDriveChange: (drivePosition: keyof SelectedDrives, driveValue: statTypeKeys | boolean) => void;
+    selectedDrives: DriveDisks;
+    onDriveChange: (drivePosition: keyof DriveDisks, driveValue: statTypeKeys | boolean) => void;
 
-    selectedSubstats: SelectedSubstats;
+    selectedSubstats: Substats;
     onSubstatChange: (stat: string, count: number) => void;
 }) {
     // const [selectedCharacter, setSelectedCharacterName] = useState<string>(Characters[0].name);
@@ -117,7 +119,7 @@ function StatCalculator({
         onWengineChange(newWengineName);
     };
 
-    const handleDriveChange = (drivePosition: keyof SelectedDrives, driveValue: statTypeKeys | boolean) => {
+    const handleDriveChange = (drivePosition: keyof DriveDisks, driveValue: statTypeKeys | boolean) => {
         onDriveChange(drivePosition, driveValue);
     };
 
@@ -125,7 +127,7 @@ function StatCalculator({
         const newSubstats = { ...selectedSubstats, [stat]: count };
         const substatCount = Object.values(newSubstats).reduce((a, b) => a + b, 0);
 
-        if (substatCount <= numberOfPossibleSubstats) {
+        if (substatCount <= NumberOfPossibleSubstats) {
             onSubstatChange(stat, count);
 
             setSubstatCount(substatCount);
@@ -142,7 +144,7 @@ function StatCalculator({
                             <div>
                                 <label className="block mb-2 font-semibold">Character</label>
                                 <select
-                                    value={characterName}
+                                    value={character.name}
                                     onChange={(e) => handeCharacterChange(e.target.value)}
                                     className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
@@ -162,7 +164,7 @@ function StatCalculator({
                             <div>
                                 <label className="block mb-2 font-semibold">W-Engine</label>
                                 <select
-                                    value={wengineName}
+                                    value={wengine.name}
                                     onChange={(e) => handeWengineChange(e.target.value)}
                                     className="w-full p-2 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 "
                                 >
@@ -317,12 +319,12 @@ function StatCalculator({
                     <h2 className="text-xl font-bold mb-4">Substats</h2>
                     <div className="flex">
                         <LabelWithInfo
-                            labelText={`Total Substats: ${substatCount} / ${numberOfPossibleSubstats}`}
+                            labelText={`Total Substats: ${substatCount} / ${NumberOfPossibleSubstats}`}
                             infoText="54 is the total amount of possible Substats with every Disk having 4 stats at Lvl 0"
                         />
                     </div>
                     <ProgressBar
-                        maximum={numberOfPossibleSubstats}
+                        maximum={NumberOfPossibleSubstats}
                         amount={Object.values(selectedSubstats)}
                         colors={Object.values(substatColors)}
                     />
@@ -336,14 +338,14 @@ function StatCalculator({
                                     <input
                                         type="number"
                                         min="0"
-                                        max={numberOfPossibleSubstats}
+                                        max={NumberOfPossibleSubstats}
                                         value={selectedSubstats[substat as keyof typeof selectedSubstats]}
                                         onChange={(e) => handleSubstatChange(substat, parseInt(e.target.value) || 0)}
                                         className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-16 text-center"
                                     />
                                 </div>
                                 <RangeSlider
-                                    maxValue={numberOfPossibleSubstats}
+                                    maxValue={NumberOfPossibleSubstats}
                                     value={selectedSubstats[substat as keyof typeof selectedSubstats]}
                                     onChange={(value) => handleSubstatChange(substat, value || 0)}
                                     unavailableValue={substatCount}

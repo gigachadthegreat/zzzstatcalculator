@@ -36,7 +36,7 @@ export const StatType = {
     NONE: "NONE",
 } as const;
 
-export const DriveDisks = {
+export const DriveDisksIds = {
     WoodpeckerElectro: {
         id: 31000,
         mainStat: StatType.CRIT_RATE,
@@ -191,7 +191,7 @@ export interface AdditionalStats {
     additionalSheerFlat: number;
 }
 
-export interface SelectedDrives {
+export interface DriveDisks {
     drive1Enabled: boolean;
     drive2Enabled: boolean;
     drive3Enabled: boolean;
@@ -203,7 +203,7 @@ export interface SelectedDrives {
     drive2psc3: statTypeKeys;
 }
 
-export interface SelectedSubstats {
+export interface Substats {
     HP_PERCENT: number;
     HP_FLAT: number;
     ATTACK_PERCENT: number;
@@ -226,10 +226,10 @@ export interface Character {
 
 export interface CharacterAttacks {
     characterName: string;
-    attackStats: AttackStats[];
+    attack: Attack[];
 }
 
-export interface AttackStats {
+export interface Attack {
     attackName: string;
     attackType: attackTypeKey;
     Level1Damage: number;
@@ -362,7 +362,7 @@ export const DriveStats = {
     >,
 };
 
-export const numberOfPossibleSubstats = 54;
+export const NumberOfPossibleSubstats = 54;
 export const SheerHpConversionFactor = 0.1;
 export const SheerAttackConsersionFactor = 0.3;
 

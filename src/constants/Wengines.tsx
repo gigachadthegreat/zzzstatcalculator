@@ -275,14 +275,6 @@ export const Wengines: Wengine[] = [
         WengineStatValue: 30,
     },
     {
-        name: "None",
-        id: 0,
-        speciality: "DEFENSE",
-        WengineStatSelected: "NONE",
-        WengineFlatAttack: 0,
-        WengineStatValue: 0,
-    },
-    {
         name: "The Vault",
         id: 13103,
         speciality: "SUPPORT",
@@ -657,5 +649,13 @@ export const Wengines: Wengine[] = [
         WengineStatSelected: "CRIT_DAMAGE",
         WengineFlatAttack: 743,
         WengineStatValue: 48,
+    },
+    {
+        name: "None",
+        id: 0,
+        speciality: "DEFENSE",
+        WengineStatSelected: "NONE",
+        WengineFlatAttack: 0,
+        WengineStatValue: 0,
     },
 ];

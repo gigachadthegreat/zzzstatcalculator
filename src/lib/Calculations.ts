@@ -3,8 +3,8 @@ import {
     type Stats as CalculatedStats,
     type Character,
     type Wengine,
-    type SelectedDrives,
-    type SelectedSubstats,
+    type DriveDisks,
+    type Substats,
     DriveStats,
     SheerHpConversionFactor,
     SheerAttackConsersionFactor,
@@ -119,13 +119,13 @@ export const AddNewStatsToBaseStats = (_baseStats: CalculatedStats, _statsToAdd:
     return finalStats;
 };
 
-export const calculateStats = (character: Character, wengineSt: Wengine, drives: SelectedDrives, substatsSt: SelectedSubstats) => {
+export const calculateStats = (character: Character, wengine: Wengine, drives: DriveDisks, substatsSt: Substats) => {
     let baseStats = JSON.parse(JSON.stringify(character.stats));
     let finalStats = JSON.parse(JSON.stringify(character.stats));
 
-    const wengineMainAdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, wengineSt.WengineFlatAttack);
+    const wengineMainAdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, wengine.WengineFlatAttack);
     baseStats = AddNewStatsToBaseStats(baseStats, wengineMainAdditionalStats); // Wengine Base Stat is always added to character stats before any other calculation. Therefore it's included in further percentage additions.
-    const wengineSecondaryAdditionalStats = AddIndividualStatToBase(baseStats, wengineSt.WengineStatSelected, wengineSt.WengineStatValue);
+    const wengineSecondaryAdditionalStats = AddIndividualStatToBase(baseStats, wengine.WengineStatSelected, wengine.WengineStatValue);
 
     const drive1AdditionalStats = AddIndividualStatToBase(baseStats, StatType.HP_FLAT, DriveStats.Drive1HpFlat);
     const drive2AdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, DriveStats.Drive2AttackFlat);

@@ -6,11 +6,11 @@ import {
     StatType,
     type AdditionalStats,
     type AttackModifiers,
-    type AttackStats,
+    type Attack,
     type Character,
     type CharacterAttacks,
-    type SelectedDrives,
-    type SelectedSubstats,
+    type DriveDisks,
+    type Substats,
 } from "../constants/types";
 import { type Wengine } from "../constants/types";
 import { Wengines } from "../constants/Wengines";
@@ -30,7 +30,7 @@ export const getWengineFromName = (name: string, wengines: Wengine[]): Wengine =
     if (foundWengine != undefined) {
         return foundWengine;
     }
-    return wengines[0];
+    return defaultWengine;
 };
 
 export const getSortedList = (names: string[]) => {
@@ -41,12 +41,12 @@ export const getSortedList = (names: string[]) => {
 
 export const getMultiplierFromAttack = (
     Attacks: CharacterAttacks[],
-    characterName: string,
+    character: Character,
     Level1Damage: number,
     growthPerLevel: number,
     attackLvl: number
 ) => {
-    const attack = Attacks.find((characterAttacks) => characterAttacks.characterName === characterName);
+    const attack = Attacks.find((characterAttacks) => characterAttacks.characterName === character.name);
 
     if (attack == undefined) throw new Error("Attack not found");
 
@@ -79,13 +79,13 @@ export const AddDifference = (base: any, update: any) => {
 export const getParameterizedStatsAsUrl = (
     attackModifiers: AttackModifiers,
 
-    characterName: string,
-    wengineName: string,
-    selectedDrives: SelectedDrives,
-    selectedSubstats: SelectedSubstats,
+    character: Character,
+    wengine: Wengine,
+    selectedDrives: DriveDisks,
+    selectedSubstats: Substats,
 
     multiplierValue: number,
-    attackUsed: AttackStats,
+    attackUsed: Attack,
     attackLevel: number,
 
     isCustomMultiplier: boolean,
@@ -100,9 +100,9 @@ export const getParameterizedStatsAsUrl = (
     const params = new URLSearchParams();
 
     // Only serialize the properties that differ from default to keep the resulting url smaller.
-    if (characterName !== defaultCharacterName) params.set("characterName", characterName);
+    if (character.name !== defaultCharacter.name) params.set("characterName", character.name);
 
-    if (wengineName !== defaultWengineName) params.set("wengineName", wengineName);
+    if (wengine.name !== defaultWengine.name) params.set("wengineName", wengine.name);
 
     if (JSON.stringify(selectedDrives) !== JSON.stringify(defaultSelectedDrives)) {
         params.set("selectedDrives", JSON.stringify(Difference(defaultSelectedDrives, selectedDrives)));
@@ -158,8 +158,8 @@ export const getsettingsFromUrl = () => {
         }
     };
 
-    settings.characterName = parseParam("characterName", "string", defaultCharacterName);
-    settings.wengineName = parseParam("wengineName", "string", defaultWengineName);
+    settings.characterName = parseParam("characterName", "string", defaultCharacter.name);
+    settings.wengineName = parseParam("wengineName", "string", defaultWengine);
     settings.selectedDrives = AddDifference(defaultSelectedDrives, parseParam("selectedDrives", "json", defaultSelectedDrives) || {});
     settings.selectedSubstats = AddDifference(
         defaultSelectedSubstats,
@@ -196,9 +196,9 @@ export const getEnkaData = async (id: number) => {
     return res;
 };
 
-export const defaultCharacterName = Characters[0].name;
-export const defaultWengineName = "None";
-export const defaultSelectedDrives: SelectedDrives = {
+export const defaultCharacter = Characters[0];
+export const defaultWengine = Wengines.filter(wengine => wengine.name === "None")[0];
+export const defaultSelectedDrives: DriveDisks = {
     drive1Enabled: false,
     drive2Enabled: false,
     drive3Enabled: false,
@@ -209,7 +209,7 @@ export const defaultSelectedDrives: SelectedDrives = {
     drive2psc2: StatType.NONE,
     drive2psc3: StatType.NONE,
 };
-export const defaultSelectedSubstats: SelectedSubstats = {
+export const defaultSelectedSubstats: Substats = {
     HP_PERCENT: 0,
     HP_FLAT: 0,
     ATTACK_PERCENT: 0,
@@ -239,11 +239,11 @@ export const defaultAttackModifiers: AttackModifiers = {
     resIgnore: 0,
 };
 
-export const defaultAttackUsed = Attacks.filter((attack) => attack.characterName === defaultCharacterName)[0].attackStats[0];
+export const defaultAttackUsed = Attacks.filter((attack) => attack.characterName === defaultCharacter.name)[0].attack[0];
 export const defaultAttackLevel = 12;
 export const defaultAttackMultiplier = getMultiplierFromAttack(
     Attacks,
-    defaultCharacterName,
+    defaultCharacter,
     defaultAttackUsed.Level1Damage,
     defaultAttackUsed.growthPerLevel,
 
@@ -251,8 +251,8 @@ export const defaultAttackMultiplier = getMultiplierFromAttack(
 );
 export const defaultIsCustomMultipler = false;
 
-export const defaultIsRupture = getCharacterFromName(defaultCharacterName, Characters).speciality == "RUPTURE";
-export const defaultIsAnomaly = getWengineFromName(defaultWengineName, Wengines).speciality == "ANOMALY";
+export const defaultIsRupture = defaultCharacter.speciality == "RUPTURE";
+export const defaultIsAnomaly = defaultWengine.speciality == "ANOMALY";
 export const defaultAnomalyType = "Burn";
 export const defaultAdditionalStatsUI = {
     additionalHpFlat: 0,

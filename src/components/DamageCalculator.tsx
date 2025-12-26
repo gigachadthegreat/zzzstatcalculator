@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import {
     type Stats,
     AnomalyMultipliers,
-    type AttackStats,
+    type Attack,
     AttackTypes,
     type AttackModifiers,
     type AdditionalStats,
+    type Character,
 } from "../constants/types";
 import LabelWithTextInput from "./LabelWithTextInput";
 import DamageFormulaStandard from "./DamageFormulaStandard.tsx";
@@ -32,7 +33,7 @@ import {
 
 function DamageCalculator({
     calculatedStats,
-    characterName,
+    character,
 
     attackModifiers,
     setAttackModifiers,
@@ -62,13 +63,13 @@ function DamageCalculator({
     setAdditionalStatsUI,
 }: {
     calculatedStats: Stats;
-    characterName: string;
+    character: Character;
 
     attackModifiers: AttackModifiers;
     setAttackModifiers: (value: AttackModifiers) => void;
 
-    attackUsed: AttackStats;
-    setAttackUsed: (value: AttackStats) => void;
+    attackUsed: Attack;
+    setAttackUsed: (value: Attack) => void;
 
     attackLevel: number;
     setAttackLevel: (value: number) => void;
@@ -122,7 +123,7 @@ function DamageCalculator({
             ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStatsUI.additionalElementPercent,
         });
     }, [
-        characterName,
+        character,
         calculatedStats,
         additionalStatsUI.additionalHpFlat,
         additionalStatsUI.additionalHpPercent,
@@ -195,7 +196,7 @@ function DamageCalculator({
 
         const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
-            characterName,
+            character,
             attackUsed.Level1Damage,
             attackUsed.growthPerLevel,
             attackLevel
@@ -219,7 +220,7 @@ function DamageCalculator({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
         isCustomMultiplier,
-        characterName,
+        character,
         calculatedStats,
         additionalStatsUI.additionalHpFlat,
         additionalStatsUI.additionalHpPercent,
@@ -249,7 +250,7 @@ function DamageCalculator({
         const baseStats = computeBaseStats();
         const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
-            characterName,
+            character,
             attackUsed.Level1Damage,
             attackUsed.growthPerLevel,
             attackLevel
@@ -276,7 +277,7 @@ function DamageCalculator({
         isCustomMultiplier,
         attackUsed,
         attackLevel,
-        characterName,
+        character,
         calculatedStats,
         additionalStatsUI.additionalHpFlat,
         additionalStatsUI.additionalHpPercent,
@@ -304,7 +305,7 @@ function DamageCalculator({
         const baseStats = computeBaseStats();
         const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
-            characterName,
+            character,
             attackUsed.Level1Damage,
             attackUsed.growthPerLevel,
             attackLevel
@@ -318,7 +319,7 @@ function DamageCalculator({
         isCustomMultiplier,
         attackUsed,
         attackLevel,
-        characterName,
+        character,
         calculatedStats,
         additionalStatsUI.additionalHpFlat,
         additionalStatsUI.additionalHpPercent,
@@ -339,7 +340,7 @@ function DamageCalculator({
 
         const baseMultiplierLocal = getMultiplierFromAttack(
             Attacks,
-            characterName,
+            character,
             attackUsed.Level1Damage,
             attackUsed.growthPerLevel,
             attackLevel
@@ -359,7 +360,7 @@ function DamageCalculator({
         isCustomMultiplier,
         attackUsed,
         attackLevel,
-        characterName,
+        character,
         calculatedStats,
         additionalStatsUI.additionalHpFlat,
         additionalStatsUI.additionalHpPercent,
@@ -576,7 +577,7 @@ function DamageCalculator({
                                 value={attackUsed.attackName}
                                 onChange={(e) =>
                                     setAttackUsed(
-                                        Attacks.filter((attack) => attack.characterName === characterName)[0].attackStats.filter(
+                                        Attacks.filter((attack) => attack.characterName === character.name)[0].attack.filter(
                                             (attack) => attack.attackName == e.target.value
                                         )[0]
                                     )
@@ -585,8 +586,8 @@ function DamageCalculator({
                             >
                                 {Object.keys(AttackTypes).map((type) => (
                                     <optgroup label={type} key={type}>
-                                        {Attacks.filter((attack) => attack.characterName === characterName)[0]
-                                            .attackStats.filter((attackStat) => attackStat.attackType === type)
+                                        {Attacks.filter((attack) => attack.characterName === character.name)[0]
+                                            .attack.filter((attackStat) => attackStat.attackType === type)
                                             .map((key) => (
                                                 <option value={key.attackName} key={key.attackName}>
                                                     {key.attackName}
