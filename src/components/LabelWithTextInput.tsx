@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useEffect, useState } from "react";
 import LabelWithInfo from "./LabelWithInfo";
 
 function LabelWithTextInput({
@@ -18,6 +18,9 @@ function LabelWithTextInput({
 }) {
     const [currentValue, setCurrentValue] = useState<string>(String(inputValue));
 
+    useEffect(() => {
+        setCurrentValue(String(inputValue));
+    }, [inputValue]);
     const handleFocusLoss = () => {
         // Optional: Clean up trailing dots (e.g., "12." becomes "12")
         const cleaned = currentValue.endsWith(".") ? currentValue.slice(0, -1) : currentValue;
@@ -58,7 +61,7 @@ function LabelWithTextInput({
                 value={currentValue}
                 onChange={(e) => handleChange(e.target.value)}
                 onBlur={handleFocusLoss}
-                onKeyDown={(e) => e.key == "Enter" ? handleFocusLoss() : undefined}
+                onKeyDown={(e) => (e.key == "Enter" ? handleFocusLoss() : undefined)}
                 className="p-1 border rounded bg-white dark:bg-slate-700 dark:border-slate-600 w-19 text-center"
             />
         </div>
