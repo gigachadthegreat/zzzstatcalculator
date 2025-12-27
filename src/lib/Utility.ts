@@ -235,7 +235,7 @@ export const defaultAttackModifiers: AttackModifiers = {
     resReductionTarget: 0,
     dmgTakenIncrease: 0,
     dmgTakenReduction: 0,
-    stunMultiplier: 100,
+    stunMultiplier: 0,
     resIgnore: 0,
 };
 
