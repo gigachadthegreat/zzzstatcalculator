@@ -222,7 +222,9 @@ export const calculateDefenseMultiplier = (
     penPercent: number,
     penFlat: number
 ) => {
+
     const finalDef = Math.max(defTarget * (1 - defenseShred / 100) * (1 - penPercent / 100) - (penFlat ?? 0), 0);
+    console.log("finalDef", finalDef)
     return levelFactor / (finalDef + levelFactor);
 };
 

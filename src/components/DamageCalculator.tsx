@@ -31,7 +31,7 @@ import {
     ZhuYuanInStun,
     ZhuYuanOutOfStun,
 } from "../lib/CustomCalculators.tsx";
-import { defaultAttackModifiers, getMultiplierFromAttack } from "../lib/Utility.ts";
+import { getMultiplierFromAttack } from "../lib/Utility.ts";
 
 function DamageCalculator({
     character,
@@ -106,23 +106,19 @@ function DamageCalculator({
 
     const [isFormulaVisible, setIsFormulaVisible] = useState(false);
 
-    const computeBaseStats = (): Stats => {
-        return {
-            ...calculatedStats,
-            HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStats.additionalHpPercent / 100) + additionalStats.additionalHpFlat,
-            ATTACK_FLAT:
-                calculatedStats.ATTACK_FLAT * (1 + additionalStats.additionalAttackPercent / 100) + additionalStats.additionalAttackFlat,
-            PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStats.additionalPenPercent,
-            PEN_FLAT: calculatedStats.PEN_FLAT + additionalStats.additionalPenFlat,
-            CRIT_RATE: calculatedStats.CRIT_RATE + additionalStats.additionalCritRate,
-            CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStats.additionalCritDamage,
-            ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStats.additionalElementPercent,
-            ANOMALY_PROFICIENCY_FLAT: calculatedStats.ANOMALY_PROFICIENCY_FLAT + additionalStats.additionalAnomalyProficiency,
-        };
-    };
-
-    // This state is only used to display the damage formula. 
-    const [finalStats, setFinalStats] = useState<Stats>(computeBaseStats());
+    // This state is only used to display the damage formula.
+    const [finalStats, setFinalStats] = useState<Stats>({
+        ...calculatedStats,
+        HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStats.additionalHpPercent / 100) + additionalStats.additionalHpFlat,
+        ATTACK_FLAT:
+            calculatedStats.ATTACK_FLAT * (1 + additionalStats.additionalAttackPercent / 100) + additionalStats.additionalAttackFlat,
+        PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStats.additionalPenPercent,
+        PEN_FLAT: calculatedStats.PEN_FLAT + additionalStats.additionalPenFlat,
+        CRIT_RATE: calculatedStats.CRIT_RATE + additionalStats.additionalCritRate,
+        CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStats.additionalCritDamage,
+        ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStats.additionalElementPercent,
+        ANOMALY_PROFICIENCY_FLAT: calculatedStats.ANOMALY_PROFICIENCY_FLAT + additionalStats.additionalAnomalyProficiency,
+    });
 
     const [finalAttackModifiers, setFinalAttackModifiers] = useState<AttackModifiers>({ ...attackModifiers });
 
@@ -133,18 +129,17 @@ function DamageCalculator({
     // update calculated Damage.
     useEffect(() => {
         const _computeBaseStats = (): Stats => {
+            const stats = getCalculatedStats();
             return {
-                ...calculatedStats,
-                HP_FLAT: calculatedStats.HP_FLAT * (1 + additionalStats.additionalHpPercent / 100) + additionalStats.additionalHpFlat,
-                ATTACK_FLAT:
-                    calculatedStats.ATTACK_FLAT * (1 + additionalStats.additionalAttackPercent / 100) +
-                    additionalStats.additionalAttackFlat,
-                PEN_PERCENT: calculatedStats.PEN_PERCENT + additionalStats.additionalPenPercent,
-                PEN_FLAT: calculatedStats.PEN_FLAT + additionalStats.additionalPenFlat,
-                CRIT_RATE: calculatedStats.CRIT_RATE + additionalStats.additionalCritRate,
-                CRIT_DAMAGE: calculatedStats.CRIT_DAMAGE + additionalStats.additionalCritDamage,
-                ELEMENT_PERCENT: calculatedStats.ELEMENT_PERCENT + additionalStats.additionalElementPercent,
-                ANOMALY_PROFICIENCY_FLAT: calculatedStats.ANOMALY_PROFICIENCY_FLAT + additionalStats.additionalAnomalyProficiency,
+                ...stats,
+                HP_FLAT: stats.HP_FLAT * (1 + additionalStats.additionalHpPercent / 100) + additionalStats.additionalHpFlat,
+                ATTACK_FLAT: stats.ATTACK_FLAT * (1 + additionalStats.additionalAttackPercent / 100) + additionalStats.additionalAttackFlat,
+                PEN_PERCENT: stats.PEN_PERCENT + additionalStats.additionalPenPercent,
+                PEN_FLAT: stats.PEN_FLAT + additionalStats.additionalPenFlat,
+                CRIT_RATE: stats.CRIT_RATE + additionalStats.additionalCritRate,
+                CRIT_DAMAGE: stats.CRIT_DAMAGE + additionalStats.additionalCritDamage,
+                ELEMENT_PERCENT: stats.ELEMENT_PERCENT + additionalStats.additionalElementPercent,
+                ANOMALY_PROFICIENCY_FLAT: stats.ANOMALY_PROFICIENCY_FLAT + additionalStats.additionalAnomalyProficiency,
             };
         };
 
@@ -170,8 +165,23 @@ function DamageCalculator({
                         ENERGY_REGEN_FLAT: 0,
                     },
                     baseMultiplierLocal,
-                    defaultAttackModifiers,
-                    0,
+                    {
+                        additionalSheerFlat: 0,
+                        additionalSheerPercent: 0,
+                        additionalDmgBonusMultiplierAttacker: 0,
+                        additionalSheerDmgBonusMultiplierAttacker: 0,
+                        critMode: "avg",
+                        defenseTarget: 0,
+                        defenseShred: 0,
+                        levelFactorAttacker: 0,
+                        resTarget: 0,
+                        resReductionTarget: 0,
+                        dmgTakenIncrease: 0,
+                        dmgTakenReduction: 0,
+                        stunMultiplier: 100,
+                        resIgnore: 0,
+                    },
+                    0
                 ];
 
             switch (type) {
@@ -236,7 +246,9 @@ function DamageCalculator({
         } else if (isRupture) {
             setDamageDealt(calculateSheerDamageDealt(_multiplier, _stats, _attackModifiers, _additionalDamage));
         } else {
-            setDamageDealt(calculateDamageDealt(_multiplier, _stats, _attackModifiers, _additionalDamage));
+            const damage = calculateDamageDealt(_multiplier, _stats, _attackModifiers, _additionalDamage);
+
+            setDamageDealt(damage);
         }
     }, [
         character,
