@@ -227,7 +227,7 @@ function DamageCalculator({
             if (key !== "critMode") _attackModifiers[key] = attackModifiers[key] + _additionalAttackModiifers[key];
         });
         setFinalAttackModifiers(_attackModifiers);
-        //
+
         setAdditionalDamage(_additionalDamage);
 
         // Calculate Damage dealt
