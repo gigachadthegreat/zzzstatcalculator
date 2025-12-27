@@ -181,7 +181,7 @@ function DamageCalculator({
                         stunMultiplier: 100,
                         resIgnore: 0,
                     },
-                    0
+                    0,
                 ];
 
             switch (type) {
@@ -221,7 +221,7 @@ function DamageCalculator({
         );
 
         // Set multiplier
-        setMultiplier(_multiplier);
+        setMultiplier(Number(_multiplier.toFixed(1)));
 
         // Add additional stats form custom calculator
         Object.keys(_stats).forEach((k) => {
