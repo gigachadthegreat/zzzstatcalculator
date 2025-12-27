@@ -106,6 +106,7 @@ function App() {
         }
     }, []);
 
+
     // UI states
     const [showEnkaOverlay, setShowEnkaOverlay] = useState<boolean>(false);
     const [enkaPlayer, setEnkaPlayer] = useState<EnkaPlayer>();
@@ -565,8 +566,8 @@ function App() {
                                     setIsAnomaly={(value) => setIsAnomaly(value)}
                                     anomalyType={anomalyType}
                                     setAnomalyType={(value) => setAnomalyType(value)}
-                                    additionalStatsUI={additionalCombatStats}
-                                    setAdditionalStatsUI={(value) => setAdditionalCombatStats(value)}
+                                    additionalStats={additionalCombatStats}
+                                    setAdditionalStats={(value) => setAdditionalCombatStats(value)}
                                 />
                             </div>
                         </div>

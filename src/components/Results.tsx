@@ -81,7 +81,7 @@ function Results({
         CRIT_RATE: additionalCombatStats.additionalCritRate,
         CRIT_DAMAGE: additionalCombatStats.additionalCritDamage,
         ELEMENT_PERCENT: additionalCombatStats.additionalElementPercent,
-        ANOMALY_PROFICIENCY_FLAT: 0,
+        ANOMALY_PROFICIENCY_FLAT: additionalCombatStats.additionalAnomalyProficiency,
         ANOMALY_MASTERY_FLAT: 0,
         PEN_PERCENT: additionalCombatStats.additionalPenPercent,
         PEN_FLAT: additionalCombatStats.additionalPenFlat,

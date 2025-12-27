@@ -187,6 +187,7 @@ export interface AdditionalStats {
     additionalCritRate: number;
     additionalCritDamage: number;
     additionalElementPercent: number;
+    additionalAnomalyProficiency: number;
     additionalSheerPercent: number;
     additionalSheerFlat: number;
 }

@@ -263,6 +263,7 @@ export const defaultAdditionalCombatStats = {
     additionalPenFlat: 0,
     additionalCritRate: 0,
     additionalCritDamage: 0,
+    additionalAnomalyProficiency: 0,
     additionalElementPercent: 0,
     additionalSheerPercent: 0,
     additionalSheerFlat: 0,

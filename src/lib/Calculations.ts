@@ -297,16 +297,15 @@ export const calculateSheerDamageDealt = (
     stats: Stats,
     attackModifiers: AttackModifiers,
     additionalDamage: number,
-    additionalSheerFlat: number,
-    additionalSheerPercent: number
+
 ) => {
     return (
         calculateBaseSheerDamage(
             multiplierValue,
             stats.HP_FLAT,
             stats.ATTACK_FLAT,
-            additionalSheerPercent,
-            additionalSheerFlat
+            attackModifiers.additionalSheerPercent,
+            attackModifiers.additionalSheerFlat
         ) *
             dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker) *
             critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE) *
