@@ -3,7 +3,6 @@ import {
     calculateBaseSheerDamage,
     calculatedmgTakenMultiplierTarget,
     calculateResMultiplier,
-    calculateSheer,
     critMultiplierAttacker,
     dmgBonusMultiplierAttacker,
 } from "../lib/Calculations";
