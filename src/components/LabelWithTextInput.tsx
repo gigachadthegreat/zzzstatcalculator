@@ -9,7 +9,7 @@ function LabelWithTextInput({
     disabled,
 }: {
     labelText: string;
-    infoText: string;
+    infoText?: string;
     inputValue: number;
     onInputChange: (newValue: number) => void;
     disabled?: boolean;
