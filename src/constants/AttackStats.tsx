@@ -381,7 +381,7 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "High-Pressure Spike - 2", attackType: "BASIC", Level1Damage: 59.7, growthPerLevel: 5.5 },
             { attackName: "High-Pressure Spike - 3", attackType: "BASIC", Level1Damage: 124.8, growthPerLevel: 11.4 },
             { attackName: "High-Pressure Spike - 4", attackType: "BASIC", Level1Damage: 186.3, growthPerLevel: 17 },
-            { attackName: "High-Pressure Spike - 5", attackType: "BASIC", Level1Damage: 40.3, growthPerLevel: 3.7 },
+            { attackName: "Moving Shot", attackType: "BASIC", Level1Damage: 40.3, growthPerLevel: 3.7 },
             // DASH
             { attackName: "Quick Inspection", attackType: "DASH", Level1Damage: 33.3, growthPerLevel: 3.1 },
             // DODGE
@@ -391,6 +391,10 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Counter Volt Needle", attackType: "ASSIST", Level1Damage: 359.2, growthPerLevel: 32.7 },
             // SPECIAL
             { attackName: "Obstruction Removal", attackType: "SPECIAL", Level1Damage: 42.1, growthPerLevel: 3.9 },
+            { attackName: "Obstruction Removal - Cycle - 1", attackType: "SPECIAL", Level1Damage: 19.4, growthPerLevel: 1.769 },
+            { attackName: "Obstruction Removal - Cycle - 29", attackType: "SPECIAL", Level1Damage: 563.4, growthPerLevel: 51.3 },
+            { attackName: "Vortex Cluster Grenade", attackType: "SPECIAL", Level1Damage: 87.5, growthPerLevel: 8 },
+            { attackName: "Pulse Grenade", attackType: "SPECIAL", Level1Damage: 42, growthPerLevel: 3.9 },
             // EX SPECIAL
             { attackName: "Supercharged Obstruction Removal", attackType: "EXSPECIAL", Level1Damage: 333.8, growthPerLevel: 30.4 },
             // CHAIN
@@ -412,6 +416,19 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Fire Suppression - 2", attackType: "BASIC", Level1Damage: 57.2, growthPerLevel: 5.2 },
             { attackName: "Fire Suppression - 3", attackType: "BASIC", Level1Damage: 132, growthPerLevel: 12 },
             { attackName: "Fire Suppression - 4", attackType: "BASIC", Level1Damage: 340.7, growthPerLevel: 31 },
+            { attackName: "Fire Suppression - 5", attackType: "BASIC", Level1Damage: 441.7, growthPerLevel: 40.2 },
+
+            { attackName: "Fire Suppression - 5 - Enhanced", attackType: "BASIC", Level1Damage: 441.7, growthPerLevel: 40.2 },
+            { attackName: "Fire Suppression - 5 - Enhanced 1 Stack", attackType: "BASIC", Level1Damage: 524.5, growthPerLevel: 47.8 },
+            { attackName: "Fire Suppression - 5 - Enhanced 2 Stacks", attackType: "BASIC", Level1Damage: 607.3, growthPerLevel: 55.4 },
+            { attackName: "Fire Suppression - 5 - Enhanced 3 Stacks", attackType: "BASIC", Level1Damage: 690.1, growthPerLevel: 63 },
+            { attackName: "Fire Suppression - 5 - Enhanced 4 Stacks", attackType: "BASIC", Level1Damage: 772.9, growthPerLevel: 70.6 },
+            { attackName: "Fire Suppression - 5 - Enhanced 5 Stacks", attackType: "BASIC", Level1Damage: 855.7, growthPerLevel: 78.2 },
+            { attackName: "Fire Suppression - 5 - Enhanced 6 Stacks", attackType: "BASIC", Level1Damage: 938.5, growthPerLevel: 85.8 },
+            
+            { attackName: "Fire Suppression - 5 - Enhanced Additional DMG per Stack", attackType: "BASIC", Level1Damage: 82.8, growthPerLevel: 7.6 },
+            
+            { attackName: "Fire Assault", attackType: "BASIC", Level1Damage: 8.6, growthPerLevel: 8.6 },
             // DASH
             { attackName: "Blazing Fire", attackType: "DASH", Level1Damage: 68.3, growthPerLevel: 6.3 },
             { attackName: "Fire Suppression", attackType: "DASH", Level1Damage: 78.8, growthPerLevel: 7.2 },
@@ -697,7 +714,9 @@ export const Attacks: CharacterAttacks[] = [
             { attackName: "Intense Heat Stirring Method - Double Shot - Continuous Spray", attackType: "EXSPECIAL", Level1Damage: 958.1, growthPerLevel: 87.1 },
             { attackName: "Intense Heat Stirring Method - Double Shot - Fire Blast", attackType: "EXSPECIAL", Level1Damage: 287.1, growthPerLevel: 26.1 },
             { attackName: "Intense Heat Stirring Method - Continuous Spray", attackType: "EXSPECIAL", Level1Damage: 543.8, growthPerLevel: 49.5 },
-            { attackName: "Intense Heat Stirring Method - Fire Blast ", attackType: "EXSPECIAL", Level1Damage: 96.7, growthPerLevel: 8.8 },
+            { attackName: "Intense Heat Stirring Method - Fire Blast", attackType: "EXSPECIAL", Level1Damage: 96.7, growthPerLevel: 8.8 },
+
+            { attackName: "Intense Heat Tossing Method", attackType: "EXSPECIAL", Level1Damage: 199.9, growthPerLevel: 18.2 },
             // CHAIN
             { attackName: "Fuel-Fed Flame", attackType: "CHAIN", Level1Damage: 680.9, growthPerLevel: 61.9 },
             // ULT
