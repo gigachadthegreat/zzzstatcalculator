@@ -13,15 +13,11 @@ function DamageFormulaRupture({
     attackModifiers,
     stats,
     additionalDamage,
-    additionalSheerFlat,
-    additionalSheerPercent,
 }: {
     multiplier: number;
     attackModifiers: AttackModifiers;
     stats: Stats;
     additionalDamage: number;
-    additionalSheerFlat: number;
-    additionalSheerPercent: number;
 }) {
     const getCritFormula = () => {
         switch (attackModifiers.critMode) {
@@ -41,8 +37,7 @@ function DamageFormulaRupture({
         <>
             <div className="mt-2 grid grid-cols-[auto_auto_1fr] gap-x-6 ">
                 <strong>Base DMG:</strong> ({multiplier.toFixed(1)} / 100 &times; (
-                {calculateSheer(stats!.HP_FLAT, stats!.ATTACK_FLAT).toFixed(1)} &times; (1 + {additionalSheerPercent} / 100)
-                + {additionalSheerFlat}))
+                {calculateSheer(stats!.HP_FLAT, stats!.ATTACK_FLAT).toFixed(1)} + {stats.SHEER_FLAT})
                 <span className="text-blue-300">
                     {" "}
                     ={" "}
@@ -50,8 +45,7 @@ function DamageFormulaRupture({
                         multiplier,
                         stats.HP_FLAT,
                         stats.ATTACK_FLAT,
-                        additionalSheerPercent,
-                        additionalSheerFlat
+                        stats.SHEER_FLAT
                     ).toFixed(1)}
                 </span>
                 <div>

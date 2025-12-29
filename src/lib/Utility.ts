@@ -223,8 +223,6 @@ export const defaultSelectedSubstats: Substats = {
 };
 
 export const defaultAttackModifiers: AttackModifiers = {
-    additionalSheerFlat: 0,
-    additionalSheerPercent: 0,
     additionalDmgBonusMultiplierAttacker: 0,
     additionalSheerDmgBonusMultiplierAttacker: 0,
     critMode: "avg",

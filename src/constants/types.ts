@@ -33,6 +33,8 @@ export const StatType = {
     ENERGY_REGEN_FLAT: "ENERGY_REGEN_FLAT",
     IMPACT_PERCENT: "IMPACT_PERCENT",
     IMPACT_FLAT: "IMPACT_FLAT",
+    SHEER_FLAT: "SHEER_FLAT",
+    SHEER_PERCENT: "SHEER_PERCENT",
     NONE: "NONE",
 } as const;
 
@@ -158,11 +160,11 @@ export interface Stats {
     PEN_FLAT: number;
     IMPACT_FLAT: number;
     ENERGY_REGEN_FLAT: number;
+    SHEER_FLAT: number
 }
 
 export interface AttackModifiers {
-    additionalSheerPercent: number;
-    additionalSheerFlat: number;
+
     additionalDmgBonusMultiplierAttacker: number;
     critMode: "avg" | "crit" | "noCrit";
     defenseTarget: number;

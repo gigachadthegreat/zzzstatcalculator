@@ -87,6 +87,7 @@ function Results({
         PEN_FLAT: additionalCombatStats.additionalPenFlat,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0,
     };
 
     return (

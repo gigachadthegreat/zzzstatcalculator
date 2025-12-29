@@ -19,6 +19,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 88,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -39,6 +40,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -59,6 +61,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 136,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -79,6 +82,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -99,6 +103,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -119,6 +124,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -139,6 +145,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 137,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -159,6 +166,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 134,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -179,6 +187,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -199,6 +208,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 91,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -219,6 +229,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -239,6 +250,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -259,6 +271,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -279,6 +292,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -299,6 +313,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 92,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -319,6 +334,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 90,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -339,6 +355,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -359,6 +376,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 136,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -379,6 +397,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -399,6 +418,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 94,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -419,6 +439,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 123,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -439,6 +460,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -459,6 +481,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -479,6 +502,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 137,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -499,6 +523,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -519,6 +544,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 90,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -539,6 +565,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -559,6 +586,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -579,6 +607,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -599,6 +628,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 136,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -619,6 +649,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 131,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -639,6 +670,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -659,6 +691,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -679,6 +712,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 94,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -699,6 +733,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -719,6 +754,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 118,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -739,6 +775,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -759,6 +796,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 86,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -779,6 +817,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -799,6 +838,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 93,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -819,6 +859,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.56,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -839,6 +880,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -859,6 +901,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -879,6 +922,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 110,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -899,6 +943,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 95,
             ENERGY_REGEN_FLAT: 2,
+            SHEER_FLAT: 0
         },
     },
     {
@@ -919,6 +964,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 96,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
         {
@@ -939,6 +985,7 @@ export const Characters: Character[] = [
             PEN_FLAT: 0,
             IMPACT_FLAT: 83,
             ENERGY_REGEN_FLAT: 1.2,
+            SHEER_FLAT: 0
         },
     },
 ];

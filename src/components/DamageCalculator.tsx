@@ -140,6 +140,7 @@ function DamageCalculator({
                 CRIT_DAMAGE: stats.CRIT_DAMAGE + additionalStats.additionalCritDamage,
                 ELEMENT_PERCENT: stats.ELEMENT_PERCENT + additionalStats.additionalElementPercent,
                 ANOMALY_PROFICIENCY_FLAT: stats.ANOMALY_PROFICIENCY_FLAT + additionalStats.additionalAnomalyProficiency,
+                SHEER_FLAT: stats.SHEER_FLAT * (1 + additionalStats.additionalSheerPercent / 100) + additionalStats.additionalSheerFlat,
             };
         };
 
@@ -163,11 +164,10 @@ function DamageCalculator({
                         PEN_FLAT: 0,
                         IMPACT_FLAT: 0,
                         ENERGY_REGEN_FLAT: 0,
+                        SHEER_FLAT: 0
                     },
                     baseMultiplierLocal,
                     {
-                        additionalSheerFlat: 0,
-                        additionalSheerPercent: 0,
                         additionalDmgBonusMultiplierAttacker: 0,
                         additionalSheerDmgBonusMultiplierAttacker: 0,
                         critMode: "avg",
@@ -309,8 +309,6 @@ function DamageCalculator({
                                     attackModifiers={finalAttackModifiers}
                                     stats={finalStats}
                                     additionalDamage={additionalDamage}
-                                    additionalSheerFlat={additionalStats.additionalSheerFlat}
-                                    additionalSheerPercent={additionalStats.additionalSheerPercent}
                                 />
                             ) : isAnomaly ? (
                                 <DamageFormulaAnomaly
@@ -712,12 +710,12 @@ function DamageCalculator({
                             <LabelWithTextInput
                                 labelText="Add. Sheer Flat"
                                 infoText="Additional flat sheer"
-                                onInputChange={(value) =>
+                                onInputChange={(value) => {
                                     setAdditionalStats({
                                         ...(additionalStats ?? {}),
                                         additionalSheerFlat: Number(value),
                                     })
-                                }
+                                }}
                                 inputValue={additionalStats.additionalSheerFlat}
                             />
                         </div>

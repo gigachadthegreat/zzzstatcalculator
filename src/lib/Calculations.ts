@@ -27,6 +27,7 @@ export const AddIndividualStatToBase = (_baseStats: CalculatedStats, _statTypeTo
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0,
     };
 
     // Iterate through all properties in _statsToAdd
@@ -110,6 +111,7 @@ export const AddNewStatsToBaseStats = (_baseStats: CalculatedStats, _statsToAdd:
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
     // Iterate through all properties in _statsToAdd
     (Object.keys(_baseStats) as Array<keyof CalculatedStats>).forEach((stat) => {
@@ -119,9 +121,9 @@ export const AddNewStatsToBaseStats = (_baseStats: CalculatedStats, _statsToAdd:
     return finalStats;
 };
 
-export const calculateStats = (character: Character, wengine: Wengine, drives: DriveDisks, substatsSt: Substats) => {
-    let baseStats = JSON.parse(JSON.stringify(character.stats));
-    let finalStats = JSON.parse(JSON.stringify(character.stats));
+export const calculateStats = (character: Character, wengine: Wengine, drives: DriveDisks, substatsSt: Substats): Stats => {
+    let baseStats: Stats = JSON.parse(JSON.stringify(character.stats));
+    let finalStats: Stats = JSON.parse(JSON.stringify(character.stats));
 
     const wengineMainAdditionalStats = AddIndividualStatToBase(baseStats, StatType.ATTACK_FLAT, wengine.WengineFlatAttack);
     baseStats = AddNewStatsToBaseStats(baseStats, wengineMainAdditionalStats); // Wengine Base Stat is always added to character stats before any other calculation. Therefore it's included in further percentage additions.
@@ -177,6 +179,7 @@ export const calculateStats = (character: Character, wengine: Wengine, drives: D
     finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat1);
     finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat2);
     finalStats = AddNewStatsToBaseStats(finalStats, drive2PscAdditionalStat3);
+    finalStats.SHEER_FLAT = Number(calculateSheer(finalStats.HP_FLAT, finalStats.ATTACK_FLAT).toFixed(0))
 
     let additionalStatsFromSubstats = {
         HP_FLAT: 0,
@@ -191,6 +194,7 @@ export const calculateStats = (character: Character, wengine: Wengine, drives: D
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     Object.entries(substatsSt).forEach((subStat) => {
@@ -248,10 +252,9 @@ export const calculateBaseSheerDamage = (
     multiplierValue: number,
     hpFlat: number,
     attackFlat: number,
-    additionalSheerPercentage: number,
-    additionalSheerFlat: number
+    sheerFlat: number
 ) => {
-    return (multiplierValue / 100) * (calculateSheer(hpFlat, attackFlat) * (1 + additionalSheerPercentage / 100) + additionalSheerFlat);
+    return (multiplierValue / 100) * (calculateSheer(hpFlat, attackFlat) + sheerFlat);
 };
 
 export const calculateSheer = (hp: number, attack: number) => {
@@ -305,8 +308,7 @@ export const calculateSheerDamageDealt = (
             multiplierValue,
             stats.HP_FLAT,
             stats.ATTACK_FLAT,
-            attackModifiers.additionalSheerPercent,
-            attackModifiers.additionalSheerFlat
+            stats.SHEER_FLAT
         ) *
             dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker) *
             critMultiplierAttacker(attackModifiers.critMode, stats.CRIT_RATE, stats.CRIT_DAMAGE) *

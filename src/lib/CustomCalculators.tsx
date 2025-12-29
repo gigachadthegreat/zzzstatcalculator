@@ -11,8 +11,6 @@ export const EvelynAdditionalActive = (stats: Stats, multiplier: number): [Stats
         newMulitplier *= 1.25;
     }
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 30,
         critMode: "avg",
@@ -40,6 +38,7 @@ export const EvelynAdditionalActive = (stats: Stats, multiplier: number): [Stats
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
@@ -51,8 +50,6 @@ export const ZhuYuanOutOfStun = (multiplierValue: number): [Stats, number, Attac
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 40,
         critMode: "avg",
@@ -80,6 +77,7 @@ export const ZhuYuanOutOfStun = (multiplierValue: number): [Stats, number, Attac
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
@@ -91,8 +89,6 @@ export const ZhuYuanInStun = (multiplierValue: number): [Stats, number, AttackMo
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 80,
         critMode: "avg",
@@ -120,6 +116,7 @@ export const ZhuYuanInStun = (multiplierValue: number): [Stats, number, AttackMo
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
@@ -131,8 +128,6 @@ export const YixuanBonus = (multiplierValue: number): [Stats, number, AttackModi
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 60,
         critMode: "avg",
@@ -160,6 +155,7 @@ export const YixuanBonus = (multiplierValue: number): [Stats, number, AttackModi
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
@@ -171,8 +167,6 @@ export const YixuanAdditionalActiveStunned = (multiplierValue: number): [Stats, 
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 90,
         critMode: "avg",
@@ -200,6 +194,7 @@ export const YixuanAdditionalActiveStunned = (multiplierValue: number): [Stats, 
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
@@ -214,8 +209,6 @@ export const LuciaHpBonus = (stats: Stats, multiplierValue: number, attackLevel:
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -243,6 +236,7 @@ export const LuciaHpBonus = (stats: Stats, multiplierValue: number, attackLevel:
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     const additionalDamage = stats.HP_FLAT * ((additionalDamageLvl1Multiplier + additionalDamageGrowthPerLevel * attackLevel) / 100);
@@ -259,8 +253,6 @@ export const YanagiEXSpecial = (stats: Stats, multiplierValue: number, attackLev
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -288,6 +280,7 @@ export const YanagiEXSpecial = (stats: Stats, multiplierValue: number, attackLev
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     const additionalDamage =
@@ -305,8 +298,6 @@ export const YanagiUltimate = (stats: Stats, multiplierValue: number, attackLeve
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 0,
         critMode: "avg",
@@ -334,6 +325,7 @@ export const YanagiUltimate = (stats: Stats, multiplierValue: number, attackLeve
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     const additionalDamage =
@@ -348,8 +340,6 @@ export const HarumasaAdditionalActive = (multiplierValue: number): [Stats, numbe
     const newMulitplier = multiplierValue;
 
     const newAdditionalAttackModiifers: AttackModifiers = {
-        additionalSheerPercent: 0,
-        additionalSheerFlat: 0,
         additionalSheerDmgBonusMultiplierAttacker: 0,
         additionalDmgBonusMultiplierAttacker: 40,
         critMode: "avg",
@@ -377,6 +367,7 @@ export const HarumasaAdditionalActive = (multiplierValue: number): [Stats, numbe
         PEN_FLAT: 0,
         IMPACT_FLAT: 0,
         ENERGY_REGEN_FLAT: 0,
+        SHEER_FLAT: 0
     };
 
     return [newAdditionalStats, newMulitplier, newAdditionalAttackModiifers, 0];
