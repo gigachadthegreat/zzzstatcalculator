@@ -31,22 +31,14 @@ function DamageFormulaRupture({
                 return "1";
         }
     };
-    
 
     return (
         <>
             <div className="mt-2 grid grid-cols-[auto_auto_1fr] gap-x-6 ">
-                <strong>Base DMG:</strong> ({multiplier.toFixed(1)} / 100 &times; (
-                {calculateSheer(stats!.HP_FLAT, stats!.ATTACK_FLAT).toFixed(1)} + {stats.SHEER_FLAT})
+                <strong>Base DMG:</strong> {multiplier.toFixed(1)} / 100 &times; {stats.SHEER_FLAT.toFixed(0)}
                 <span className="text-blue-300">
                     {" "}
-                    ={" "}
-                    {calculateBaseSheerDamage(
-                        multiplier,
-                        stats.HP_FLAT,
-                        stats.ATTACK_FLAT,
-                        stats.SHEER_FLAT
-                    ).toFixed(1)}
+                    = {calculateBaseSheerDamage(multiplier, stats.HP_FLAT, stats.ATTACK_FLAT, stats.SHEER_FLAT).toFixed(1)}
                 </span>
                 <div>
                     &times; <strong>DMG Bonus Multiplier:</strong>{" "}
@@ -54,7 +46,8 @@ function DamageFormulaRupture({
                 (1 + {stats.ELEMENT_PERCENT.toFixed(0)} / 100 + {attackModifiers.additionalDmgBonusMultiplierAttacker} / 100)
                 <span className="text-blue-300">
                     {" "}
-                    = {dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker).toPrecision(4)}
+                    ={" "}
+                    {dmgBonusMultiplierAttacker(stats.ELEMENT_PERCENT, attackModifiers.additionalDmgBonusMultiplierAttacker).toPrecision(4)}
                 </span>
                 <div>
                     &times; <strong>Crit Multiplier:</strong>{" "}
@@ -68,7 +61,10 @@ function DamageFormulaRupture({
                     &times; <strong>Additional Sheer DMG Multiplier:</strong>{" "}
                 </div>{" "}
                 <div>(1 + {attackModifiers.additionalSheerDmgBonusMultiplierAttacker} / 100)</div>
-                <span className="text-blue-300"> = {(1 + attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100).toPrecision(4)}</span>
+                <span className="text-blue-300">
+                    {" "}
+                    = {(1 + attackModifiers.additionalSheerDmgBonusMultiplierAttacker / 100).toPrecision(4)}
+                </span>
                 <div>
                     &times; <strong>RES Multiplier:</strong>{" "}
                 </div>{" "}
@@ -92,7 +88,8 @@ function DamageFormulaRupture({
                 </div>
                 <span className="text-blue-300">
                     {" "}
-                    = {calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction).toPrecision(4)}
+                    ={" "}
+                    {calculatedmgTakenMultiplierTarget(attackModifiers.dmgTakenIncrease, attackModifiers.dmgTakenReduction).toPrecision(4)}
                 </span>
                 <div>
                     &times; <strong>Stun Multiplier:</strong>{" "}
