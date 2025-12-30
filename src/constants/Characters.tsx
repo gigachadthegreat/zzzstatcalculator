@@ -952,7 +952,7 @@ export const Characters: Character[] = [
         id: 1341,
         speciality: "DEFENSE",
         stats: {
-            HP_FLAT: 10758,
+            HP_FLAT: 9117,
             ATTACK_FLAT: 765,
             DEFENSE_FLAT: 701,
             CRIT_RATE: 5,
