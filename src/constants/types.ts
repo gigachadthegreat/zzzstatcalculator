@@ -129,11 +129,11 @@ export const DriveDisksIds = {
     },
     WhiteWaterBallad: {
         id: 33500,
-        mainStat: StatType.NONE,
+        mainStat: StatType.ELEMENT_PERCENT,
     },
     ShiningAria: {
         id: 33600,
-        mainStat: StatType.NONE,
+        mainStat: StatType.ELEMENT_PERCENT,
     },
 };
 
